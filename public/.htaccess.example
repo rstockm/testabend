@@ -1,0 +1,40 @@
+# .htaccess Beispiel für Cloudron LAMP
+# 
+# Kopiere diese Datei zu .htaccess und füge deinen OpenRouter API-Key ein
+# WICHTIG: .htaccess ist in .gitignore, damit der Key nicht ins Repo kommt!
+
+# Fallback auf index.html für SPA-Routing
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# API-Key als Umgebungsvariable setzen (wird von api-proxy.php verwendet)
+# Ersetze DEIN_API_KEY_HIER mit deinem echten OpenRouter API-Key
+SetEnv OPENROUTER_API_KEY "DEIN_API_KEY_HIER"
+
+# Caching für statische Assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/json "access plus 1 day"
+</IfModule>
+
+# Gzip-Kompression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Sicherheit: .htaccess selbst schützen
+<Files ".htaccess">
+  Order allow,deny
+  Deny from all
+</Files>

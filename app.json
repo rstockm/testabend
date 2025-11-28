@@ -1,0 +1,44 @@
+{
+  "id": "com.testabend.testabend",
+  "title": "Testabend",
+  "version": "1.0.0",
+  "description": "Testabend - Dashboard für Album-Bewertungen mit interaktiven Charts und RAG-Chatbot",
+  "author": "Testabend",
+  "homepage": "https://github.com/testabend/alben-dashboard",
+  "appDocumentation": "https://github.com/testabend/alben-dashboard",
+  "icon": "icon.png",
+  "tags": [
+    "dashboard",
+    "music",
+    "analytics"
+  ],
+  "screenshots": [],
+  "healthCheckPath": "/",
+  "httpPort": 8000,
+  "addons": {},
+  "manifestVersion": 2,
+  "website": "https://github.com/testabend/alben-dashboard",
+  "contactEmail": "",
+  "runAs": "www-data",
+  "system": {
+    "shmSize": "64m"
+  },
+  "services": [],
+  "ingress": {
+    "paths": [
+      "/"
+    ],
+    "domains": [
+      "$CLOUDRON_APP_DOMAIN"
+    ]
+  },
+  "scripts": {
+    "start": "cd /app && python3 -m http.server 8000 --directory public"
+  },
+  "build": [],
+  "requirements": {
+    "os": "debian",
+    "memory": 512,
+    "cpu": 1
+  }
+}

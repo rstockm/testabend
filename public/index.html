@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Testabend</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile.css">
+  </head>
+  <body>
+    <header>
+      <button class="burger-menu-button" id="burger-menu-button" aria-label="Menü öffnen" aria-expanded="false">
+        <span class="burger-icon"></span>
+        <span class="burger-icon"></span>
+        <span class="burger-icon"></span>
+      </button>
+      <h1>Testabend</h1>
+      <nav class="desktop-nav">
+        <a href="#overview" id="nav-overview">Übersicht</a>
+        <a href="#band" id="nav-band">Zeitreihe Band</a>
+        <a href="#scatter" id="nav-scatter">Alle Wertungen</a>
+        <a href="#testteam" id="nav-testteam">Testteam</a>
+      </nav>
+      <div id="header-controls" style="margin-left:auto"></div>
+    </header>
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+      <div class="mobile-nav-panel">
+        <nav>
+          <a href="#overview" id="nav-overview-mobile">Übersicht</a>
+          <a href="#band" id="nav-band-mobile">Zeitreihe Band</a>
+          <a href="#scatter" id="nav-scatter-mobile">Alle Wertungen</a>
+          <a href="#testteam" id="nav-testteam-mobile">Testteam</a>
+        </nav>
+      </div>
+    </div>
+    <main>
+      <div class="controls" id="controls"></div>
+      <div id="chart" class="chart"></div>
+    </main>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

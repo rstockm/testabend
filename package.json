@@ -1,0 +1,13 @@
+{
+  "name": "testabend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Testabend - Dashboard für Album-Bewertungen mit RAG-Chatbot",
+  "scripts": {
+    "generate-embeddings": "node scripts/generate_embeddings_interactive.js",
+    "generate-embeddings:direct": "node scripts/generate_embeddings.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
