@@ -207,6 +207,10 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
   
   const maxCount = albumCounts.size > 0 ? Math.max(...Array.from(albumCounts.values())) : 1;
   
+  // Lokale Kopie der ausgewählten Bands für Multi-Selection
+  // Diese wird erst beim "Fertig"-Klick über onSelectChange übergeben
+  const localSelectedBands = [...selectedBands];
+  
   function renderList(filterText) {
     list.innerHTML = '';
     const norm = (filterText || '').toLowerCase();
@@ -226,7 +230,8 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
     
     const items = filteredBands.map(b => {
       const li = document.createElement('li');
-      li.className = 'band-item' + (selectedBands.includes(b) ? ' selected' : '');
+      // Verwende localSelectedBands für visuelle Auswahl
+      li.className = 'band-item' + (localSelectedBands.includes(b) ? ' selected' : '');
       li.style.padding = '12px 8px'; // Größere Touch-Targets
       
       const nameSpan = document.createElement('span');
@@ -253,6 +258,11 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
     for (const li of items) list.appendChild(li);
   }
   
+  function updateSelection() {
+    // Aktualisiere visuelle Auswahl basierend auf localSelectedBands
+    renderList(input.value);
+  }
+  
   renderList('');
   input.addEventListener('input', () => renderList(input.value));
   
@@ -261,14 +271,22 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
     if (!li) return;
     
     const b = li.dataset.band;
-    const idx = selectedBands.indexOf(b);
+    const idx = localSelectedBands.indexOf(b);
     if (idx >= 0) {
-      selectedBands.splice(idx, 1);
+      localSelectedBands.splice(idx, 1);
     } else {
-      selectedBands.push(b);
+      localSelectedBands.push(b);
     }
-    onSelectChange([...selectedBands]);
-    renderList(input.value);
+    // Nur visuelle Auswahl aktualisieren, nicht sofort onSelectChange aufrufen
+    updateSelection();
+  });
+  
+  // "Fertig"-Button: Finale Auswahl übergeben und Modal schließen
+  doneBtn.addEventListener('click', () => {
+    // Finale Auswahl übergeben
+    onSelectChange([...localSelectedBands]);
+    // Modal schließen
+    onClose();
   });
   
   modal.appendChild(header);
