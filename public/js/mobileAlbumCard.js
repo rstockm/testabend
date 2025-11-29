@@ -203,4 +203,3 @@ document.addEventListener('keydown', (e) => {
     closeMobileAlbumCard();
   }
 });
-

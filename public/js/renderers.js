@@ -95,7 +95,7 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
         data: { values: filtered },
         mark: { 
           type: "point", 
-          size: 80, 
+          size: isMobile() ? 160 : 80, // Mobile: Doppelte Größe
           filled: true, 
           opacity: CONFIG.OPACITY.POINT, 
           color: CONFIG.COLORS.POINT 
@@ -321,17 +321,17 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     layer: layers
   };
   
-  const view = await vegaEmbed(chartEl, spec, { actions: false });
+  const result = await vegaEmbed(chartEl, spec, { actions: false });
   
   // Mobile Touch-Handler einrichten
-  if (isMobile() && view) {
-    setupMobileTouchHandlers(view, chartEl);
+  if (isMobile() && result && result.view) {
+    setupMobileTouchHandlers(result.view, chartEl);
   } else {
     // Desktop: Standard Tooltip-Handler
     setupCoverTooltipHandler();
   }
   
-  return view;
+  return result;
 }
 
 /**
@@ -630,9 +630,12 @@ function createLineLayer(bestPoints, rangeYears, domainMinY, domainMaxY, selecte
  * Punkte-Layer erstellen
  */
 function createPointLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
+  // Mobile: Doppelte Punktgröße für bessere Touch-Interaktion
+  const pointSize = isMobile() ? CONFIG.UI.POINT_SIZE * 2 : CONFIG.UI.POINT_SIZE;
+  
   return {
     data: { values: allPoints },
-    mark: { type: "point", size: CONFIG.UI.POINT_SIZE, filled: true, cursor: "pointer" },
+    mark: { type: "point", size: pointSize, filled: true, cursor: "pointer" },
     encoding: {
       x: { 
         field: "Jahr", 
