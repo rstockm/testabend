@@ -209,9 +209,11 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
   try {
     const result = await vegaEmbed(chartEl, spec, { actions: false });
     
-    // Mobile Touch-Handler einrichten
+    // Mobile Touch-Handler einrichten - warte etwas länger für Rendering
     if (isMobile() && result && result.view) {
-      setupMobileTouchHandlers(result.view, chartEl);
+      setTimeout(() => {
+        setupMobileTouchHandlers(result.view, chartEl);
+      }, 300);
     } else {
       // Desktop: Standard Tooltip-Handler und Keyboard-Navigation
       setupCoverTooltipHandler();
@@ -323,9 +325,12 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
   
   const result = await vegaEmbed(chartEl, spec, { actions: false });
   
-  // Mobile Touch-Handler einrichten
+  // Mobile Touch-Handler einrichten - warte etwas länger für Rendering
   if (isMobile() && result && result.view) {
-    setupMobileTouchHandlers(result.view, chartEl);
+    // Warte zusätzlich, damit SVG gerendert ist
+    setTimeout(() => {
+      setupMobileTouchHandlers(result.view, chartEl);
+    }, 300);
   } else {
     // Desktop: Standard Tooltip-Handler
     setupCoverTooltipHandler();

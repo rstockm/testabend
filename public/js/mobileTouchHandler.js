@@ -99,13 +99,27 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
     showDebugMessage('Tooltip-disable style added', '#90EE90');
   }
   
-  // Warte bis Chart vollständig gerendert ist
-  setTimeout(() => {
+  // Warte bis Chart vollständig gerendert ist - mehrere Versuche
+  let attempts = 0;
+  const maxAttempts = 10;
+  
+  const trySetup = () => {
+    attempts++;
     const svg = chartEl.querySelector('svg');
+    
     if (!svg) {
-      showDebugMessage('ERROR: SVG not found', '#ff0000');
-      return;
+      if (attempts < maxAttempts) {
+        showDebugMessage(`Waiting for SVG... (${attempts}/${maxAttempts})`, '#ffaa00');
+        setTimeout(trySetup, 200);
+        return;
+      } else {
+        showDebugMessage('ERROR: SVG not found after multiple attempts', '#ff0000');
+        showDebugMessage(`ChartEl: ${chartEl.tagName}, children: ${chartEl.children.length}`, '#ff0000');
+        return;
+      }
     }
+    
+    showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
     
     showDebugMessage(`SVG found: ${svg.constructor.name}`, '#90EE90');
     
@@ -276,5 +290,8 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
         clearTimeout(tooltipTimeout);
       }
     };
-  }, 500); // Warte 500ms bis Chart gerendert ist
+    
+    // Starte Setup-Versuch
+    trySetup();
+  }, 100); // Starte früher, aber mit Retry-Logik
 }
