@@ -95,7 +95,7 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
         data: { values: filtered },
         mark: { 
           type: "point", 
-          size: isMobile() ? 160 : 80, // Mobile: Doppelte Größe
+          size: 160, // Doppelte Größe für bessere Sichtbarkeit
           filled: true, 
           opacity: CONFIG.OPACITY.POINT, 
           color: CONFIG.COLORS.POINT 
@@ -630,8 +630,8 @@ function createLineLayer(bestPoints, rangeYears, domainMinY, domainMaxY, selecte
  * Punkte-Layer erstellen
  */
 function createPointLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
-  // Mobile: Doppelte Punktgröße für bessere Touch-Interaktion
-  const pointSize = isMobile() ? CONFIG.UI.POINT_SIZE * 2 : CONFIG.UI.POINT_SIZE;
+  // Doppelte Punktgröße für bessere Sichtbarkeit und Touch-Interaktion
+  const pointSize = CONFIG.UI.POINT_SIZE * 2;
   
   return {
     data: { values: allPoints },
