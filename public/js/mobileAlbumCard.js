@@ -107,6 +107,24 @@ export function showMobileAlbumCard(datum) {
     overlay = document.createElement('dialog');
     overlay.id = 'mobile-album-card-dialog';
     overlay.className = 'mobile-album-card-overlay';
+    // Explizite Styles für Dialog direkt setzen
+    overlay.style.cssText = `
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      padding: 20px !important;
+      border: none !important;
+      background: rgba(0, 0, 0, 0.8) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 9999 !important;
+    `;
     document.body.appendChild(overlay);
     console.log('[MobileAlbumCard] Dialog element created');
   } else {
@@ -118,6 +136,23 @@ export function showMobileAlbumCard(datum) {
   // Erstelle Karte
   const card = document.createElement('div');
   card.className = 'mobile-album-card';
+  // Explizite Styles direkt setzen (für Android-Browser-Kompatibilität)
+  card.style.cssText = `
+    background: #1e1e1e !important;
+    color: #f5f5f5 !important;
+    border-radius: 12px !important;
+    max-width: 90%;
+    max-height: 80vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  `;
   
   // Close-Button
   const closeBtn = document.createElement('button');
@@ -129,6 +164,14 @@ export function showMobileAlbumCard(datum) {
   // Content
   const content = document.createElement('div');
   content.className = 'mobile-album-card-content';
+  content.style.cssText = `
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
+    background: transparent !important;
+    color: #f5f5f5 !important;
+  `;
   
   // Info-Bereich
   const info = document.createElement('div');
@@ -136,6 +179,13 @@ export function showMobileAlbumCard(datum) {
   
   const title = document.createElement('h3');
   title.textContent = `${datum.Band} - ${datum.Album}`;
+  title.style.cssText = `
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    text-align: center;
+    color: #f5f5f5 !important;
+    font-weight: 600;
+  `;
   info.appendChild(title);
   
   const table = document.createElement('table');
@@ -149,12 +199,28 @@ export function showMobileAlbumCard(datum) {
     const tr = document.createElement('tr');
     const tdKey = document.createElement('td');
     tdKey.textContent = row.key + ':';
+    tdKey.style.cssText = `
+      padding: 12px 12px 12px 0;
+      color: #d4d4d4 !important;
+      font-weight: 600;
+      width: 30%;
+    `;
     const tdValue = document.createElement('td');
     tdValue.textContent = row.value;
+    tdValue.style.cssText = `
+      padding: 12px 0;
+      color: #f5f5f5 !important;
+      text-align: left;
+    `;
     tr.appendChild(tdKey);
     tr.appendChild(tdValue);
     table.appendChild(tr);
   });
+  
+  table.style.cssText = `
+    width: 100%;
+    border-collapse: collapse;
+  `;
   
   info.appendChild(table);
   
