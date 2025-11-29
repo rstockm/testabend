@@ -264,16 +264,33 @@ git clone https://github.com/rstockm/testabend.git .
 **Hinweis:** Die `-c safe.directory=/app/data/public` Option ist nötig, weil Cloudron das Verzeichnis als `www-data` besitzt, aber du als `root` eingeloggt bist. Die `-c` Option umgeht das Problem ohne globale Config-Änderungen.
 
 **Updates (nach jedem Push zu GitHub):**
+
+**Option 1: Deployment-Script (Empfohlen - aktualisiert alle Dateien korrekt):**
 ```bash
 # Auf Cloudron Server via Web-Terminal:
 cd /app/data/public
-git -c safe.directory=/app/data/public pull
+bash deploy.sh
 ```
 
-**Oder von lokal (SSH Einzeiler):**
+**Option 2: Manueller Git Pull:**
 ```bash
-ssh cloudron@deine-domain.de "cd /app/data/public && git -c safe.directory=/app/data/public pull"
+# Auf Cloudron Server via Web-Terminal:
+cd /app/data/public
+git -c safe.directory=/app/data/public fetch origin
+git -c safe.directory=/app/data/public reset --hard origin/main
+# Dann Dateien aus public/ ins Root kopieren (siehe deploy.sh)
 ```
+
+**Option 3: Von lokal (SSH Einzeiler):**
+```bash
+ssh cloudron@deine-domain.de "cd /app/data/public && bash deploy.sh"
+```
+
+**Das `deploy.sh` Script:**
+- Führt `git pull` aus
+- Kopiert alle Dateien aus `public/` ins Root-Verzeichnis
+- Behält lokale Dateien bei: `.htaccess`, `images/`, `data/embeddings.json`
+- Funktioniert auch wenn Dateien im Repo unter `public/` liegen
 
 **Tipp:** Du kannst dir einen Alias erstellen, um nicht jedes Mal `-c safe.directory=/app/data/public` tippen zu müssen:
 ```bash

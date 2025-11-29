@@ -25,10 +25,16 @@ git -c safe.directory=/app/data/public archive HEAD public/ | tar -x -C "$TMP_DI
 # - data/embeddings.json (zu groß)
 
 # Kopiere Dateien, die nicht ausgeschlossen sind
-rsync -av --exclude='.htaccess' \
-      --exclude='images/' \
-      --exclude='data/embeddings.json' \
-      "$TMP_DIR/public/" ./
+# Verwende find + cp statt rsync (funktioniert auf jedem Linux-System)
+cd "$TMP_DIR/public"
+find . -type f ! -path './.htaccess' ! -path './images/*' ! -path './data/embeddings.json' -exec sh -c '
+  for file do
+    dest="/app/data/public/$file"
+    mkdir -p "$(dirname "$dest")"
+    cp "$file" "$dest"
+  done
+' _ {} +
+cd /app/data/public
 
 # Aufräumen
 rm -rf "$TMP_DIR"
