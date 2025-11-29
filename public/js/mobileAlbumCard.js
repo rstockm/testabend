@@ -219,7 +219,7 @@ async function loadCoverImage(band, album, year, content, info) {
       
       const coverContainer = document.createElement('div');
       coverContainer.className = 'mobile-album-card-cover-container';
-      // Explizite Styles für Sichtbarkeit
+      // Explizite Styles für Sichtbarkeit - mit expliziten Farben
       coverContainer.style.cssText = `
         width: 100%;
         max-width: 300px;
@@ -227,10 +227,11 @@ async function loadCoverImage(band, album, year, content, info) {
         aspect-ratio: 1;
         border-radius: 8px;
         overflow: hidden;
-        border: 2px solid var(--border-color);
-        background: var(--bg-tertiary);
-        display: block;
-        visibility: visible;
+        border: 2px solid #404040;
+        background: #2a2a2a;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       `;
       
       const coverImage = document.createElement('img');
@@ -240,13 +241,16 @@ async function loadCoverImage(band, album, year, content, info) {
       coverImage.loading = 'eager';
       // Explizite Styles für Sichtbarkeit
       coverImage.style.cssText = `
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        visibility: visible;
-        opacity: 1;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       `;
+      
+      // Test: Füge einen roten Border hinzu, um zu sehen, ob das Bild geladen wird
+      console.log('[MobileAlbumCard] Creating cover image with src:', coverUrl);
       
       // Besseres Error-Handling
       coverImage.onerror = (e) => {
