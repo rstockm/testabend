@@ -199,13 +199,16 @@ export function getCoversBasePathSync() {
 
 /**
  * Erstellt vollständigen Pfad zu einem Cover-Bild
+ * Verwendet einen PHP-Proxy, um sicherzustellen, dass Bilder korrekt als image/jpeg serviert werden
+ * und nicht von der SPA-Rewrite-Regel abgefangen werden
  * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
- * @returns {string} Vollständiger Pfad zum Cover: "/images/covers/Band_Album.jpg"
+ * @returns {string} Vollständiger Pfad zum Cover über den Proxy: "/image-proxy.php?path=images/covers/Band_Album.jpg"
  */
 export function getCoverImagePath(filename) {
   if (!filename) return '';
   const cleanFilename = filename.startsWith('/') ? filename.slice(1) : filename;
-  return '/images/covers/' + cleanFilename;
+  // Verwende Image-Proxy, um sicherzustellen, dass Bilder korrekt serviert werden
+  return '/image-proxy.php?path=images/covers/' + encodeURIComponent(cleanFilename);
 }
 
 /**
