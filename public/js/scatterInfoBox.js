@@ -114,15 +114,23 @@ async function addCoverToInfoBox(datum, requestId) {
   }
   
   const coverImage = document.createElement('img');
-  coverImage.src = getCoverImagePath(result);
+  const coverPath = getCoverImagePath(result);
+  coverImage.src = coverPath;
   coverImage.alt = `${datum.Band} - ${datum.Album}`;
+  console.log('[scatterInfoBox] Loading cover image:', coverPath, 'for', datum.Band, '-', datum.Album);
   coverImage.style.cssText = `
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   `;
-  coverImage.onerror = () => coverContainer.remove();
+  coverImage.onerror = (e) => {
+    console.error('[scatterInfoBox] Cover image failed to load:', coverPath, e);
+    coverContainer.remove();
+  };
+  coverImage.onload = () => {
+    console.log('[scatterInfoBox] Cover image loaded successfully:', coverPath);
+  };
   
   coverContainer.appendChild(coverImage);
   infoBox.appendChild(coverContainer);
@@ -147,11 +155,14 @@ async function findCover(datum) {
 async function coverExists(filename) {
   if (!filename) return false;
   const path = getCoverImagePath(filename);
+  console.log('[scatterInfoBox] Checking cover exists:', filename, '->', path);
   try {
     const response = await fetch(path, { method: 'HEAD', cache: 'no-cache' });
-    return response.ok;
+    const exists = response.ok;
+    console.log('[scatterInfoBox] Cover exists check result:', path, '->', exists, 'status:', response.status);
+    return exists;
   } catch (error) {
-    console.debug('Cover exists check failed:', path, error);
+    console.error('[scatterInfoBox] Cover exists check failed:', path, error);
     return false;
   }
 }

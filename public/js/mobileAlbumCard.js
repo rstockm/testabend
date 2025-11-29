@@ -40,37 +40,41 @@ async function checkCoverExists(band, album, year = null) {
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
     const pathWithYear = getCoverImagePath(filenameWithYear);
-    console.log('[MobileAlbumCard] Trying cover with year:', pathWithYear);
+    console.log('[MobileAlbumCard] Trying cover with year:', filenameWithYear, '->', pathWithYear);
     
     try {
       const response = await fetch(pathWithYear, { method: 'HEAD', cache: 'no-cache' });
-      console.log('[MobileAlbumCard] Cover check response (with year):', pathWithYear, response.status, response.ok);
+      console.log('[MobileAlbumCard] Cover check response (with year):', pathWithYear, 'status:', response.status, 'ok:', response.ok);
       if (response.ok) {
-        console.log('[MobileAlbumCard] Cover found with year:', filenameWithYear);
+        console.log('[MobileAlbumCard] ✅ Cover found with year:', filenameWithYear);
         return { exists: true, filename: filenameWithYear };
+      } else {
+        console.log('[MobileAlbumCard] ❌ Cover not found (with year), status:', response.status);
       }
     } catch (error) {
-      console.log('[MobileAlbumCard] Cover check failed (with year):', pathWithYear, error);
+      console.error('[MobileAlbumCard] ❌ Cover check failed (with year):', pathWithYear, error);
     }
   }
   
   // Fallback: Versuche ohne Jahr
   const filenameWithoutYear = getCoverFilename(band, album, null);
   const pathWithoutYear = getCoverImagePath(filenameWithoutYear);
-  console.log('[MobileAlbumCard] Trying cover without year:', pathWithoutYear);
+  console.log('[MobileAlbumCard] Trying cover without year:', filenameWithoutYear, '->', pathWithoutYear);
   
   try {
     const response = await fetch(pathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
-    console.log('[MobileAlbumCard] Cover check response (without year):', pathWithoutYear, response.status, response.ok);
+    console.log('[MobileAlbumCard] Cover check response (without year):', pathWithoutYear, 'status:', response.status, 'ok:', response.ok);
     if (response.ok) {
-      console.log('[MobileAlbumCard] Cover found without year:', filenameWithoutYear);
+      console.log('[MobileAlbumCard] ✅ Cover found without year:', filenameWithoutYear);
       return { exists: true, filename: filenameWithoutYear };
+    } else {
+      console.log('[MobileAlbumCard] ❌ Cover not found (without year), status:', response.status);
     }
   } catch (error) {
-    console.log('[MobileAlbumCard] Cover check failed (without year):', pathWithoutYear, error);
+    console.error('[MobileAlbumCard] ❌ Cover check failed (without year):', pathWithoutYear, error);
   }
   
-  console.log('[MobileAlbumCard] Cover not found for:', band, album, year);
+  console.log('[MobileAlbumCard] ❌ Cover not found for:', band, album, year);
   return { exists: false, filename: null };
 }
 
