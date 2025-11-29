@@ -281,7 +281,6 @@ async function loadCoverImage(band, album, year, content, info) {
       `;
       
       const coverImage = document.createElement('img');
-      coverImage.src = coverUrl;
       coverImage.alt = `${band} - ${album}`;
       coverImage.className = 'mobile-album-card-cover';
       coverImage.loading = 'eager';
@@ -291,16 +290,44 @@ async function loadCoverImage(band, album, year, content, info) {
         display: block !important;
         object-fit: cover !important;
       `;
-      coverImage.onerror = () => {
-        console.error('[MobileAlbumCard] Cover image failed to load:', coverUrl);
-        coverContainer.remove();
-      };
+      
+      // Setze Handler BEVOR src gesetzt wird
       coverImage.onload = () => {
-        console.log('[MobileAlbumCard] Cover image loaded:', coverUrl);
+        console.log('[MobileAlbumCard] ✅ Cover image loaded successfully:', coverUrl);
       };
       
+      coverImage.onerror = (e) => {
+        console.error('[MobileAlbumCard] ❌ Cover image failed to load:', coverUrl);
+        console.error('[MobileAlbumCard] Error details:', e);
+        console.error('[MobileAlbumCard] Image naturalWidth:', coverImage.naturalWidth, 'naturalHeight:', coverImage.naturalHeight);
+        console.error('[MobileAlbumCard] Image complete:', coverImage.complete);
+        console.error('[MobileAlbumCard] Image src:', coverImage.src);
+        
+        // Versuche zu prüfen, was tatsächlich geladen wurde
+        fetch(coverUrl, { method: 'GET', cache: 'no-cache' })
+          .then(response => {
+            console.error('[MobileAlbumCard] GET response status:', response.status);
+            console.error('[MobileAlbumCard] GET response Content-Type:', response.headers.get('Content-Type'));
+            return response.text();
+          })
+          .then(text => {
+            console.error('[MobileAlbumCard] Response preview (first 200 chars):', text.substring(0, 200));
+            if (text.startsWith('<!DOCTYPE') || text.startsWith('<html')) {
+              console.error('[MobileAlbumCard] ⚠️ Bild wird als HTML serviert! Das ist das Problem.');
+            }
+          })
+          .catch(err => console.error('[MobileAlbumCard] Fetch error:', err));
+        
+        coverContainer.remove();
+      };
+      
+      // Hänge Container ZUERST an DOM, dann setze src (damit onload/onerror funktionieren)
       coverContainer.appendChild(coverImage);
       content.insertBefore(coverContainer, info);
+      
+      // Setze src NACH dem Anhängen an DOM
+      console.log('[MobileAlbumCard] Setting image src:', coverUrl);
+      coverImage.src = coverUrl;
     }
   } catch (error) {
     console.error('[MobileAlbumCard] Cover konnte nicht geladen werden:', error);
