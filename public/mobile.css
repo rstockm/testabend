@@ -213,6 +213,9 @@
   z-index: 2000;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
+  max-width: 100vw; /* Verhindert horizontales Scrollen */
+  box-sizing: border-box;
 }
 
 .mobile-band-modal.active {
@@ -247,8 +250,11 @@
 .mobile-modal-content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden; /* Verhindert horizontales Scrollen */
   padding: 16px;
   box-sizing: border-box; /* Wichtig: Padding wird in Breite eingerechnet */
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Edles Suchfeld für Mobile Modal */
