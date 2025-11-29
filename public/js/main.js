@@ -1,7 +1,7 @@
 /**
  * Hauptanwendungslogik
  */
-import { log, normalizeData, uniqueSorted } from './utils.js';
+import { log, normalizeData, uniqueSorted, getCoversBasePath } from './utils.js';
 import { Router } from './router.js';
 import { setupCoverTooltipHandler } from './coverTooltip.js';
 import { setupMobileNavigation } from './mobileNav.js';
@@ -24,6 +24,12 @@ function updateHeaderHeightVar() {
  */
 export async function main() {
   try {
+    // Pfad-Erkennung für Cover-Bilder initialisieren (im Hintergrund)
+    // Das setzt den Cache, damit spätere Aufrufe synchron funktionieren
+    getCoversBasePath().catch(err => {
+      console.warn('[main] Cover path detection failed:', err);
+    });
+    
     // DOM-Elemente
     const controlsEl = document.getElementById('controls');
     const chartEl = document.getElementById('chart');

@@ -185,16 +185,30 @@ export function calculateMinMaxPerYear(data) {
 /**
  * Ermittelt den Base-Pfad für Cover-Bilder
  * Funktioniert sowohl lokal als auch auf Cloudron mit verschiedenen URL-Strukturen
- * @returns {string} Base-Pfad für Cover-Bilder (z.B. "/images/covers/" oder "./images/covers/")
+ * Testet mehrere Pfade und verwendet den funktionierenden
+ * @returns {Promise<string>} Base-Pfad für Cover-Bilder (z.B. "/images/covers/")
  */
 let cachedCoversBasePath = null;
+let pathDetectionPromise = null;
 
-export function getCoversBasePath() {
-  // Cache für Performance
-  if (cachedCoversBasePath !== null) {
-    return cachedCoversBasePath;
+async function testCoverPath(basePath, testFilename = 'test.jpg') {
+  const testPath = basePath.endsWith('/') 
+    ? basePath + testFilename 
+    : basePath + '/' + testFilename;
+  
+  try {
+    const response = await fetch(testPath, { method: 'HEAD', cache: 'no-cache' });
+    // Auch 404 ist OK - bedeutet nur, dass der Pfad existiert, aber das Test-Bild nicht
+    // Wichtig ist, dass wir keine Netzwerk-Fehler bekommen
+    return response.status !== 0; // 0 bedeutet meist CORS/Netzwerk-Fehler
+  } catch (error) {
+    return false;
   }
+}
 
+async function detectCoversBasePath() {
+  const candidates = [];
+  
   // Strategie 1: Prüfe ob ein <base> Tag existiert
   const baseTag = document.querySelector('base');
   if (baseTag && baseTag.href) {
@@ -203,44 +217,139 @@ export function getCoversBasePath() {
       const basePath = baseUrl.pathname.endsWith('/') 
         ? baseUrl.pathname + 'images/covers/'
         : baseUrl.pathname + '/images/covers/';
-      cachedCoversBasePath = basePath;
-      console.log('[getCoversBasePath] Using base tag:', basePath);
-      return basePath;
+      candidates.push(basePath);
     } catch (e) {
       console.warn('[getCoversBasePath] Invalid base tag URL:', e);
     }
   }
 
-  // Strategie 2: Ermittle Base-Pfad aus window.location
+  // Strategie 2: Absoluter Pfad vom Root (häufigster Fall)
+  candidates.push('/images/covers/');
+
+  // Strategie 3: Relativer Pfad basierend auf window.location
   const pathname = window.location.pathname;
   
   // Wenn wir im Root sind (z.B. "/index.html" oder "/")
   if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('/index.html')) {
-    cachedCoversBasePath = '/images/covers/';
-    console.log('[getCoversBasePath] Using root path:', cachedCoversBasePath);
+    // Bereits als '/images/covers/' hinzugefügt
+  } else {
+    // Wenn wir in einem Subverzeichnis sind
+    const pathParts = pathname.split('/').filter(p => p && !p.endsWith('.html'));
+    if (pathParts.length > 0) {
+      const baseDir = '/' + pathParts.join('/') + '/images/covers/';
+      candidates.push(baseDir);
+    }
+  }
+
+  // Strategie 4: Relativer Pfad vom aktuellen Verzeichnis
+  const currentDir = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+  if (currentDir && currentDir !== '/') {
+    candidates.push(currentDir + 'images/covers/');
+  }
+
+  // Entferne Duplikate
+  const uniqueCandidates = [...new Set(candidates)];
+
+  console.log('[getCoversBasePath] Testing candidates:', uniqueCandidates);
+
+  // Teste die Kandidaten (beginne mit dem wahrscheinlichsten)
+  for (const candidate of uniqueCandidates) {
+    // Teste mit einem bekannten Test-Bild oder einfach die Existenz des Verzeichnisses
+    // Wir testen mit einem sehr unwahrscheinlichen Dateinamen - wenn wir 404 bekommen,
+    // bedeutet das, dass der Pfad existiert (nur das Bild nicht)
+    const isValid = await testCoverPath(candidate, '__path_test__');
+    if (isValid) {
+      console.log('[getCoversBasePath] Valid path found:', candidate);
+      return candidate;
+    }
+  }
+
+  // Fallback: Verwende den ersten Kandidaten (meist '/images/covers/')
+  const fallback = uniqueCandidates[0] || '/images/covers/';
+  console.warn('[getCoversBasePath] No valid path found, using fallback:', fallback);
+  return fallback;
+}
+
+export async function getCoversBasePath() {
+  // Cache für Performance
+  if (cachedCoversBasePath !== null) {
     return cachedCoversBasePath;
   }
 
-  // Wenn wir in einem Subverzeichnis sind (z.B. "/app/" oder "/testabend/")
-  // Entferne Dateinamen und führende Slashes
-  const pathParts = pathname.split('/').filter(p => p && !p.endsWith('.html'));
-  const baseDir = pathParts.length > 0 
-    ? '/' + pathParts.join('/') + '/images/covers/'
-    : '/images/covers/';
+  // Wenn bereits eine Detection läuft, warte darauf
+  if (pathDetectionPromise) {
+    return pathDetectionPromise;
+  }
+
+  // Starte Detection
+  pathDetectionPromise = detectCoversBasePath();
+  cachedCoversBasePath = await pathDetectionPromise;
+  pathDetectionPromise = null;
   
-  cachedCoversBasePath = baseDir;
-  console.log('[getCoversBasePath] Using calculated path:', cachedCoversBasePath);
   return cachedCoversBasePath;
+}
+
+// Synchroner Fallback für sofortige Verwendung (verwendet Standard-Pfad)
+export function getCoversBasePathSync() {
+  if (cachedCoversBasePath !== null) {
+    return cachedCoversBasePath;
+  }
+  
+  // Verwende Standard-Pfad bis Detection abgeschlossen ist
+  return '/images/covers/';
 }
 
 /**
  * Erstellt vollständigen Pfad zu einem Cover-Bild
+ * Gibt mehrere mögliche Pfade zurück (für Fallback-Mechanismus)
  * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
- * @returns {string} Vollständiger Pfad zum Cover
+ * @returns {string[]} Array von möglichen Pfaden (vom wahrscheinlichsten zum unwahrscheinlichsten)
+ */
+export function getCoverImagePaths(filename) {
+  if (!filename) return [];
+  const cleanFilename = filename.startsWith('/') ? filename.slice(1) : filename;
+  
+  const paths = [];
+  
+  // 1. Verwende gecachten Pfad (falls bereits erkannt)
+  const cachedPath = getCoversBasePathSync();
+  paths.push((cachedPath.endsWith('/') ? cachedPath : cachedPath + '/') + cleanFilename);
+  
+  // 2. Absoluter Pfad vom Root (häufigster Fall)
+  paths.push('/images/covers/' + cleanFilename);
+  
+  // 3. Relativer Pfad basierend auf window.location
+  const pathname = window.location.pathname;
+  if (pathname && pathname !== '/' && !pathname.endsWith('/index.html')) {
+    const pathParts = pathname.split('/').filter(p => p && !p.endsWith('.html'));
+    if (pathParts.length > 0) {
+      paths.push('/' + pathParts.join('/') + '/images/covers/' + cleanFilename);
+    }
+  }
+  
+  // Entferne Duplikate
+  return [...new Set(paths)];
+}
+
+/**
+ * Erstellt vollständigen Pfad zu einem Cover-Bild (für direkte Verwendung)
+ * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
+ * @returns {string} Vollständiger Pfad zum Cover (verwendet gecachten Pfad oder Fallback)
  */
 export function getCoverImagePath(filename) {
   if (!filename) return '';
-  const basePath = getCoversBasePath();
+  const paths = getCoverImagePaths(filename);
+  return paths[0]; // Verwende den ersten (wahrscheinlichsten) Pfad
+}
+
+/**
+ * Erstellt vollständigen Pfad zu einem Cover-Bild (async, wartet auf Pfad-Detection)
+ * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
+ * @returns {Promise<string>} Vollständiger Pfad zum Cover
+ */
+export async function getCoverImagePathAsync(filename) {
+  if (!filename) return '';
+  const basePath = await getCoversBasePath();
   // Stelle sicher, dass basePath mit / endet und filename nicht mit / beginnt
   const cleanBase = basePath.endsWith('/') ? basePath : basePath + '/';
   const cleanFilename = filename.startsWith('/') ? filename.slice(1) : filename;

@@ -1,5 +1,5 @@
 import { updateScatterHighlight } from './scatterHighlight.js';
-import { isMobile, getCoversBasePath, getCoverImagePath } from './utils.js';
+import { isMobile, getCoverImagePaths } from './utils.js';
 
 let infoBox = null;
 let currentCoverRequestId = 0;
@@ -108,13 +108,13 @@ async function addCoverToInfoBox(datum, requestId) {
   `;
   
   const result = await findCover(datum);
-  if (!result) return;
+  if (!result || !result.filename) return;
   if (requestId !== currentCoverRequestId) {
     return; // Eine neuere Anfrage hat bereits die Info-Box aktualisiert
   }
   
   const coverImage = document.createElement('img');
-  coverImage.src = getCoverImagePath(result);
+  coverImage.src = result.path || getCoverImagePaths(result.filename)[0];
   coverImage.alt = `${datum.Band} - ${datum.Album}`;
   coverImage.style.cssText = `
     width: 100%;
@@ -132,29 +132,37 @@ async function findCover(datum) {
   if (!datum) return null;
   
   const filenameWithYear = getCoverFilename(datum.Band, datum.Album, datum.Jahr);
-  if (await coverExists(filenameWithYear)) {
-    return filenameWithYear;
+  const resultWithYear = await coverExists(filenameWithYear);
+  if (resultWithYear.exists) {
+    return { filename: filenameWithYear, path: resultWithYear.path };
   }
   
   const filenameWithoutYear = getCoverFilename(datum.Band, datum.Album);
-  if (await coverExists(filenameWithoutYear)) {
-    return filenameWithoutYear;
+  const resultWithoutYear = await coverExists(filenameWithoutYear);
+  if (resultWithoutYear.exists) {
+    return { filename: filenameWithoutYear, path: resultWithoutYear.path };
   }
   
   return null;
 }
 
 async function coverExists(filename) {
-  if (!filename) return false;
-  try {
-    // Verwende robuste Pfad-Funktion
-    const coverPath = getCoverImagePath(filename);
-    const response = await fetch(coverPath, { method: 'HEAD', cache: 'no-cache' });
-    return response.ok;
-  } catch (error) {
-    console.debug('Cover exists check failed:', filename, error);
-    return false;
+  if (!filename) return { exists: false, path: null };
+  const paths = getCoverImagePaths(filename);
+  
+  for (const path of paths) {
+    try {
+      const response = await fetch(path, { method: 'HEAD', cache: 'no-cache' });
+      if (response.ok) {
+        return { exists: true, path: path };
+      }
+    } catch (error) {
+      console.debug('Cover exists check failed:', path, error);
+      // Weiter zum nächsten Pfad
+    }
   }
+  
+  return { exists: false, path: null };
 }
 
 function sanitizeFilename(text) {

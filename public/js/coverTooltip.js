@@ -2,7 +2,7 @@
  * Custom Tooltip-Handler für Album-Cover-Anzeige
  * Lädt Cover-Bilder lazy beim Hover
  */
-import { getCoversBasePath, getCoverImagePath } from './utils.js';
+import { getCoverImagePaths } from './utils.js';
 
 /**
  * Generiert Dateinamen für Album-Cover (identisch zur Python-Version)
@@ -34,40 +34,41 @@ function getCoverFilename(band, album, year = null) {
  * Versucht zuerst mit Jahr, dann ohne Jahr
  */
 async function checkCoverExists(band, album, year = null) {
-  // Verwende robuste Pfad-Funktion
-  const coversBase = getCoversBasePath();
-  
   // Versuche zuerst mit Jahr (falls vorhanden)
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const coverPathWithYear = getCoverImagePath(filenameWithYear);
+    const pathsWithYear = getCoverImagePaths(filenameWithYear);
     
-    try {
-      const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
-      if (response.ok) {
-        return { exists: true, filename: filenameWithYear };
+    for (const path of pathsWithYear) {
+      try {
+        const response = await fetch(path, { method: 'HEAD', cache: 'no-cache' });
+        if (response.ok) {
+          return { exists: true, filename: filenameWithYear, path: path };
+        }
+      } catch (error) {
+        console.debug('Cover check failed (with year):', path, error);
+        // Weiter zum nächsten Pfad
       }
-    } catch (error) {
-      console.debug('Cover check failed (with year):', coverPathWithYear, error);
-      // Weiter zu Fallback ohne Jahr
     }
   }
   
   // Fallback: Versuche ohne Jahr
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const coverPathWithoutYear = getCoverImagePath(filenameWithoutYear);
+  const pathsWithoutYear = getCoverImagePaths(filenameWithoutYear);
   
-  try {
-    const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
-    if (response.ok) {
-      return { exists: true, filename: filenameWithoutYear };
+  for (const path of pathsWithoutYear) {
+    try {
+      const response = await fetch(path, { method: 'HEAD', cache: 'no-cache' });
+      if (response.ok) {
+        return { exists: true, filename: filenameWithoutYear, path: path };
+      }
+    } catch (error) {
+      console.debug('Cover check failed (without year):', path, error);
+      // Weiter zum nächsten Pfad
     }
-  } catch (error) {
-    console.debug('Cover check failed (without year):', coverPathWithoutYear, error);
-    // Cover nicht gefunden
   }
   
-  return { exists: false, filename: null };
+  return { exists: false, filename: null, path: null };
 }
 
 /**
@@ -145,8 +146,8 @@ async function addCoverToTooltip(tooltipElement) {
       return; // Cover nicht vorhanden
     }
     
-    // Verwende robuste Pfad-Funktion
-    coverUrl = getCoverImagePath(result.filename);
+    // Verwende den gefundenen Pfad oder teste alle möglichen Pfade
+    coverUrl = result.path || getCoverImagePaths(result.filename)[0];
     coverUrlCache.set(cacheKey, coverUrl);
   } else if (coverUrl === null) {
     // Bereits geprüft, nicht vorhanden
