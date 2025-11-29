@@ -157,13 +157,17 @@ export function showMobileAlbumCard(datum) {
   });
   
   info.appendChild(table);
+  
+  // Cover-Bild SOFORT laden (vor dem Einfügen in content)
+  // Erstelle Platzhalter für Cover
+  const coverPlaceholder = document.createElement('div');
+  coverPlaceholder.id = 'cover-placeholder';
+  content.appendChild(coverPlaceholder);
+  
   content.appendChild(info);
   
-  // Cover-Bild asynchron laden (nach dem Einfügen der Card)
-  // Warte kurz, damit die Card bereits im DOM ist
-  setTimeout(() => {
-    loadCoverImage(datum.Band, datum.Album, datum.Jahr, content, info);
-  }, 100);
+  // Cover-Bild asynchron laden
+  loadCoverImage(datum.Band, datum.Album, datum.Jahr, content, coverPlaceholder);
   
   card.appendChild(closeBtn);
   card.appendChild(content);
@@ -215,13 +219,34 @@ async function loadCoverImage(band, album, year, content, info) {
       
       const coverContainer = document.createElement('div');
       coverContainer.className = 'mobile-album-card-cover-container';
+      // Explizite Styles für Sichtbarkeit
+      coverContainer.style.cssText = `
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 20px;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid var(--border-color);
+        background: var(--bg-tertiary);
+        display: block;
+        visibility: visible;
+      `;
       
       const coverImage = document.createElement('img');
       coverImage.src = coverUrl;
       coverImage.alt = `${band} - ${album}`;
       coverImage.className = 'mobile-album-card-cover';
-      coverImage.loading = 'eager'; // Sofort laden für bessere UX
-      coverImage.style.display = 'block'; // Explizit sichtbar machen
+      coverImage.loading = 'eager';
+      // Explizite Styles für Sichtbarkeit
+      coverImage.style.cssText = `
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        visibility: visible;
+        opacity: 1;
+      `;
       
       // Besseres Error-Handling
       coverImage.onerror = (e) => {
@@ -239,17 +264,23 @@ async function loadCoverImage(band, album, year, content, info) {
       
       coverContainer.appendChild(coverImage);
       
-      // Prüfe, ob content und info noch im DOM sind
-      if (content && info && content.contains(info)) {
-        content.insertBefore(coverContainer, info);
-        console.log('[MobileAlbumCard] Cover container inserted before info');
+      // Ersetze Platzhalter mit Cover-Container
+      if (content && coverPlaceholder && content.contains(coverPlaceholder)) {
+        coverPlaceholder.replaceWith(coverContainer);
+        console.log('[MobileAlbumCard] Cover container replaced placeholder');
       } else {
         // Fallback: Einfach am Anfang einfügen
-        content.insertBefore(coverContainer, content.firstChild);
-        console.log('[MobileAlbumCard] Cover container inserted at beginning (fallback)');
+        if (content.firstChild) {
+          content.insertBefore(coverContainer, content.firstChild);
+        } else {
+          content.appendChild(coverContainer);
+        }
+        console.log('[MobileAlbumCard] Cover container inserted (fallback)');
       }
       
       console.log('[MobileAlbumCard] Cover container inserted, content children:', content.children.length);
+      console.log('[MobileAlbumCard] Cover image src:', coverImage.src);
+      console.log('[MobileAlbumCard] Cover container visible:', window.getComputedStyle(coverContainer).display);
     } else {
       console.log('[MobileAlbumCard] Cover not found for:', band, album, year);
     }
