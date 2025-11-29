@@ -257,82 +257,19 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
           });
           showDebugMessage('Tooltip observer started', '#4a9dd4');
           
-          // Ansatz 3: Direkte SVG-Events als Fallback
-          const handleSVGClick = (e) => {
-            showDebugMessage(`SVG ${e.type} at (${e.clientX || e.changedTouches?.[0]?.clientX || 0}, ${e.clientY || e.changedTouches?.[0]?.clientY || 0})`, '#ff6b35');
-            
-            // Wenn Vega-Lite Events nicht funktionieren, versuche Hit-Test
-            if (!lastTooltipData) {
-              const point = svg.createSVGPoint();
-              if (e.type === 'touchend' && e.changedTouches) {
-                point.x = e.changedTouches[0].clientX;
-                point.y = e.changedTouches[0].clientY;
-              } else {
-                point.x = e.clientX;
-                point.y = e.clientY;
-              }
-              
-              const svgPoint = point.matrixTransform(svg.getScreenCTM().inverse());
-              showDebugMessage(`SVG point: (${svgPoint.x.toFixed(1)}, ${svgPoint.y.toFixed(1)})`, '#888');
-              
-              // Versuche Hit-Test mit Vega-Lite's scene API
-              try {
-                if (chartView && chartView.scene) {
-                  const scene = chartView.scene();
-                  if (scene && scene.items) {
-                    showDebugMessage(`Scene items: ${scene.items.length}`, '#888');
-                    
-                    let closestItem = null;
-                    let minDistance = Infinity;
-                    
-                    scene.items.forEach(item => {
-                      if (item.mark && item.mark.marktype === 'symbol' && item.bounds) {
-                        const bounds = item.bounds;
-                        const centerX = (bounds.x1 + bounds.x2) / 2;
-                        const centerY = (bounds.y1 + bounds.y2) / 2;
-                        const distance = Math.sqrt(
-                          Math.pow(svgPoint.x - centerX, 2) + Math.pow(svgPoint.y - centerY, 2)
-                        );
-                        
-                        const withinBounds = svgPoint.x >= bounds.x1 && svgPoint.x <= bounds.x2 &&
-                                             svgPoint.y >= bounds.y1 && svgPoint.y <= bounds.y2;
-                        
-                        if (withinBounds || distance < 100) {
-                          if (distance < minDistance) {
-                            minDistance = distance;
-                            closestItem = item;
-                          }
-                        }
-                      }
-                    });
-                    
-                    if (closestItem && closestItem.datum) {
-                      showDebugMessage(`Hit test found: ${closestItem.datum.Band}`, '#90EE90');
-                      e.preventDefault();
-                      e.stopPropagation();
-                      showMobileAlbumCard(closestItem.datum);
-                    } else {
-                      showDebugMessage(`Hit test: no item found (minDistance: ${minDistance.toFixed(1)})`, '#ffaa00');
-                    }
-                  } else {
-                    showDebugMessage('Scene has no items', '#ffaa00');
-                  }
-                } else {
-                  showDebugMessage('chartView.scene not available', '#ffaa00');
-                }
-              } catch (error) {
-                showDebugMessage(`Hit test error: ${error.message}`, '#ff0000');
-              }
-            }
-          };
-          
-          svg.addEventListener('click', handleSVGClick);
-          svg.addEventListener('touchend', handleSVGClick, { passive: false });
+          // Ansatz 3: Direkte SVG-Events nur für Debugging
+          // Die Vega-Lite Event API (Ansatz 1) und Tooltip-Observer (Ansatz 2) sollten ausreichen
           svg.addEventListener('touchstart', (e) => {
             showDebugMessage(`Touch start: ${e.touches.length} touches`, '#4a9dd4');
           }, { passive: true });
           
-          showDebugMessage('SVG event listeners added', '#90EE90');
+          svg.addEventListener('click', (e) => {
+            showDebugMessage(`SVG click at (${e.clientX}, ${e.clientY})`, '#888');
+            // Die Vega-Lite Event API sollte das bereits abfangen
+            // Falls nicht, wird der Tooltip-Observer greifen
+          });
+          
+          showDebugMessage('SVG event listeners added (debugging only)', '#90EE90');
         };
         
         // Starte Setup-Versuch
