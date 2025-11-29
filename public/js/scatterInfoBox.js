@@ -113,8 +113,12 @@ async function addCoverToInfoBox(datum, requestId) {
     return; // Eine neuere Anfrage hat bereits die Info-Box aktualisiert
   }
   
+  // Verwende absoluten Pfad relativ zum Root
+  const basePath = window.location.pathname.endsWith('/') 
+    ? window.location.pathname 
+    : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
   const coverImage = document.createElement('img');
-  coverImage.src = `images/covers/${result}`;
+  coverImage.src = basePath + (basePath.endsWith('/') ? '' : '/') + `images/covers/${result}`;
   coverImage.alt = `${datum.Band} - ${datum.Album}`;
   coverImage.style.cssText = `
     width: 100%;
@@ -147,9 +151,15 @@ async function findCover(datum) {
 async function coverExists(filename) {
   if (!filename) return false;
   try {
-    const response = await fetch(`images/covers/${filename}`, { method: 'HEAD', cache: 'no-cache' });
+    // Verwende absoluten Pfad relativ zum Root
+    const basePath = window.location.pathname.endsWith('/') 
+      ? window.location.pathname 
+      : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+    const coverPath = basePath + (basePath.endsWith('/') ? '' : '/') + `images/covers/${filename}`;
+    const response = await fetch(coverPath, { method: 'HEAD', cache: 'no-cache' });
     return response.ok;
-  } catch {
+  } catch (error) {
+    console.debug('Cover exists check failed:', filename, error);
     return false;
   }
 }

@@ -34,29 +34,37 @@ function getCoverFilename(band, album, year = null) {
  * Prüft, ob ein Cover-Bild existiert
  */
 async function checkCoverExists(band, album, year = null) {
+  // Verwende absoluten Pfad relativ zum Root
+  const basePath = window.location.pathname.endsWith('/') 
+    ? window.location.pathname 
+    : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+  const coversBase = basePath + (basePath.endsWith('/') ? '' : '/') + 'images/covers/';
+  
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const coverPathWithYear = `images/covers/${filenameWithYear}`;
+    const coverPathWithYear = coversBase + filenameWithYear;
     
     try {
       const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
       if (response.ok) {
         return { exists: true, filename: filenameWithYear };
       }
-    } catch {
+    } catch (error) {
+      console.debug('Cover check failed (with year):', coverPathWithYear, error);
       // Weiter zu Fallback ohne Jahr
     }
   }
   
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const coverPathWithoutYear = `images/covers/${filenameWithoutYear}`;
+  const coverPathWithoutYear = coversBase + filenameWithoutYear;
   
   try {
     const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
     if (response.ok) {
       return { exists: true, filename: filenameWithoutYear };
     }
-  } catch {
+  } catch (error) {
+    console.debug('Cover check failed (without year):', coverPathWithoutYear, error);
     // Cover nicht gefunden
   }
   
@@ -158,7 +166,11 @@ async function loadCoverImage(band, album, year, content, info) {
     const result = await checkCoverExists(band, album, year);
     
     if (result.exists && result.filename) {
-      const coverUrl = `images/covers/${result.filename}`;
+      // Verwende absoluten Pfad relativ zum Root
+      const basePath = window.location.pathname.endsWith('/') 
+        ? window.location.pathname 
+        : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+      const coverUrl = basePath + (basePath.endsWith('/') ? '' : '/') + `images/covers/${result.filename}`;
       
       const coverContainer = document.createElement('div');
       coverContainer.className = 'mobile-album-card-cover-container';

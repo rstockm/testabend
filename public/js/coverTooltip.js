@@ -33,31 +33,39 @@ function getCoverFilename(band, album, year = null) {
  * Versucht zuerst mit Jahr, dann ohne Jahr
  */
 async function checkCoverExists(band, album, year = null) {
+  // Verwende absoluten Pfad relativ zum Root
+  const basePath = window.location.pathname.endsWith('/') 
+    ? window.location.pathname 
+    : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+  const coversBase = basePath + (basePath.endsWith('/') ? '' : '/') + 'images/covers/';
+  
   // Versuche zuerst mit Jahr (falls vorhanden)
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const coverPathWithYear = `images/covers/${filenameWithYear}`;
+    const coverPathWithYear = coversBase + filenameWithYear;
     
     try {
       const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
       if (response.ok) {
         return { exists: true, filename: filenameWithYear };
       }
-    } catch {
+    } catch (error) {
+      console.debug('Cover check failed (with year):', coverPathWithYear, error);
       // Weiter zu Fallback ohne Jahr
     }
   }
   
   // Fallback: Versuche ohne Jahr
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const coverPathWithoutYear = `images/covers/${filenameWithoutYear}`;
+  const coverPathWithoutYear = coversBase + filenameWithoutYear;
   
   try {
     const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
     if (response.ok) {
       return { exists: true, filename: filenameWithoutYear };
     }
-  } catch {
+  } catch (error) {
+    console.debug('Cover check failed (without year):', coverPathWithoutYear, error);
     // Cover nicht gefunden
   }
   
@@ -139,7 +147,11 @@ async function addCoverToTooltip(tooltipElement) {
       return; // Cover nicht vorhanden
     }
     
-    coverUrl = `images/covers/${result.filename}`;
+    // Verwende absoluten Pfad relativ zum Root
+    const basePath = window.location.pathname.endsWith('/') 
+      ? window.location.pathname 
+      : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+    coverUrl = basePath + (basePath.endsWith('/') ? '' : '/') + `images/covers/${result.filename}`;
     coverUrlCache.set(cacheKey, coverUrl);
   } else if (coverUrl === null) {
     // Bereits geprüft, nicht vorhanden
