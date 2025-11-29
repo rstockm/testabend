@@ -191,7 +191,7 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
   const doneBtn = document.createElement('button');
   doneBtn.className = 'mobile-modal-done-btn';
   doneBtn.textContent = 'Fertig';
-  doneBtn.addEventListener('click', onClose);
+  // Event-Handler wird später hinzugefügt, nachdem localSelectedBands definiert ist
   
   footer.appendChild(doneBtn);
   
