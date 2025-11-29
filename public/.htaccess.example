@@ -4,12 +4,21 @@
 # WICHTIG: .htaccess ist in .gitignore, damit der Key nicht ins Repo kommt!
 
 # Fallback auf index.html für SPA-Routing
+# WICHTIG: Statische Dateien (Bilder, CSS, JS) werden direkt serviert, nicht umgeleitet
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+  
+  # Erlaube direkten Zugriff auf statische Dateien (Bilder, CSS, JS, etc.)
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule . - [L]
+  
+  # Erlaube direkten Zugriff auf Verzeichnisse
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule . - [L]
+  
+  # Alle anderen Requests auf index.html umleiten (für SPA-Routing)
   RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
 
