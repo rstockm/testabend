@@ -76,9 +76,11 @@ let currentCard = null;
 export function showMobileAlbumCard(datum) {
   if (!isMobile()) return; // Nur auf Mobile
   
-  // Entferne bestehende Karte falls vorhanden
+  // Entferne bestehende Karte sofort (ohne Animation)
   if (currentCard) {
-    closeMobileAlbumCard();
+    currentCard.remove();
+    currentCard = null;
+    document.body.style.overflow = '';
   }
   
   // Erstelle Overlay
@@ -173,14 +175,22 @@ async function loadCoverImage(band, album, year, content, info) {
       coverImage.src = coverUrl;
       coverImage.alt = `${band} - ${album}`;
       coverImage.className = 'mobile-album-card-cover';
-      coverImage.loading = 'lazy';
+      coverImage.loading = 'eager'; // Sofort laden für bessere UX
       
-      coverImage.onerror = () => {
+      // Besseres Error-Handling
+      coverImage.onerror = (e) => {
+        console.debug('Cover image failed to load:', coverUrl);
         coverContainer.remove();
+      };
+      
+      coverImage.onload = () => {
+        console.debug('Cover image loaded successfully:', coverUrl);
       };
       
       coverContainer.appendChild(coverImage);
       content.insertBefore(coverContainer, info);
+    } else {
+      console.debug('Cover not found for:', band, album, year);
     }
   } catch (error) {
     // Cover konnte nicht geladen werden, ignorieren
@@ -195,10 +205,12 @@ export function closeMobileAlbumCard() {
   if (currentCard) {
     currentCard.classList.remove('active');
     setTimeout(() => {
-      currentCard.remove();
-      currentCard = null;
-      // Erlaube Scrollen wieder
-      document.body.style.overflow = '';
+      if (currentCard) {
+        currentCard.remove();
+        currentCard = null;
+        // Erlaube Scrollen wieder
+        document.body.style.overflow = '';
+      }
     }, 300); // Warte auf Animation
   }
 }
