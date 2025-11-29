@@ -207,7 +207,12 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
   
   chartEl.innerHTML = '';
   try {
-    const result = await vegaEmbed(chartEl, spec, { actions: false });
+    // Auf Mobile SVG-Renderer erzwingen (für Touch-Handler)
+    const embedOptions = { 
+      actions: false,
+      ...(isMobile() ? { renderer: 'svg' } : {})
+    };
+    const result = await vegaEmbed(chartEl, spec, embedOptions);
     
     // Mobile Touch-Handler einrichten - warte etwas länger für Rendering
     if (isMobile() && result && result.view) {
@@ -323,7 +328,12 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     layer: layers
   };
   
-  const result = await vegaEmbed(chartEl, spec, { actions: false });
+  // Auf Mobile SVG-Renderer erzwingen (für Touch-Handler)
+  const embedOptions = { 
+    actions: false,
+    ...(isMobile() ? { renderer: 'svg' } : {})
+  };
+  const result = await vegaEmbed(chartEl, spec, embedOptions);
   
   // Mobile Touch-Handler einrichten - warte etwas länger für Rendering
   if (isMobile() && result && result.view) {

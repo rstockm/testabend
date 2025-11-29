@@ -108,22 +108,71 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
     setTimeout(() => {
       try {
         let attempts = 0;
-        const maxAttempts = 10;
+        const maxAttempts = 20; // Erhöht von 10 auf 20
         
         const trySetup = () => {
           attempts++;
-          const svg = chartEl.querySelector('svg');
+          // Suche SVG direkt oder in verschachtelten Elementen
+          let svg = chartEl.querySelector('svg');
           
-          if (!svg) {
+          // Falls nicht gefunden, suche auch in allen Kindern
+          if (!svg && chartEl.children.length > 0) {
+            for (const child of chartEl.children) {
+              svg = child.querySelector('svg') || (child.tagName === 'SVG' ? child : null);
+              if (svg) break;
+            }
+          }
+          
+          // Prüfe auch auf Canvas (Fallback, sollte nicht mehr vorkommen mit SVG-Renderer)
+          const canvas = chartEl.querySelector('canvas');
+          
+          if (!svg && !canvas) {
+            // Detaillierte Debug-Info über Chart-Struktur (nur beim ersten Versuch)
+            if (attempts === 1) {
+              showDebugMessage(`ChartEl: ${chartEl ? chartEl.tagName : 'null'}`, '#888');
+              showDebugMessage(`Children: ${chartEl ? chartEl.children.length : 0}`, '#888');
+              if (chartEl && chartEl.children.length > 0) {
+                Array.from(chartEl.children).forEach((child, i) => {
+                  showDebugMessage(`Child ${i}: ${child.tagName}, classes: ${child.className}`, '#888');
+                  const childSvg = child.querySelector('svg');
+                  const childCanvas = child.querySelector('canvas');
+                  if (childSvg) {
+                    showDebugMessage(`  -> SVG found in child ${i}!`, '#90EE90');
+                  }
+                  if (childCanvas) {
+                    showDebugMessage(`  -> Canvas found in child ${i}!`, '#ffaa00');
+                  }
+                });
+              }
+            }
+            
             if (attempts < maxAttempts) {
-              showDebugMessage(`Waiting for SVG... (${attempts}/${maxAttempts})`, '#ffaa00');
+              showDebugMessage(`Waiting for SVG/Canvas... (${attempts}/${maxAttempts})`, '#ffaa00');
               setTimeout(trySetup, 200);
               return;
             } else {
-              showDebugMessage('ERROR: SVG not found after multiple attempts', '#ff0000');
+              showDebugMessage('ERROR: SVG/Canvas not found after multiple attempts', '#ff0000');
               showDebugMessage(`ChartEl: ${chartEl ? chartEl.tagName : 'null'}, children: ${chartEl ? chartEl.children.length : 0}`, '#ff0000');
               return;
             }
+          }
+          
+          // Canvas gefunden (Fallback - sollte nicht mehr vorkommen)
+          if (!svg && canvas) {
+            showDebugMessage('WARNING: Canvas found instead of SVG!', '#ffaa00');
+            showDebugMessage('Using Vega-Lite event API for Canvas...', '#4a9dd4');
+            // Für Canvas nutzen wir nur die Vega-Lite Event API
+            if (chartView && typeof chartView.addEventListener === 'function') {
+              chartView.addEventListener('click', (event, item) => {
+                if (item && item.datum) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  showMobileAlbumCard(item.datum);
+                }
+              });
+              showDebugMessage('Canvas event listeners added', '#90EE90');
+            }
+            return;
           }
           
           showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
