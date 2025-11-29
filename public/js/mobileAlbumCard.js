@@ -2,7 +2,7 @@
  * Mobile Album-Karte für Touch-Interaktionen
  * Zeigt Album-Informationen als modale Karte statt flüchtiger Tooltips
  */
-import { isMobile, getCoverImagePaths } from './utils.js';
+import { isMobile, getCoverImagePath } from './utils.js';
 
 // Exportiere Cover-Funktionen aus coverTooltip.js für Wiederverwendung
 // Wir müssen diese Funktionen hier duplizieren oder importieren
@@ -39,45 +39,39 @@ async function checkCoverExists(band, album, year = null) {
   // Teste zuerst mit Jahr (falls vorhanden)
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const pathsWithYear = getCoverImagePaths(filenameWithYear);
-    console.log('[MobileAlbumCard] Trying cover with year, paths:', pathsWithYear);
+    const pathWithYear = getCoverImagePath(filenameWithYear);
+    console.log('[MobileAlbumCard] Trying cover with year:', pathWithYear);
     
-    for (const path of pathsWithYear) {
-      try {
-        const response = await fetch(path, { method: 'HEAD', cache: 'no-cache' });
-        console.log('[MobileAlbumCard] Cover check response (with year):', path, response.status, response.ok);
-        if (response.ok) {
-          console.log('[MobileAlbumCard] Cover found with year:', filenameWithYear, 'at path:', path);
-          return { exists: true, filename: filenameWithYear, path: path };
-        }
-      } catch (error) {
-        console.log('[MobileAlbumCard] Cover check failed (with year):', path, error);
-        // Weiter zum nächsten Pfad
+    try {
+      const response = await fetch(pathWithYear, { method: 'HEAD', cache: 'no-cache' });
+      console.log('[MobileAlbumCard] Cover check response (with year):', pathWithYear, response.status, response.ok);
+      if (response.ok) {
+        console.log('[MobileAlbumCard] Cover found with year:', filenameWithYear);
+        return { exists: true, filename: filenameWithYear };
       }
+    } catch (error) {
+      console.log('[MobileAlbumCard] Cover check failed (with year):', pathWithYear, error);
     }
   }
   
   // Fallback: Versuche ohne Jahr
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const pathsWithoutYear = getCoverImagePaths(filenameWithoutYear);
-  console.log('[MobileAlbumCard] Trying cover without year, paths:', pathsWithoutYear);
+  const pathWithoutYear = getCoverImagePath(filenameWithoutYear);
+  console.log('[MobileAlbumCard] Trying cover without year:', pathWithoutYear);
   
-  for (const path of pathsWithoutYear) {
-    try {
-      const response = await fetch(path, { method: 'HEAD', cache: 'no-cache' });
-      console.log('[MobileAlbumCard] Cover check response (without year):', path, response.status, response.ok);
-      if (response.ok) {
-        console.log('[MobileAlbumCard] Cover found without year:', filenameWithoutYear, 'at path:', path);
-        return { exists: true, filename: filenameWithoutYear, path: path };
-      }
-    } catch (error) {
-      console.log('[MobileAlbumCard] Cover check failed (without year):', path, error);
-      // Weiter zum nächsten Pfad
+  try {
+    const response = await fetch(pathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
+    console.log('[MobileAlbumCard] Cover check response (without year):', pathWithoutYear, response.status, response.ok);
+    if (response.ok) {
+      console.log('[MobileAlbumCard] Cover found without year:', filenameWithoutYear);
+      return { exists: true, filename: filenameWithoutYear };
     }
+  } catch (error) {
+    console.log('[MobileAlbumCard] Cover check failed (without year):', pathWithoutYear, error);
   }
   
   console.log('[MobileAlbumCard] Cover not found for:', band, album, year);
-  return { exists: false, filename: null, path: null };
+  return { exists: false, filename: null };
 }
 
 let currentCard = null;
@@ -266,8 +260,7 @@ async function loadCoverImage(band, album, year, content, info) {
     const result = await checkCoverExists(band, album, year);
     
     if (result.exists && result.filename) {
-      // Verwende den gefundenen Pfad oder teste alle möglichen Pfade
-      const coverUrl = result.path || getCoverImagePaths(result.filename)[0];
+      const coverUrl = getCoverImagePath(result.filename);
       
       const coverContainer = document.createElement('div');
       coverContainer.className = 'mobile-album-card-cover-container';
