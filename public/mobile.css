@@ -148,10 +148,10 @@
   flex-direction: column;
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: var(--header-height-mobile, 56px); /* Unter Header */
+  position: relative; /* Erstmal kein sticky, direkt unter Header */
   z-index: 90;
   width: 100%;
+  flex-shrink: 0; /* Verhindert Schrumpfen */
 }
 
 /* Scrollbare Tags-Leiste */
@@ -332,6 +332,8 @@
     flex-direction: column;
     min-height: calc(100dvh - var(--header-height-mobile, 56px)); /* Viewport minus Header */
     gap: 0;
+    margin-top: 0;
+    padding-top: 0;
     overflow-x: hidden;
     overflow-y: auto; /* Gesamtes Layout darf scrollen */
   }
@@ -376,7 +378,8 @@
   
   /* Hauptcontainer Anpassung */
   main {
-    padding: 0;
+    padding: 0 !important;
+    margin: 0 !important;
     min-height: calc(100dvh - var(--header-height-mobile, 56px));
     overflow: visible;
     display: flex;
