@@ -3,6 +3,7 @@
  * Image Proxy für Cover-Bilder
  * Stellt sicher, dass Bilder korrekt als image/jpeg serviert werden
  * und nicht von der SPA-Rewrite-Regel abgefangen werden
+ * Unterstützt sowohl GET als auch HEAD Requests
  */
 
 // Pfad zum Bild relativ zum Document Root
@@ -11,6 +12,7 @@ $imagePath = $_GET['path'] ?? '';
 // Sicherheitsprüfung: Nur Bilder aus dem covers-Verzeichnis erlauben
 if (empty($imagePath) || strpos($imagePath, 'images/covers/') !== 0) {
     http_response_code(400);
+    header('Content-Type: application/json');
     echo json_encode(['error' => 'Invalid image path']);
     exit();
 }
@@ -21,6 +23,7 @@ $fullPath = __DIR__ . '/' . $imagePath;
 // Prüfe ob Datei existiert
 if (!file_exists($fullPath)) {
     http_response_code(404);
+    header('Content-Type: application/json');
     echo json_encode(['error' => 'Image not found']);
     exit();
 }
@@ -28,6 +31,7 @@ if (!file_exists($fullPath)) {
 // Prüfe ob es wirklich eine Datei ist (nicht ein Verzeichnis)
 if (!is_file($fullPath)) {
     http_response_code(400);
+    header('Content-Type: application/json');
     echo json_encode(['error' => 'Not a file']);
     exit();
 }
@@ -44,12 +48,23 @@ $contentTypes = [
 
 $contentType = $contentTypes[$extension] ?? 'image/jpeg';
 
+// Dateigröße für Content-Length Header
+$fileSize = filesize($fullPath);
+
 // Setze Header
 header('Content-Type: ' . $contentType);
+header('Content-Length: ' . $fileSize);
 header('Cache-Control: public, max-age=31536000'); // 1 Jahr Cache
 header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 31536000) . ' GMT');
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($fullPath)) . ' GMT');
 
-// Lese und sende Bild
+// Für HEAD-Requests nur Header senden, kein Body
+if ($_SERVER['REQUEST_METHOD'] === 'HEAD') {
+    http_response_code(200);
+    exit();
+}
+
+// Für GET-Requests: Lese und sende Bild
+http_response_code(200);
 readfile($fullPath);
 ?>
-
