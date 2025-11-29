@@ -1,4 +1,5 @@
 import { updateScatterHighlight } from './scatterHighlight.js';
+import { isMobile } from './utils.js';
 
 let infoBox = null;
 let currentCoverRequestId = 0;
@@ -12,6 +13,9 @@ const PLACEHOLDER_HTML = `
  * Erstellt oder ersetzt die feste Info-Box rechts neben dem Scatter-Chart.
  */
 export function createScatterInfoBox(containerId = 'scatter-container') {
+  // Auf Mobile keine Info-Box erstellen
+  if (isMobile()) return null;
+  
   const scatterContainer = document.getElementById(containerId);
   if (!scatterContainer) return null;
   

@@ -6,6 +6,7 @@ import { generateYearRange, calculateYDomain, calculateMinMaxPerYear, isMobile, 
 import { polynomialRegression, generateRegressionPoints } from './regression.js';
 import { setupCoverTooltipHandler } from './coverTooltip.js';
 import { setupScatterKeyboardNav } from './scatterKeyboardNav.js';
+import { setupMobileTouchHandlers } from './mobileTouchHandler.js';
 
 /**
  * Overview-Chart rendern
@@ -207,11 +208,16 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
   chartEl.innerHTML = '';
   try {
     const result = await vegaEmbed(chartEl, spec, { actions: false });
-    setupCoverTooltipHandler();
     
-    // Setup Keyboard-Navigation
-    if (result && result.view) {
-      setupScatterKeyboardNav(filtered, result.view, chartEl);
+    // Mobile Touch-Handler einrichten
+    if (isMobile() && result && result.view) {
+      setupMobileTouchHandlers(result.view, chartEl);
+    } else {
+      // Desktop: Standard Tooltip-Handler und Keyboard-Navigation
+      setupCoverTooltipHandler();
+      if (result && result.view) {
+        setupScatterKeyboardNav(filtered, result.view, chartEl);
+      }
     }
   } catch (e) {
     chartEl.innerHTML = '<p style="padding: 40px; text-align: center; color: #ff6b6b;">Fehler beim Rendering: ' + e.message + '</p>';
@@ -315,8 +321,17 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     layer: layers
   };
   
-  await vegaEmbed(chartEl, spec, { actions: false });
-  setupCoverTooltipHandler();
+  const view = await vegaEmbed(chartEl, spec, { actions: false });
+  
+  // Mobile Touch-Handler einrichten
+  if (isMobile() && view) {
+    setupMobileTouchHandlers(view, chartEl);
+  } else {
+    // Desktop: Standard Tooltip-Handler
+    setupCoverTooltipHandler();
+  }
+  
+  return view;
 }
 
 /**

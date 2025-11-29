@@ -1,5 +1,6 @@
 import { createScatterInfoBox, updateScatterInfoBox, destroyScatterInfoBox } from './scatterInfoBox.js';
 import { setupScatterHighlight, teardownScatterHighlight } from './scatterHighlight.js';
+import { isMobile } from './utils.js';
 
 /**
  * Keyboard-Navigation für Scatter-Chart
@@ -24,8 +25,10 @@ export function setupScatterKeyboardNav(data, view, chartEl) {
   chartElement = chartEl;
   setupScatterHighlight(view);
   
-  // Erstelle feste Info-Box rechts neben dem Chart
-  createScatterInfoBox();
+  // Erstelle feste Info-Box rechts neben dem Chart (nur Desktop)
+  if (!isMobile()) {
+    createScatterInfoBox();
+  }
   
   // Sortiere Daten nach Note (Y-Koordinate) für Links/Rechts-Navigation
   sortedByNote = [...data]
@@ -47,11 +50,12 @@ export function setupScatterKeyboardNav(data, view, chartEl) {
       return Number(b.Note) - Number(a.Note);
     });
   
-  // Tracke aktuellen Hover-Punkt
-  trackHoveredPoint();
-  
-  // Keyboard-Event-Listener hinzufügen
-  setupKeyboardListener();
+  // Tracke aktuellen Hover-Punkt (nur Desktop)
+  if (!isMobile()) {
+    trackHoveredPoint();
+    // Keyboard-Event-Listener hinzufügen
+    setupKeyboardListener();
+  }
 }
 
 /**

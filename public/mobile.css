@@ -402,6 +402,144 @@
 }
 
 /* ============================================
+   Mobile Album-Karte (Modale Touch-Interaktion)
+   ============================================ */
+
+.mobile-album-card-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-album-card-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-album-card {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  max-width: 90%;
+  max-height: 80vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.mobile-album-card-overlay.active .mobile-album-card {
+  transform: scale(1);
+}
+
+.mobile-album-card-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-primary);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-album-card-close:active {
+  background: var(--hover-bg);
+}
+
+.mobile-album-card-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-album-card-cover-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  background: var(--bg-tertiary);
+}
+
+.mobile-album-card-cover {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.mobile-album-card-info {
+  width: 100%;
+}
+
+.mobile-album-card-info h3 {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  text-align: center;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.mobile-album-card-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mobile-album-card-info tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-album-card-info tr:last-child {
+  border-bottom: none;
+}
+
+.mobile-album-card-info td {
+  padding: 12px 0;
+  color: var(--text-primary);
+}
+
+.mobile-album-card-info td:first-child {
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 30%;
+  padding-right: 12px;
+}
+
+.mobile-album-card-info td:last-child {
+  text-align: left;
+}
+
+/* ============================================
    Tablet Breakpoint (768px - 1024px)
    ============================================ */
 
