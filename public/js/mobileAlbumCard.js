@@ -91,10 +91,20 @@ export function showMobileAlbumCard(datum) {
     document.body.style.overflow = '';
   }
   
-  // Erstelle Overlay
-  const overlay = document.createElement('div');
-  overlay.className = 'mobile-album-card-overlay';
-  console.log('[MobileAlbumCard] Overlay created');
+  // Verwende natives <dialog> Element für besseren Mobile-Support
+  let overlay = document.getElementById('mobile-album-card-dialog');
+  
+  if (!overlay) {
+    overlay = document.createElement('dialog');
+    overlay.id = 'mobile-album-card-dialog';
+    overlay.className = 'mobile-album-card-overlay';
+    document.body.appendChild(overlay);
+    console.log('[MobileAlbumCard] Dialog element created');
+  } else {
+    // Entferne alten Inhalt falls vorhanden
+    overlay.innerHTML = '';
+    console.log('[MobileAlbumCard] Reusing existing dialog');
+  }
   
   // Erstelle Karte
   const card = document.createElement('div');
@@ -146,37 +156,22 @@ export function showMobileAlbumCard(datum) {
   card.appendChild(closeBtn);
   card.appendChild(content);
   overlay.appendChild(card);
-  document.body.appendChild(overlay);
   
-  console.log('[MobileAlbumCard] Card appended to body');
+  console.log('[MobileAlbumCard] Card appended to dialog');
   
   currentCard = overlay;
   
-  // Aktiviere Overlay (für Animation)
+  // Zeige Dialog mit nativer API (robust auf Mobile)
   requestAnimationFrame(() => {
-    console.log('[MobileAlbumCard] Adding active class');
-    overlay.classList.add('active');
-    console.log('[MobileAlbumCard] Active class added, overlay classes:', overlay.className);
-    
-    // Debug: Prüfe alle wichtigen Styles
-    const computed = window.getComputedStyle(overlay);
-    console.log('[MobileAlbumCard] Overlay computed styles:', {
-      display: computed.display,
-      position: computed.position,
-      zIndex: computed.zIndex,
-      opacity: computed.opacity,
-      visibility: computed.visibility,
-      top: computed.top,
-      left: computed.left,
-      width: computed.width,
-      height: computed.height
-    });
-    
-    // Stelle sicher, dass das Overlay wirklich sichtbar ist
-    if (computed.opacity === '0' || computed.visibility === 'hidden') {
-      console.warn('[MobileAlbumCard] Overlay still hidden! Forcing visibility...');
-      overlay.style.opacity = '1';
-      overlay.style.visibility = 'visible';
+    console.log('[MobileAlbumCard] Showing dialog');
+    try {
+      overlay.showModal(); // Native Dialog API
+      console.log('[MobileAlbumCard] Dialog shown successfully');
+    } catch (error) {
+      console.error('[MobileAlbumCard] Error showing dialog:', error);
+      // Fallback: Manuell anzeigen
+      overlay.classList.add('active');
+      overlay.style.display = 'flex';
     }
   });
   
@@ -237,15 +232,30 @@ async function loadCoverImage(band, album, year, content, info) {
  */
 export function closeMobileAlbumCard() {
   if (currentCard) {
-    currentCard.classList.remove('active');
-    setTimeout(() => {
-      if (currentCard) {
-        currentCard.remove();
-        currentCard = null;
-        // Erlaube Scrollen wieder
-        document.body.style.overflow = '';
+    try {
+      // Native Dialog API verwenden
+      if (currentCard.close) {
+        currentCard.close();
+      } else {
+        currentCard.classList.remove('active');
+        currentCard.style.display = 'none';
       }
-    }, 300); // Warte auf Animation
+    } catch (error) {
+      console.error('[MobileAlbumCard] Error closing dialog:', error);
+      currentCard.classList.remove('active');
+      currentCard.style.display = 'none';
+    }
+    
+    // Erlaube Scrollen wieder
+    document.body.style.overflow = '';
+    
+    // Optional: Dialog-Inhalt löschen nach Animation
+    setTimeout(() => {
+      if (currentCard && currentCard.innerHTML) {
+        currentCard.innerHTML = '';
+      }
+      currentCard = null;
+    }, 300);
   }
 }
 
