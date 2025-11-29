@@ -157,7 +157,27 @@ export function showMobileAlbumCard(datum) {
     console.log('[MobileAlbumCard] Adding active class');
     overlay.classList.add('active');
     console.log('[MobileAlbumCard] Active class added, overlay classes:', overlay.className);
-    console.log('[MobileAlbumCard] Overlay computed style:', window.getComputedStyle(overlay).display);
+    
+    // Debug: Prüfe alle wichtigen Styles
+    const computed = window.getComputedStyle(overlay);
+    console.log('[MobileAlbumCard] Overlay computed styles:', {
+      display: computed.display,
+      position: computed.position,
+      zIndex: computed.zIndex,
+      opacity: computed.opacity,
+      visibility: computed.visibility,
+      top: computed.top,
+      left: computed.left,
+      width: computed.width,
+      height: computed.height
+    });
+    
+    // Stelle sicher, dass das Overlay wirklich sichtbar ist
+    if (computed.opacity === '0' || computed.visibility === 'hidden') {
+      console.warn('[MobileAlbumCard] Overlay still hidden! Forcing visibility...');
+      overlay.style.opacity = '1';
+      overlay.style.visibility = 'visible';
+    }
   });
   
   // Schließen bei Klick außerhalb
