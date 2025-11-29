@@ -1,8 +1,7 @@
 #!/bin/bash
 # Test-Script um herauszufinden, wo die Bilder auf dem Server liegen
 
-DOMAIN="testabend.wolkenbar"
-# Oder falls HTTPS: DOMAIN="https://testabend.wolkenbar"
+DOMAIN="testabend.wolkenbar.de"
 
 echo "Testing image paths on $DOMAIN..."
 echo ""
