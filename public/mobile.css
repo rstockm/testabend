@@ -405,76 +405,39 @@
    Mobile Album-Karte (Modale Touch-Interaktion)
    ============================================ */
 
-/* Native <dialog> Element Styling - robust auf Mobile */
 .mobile-album-card-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  margin: 0;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
   padding: 20px;
-  border: none;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  /* Dialog ist standardmäßig versteckt */
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
-/* Wenn Dialog geöffnet ist (::backdrop wird automatisch hinzugefügt) */
-.mobile-album-card-overlay[open] {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  display: flex;
-}
-
-/* Backdrop für Dialog */
-.mobile-album-card-overlay::backdrop {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
-}
-
-/* Fallback für Browser ohne Dialog-Support */
 .mobile-album-card-overlay.active {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-  display: flex !important;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .mobile-album-card {
-  background: #1e1e1e !important; /* Explizite Farbe für Dark Theme */
-  color: #f5f5f5 !important;
-  border-radius: 12px !important;
-  max-width: 90%;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 16px;
+  width: min(90vw, 420px);
   max-height: 80vh;
-  width: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-  position: relative;
-  border: none !important; /* Entferne Standard-Dialog-Border */
-  padding: 0 !important; /* Entferne Standard-Dialog-Padding */
-  margin: 0 !important;
-}
-
-.mobile-album-card-overlay.active .mobile-album-card {
-  transform: scale(1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
 }
 
 .mobile-album-card-close {
@@ -508,8 +471,8 @@
   overflow-y: auto;
   flex: 1;
   -webkit-overflow-scrolling: touch;
-  background: transparent !important;
-  color: #f5f5f5 !important;
+  background: transparent;
+  color: var(--text-primary);
 }
 
 .mobile-album-card-cover-container {
@@ -535,10 +498,10 @@
 }
 
 .mobile-album-card-info h3 {
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
   font-size: 20px;
   text-align: center;
-  color: #f5f5f5 !important;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -557,18 +520,19 @@
 
 .mobile-album-card-info td {
   padding: 12px 0;
-  color: #f5f5f5 !important;
+  color: var(--text-primary);
 }
 
 .mobile-album-card-info td:first-child {
   font-weight: 600;
-  color: #d4d4d4 !important;
+  color: var(--text-secondary);
   width: 30%;
   padding-right: 12px;
 }
 
 .mobile-album-card-info td:last-child {
   text-align: left;
+  color: var(--text-primary);
 }
 
 /* ============================================
