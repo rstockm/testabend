@@ -37,6 +37,19 @@ export async function main() {
     updateHeaderHeightVar();
     window.addEventListener('resize', updateHeaderHeightVar);
     
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+      const updateMainPadding = () => {
+        if (window.innerWidth <= 767) {
+          mainEl.style.paddingTop = '0px';
+        } else {
+          mainEl.style.paddingTop = '';
+        }
+      };
+      updateMainPadding();
+      window.addEventListener('resize', updateMainPadding);
+    }
+    
     // Daten laden
     const resp = await fetch('data/alben.json', { cache: 'no-store' });
     const data = await resp.json();

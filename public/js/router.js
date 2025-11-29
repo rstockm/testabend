@@ -17,6 +17,9 @@ export class Router {
     this.chartEl = chartEl;
     this.controlsEl = controlsEl;
     this.chat = null; // Chat-Instanz wird persistent gehalten
+    this.controlsDetached = false;
+    this.controlsParent = null;
+    this.controlsNextSibling = null;
   }
   
   /**
@@ -83,6 +86,14 @@ export class Router {
     
     // Layout erstellen
     const mainEl = document.querySelector('main');
+    if (!this.controlsDetached) {
+      this.controlsParent = this.controlsEl.parentNode;
+      this.controlsNextSibling = this.controlsEl.nextSibling;
+      if (this.controlsParent) {
+        this.controlsParent.removeChild(this.controlsEl);
+        this.controlsDetached = true;
+      }
+    }
     const layout = document.createElement('div');
     layout.className = 'layout-band';
     layout.id = 'band-layout';
@@ -347,6 +358,16 @@ export class Router {
     if (layout) {
       mainEl.appendChild(this.chartEl);
       layout.remove();
+    }
+    if (this.controlsDetached && this.controlsParent) {
+      if (this.controlsNextSibling && this.controlsNextSibling.parentNode === this.controlsParent) {
+        this.controlsParent.insertBefore(this.controlsEl, this.controlsNextSibling);
+      } else {
+        this.controlsParent.appendChild(this.controlsEl);
+      }
+      this.controlsDetached = false;
+      this.controlsParent = null;
+      this.controlsNextSibling = null;
     }
     this.controlsEl.style.display = '';
     

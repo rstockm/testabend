@@ -45,4 +45,3 @@ echo "Hinweis: Folgende Dateien wurden NICHT überschrieben (lokal behalten):"
 echo "  - .htaccess (API-Key)"
 echo "  - images/ (Album-Cover)"
 echo "  - data/embeddings.json (zu groß)"
-

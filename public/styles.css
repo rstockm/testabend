@@ -65,7 +65,7 @@ nav a.active {
 }
 
 main {
-  padding: 8px 8px 16px 0;
+  padding: 0 8px 16px 0;
   max-width: none;
   margin: 0;
   background-color: var(--bg-primary);
@@ -927,7 +927,7 @@ pre#debug {
     padding-right: 12px;
   }
   main {
-    padding: 12px 12px 12px 0;
+    padding: 0 12px 12px 0;
   }
   
   .chat-container {
@@ -936,5 +936,11 @@ pre#debug {
   
   .chat-message {
     max-width: 90%;
+  }
+}
+
+@media (min-width: 901px) {
+  main {
+    padding-top: 8px;
   }
 }
