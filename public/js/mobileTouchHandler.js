@@ -14,40 +14,44 @@ let debugOverlay = null;
 function showDebugMessage(message, color = '#ff6b35') {
   if (!debugMode) return;
   
-  if (!debugOverlay) {
-    debugOverlay = document.createElement('div');
-    debugOverlay.style.cssText = `
-      position: fixed;
-      top: 100px;
-      left: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.9);
-      color: white;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-family: monospace;
-      z-index: 10000;
-      max-height: 200px;
-      overflow-y: auto;
-      pointer-events: none;
-    `;
-    document.body.appendChild(debugOverlay);
+  try {
+    if (!debugOverlay) {
+      debugOverlay = document.createElement('div');
+      debugOverlay.style.cssText = `
+        position: fixed;
+        top: 100px;
+        left: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-family: monospace;
+        z-index: 10000;
+        max-height: 200px;
+        overflow-y: auto;
+        pointer-events: none;
+      `;
+      document.body.appendChild(debugOverlay);
+    }
+    
+    const time = new Date().toLocaleTimeString();
+    const logEntry = document.createElement('div');
+    logEntry.style.color = color;
+    logEntry.textContent = `[${time}] ${message}`;
+    debugOverlay.appendChild(logEntry);
+    
+    // Behalte nur die letzten 10 Einträge
+    while (debugOverlay.children.length > 10) {
+      debugOverlay.removeChild(debugOverlay.firstChild);
+    }
+    
+    // Scroll nach unten
+    debugOverlay.scrollTop = debugOverlay.scrollHeight;
+  } catch (error) {
+    console.error('Debug message error:', error);
   }
-  
-  const time = new Date().toLocaleTimeString();
-  const logEntry = document.createElement('div');
-  logEntry.style.color = color;
-  logEntry.textContent = `[${time}] ${message}`;
-  debugOverlay.appendChild(logEntry);
-  
-  // Behalte nur die letzten 10 Einträge
-  while (debugOverlay.children.length > 10) {
-    debugOverlay.removeChild(debugOverlay.firstChild);
-  }
-  
-  // Scroll nach unten
-  debugOverlay.scrollTop = debugOverlay.scrollHeight;
 }
 
 /**
@@ -80,218 +84,216 @@ function extractDataFromTooltip(tooltip) {
 export function setupMobileTouchHandlers(chartView, chartEl) {
   if (!isMobile()) return; // Nur auf Mobile
   
-  showDebugMessage('Setting up mobile touch handlers', '#4a9dd4');
-  
-  // Verhindere Standard-Tooltips auf Mobile (werden trotzdem erstellt, aber versteckt)
-  const style = document.createElement('style');
-  style.id = 'mobile-tooltip-disable';
-  style.textContent = `
-    @media (max-width: 767px) {
-      .vg-tooltip, .vega-tooltip {
-        display: none !important;
-        visibility: hidden !important;
-      }
-    }
-  `;
-  
-  if (!document.getElementById('mobile-tooltip-disable')) {
-    document.head.appendChild(style);
-    showDebugMessage('Tooltip-disable style added', '#90EE90');
-  }
-  
-  // Warte bis Chart vollständig gerendert ist - mehrere Versuche
-  let attempts = 0;
-  const maxAttempts = 10;
-  
-  const trySetup = () => {
-    attempts++;
-    const svg = chartEl.querySelector('svg');
+  try {
+    showDebugMessage('Setting up mobile touch handlers', '#4a9dd4');
     
-    if (!svg) {
-      if (attempts < maxAttempts) {
-        showDebugMessage(`Waiting for SVG... (${attempts}/${maxAttempts})`, '#ffaa00');
-        setTimeout(trySetup, 200);
-        return;
-      } else {
-        showDebugMessage('ERROR: SVG not found after multiple attempts', '#ff0000');
-        showDebugMessage(`ChartEl: ${chartEl.tagName}, children: ${chartEl.children.length}`, '#ff0000');
-        return;
-      }
-    }
-    
-    showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
-    
-    showDebugMessage(`SVG found: ${svg.constructor.name}`, '#90EE90');
-    
-    // Ansatz 1: Nutze Vega-Lite's Event-API (wie scatterKeyboardNav)
-    if (chartView && typeof chartView.addEventListener === 'function') {
-      showDebugMessage('Using Vega-Lite addEventListener', '#4a9dd4');
-      
-      // Click-Events (funktionieren auch auf Touch)
-      chartView.addEventListener('click', (event, item) => {
-        showDebugMessage(`Vega click: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
-        if (item && item.datum) {
-          event.preventDefault();
-          event.stopPropagation();
-          showDebugMessage(`Showing card: ${item.datum.Band} - ${item.datum.Album}`, '#90EE90');
-          showMobileAlbumCard(item.datum);
-        } else {
-          showDebugMessage('Vega click but no datum', '#ffaa00');
+    // Verhindere Standard-Tooltips auf Mobile (werden trotzdem erstellt, aber versteckt)
+    const style = document.createElement('style');
+    style.id = 'mobile-tooltip-disable';
+    style.textContent = `
+      @media (max-width: 767px) {
+        .vg-tooltip, .vega-tooltip {
+          display: none !important;
+          visibility: hidden !important;
         }
-      });
-      
-      // Auch mousemove abfangen (falls Touch als Mouse-Event durchkommt)
-      chartView.addEventListener('mousemove', (event, item) => {
-        if (item && item.datum) {
-          showDebugMessage(`Vega mousemove: ${item.datum.Band}`, '#888');
-          // Verhindere Tooltip-Anzeige
-          const tooltips = document.querySelectorAll('.vg-tooltip, .vega-tooltip');
-          tooltips.forEach(t => t.remove());
-        }
-      });
-    } else {
-      showDebugMessage('ERROR: chartView.addEventListener not available', '#ff0000');
+      }
+    `;
+    
+    if (!document.getElementById('mobile-tooltip-disable')) {
+      document.head.appendChild(style);
+      showDebugMessage('Tooltip-disable style added', '#90EE90');
     }
     
-    // Ansatz 2: Beobachte Tooltip-Erstellung und extrahiere Daten
-    // Vega-Lite erstellt Tooltips auch bei Touch, wir fangen sie ab
-    let tooltipObserver = null;
-    let lastTooltipData = null;
-    let tooltipTimeout = null;
-    
-    const handleTooltipCreation = (mutations) => {
-      mutations.forEach(mutation => {
-        mutation.addedNodes.forEach(node => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            const tooltip = node.classList?.contains('vg-tooltip') || node.classList?.contains('vega-tooltip')
-              ? node
-              : node.querySelector?.('.vg-tooltip, .vega-tooltip');
-            
-            if (tooltip) {
-              showDebugMessage('Tooltip created!', '#ff6b35');
-              
-              // Extrahiere Daten aus Tooltip
-              const data = extractDataFromTooltip(tooltip);
-              if (data.Band && data.Album) {
-                lastTooltipData = data;
-                showDebugMessage(`Tooltip data: ${data.Band} - ${data.Album}`, '#90EE90');
-                
-                // Verzögere die Karten-Anzeige etwas, falls mehrere Tooltips kommen
-                clearTimeout(tooltipTimeout);
-                tooltipTimeout = setTimeout(() => {
-                  if (lastTooltipData) {
-                    showDebugMessage(`Showing card from tooltip: ${lastTooltipData.Band}`, '#90EE90');
-                    showMobileAlbumCard(lastTooltipData);
-                    lastTooltipData = null;
-                  }
-                }, 100);
-              } else {
-                showDebugMessage('Tooltip created but no data extracted', '#ffaa00');
-              }
-              
-              // Entferne Tooltip sofort
-              tooltip.remove();
+    // Warte bis Chart vollständig gerendert ist - mehrere Versuche
+    setTimeout(() => {
+      try {
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        const trySetup = () => {
+          attempts++;
+          const svg = chartEl.querySelector('svg');
+          
+          if (!svg) {
+            if (attempts < maxAttempts) {
+              showDebugMessage(`Waiting for SVG... (${attempts}/${maxAttempts})`, '#ffaa00');
+              setTimeout(trySetup, 200);
+              return;
+            } else {
+              showDebugMessage('ERROR: SVG not found after multiple attempts', '#ff0000');
+              showDebugMessage(`ChartEl: ${chartEl ? chartEl.tagName : 'null'}, children: ${chartEl ? chartEl.children.length : 0}`, '#ff0000');
+              return;
             }
           }
-        });
-      });
-    };
-    
-    tooltipObserver = new MutationObserver(handleTooltipCreation);
-    tooltipObserver.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-    showDebugMessage('Tooltip observer started', '#4a9dd4');
-    
-    // Ansatz 3: Direkte SVG-Events als Fallback
-    const handleSVGClick = (e) => {
-      showDebugMessage(`SVG ${e.type} at (${e.clientX}, ${e.clientY})`, '#ff6b35');
-      
-      // Wenn Vega-Lite Events nicht funktionieren, versuche Hit-Test
-      if (!lastTooltipData) {
-        const point = svg.createSVGPoint();
-        if (e.type === 'touchend' && e.changedTouches) {
-          point.x = e.changedTouches[0].clientX;
-          point.y = e.changedTouches[0].clientY;
-        } else {
-          point.x = e.clientX;
-          point.y = e.clientY;
-        }
-        
-        const svgPoint = point.matrixTransform(svg.getScreenCTM().inverse());
-        showDebugMessage(`SVG point: (${svgPoint.x.toFixed(1)}, ${svgPoint.y.toFixed(1)})`, '#888');
-        
-        // Versuche Hit-Test mit Vega-Lite's scene API
-        try {
-          if (chartView && chartView.scene) {
-            const scene = chartView.scene();
-            if (scene && scene.items) {
-              showDebugMessage(`Scene items: ${scene.items.length}`, '#888');
-              
-              let closestItem = null;
-              let minDistance = Infinity;
-              
-              scene.items.forEach(item => {
-                if (item.mark && item.mark.marktype === 'symbol' && item.bounds) {
-                  const bounds = item.bounds;
-                  const centerX = (bounds.x1 + bounds.x2) / 2;
-                  const centerY = (bounds.y1 + bounds.y2) / 2;
-                  const distance = Math.sqrt(
-                    Math.pow(svgPoint.x - centerX, 2) + Math.pow(svgPoint.y - centerY, 2)
-                  );
+          
+          showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
+          
+          // Ansatz 1: Nutze Vega-Lite's Event-API (wie scatterKeyboardNav)
+          if (chartView && typeof chartView.addEventListener === 'function') {
+            showDebugMessage('Using Vega-Lite addEventListener', '#4a9dd4');
+            
+            // Click-Events (funktionieren auch auf Touch)
+            chartView.addEventListener('click', (event, item) => {
+              showDebugMessage(`Vega click: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
+              if (item && item.datum) {
+                event.preventDefault();
+                event.stopPropagation();
+                showDebugMessage(`Showing card: ${item.datum.Band} - ${item.datum.Album}`, '#90EE90');
+                showMobileAlbumCard(item.datum);
+              } else {
+                showDebugMessage('Vega click but no datum', '#ffaa00');
+              }
+            });
+            
+            // Auch mousemove abfangen (falls Touch als Mouse-Event durchkommt)
+            chartView.addEventListener('mousemove', (event, item) => {
+              if (item && item.datum) {
+                showDebugMessage(`Vega mousemove: ${item.datum.Band}`, '#888');
+                // Verhindere Tooltip-Anzeige
+                const tooltips = document.querySelectorAll('.vg-tooltip, .vega-tooltip');
+                tooltips.forEach(t => t.remove());
+              }
+            });
+          } else {
+            showDebugMessage('ERROR: chartView.addEventListener not available', '#ff0000');
+          }
+          
+          // Ansatz 2: Beobachte Tooltip-Erstellung und extrahiere Daten
+          let tooltipObserver = null;
+          let lastTooltipData = null;
+          let tooltipTimeout = null;
+          
+          const handleTooltipCreation = (mutations) => {
+            mutations.forEach(mutation => {
+              mutation.addedNodes.forEach(node => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                  const tooltip = node.classList?.contains('vg-tooltip') || node.classList?.contains('vega-tooltip')
+                    ? node
+                    : node.querySelector?.('.vg-tooltip, .vega-tooltip');
                   
-                  const withinBounds = svgPoint.x >= bounds.x1 && svgPoint.x <= bounds.x2 &&
-                                       svgPoint.y >= bounds.y1 && svgPoint.y <= bounds.y2;
-                  
-                  if (withinBounds || distance < 100) { // Größere Toleranz
-                    if (distance < minDistance) {
-                      minDistance = distance;
-                      closestItem = item;
+                  if (tooltip) {
+                    showDebugMessage('Tooltip created!', '#ff6b35');
+                    
+                    // Extrahiere Daten aus Tooltip
+                    const data = extractDataFromTooltip(tooltip);
+                    if (data.Band && data.Album) {
+                      lastTooltipData = data;
+                      showDebugMessage(`Tooltip data: ${data.Band} - ${data.Album}`, '#90EE90');
+                      
+                      // Verzögere die Karten-Anzeige etwas, falls mehrere Tooltips kommen
+                      clearTimeout(tooltipTimeout);
+                      tooltipTimeout = setTimeout(() => {
+                        if (lastTooltipData) {
+                          showDebugMessage(`Showing card from tooltip: ${lastTooltipData.Band}`, '#90EE90');
+                          showMobileAlbumCard(lastTooltipData);
+                          lastTooltipData = null;
+                        }
+                      }, 100);
+                    } else {
+                      showDebugMessage('Tooltip created but no data extracted', '#ffaa00');
                     }
+                    
+                    // Entferne Tooltip sofort
+                    tooltip.remove();
                   }
                 }
               });
-              
-              if (closestItem && closestItem.datum) {
-                showDebugMessage(`Hit test found: ${closestItem.datum.Band}`, '#90EE90');
-                e.preventDefault();
-                e.stopPropagation();
-                showMobileAlbumCard(closestItem.datum);
+            });
+          };
+          
+          tooltipObserver = new MutationObserver(handleTooltipCreation);
+          tooltipObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+          });
+          showDebugMessage('Tooltip observer started', '#4a9dd4');
+          
+          // Ansatz 3: Direkte SVG-Events als Fallback
+          const handleSVGClick = (e) => {
+            showDebugMessage(`SVG ${e.type} at (${e.clientX || e.changedTouches?.[0]?.clientX || 0}, ${e.clientY || e.changedTouches?.[0]?.clientY || 0})`, '#ff6b35');
+            
+            // Wenn Vega-Lite Events nicht funktionieren, versuche Hit-Test
+            if (!lastTooltipData) {
+              const point = svg.createSVGPoint();
+              if (e.type === 'touchend' && e.changedTouches) {
+                point.x = e.changedTouches[0].clientX;
+                point.y = e.changedTouches[0].clientY;
               } else {
-                showDebugMessage(`Hit test: no item found (minDistance: ${minDistance.toFixed(1)})`, '#ffaa00');
+                point.x = e.clientX;
+                point.y = e.clientY;
               }
-            } else {
-              showDebugMessage('Scene has no items', '#ffaa00');
+              
+              const svgPoint = point.matrixTransform(svg.getScreenCTM().inverse());
+              showDebugMessage(`SVG point: (${svgPoint.x.toFixed(1)}, ${svgPoint.y.toFixed(1)})`, '#888');
+              
+              // Versuche Hit-Test mit Vega-Lite's scene API
+              try {
+                if (chartView && chartView.scene) {
+                  const scene = chartView.scene();
+                  if (scene && scene.items) {
+                    showDebugMessage(`Scene items: ${scene.items.length}`, '#888');
+                    
+                    let closestItem = null;
+                    let minDistance = Infinity;
+                    
+                    scene.items.forEach(item => {
+                      if (item.mark && item.mark.marktype === 'symbol' && item.bounds) {
+                        const bounds = item.bounds;
+                        const centerX = (bounds.x1 + bounds.x2) / 2;
+                        const centerY = (bounds.y1 + bounds.y2) / 2;
+                        const distance = Math.sqrt(
+                          Math.pow(svgPoint.x - centerX, 2) + Math.pow(svgPoint.y - centerY, 2)
+                        );
+                        
+                        const withinBounds = svgPoint.x >= bounds.x1 && svgPoint.x <= bounds.x2 &&
+                                             svgPoint.y >= bounds.y1 && svgPoint.y <= bounds.y2;
+                        
+                        if (withinBounds || distance < 100) {
+                          if (distance < minDistance) {
+                            minDistance = distance;
+                            closestItem = item;
+                          }
+                        }
+                      }
+                    });
+                    
+                    if (closestItem && closestItem.datum) {
+                      showDebugMessage(`Hit test found: ${closestItem.datum.Band}`, '#90EE90');
+                      e.preventDefault();
+                      e.stopPropagation();
+                      showMobileAlbumCard(closestItem.datum);
+                    } else {
+                      showDebugMessage(`Hit test: no item found (minDistance: ${minDistance.toFixed(1)})`, '#ffaa00');
+                    }
+                  } else {
+                    showDebugMessage('Scene has no items', '#ffaa00');
+                  }
+                } else {
+                  showDebugMessage('chartView.scene not available', '#ffaa00');
+                }
+              } catch (error) {
+                showDebugMessage(`Hit test error: ${error.message}`, '#ff0000');
+              }
             }
-          } else {
-            showDebugMessage('chartView.scene not available', '#ffaa00');
-          }
-        } catch (error) {
-          showDebugMessage(`Hit test error: ${error.message}`, '#ff0000');
-        }
+          };
+          
+          svg.addEventListener('click', handleSVGClick);
+          svg.addEventListener('touchend', handleSVGClick, { passive: false });
+          svg.addEventListener('touchstart', (e) => {
+            showDebugMessage(`Touch start: ${e.touches.length} touches`, '#4a9dd4');
+          }, { passive: true });
+          
+          showDebugMessage('SVG event listeners added', '#90EE90');
+        };
+        
+        // Starte Setup-Versuch
+        trySetup();
+      } catch (error) {
+        showDebugMessage(`FATAL ERROR in setup: ${error.message}`, '#ff0000');
+        console.error('Mobile touch handler setup error:', error);
       }
-    };
-    
-    svg.addEventListener('click', handleSVGClick);
-    svg.addEventListener('touchend', handleSVGClick, { passive: false });
-    svg.addEventListener('touchstart', (e) => {
-      showDebugMessage(`Touch start: ${e.touches.length} touches`, '#4a9dd4');
-    }, { passive: true });
-    
-    showDebugMessage('SVG event listeners added', '#90EE90');
-    
-    // Cleanup-Funktion (falls nötig)
-    return () => {
-      if (tooltipObserver) {
-        tooltipObserver.disconnect();
-      }
-      if (tooltipTimeout) {
-        clearTimeout(tooltipTimeout);
-      }
-    };
-    
-    // Starte Setup-Versuch
-    trySetup();
-  }, 100); // Starte früher, aber mit Retry-Logik
+    }, 100);
+  } catch (error) {
+    console.error('Mobile touch handler fatal error:', error);
+  }
 }
