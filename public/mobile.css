@@ -149,7 +149,7 @@
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
-  top: 53px; /* Unter Header (ca. Höhe) */
+  top: var(--header-height-mobile, 56px); /* Unter Header */
   z-index: 90;
   width: 100%;
 }
@@ -328,7 +328,7 @@
   .layout-band {
     display: flex;
     flex-direction: column;
-    height: calc(100dvh - 53px); /* Viewport minus Header */
+    height: calc(100dvh - var(--header-height-mobile, 56px)); /* Viewport minus Header */
     gap: 0;
     overflow: hidden; /* Scrollen nur in Sub-Containern */
   }
@@ -374,7 +374,7 @@
   /* Hauptcontainer Anpassung */
   main {
     padding: 0;
-    height: calc(100dvh - 53px);
+    height: calc(100dvh - var(--header-height-mobile, 56px));
     overflow: hidden;
     display: flex;
     flex-direction: column;

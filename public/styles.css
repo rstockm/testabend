@@ -15,6 +15,7 @@
   --hover-bg: #2a2a2a;
   --tag-bg: #2a2a2a;
   --tag-text: #e5e5e5;
+  --header-height-mobile: 56px;
 }
 
 body {
