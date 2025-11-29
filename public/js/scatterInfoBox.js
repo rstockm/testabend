@@ -93,6 +93,21 @@ export function destroyScatterInfoBox() {
 async function addCoverToInfoBox(datum, requestId) {
   if (!infoBox) return;
   
+  const result = await findCover(datum);
+  if (!result) return;
+  
+  // Prüfe, ob diese Anfrage noch aktuell ist
+  if (requestId !== currentCoverRequestId) {
+    console.log('[scatterInfoBox] Request outdated, skipping:', requestId, 'current:', currentCoverRequestId);
+    return; // Eine neuere Anfrage hat bereits die Info-Box aktualisiert
+  }
+  
+  // Prüfe erneut, ob infoBox noch existiert
+  if (!infoBox || !infoBox.parentNode) {
+    console.log('[scatterInfoBox] InfoBox removed, skipping');
+    return;
+  }
+  
   const coverContainer = document.createElement('div');
   coverContainer.className = 'scatter-info-cover';
   coverContainer.style.cssText = `
@@ -107,12 +122,6 @@ async function addCoverToInfoBox(datum, requestId) {
     margin-top: 16px;
   `;
   
-  const result = await findCover(datum);
-  if (!result) return;
-  if (requestId !== currentCoverRequestId) {
-    return; // Eine neuere Anfrage hat bereits die Info-Box aktualisiert
-  }
-  
   const coverImage = document.createElement('img');
   const coverPath = getCoverImagePath(result);
   coverImage.src = coverPath;
@@ -124,15 +133,35 @@ async function addCoverToInfoBox(datum, requestId) {
     object-fit: cover;
     display: block;
   `;
-  coverImage.onerror = (e) => {
-    console.error('[scatterInfoBox] Cover image failed to load:', coverPath, e);
-    coverContainer.remove();
-  };
+  
+  // Setze Handler BEVOR src gesetzt wird (falls es bereits im Cache ist)
   coverImage.onload = () => {
-    console.log('[scatterInfoBox] Cover image loaded successfully:', coverPath);
+    // Prüfe erneut, ob Container noch existiert und Request noch aktuell ist
+    if (coverContainer.parentNode && requestId === currentCoverRequestId) {
+      console.log('[scatterInfoBox] Cover image loaded successfully:', coverPath);
+    } else {
+      console.log('[scatterInfoBox] Cover loaded but container removed or request outdated');
+      coverContainer.remove();
+    }
   };
   
+  coverImage.onerror = (e) => {
+    console.error('[scatterInfoBox] Cover image failed to load:', coverPath, e);
+    // Prüfe, ob Container noch existiert, bevor entfernt wird
+    if (coverContainer.parentNode) {
+      coverContainer.remove();
+    }
+  };
+  
+  // Hänge Container ZUERST an, dann Bild (damit onload/onerror funktionieren)
   coverContainer.appendChild(coverImage);
+  
+  // Prüfe nochmal, ob Request noch aktuell ist, bevor Container angehängt wird
+  if (requestId !== currentCoverRequestId || !infoBox || !infoBox.parentNode) {
+    console.log('[scatterInfoBox] Request outdated before append, skipping');
+    return;
+  }
+  
   infoBox.appendChild(coverContainer);
 }
 
