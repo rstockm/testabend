@@ -181,3 +181,68 @@ export function calculateMinMaxPerYear(data) {
     }))
     .sort((a, b) => a.Jahr - b.Jahr);
 }
+
+/**
+ * Ermittelt den Base-Pfad für Cover-Bilder
+ * Funktioniert sowohl lokal als auch auf Cloudron mit verschiedenen URL-Strukturen
+ * @returns {string} Base-Pfad für Cover-Bilder (z.B. "/images/covers/" oder "./images/covers/")
+ */
+let cachedCoversBasePath = null;
+
+export function getCoversBasePath() {
+  // Cache für Performance
+  if (cachedCoversBasePath !== null) {
+    return cachedCoversBasePath;
+  }
+
+  // Strategie 1: Prüfe ob ein <base> Tag existiert
+  const baseTag = document.querySelector('base');
+  if (baseTag && baseTag.href) {
+    try {
+      const baseUrl = new URL(baseTag.href);
+      const basePath = baseUrl.pathname.endsWith('/') 
+        ? baseUrl.pathname + 'images/covers/'
+        : baseUrl.pathname + '/images/covers/';
+      cachedCoversBasePath = basePath;
+      console.log('[getCoversBasePath] Using base tag:', basePath);
+      return basePath;
+    } catch (e) {
+      console.warn('[getCoversBasePath] Invalid base tag URL:', e);
+    }
+  }
+
+  // Strategie 2: Ermittle Base-Pfad aus window.location
+  const pathname = window.location.pathname;
+  
+  // Wenn wir im Root sind (z.B. "/index.html" oder "/")
+  if (pathname === '/' || pathname === '/index.html' || pathname.endsWith('/index.html')) {
+    cachedCoversBasePath = '/images/covers/';
+    console.log('[getCoversBasePath] Using root path:', cachedCoversBasePath);
+    return cachedCoversBasePath;
+  }
+
+  // Wenn wir in einem Subverzeichnis sind (z.B. "/app/" oder "/testabend/")
+  // Entferne Dateinamen und führende Slashes
+  const pathParts = pathname.split('/').filter(p => p && !p.endsWith('.html'));
+  const baseDir = pathParts.length > 0 
+    ? '/' + pathParts.join('/') + '/images/covers/'
+    : '/images/covers/';
+  
+  cachedCoversBasePath = baseDir;
+  console.log('[getCoversBasePath] Using calculated path:', cachedCoversBasePath);
+  return cachedCoversBasePath;
+}
+
+/**
+ * Erstellt vollständigen Pfad zu einem Cover-Bild
+ * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
+ * @returns {string} Vollständiger Pfad zum Cover
+ */
+export function getCoverImagePath(filename) {
+  if (!filename) return '';
+  const basePath = getCoversBasePath();
+  // Stelle sicher, dass basePath mit / endet und filename nicht mit / beginnt
+  const cleanBase = basePath.endsWith('/') ? basePath : basePath + '/';
+  const cleanFilename = filename.startsWith('/') ? filename.slice(1) : filename;
+  return cleanBase + cleanFilename;
+}

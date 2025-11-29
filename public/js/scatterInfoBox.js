@@ -1,5 +1,5 @@
 import { updateScatterHighlight } from './scatterHighlight.js';
-import { isMobile } from './utils.js';
+import { isMobile, getCoversBasePath, getCoverImagePath } from './utils.js';
 
 let infoBox = null;
 let currentCoverRequestId = 0;
@@ -114,7 +114,7 @@ async function addCoverToInfoBox(datum, requestId) {
   }
   
   const coverImage = document.createElement('img');
-  coverImage.src = `/images/covers/${result}`;
+  coverImage.src = getCoverImagePath(result);
   coverImage.alt = `${datum.Band} - ${datum.Album}`;
   coverImage.style.cssText = `
     width: 100%;
@@ -147,8 +147,8 @@ async function findCover(datum) {
 async function coverExists(filename) {
   if (!filename) return false;
   try {
-    // Verwende absoluten Pfad vom Root
-    const coverPath = `/images/covers/${filename}`;
+    // Verwende robuste Pfad-Funktion
+    const coverPath = getCoverImagePath(filename);
     const response = await fetch(coverPath, { method: 'HEAD', cache: 'no-cache' });
     return response.ok;
   } catch (error) {

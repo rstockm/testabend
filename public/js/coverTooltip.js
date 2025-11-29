@@ -2,6 +2,7 @@
  * Custom Tooltip-Handler für Album-Cover-Anzeige
  * Lädt Cover-Bilder lazy beim Hover
  */
+import { getCoversBasePath, getCoverImagePath } from './utils.js';
 
 /**
  * Generiert Dateinamen für Album-Cover (identisch zur Python-Version)
@@ -33,13 +34,13 @@ function getCoverFilename(band, album, year = null) {
  * Versucht zuerst mit Jahr, dann ohne Jahr
  */
 async function checkCoverExists(band, album, year = null) {
-  // Verwende absoluten Pfad vom Root
-  const coversBase = '/images/covers/';
+  // Verwende robuste Pfad-Funktion
+  const coversBase = getCoversBasePath();
   
   // Versuche zuerst mit Jahr (falls vorhanden)
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const coverPathWithYear = coversBase + filenameWithYear;
+    const coverPathWithYear = getCoverImagePath(filenameWithYear);
     
     try {
       const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
@@ -54,7 +55,7 @@ async function checkCoverExists(band, album, year = null) {
   
   // Fallback: Versuche ohne Jahr
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const coverPathWithoutYear = coversBase + filenameWithoutYear;
+  const coverPathWithoutYear = getCoverImagePath(filenameWithoutYear);
   
   try {
     const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
@@ -144,8 +145,8 @@ async function addCoverToTooltip(tooltipElement) {
       return; // Cover nicht vorhanden
     }
     
-    // Verwende absoluten Pfad vom Root
-    coverUrl = `/images/covers/${result.filename}`;
+    // Verwende robuste Pfad-Funktion
+    coverUrl = getCoverImagePath(result.filename);
     coverUrlCache.set(cacheKey, coverUrl);
   } else if (coverUrl === null) {
     // Bereits geprüft, nicht vorhanden

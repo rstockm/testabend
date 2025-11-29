@@ -2,7 +2,7 @@
  * Mobile Album-Karte für Touch-Interaktionen
  * Zeigt Album-Informationen als modale Karte statt flüchtiger Tooltips
  */
-import { isMobile } from './utils.js';
+import { isMobile, getCoversBasePath, getCoverImagePath } from './utils.js';
 
 // Exportiere Cover-Funktionen aus coverTooltip.js für Wiederverwendung
 // Wir müssen diese Funktionen hier duplizieren oder importieren
@@ -34,14 +34,15 @@ function getCoverFilename(band, album, year = null) {
  * Prüft, ob ein Cover-Bild existiert
  */
 async function checkCoverExists(band, album, year = null) {
-  // Verwende absoluten Pfad vom Root
-  const coversBase = '/images/covers/';
+  // Verwende robuste Pfad-Funktion
+  const coversBase = getCoversBasePath();
   
   console.log('[MobileAlbumCard] Checking cover exists:', band, album, year);
+  console.log('[MobileAlbumCard] Using base path:', coversBase);
   
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const coverPathWithYear = coversBase + filenameWithYear;
+    const coverPathWithYear = getCoverImagePath(filenameWithYear);
     console.log('[MobileAlbumCard] Trying cover with year:', coverPathWithYear);
     
     try {
@@ -58,7 +59,7 @@ async function checkCoverExists(band, album, year = null) {
   }
   
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const coverPathWithoutYear = coversBase + filenameWithoutYear;
+  const coverPathWithoutYear = getCoverImagePath(filenameWithoutYear);
   console.log('[MobileAlbumCard] Trying cover without year:', coverPathWithoutYear);
   
   try {
@@ -263,7 +264,7 @@ async function loadCoverImage(band, album, year, content, info) {
     const result = await checkCoverExists(band, album, year);
     
     if (result.exists && result.filename) {
-      const coverUrl = `/images/covers/${result.filename}`;
+      const coverUrl = getCoverImagePath(result.filename);
       
       const coverContainer = document.createElement('div');
       coverContainer.className = 'mobile-album-card-cover-container';
