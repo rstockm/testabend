@@ -190,12 +190,16 @@ export function showMobileAlbumCard(datum) {
  * Lädt Cover-Bild asynchron und fügt es ein
  */
 async function loadCoverImage(band, album, year, content, info) {
+  console.log('[MobileAlbumCard] Loading cover for:', band, album, year);
+  
   try {
     const result = await checkCoverExists(band, album, year);
+    console.log('[MobileAlbumCard] Cover check result:', result);
     
     if (result.exists && result.filename) {
       // Verwende absoluten Pfad vom Root
       const coverUrl = `/images/covers/${result.filename}`;
+      console.log('[MobileAlbumCard] Cover URL:', coverUrl);
       
       const coverContainer = document.createElement('div');
       coverContainer.className = 'mobile-album-card-cover-container';
@@ -208,22 +212,23 @@ async function loadCoverImage(band, album, year, content, info) {
       
       // Besseres Error-Handling
       coverImage.onerror = (e) => {
-        console.debug('Cover image failed to load:', coverUrl);
+        console.error('[MobileAlbumCard] Cover image failed to load:', coverUrl, e);
         coverContainer.remove();
       };
       
       coverImage.onload = () => {
-        console.debug('Cover image loaded successfully:', coverUrl);
+        console.log('[MobileAlbumCard] Cover image loaded successfully:', coverUrl);
       };
       
       coverContainer.appendChild(coverImage);
       content.insertBefore(coverContainer, info);
+      console.log('[MobileAlbumCard] Cover container inserted');
     } else {
-      console.debug('Cover not found for:', band, album, year);
+      console.log('[MobileAlbumCard] Cover not found for:', band, album, year);
     }
   } catch (error) {
     // Cover konnte nicht geladen werden, ignorieren
-    console.debug('Cover konnte nicht geladen werden:', error);
+    console.error('[MobileAlbumCard] Error loading cover:', error);
   }
 }
 

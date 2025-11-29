@@ -184,7 +184,8 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
             // Click-Events (funktionieren auch auf Touch)
             chartView.addEventListener('click', (event, item) => {
               showDebugMessage(`Vega click: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
-              if (item && item.datum) {
+              // Nur anzeigen, wenn wirklich ein Datum vorhanden ist (Punkt getroffen)
+              if (item && item.datum && item.datum.Band && item.datum.Album) {
                 event.preventDefault();
                 event.stopPropagation();
                 showDebugMessage(`Showing card: ${item.datum.Band} - ${item.datum.Album}`, '#90EE90');
@@ -195,14 +196,15 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
                   showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
                 }
               } else {
-                showDebugMessage('Vega click but no datum', '#ffaa00');
+                showDebugMessage('Vega click but no valid datum (not on a point)', '#ffaa00');
               }
             });
             
             // Auch touchstart direkt abfangen (falls click nicht funktioniert)
             chartView.addEventListener('touchstart', (event, item) => {
               showDebugMessage(`Vega touchstart: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
-              if (item && item.datum) {
+              // Nur anzeigen, wenn wirklich ein Datum vorhanden ist (Punkt getroffen)
+              if (item && item.datum && item.datum.Band && item.datum.Album) {
                 event.preventDefault();
                 event.stopPropagation();
                 showDebugMessage(`Showing card from touchstart: ${item.datum.Band}`, '#90EE90');
@@ -211,6 +213,8 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
                 } catch (error) {
                   showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
                 }
+              } else {
+                showDebugMessage('Vega touchstart but no valid datum (not on a point)', '#ffaa00');
               }
             });
             
@@ -245,25 +249,26 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
                     
                     // Extrahiere Daten aus Tooltip
                     const data = extractDataFromTooltip(tooltip);
-                    if (data.Band && data.Album) {
+                    
+                    // Nur Card anzeigen, wenn vollständige Daten vorhanden sind
+                    if (data.Band && data.Album && (data.Jahr != null || data.Note != null)) {
                       lastTooltipData = data;
                       showDebugMessage(`Tooltip data: ${data.Band} - ${data.Album}`, '#90EE90');
                       
                       // Verzögere die Karten-Anzeige etwas, falls mehrere Tooltips kommen
                       clearTimeout(tooltipTimeout);
                       tooltipTimeout = setTimeout(() => {
-                        if (lastTooltipData) {
+                        if (lastTooltipData && lastTooltipData.Band && lastTooltipData.Album) {
                           showDebugMessage(`Showing card from tooltip: ${lastTooltipData.Band}`, '#90EE90');
                           showMobileAlbumCard(lastTooltipData);
                           lastTooltipData = null;
                         }
                       }, 100);
                     } else {
-                      showDebugMessage('Tooltip created but no data extracted', '#ffaa00');
+                      showDebugMessage('Tooltip created but no valid data extracted', '#ffaa00');
+                      // Entferne Tooltip ohne Card anzuzeigen
+                      tooltip.remove();
                     }
-                    
-                    // Entferne Tooltip sofort
-                    tooltip.remove();
                   }
                 }
               });
