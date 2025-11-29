@@ -405,134 +405,154 @@
    Mobile Album-Karte (Modale Touch-Interaktion)
    ============================================ */
 
+/* Mobile Album Card Overlay - Robust für alle Mobile-Browser */
 .mobile-album-card-overlay {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.85);
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important; /* Fallback für Browser ohne dvh */
+  padding: 20px !important;
+  margin: 0 !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  /* backdrop-filter ist optional - viele Android-Browser unterstützen es nicht */
   backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+  -webkit-backdrop-filter: blur(4px); /* Safari/iOS Fallback */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 99999 !important; /* Sehr hoch, um über allem zu liegen */
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .mobile-album-card-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 .mobile-album-card {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  border-radius: 16px;
-  width: min(90vw, 420px);
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-  border: 1px solid var(--border-color);
-  overflow: hidden;
+  background: #1e1e1e !important; /* Explizite Farbe statt CSS-Variable */
+  color: #f5f5f5 !important;
+  border-radius: 16px !important;
+  width: 90% !important;
+  max-width: 420px !important; /* Fallback statt min() */
+  max-height: 80vh !important;
+  max-height: 80dvh !important; /* Fallback für Browser ohne dvh */
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid #404040 !important; /* Explizite Farbe */
+  overflow: hidden !important;
+  position: relative !important;
+  margin: 0 auto !important;
 }
 
 .mobile-album-card-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 44px;
-  height: 44px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 50%;
-  color: var(--text-primary);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  width: 44px !important;
+  height: 44px !important;
+  background: #2a2a2a !important; /* Explizite Farbe */
+  border: 1px solid #404040 !important;
+  border-radius: 50% !important;
+  color: #f5f5f5 !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
   transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent; /* Entferne Touch-Highlight auf iOS */
 }
 
 .mobile-album-card-close:active {
-  background: var(--hover-bg);
+  background: #3a3a3a !important; /* Explizite Farbe */
 }
 
 .mobile-album-card-content {
-  padding: 20px;
-  overflow-y: auto;
-  flex: 1;
-  -webkit-overflow-scrolling: touch;
-  background: transparent;
-  color: var(--text-primary);
+  padding: 20px !important;
+  overflow-y: auto !important;
+  flex: 1 !important;
+  -webkit-overflow-scrolling: touch !important;
+  background: transparent !important;
+  color: #f5f5f5 !important;
 }
 
 .mobile-album-card-cover-container {
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 2px solid var(--border-color);
-  background: var(--bg-tertiary);
+  width: 100% !important;
+  max-width: 300px !important;
+  margin: 0 auto 20px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  border: 2px solid #404040 !important;
+  background: #2a2a2a !important; /* Explizite Farbe */
+  display: block !important;
 }
 
 .mobile-album-card-cover {
-  width: 100%;
-  height: auto;
-  display: block;
-  aspect-ratio: 1;
-  object-fit: cover;
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  aspect-ratio: 1 !important;
+  object-fit: cover !important;
 }
 
 .mobile-album-card-info {
-  width: 100%;
+  width: 100% !important;
 }
 
 .mobile-album-card-info h3 {
-  margin: 0 0 20px 0;
-  font-size: 20px;
-  text-align: center;
-  color: var(--text-primary);
-  font-weight: 600;
+  margin: 0 0 20px 0 !important;
+  font-size: 20px !important;
+  text-align: center !important;
+  color: #f5f5f5 !important; /* Explizite Farbe */
+  font-weight: 600 !important;
 }
 
 .mobile-album-card-info table {
-  width: 100%;
-  border-collapse: collapse;
+  width: 100% !important;
+  border-collapse: collapse !important;
 }
 
 .mobile-album-card-info tr {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid #404040 !important; /* Explizite Farbe */
 }
 
 .mobile-album-card-info tr:last-child {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
 .mobile-album-card-info td {
-  padding: 12px 0;
-  color: var(--text-primary);
+  padding: 12px 0 !important;
+  color: #f5f5f5 !important; /* Explizite Farbe */
 }
 
 .mobile-album-card-info td:first-child {
-  font-weight: 600;
-  color: var(--text-secondary);
-  width: 30%;
-  padding-right: 12px;
+  font-weight: 600 !important;
+  color: #d4d4d4 !important; /* Explizite Farbe */
+  width: 30% !important;
+  padding-right: 12px !important;
 }
 
 .mobile-album-card-info td:last-child {
-  text-align: left;
-  color: var(--text-primary);
+  text-align: left !important;
+  color: #f5f5f5 !important; /* Explizite Farbe */
 }
 
 /* ============================================

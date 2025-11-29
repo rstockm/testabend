@@ -90,13 +90,71 @@ export function showMobileAlbumCard(datum) {
   const overlay = document.createElement('div');
   overlay.className = 'mobile-album-card-overlay';
   
+  // Explizite Inline-Styles als Fallback für Browser ohne CSS-Unterstützung
+  overlay.style.cssText = `
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100vh !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 99999 !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateZ(0);
+  `;
+  
   const card = document.createElement('div');
   card.className = 'mobile-album-card';
+  card.style.cssText = `
+    background: #1e1e1e !important;
+    color: #f5f5f5 !important;
+    border-radius: 16px !important;
+    width: 90% !important;
+    max-width: 420px !important;
+    max-height: 80vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid #404040 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin: 0 auto !important;
+  `;
   
   const closeBtn = document.createElement('button');
   closeBtn.className = 'mobile-album-card-close';
   closeBtn.innerHTML = '×';
   closeBtn.setAttribute('aria-label', 'Schließen');
+  closeBtn.style.cssText = `
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: #2a2a2a !important;
+    border: 1px solid #404040 !important;
+    border-radius: 50% !important;
+    color: #f5f5f5 !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  `;
   closeBtn.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -105,15 +163,33 @@ export function showMobileAlbumCard(datum) {
   
   const content = document.createElement('div');
   content.className = 'mobile-album-card-content';
+  content.style.cssText = `
+    padding: 20px !important;
+    overflow-y: auto !important;
+    flex: 1 !important;
+    background: transparent !important;
+    color: #f5f5f5 !important;
+  `;
   
   const info = document.createElement('div');
   info.className = 'mobile-album-card-info';
   
   const title = document.createElement('h3');
   title.textContent = `${datum.Band} - ${datum.Album}`;
+  title.style.cssText = `
+    margin: 0 0 20px 0 !important;
+    font-size: 20px !important;
+    text-align: center !important;
+    color: #f5f5f5 !important;
+    font-weight: 600 !important;
+  `;
   info.appendChild(title);
   
   const table = document.createElement('table');
+  table.style.cssText = `
+    width: 100% !important;
+    border-collapse: collapse !important;
+  `;
   const rows = [
     { key: 'Jahr', value: datum.Jahr || '-' },
     { key: 'Note', value: datum.Note != null ? datum.Note.toFixed(1) : '-' },
@@ -122,10 +198,24 @@ export function showMobileAlbumCard(datum) {
   
   rows.forEach(row => {
     const tr = document.createElement('tr');
+    tr.style.cssText = `
+      border-bottom: 1px solid #404040 !important;
+    `;
     const tdKey = document.createElement('td');
     tdKey.textContent = row.key + ':';
+    tdKey.style.cssText = `
+      padding: 12px 12px 12px 0 !important;
+      color: #d4d4d4 !important;
+      font-weight: 600 !important;
+      width: 30% !important;
+    `;
     const tdValue = document.createElement('td');
     tdValue.textContent = row.value;
+    tdValue.style.cssText = `
+      padding: 12px 0 !important;
+      color: #f5f5f5 !important;
+      text-align: left !important;
+    `;
     tr.appendChild(tdKey);
     tr.appendChild(tdValue);
     table.appendChild(tr);
@@ -139,10 +229,17 @@ export function showMobileAlbumCard(datum) {
   card.appendChild(closeBtn);
   card.appendChild(content);
   overlay.appendChild(card);
+  
+  // Stelle sicher, dass Overlay direkt an body angehängt wird
   document.body.appendChild(overlay);
   
+  // Force reflow und dann aktivieren
+  overlay.offsetHeight; // Force reflow
   requestAnimationFrame(() => {
     overlay.classList.add('active');
+    overlay.style.opacity = '1';
+    overlay.style.visibility = 'visible';
+    overlay.style.pointerEvents = 'auto';
   });
   
   overlay.addEventListener('click', (e) => {
@@ -151,7 +248,10 @@ export function showMobileAlbumCard(datum) {
     }
   });
   
+  // Verhindere Body-Scroll
+  const originalOverflow = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
+  
   currentCard = overlay;
 }
 
@@ -167,13 +267,36 @@ async function loadCoverImage(band, album, year, content, info) {
       
       const coverContainer = document.createElement('div');
       coverContainer.className = 'mobile-album-card-cover-container';
+      coverContainer.style.cssText = `
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 auto 20px !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        border: 2px solid #404040 !important;
+        background: #2a2a2a !important;
+        display: block !important;
+        aspect-ratio: 1 !important;
+      `;
       
       const coverImage = document.createElement('img');
       coverImage.src = coverUrl;
       coverImage.alt = `${band} - ${album}`;
       coverImage.className = 'mobile-album-card-cover';
       coverImage.loading = 'eager';
-      coverImage.onerror = () => coverContainer.remove();
+      coverImage.style.cssText = `
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+        object-fit: cover !important;
+      `;
+      coverImage.onerror = () => {
+        console.error('[MobileAlbumCard] Cover image failed to load:', coverUrl);
+        coverContainer.remove();
+      };
+      coverImage.onload = () => {
+        console.log('[MobileAlbumCard] Cover image loaded:', coverUrl);
+      };
       
       coverContainer.appendChild(coverImage);
       content.insertBefore(coverContainer, info);
@@ -191,13 +314,15 @@ export function closeMobileAlbumCard(immediate = false) {
   
   const overlay = currentCard;
   const removeOverlay = () => {
-    if (overlay.parentNode) {
+    // Entferne Overlay komplett aus DOM
+    if (overlay && overlay.parentNode) {
       overlay.parentNode.removeChild(overlay);
     }
+    // Stelle sicher, dass Body-Scroll wieder aktiviert ist
+    document.body.style.overflow = '';
     if (currentCard === overlay) {
       currentCard = null;
     }
-    document.body.style.overflow = '';
   };
   
   if (immediate) {
@@ -205,8 +330,13 @@ export function closeMobileAlbumCard(immediate = false) {
     return;
   }
   
+  // Fade-out Animation
   overlay.classList.remove('active');
-  setTimeout(removeOverlay, 200);
+  overlay.style.opacity = '0';
+  overlay.style.visibility = 'hidden';
+  overlay.style.pointerEvents = 'none';
+  
+  setTimeout(removeOverlay, 250); // Etwas länger als CSS transition
 }
 
 // ESC-Taste zum Schließen

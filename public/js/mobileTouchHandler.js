@@ -8,7 +8,7 @@ import { showMobileAlbumCard } from './mobileAlbumCard.js';
 /**
  * Visueller Debug-Modus (zeigt Events auf dem Bildschirm)
  */
-let debugMode = true; // Aktiviert für Debugging
+let debugMode = false; // Deaktiviert
 let debugOverlay = null;
 
 function showDebugMessage(message, color = '#ff6b35') {
