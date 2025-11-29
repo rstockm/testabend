@@ -33,11 +33,8 @@ function getCoverFilename(band, album, year = null) {
  * Versucht zuerst mit Jahr, dann ohne Jahr
  */
 async function checkCoverExists(band, album, year = null) {
-  // Verwende absoluten Pfad relativ zum Root
-  const basePath = window.location.pathname.endsWith('/') 
-    ? window.location.pathname 
-    : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-  const coversBase = basePath + (basePath.endsWith('/') ? '' : '/') + 'images/covers/';
+  // Verwende absoluten Pfad vom Root
+  const coversBase = '/images/covers/';
   
   // Versuche zuerst mit Jahr (falls vorhanden)
   if (year) {
@@ -147,11 +144,8 @@ async function addCoverToTooltip(tooltipElement) {
       return; // Cover nicht vorhanden
     }
     
-    // Verwende absoluten Pfad relativ zum Root
-    const basePath = window.location.pathname.endsWith('/') 
-      ? window.location.pathname 
-      : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-    coverUrl = basePath + (basePath.endsWith('/') ? '' : '/') + `images/covers/${result.filename}`;
+    // Verwende absoluten Pfad vom Root
+    coverUrl = `/images/covers/${result.filename}`;
     coverUrlCache.set(cacheKey, coverUrl);
   } else if (coverUrl === null) {
     // Bereits geprüft, nicht vorhanden
