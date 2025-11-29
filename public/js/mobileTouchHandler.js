@@ -8,7 +8,7 @@ import { showMobileAlbumCard } from './mobileAlbumCard.js';
 /**
  * Visueller Debug-Modus (zeigt Events auf dem Bildschirm)
  */
-let debugMode = false; // Deaktiviert für Produktion
+let debugMode = true; // Aktiviert für Debugging
 let debugOverlay = null;
 
 function showDebugMessage(message, color = '#ff6b35') {
@@ -188,9 +188,29 @@ export function setupMobileTouchHandlers(chartView, chartEl) {
                 event.preventDefault();
                 event.stopPropagation();
                 showDebugMessage(`Showing card: ${item.datum.Band} - ${item.datum.Album}`, '#90EE90');
-                showMobileAlbumCard(item.datum);
+                try {
+                  showMobileAlbumCard(item.datum);
+                  showDebugMessage('showMobileAlbumCard called successfully', '#90EE90');
+                } catch (error) {
+                  showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
+                }
               } else {
                 showDebugMessage('Vega click but no datum', '#ffaa00');
+              }
+            });
+            
+            // Auch touchstart direkt abfangen (falls click nicht funktioniert)
+            chartView.addEventListener('touchstart', (event, item) => {
+              showDebugMessage(`Vega touchstart: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
+              if (item && item.datum) {
+                event.preventDefault();
+                event.stopPropagation();
+                showDebugMessage(`Showing card from touchstart: ${item.datum.Band}`, '#90EE90');
+                try {
+                  showMobileAlbumCard(item.datum);
+                } catch (error) {
+                  showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
+                }
               }
             });
             

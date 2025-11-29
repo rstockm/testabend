@@ -74,10 +74,18 @@ let currentCard = null;
  * Zeigt modale Album-Karte auf Mobile
  */
 export function showMobileAlbumCard(datum) {
-  if (!isMobile()) return; // Nur auf Mobile
+  console.log('[MobileAlbumCard] showMobileAlbumCard called', datum);
+  
+  if (!isMobile()) {
+    console.log('[MobileAlbumCard] Not mobile, returning');
+    return; // Nur auf Mobile
+  }
+  
+  console.log('[MobileAlbumCard] Creating card for', datum.Band, '-', datum.Album);
   
   // Entferne bestehende Karte sofort (ohne Animation)
   if (currentCard) {
+    console.log('[MobileAlbumCard] Removing existing card');
     currentCard.remove();
     currentCard = null;
     document.body.style.overflow = '';
@@ -86,6 +94,7 @@ export function showMobileAlbumCard(datum) {
   // Erstelle Overlay
   const overlay = document.createElement('div');
   overlay.className = 'mobile-album-card-overlay';
+  console.log('[MobileAlbumCard] Overlay created');
   
   // Erstelle Karte
   const card = document.createElement('div');
@@ -139,11 +148,16 @@ export function showMobileAlbumCard(datum) {
   overlay.appendChild(card);
   document.body.appendChild(overlay);
   
+  console.log('[MobileAlbumCard] Card appended to body');
+  
   currentCard = overlay;
   
   // Aktiviere Overlay (für Animation)
   requestAnimationFrame(() => {
+    console.log('[MobileAlbumCard] Adding active class');
     overlay.classList.add('active');
+    console.log('[MobileAlbumCard] Active class added, overlay classes:', overlay.className);
+    console.log('[MobileAlbumCard] Overlay computed style:', window.getComputedStyle(overlay).display);
   });
   
   // Schließen bei Klick außerhalb
