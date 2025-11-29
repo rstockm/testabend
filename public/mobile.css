@@ -163,6 +163,8 @@
   gap: 8px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
+    min-height: 0;
+    min-width: 0;
 }
 
 .mobile-tags-scroll-container::-webkit-scrollbar {
@@ -328,9 +330,10 @@
   .layout-band {
     display: flex;
     flex-direction: column;
-    height: calc(100dvh - var(--header-height-mobile, 56px)); /* Viewport minus Header */
+    min-height: calc(100dvh - var(--header-height-mobile, 56px)); /* Viewport minus Header */
     gap: 0;
-    overflow: hidden; /* Scrollen nur in Sub-Containern */
+    overflow-x: hidden;
+    overflow-y: auto; /* Gesamtes Layout darf scrollen */
   }
 
   /* Desktop Controls verstecken */
@@ -374,8 +377,8 @@
   /* Hauptcontainer Anpassung */
   main {
     padding: 0;
-    height: calc(100dvh - var(--header-height-mobile, 56px));
-    overflow: hidden;
+    min-height: calc(100dvh - var(--header-height-mobile, 56px));
+    overflow: visible;
     display: flex;
     flex-direction: column;
   }

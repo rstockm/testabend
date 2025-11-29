@@ -88,11 +88,7 @@ export function buildMobileBandToolbar(selectedBands, onRemove, onAddClick, onSe
   const palette = getBandPalette();
   
   if (selectedBands.length === 0) {
-    const emptyHint = document.createElement('span');
-    emptyHint.className = 'muted';
-    emptyHint.textContent = 'Keine Bands ausgewählt';
-    emptyHint.style.padding = '4px 0';
-    tagsContainer.appendChild(emptyHint);
+    // Keine Bands -> Container leer lassen, Hinweis folgt im Chartbereich
   } else {
     selectedBands.forEach(b => {
       const t = document.createElement('span');
