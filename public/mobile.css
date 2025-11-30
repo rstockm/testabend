@@ -463,15 +463,20 @@
   height: 100% !important;
   min-height: 100vh !important;
   min-height: 100dvh !important; /* Fallback für Browser ohne dvh */
-  padding: 20px !important;
+  padding: 0 !important; /* Kein Padding mehr, wird von der Karte selbst gehandhabt */
   margin: 0 !important;
   background: rgba(0, 0, 0, 0.85) !important;
   /* backdrop-filter ist optional - viele Android-Browser unterstützen es nicht */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px); /* Safari/iOS Fallback */
   display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  align-items: flex-start !important; /* Höher positioniert statt zentriert */
+  justify-content: center !important; /* Horizontal zentriert */
+  padding-top: 10vh !important; /* Etwas Abstand von oben */
+  padding-top: 10dvh !important; /* Fallback für Browser ohne dvh */
+  padding-left: 5vw !important; /* Gleichmäßige Ränder links */
+  padding-right: 5vw !important; /* Gleichmäßige Ränder rechts */
+  box-sizing: border-box !important;
   z-index: 99999 !important; /* Sehr hoch, um über allem zu liegen */
   opacity: 0;
   visibility: hidden;
@@ -492,17 +497,17 @@
   background: #1e1e1e !important; /* Explizite Farbe statt CSS-Variable */
   color: #f5f5f5 !important;
   border-radius: 16px !important;
-  width: 90% !important;
-  max-width: 420px !important; /* Fallback statt min() */
-  max-height: 80vh !important;
-  max-height: 80dvh !important; /* Fallback für Browser ohne dvh */
+  width: 100% !important; /* Nutzt verfügbaren Platz im Overlay */
+  max-width: 420px !important; /* Maximale Breite */
+  max-height: calc(90vh - 10vh) !important; /* Höhe minus Padding oben */
+  max-height: calc(90dvh - 10dvh) !important; /* Fallback für Browser ohne dvh */
   display: flex !important;
   flex-direction: column !important;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
   border: 1px solid #404040 !important; /* Explizite Farbe */
   overflow: hidden !important;
   position: relative !important;
-  margin: 0 auto !important;
+  margin: 0 !important; /* Kein margin mehr, Overlay-Padding sorgt für Ränder */
 }
 
 .mobile-album-card-close {
