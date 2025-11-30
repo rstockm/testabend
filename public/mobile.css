@@ -485,6 +485,8 @@
   /* Force hardware acceleration */
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  /* Overflow hidden für Swipe-Animation */
+  overflow: hidden !important;
 }
 
 .mobile-album-card-overlay.active {
@@ -508,6 +510,10 @@
   overflow: hidden !important;
   position: relative !important;
   margin: 0 !important; /* Kein margin mehr, Overlay-Padding sorgt für Ränder */
+  /* Smooth Transitions für Swipe-Animation */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .mobile-album-card-close {

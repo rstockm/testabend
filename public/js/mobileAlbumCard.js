@@ -298,7 +298,77 @@ export function showMobileAlbumCard(datum, albumData = null) {
 }
 
 /**
- * Aktualisiert die Karte mit neuen Album-Daten
+ * Erstellt eine neue Karte mit Album-Daten (für Animation)
+ */
+function createCardContent(datum, overlay) {
+  const content = document.createElement('div');
+  content.className = 'mobile-album-card-content';
+  content.style.cssText = `
+    padding: 20px !important;
+    overflow-y: auto !important;
+    flex: 1 !important;
+    background: transparent !important;
+    color: #f5f5f5 !important;
+  `;
+  
+  const info = document.createElement('div');
+  info.className = 'mobile-album-card-info';
+  
+  const title = document.createElement('h3');
+  title.textContent = `${datum.Band} - ${datum.Album}`;
+  title.style.cssText = `
+    margin: 0 0 20px 0 !important;
+    font-size: 20px !important;
+    text-align: center !important;
+    color: #f5f5f5 !important;
+    font-weight: 600 !important;
+  `;
+  info.appendChild(title);
+  
+  const table = document.createElement('table');
+  table.style.cssText = `
+    width: 100% !important;
+    border-collapse: collapse !important;
+  `;
+  const rows = [
+    { key: 'Jahr', value: datum.Jahr || '-' },
+    { key: 'Note', value: datum.Note != null ? datum.Note.toFixed(1) : '-' },
+    { key: 'Platz', value: datum.Platz != null ? datum.Platz : '-' }
+  ];
+  
+  rows.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.style.cssText = `
+      border-bottom: 1px solid #404040 !important;
+    `;
+    const tdKey = document.createElement('td');
+    tdKey.textContent = row.key + ':';
+    tdKey.style.cssText = `
+      padding: 12px 12px 12px 0 !important;
+      color: #d4d4d4 !important;
+      font-weight: 600 !important;
+      width: 30% !important;
+    `;
+    const tdValue = document.createElement('td');
+    tdValue.textContent = row.value;
+    tdValue.style.cssText = `
+      padding: 12px 0 !important;
+      color: #f5f5f5 !important;
+      text-align: left !important;
+    `;
+    tr.appendChild(tdKey);
+    tr.appendChild(tdValue);
+    table.appendChild(tr);
+  });
+  
+  info.appendChild(table);
+  content.appendChild(info);
+  
+  return content;
+}
+
+/**
+ * Aktualisiert die Karte mit neuen Album-Daten (ohne Animation)
  */
 function updateCardContent(datum, card, overlay) {
   const content = card.querySelector('.mobile-album-card-content');
@@ -336,23 +406,93 @@ function updateCardContent(datum, card, overlay) {
 }
 
 /**
- * Navigiert zum nächsten/vorherigen Album
+ * Navigiert zum nächsten/vorherigen Album mit flüssiger Animation
  */
 function navigateToAlbum(direction) {
   if (currentBandAlbums.length <= 1) return;
   
+  const overlay = currentCard;
+  const oldCard = overlay?.querySelector('.mobile-album-card');
+  if (!oldCard || !overlay) return;
+  
+  // Berechne neuen Index
+  let newIndex;
   if (direction === 'next') {
-    currentAlbumIndex = (currentAlbumIndex + 1) % currentBandAlbums.length;
-  } else if (direction === 'prev') {
-    currentAlbumIndex = (currentAlbumIndex - 1 + currentBandAlbums.length) % currentBandAlbums.length;
+    newIndex = (currentAlbumIndex + 1) % currentBandAlbums.length;
+  } else {
+    newIndex = (currentAlbumIndex - 1 + currentBandAlbums.length) % currentBandAlbums.length;
   }
   
-  const newDatum = currentBandAlbums[currentAlbumIndex];
-  const card = currentCard?.querySelector('.mobile-album-card');
+  const newDatum = currentBandAlbums[newIndex];
+  if (!newDatum) return;
   
-  if (card && newDatum) {
-    updateCardContent(newDatum, card, currentCard);
+  // Erstelle neue Karte im Hintergrund
+  const newCard = oldCard.cloneNode(false);
+  newCard.className = 'mobile-album-card';
+  newCard.style.cssText = oldCard.style.cssText;
+  
+  // Kopiere Close-Button
+  const oldCloseBtn = oldCard.querySelector('.mobile-album-card-close');
+  if (oldCloseBtn) {
+    const newCloseBtn = oldCloseBtn.cloneNode(true);
+    newCloseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileAlbumCard();
+    });
+    newCard.appendChild(newCloseBtn);
   }
+  
+  // Erstelle neuen Content
+  const newContent = createCardContent(newDatum, overlay);
+  newCard.appendChild(newContent);
+  
+  // Positioniere neue Karte außerhalb des Sichtbereichs
+  const cardWidth = oldCard.offsetWidth || 420;
+  const startX = direction === 'next' ? cardWidth : -cardWidth;
+  newCard.style.transform = `translateX(${startX}px)`;
+  newCard.style.transition = 'transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1)';
+  newCard.style.position = 'absolute';
+  newCard.style.top = '0';
+  newCard.style.left = '0';
+  newCard.style.right = '0';
+  newCard.style.margin = '0 auto';
+  
+  // Füge neue Karte zum Overlay hinzu
+  overlay.appendChild(newCard);
+  
+  // Lade Cover für neue Karte
+  const info = newContent.querySelector('.mobile-album-card-info');
+  if (info) {
+    loadCoverImage(newDatum.Band, newDatum.Album, newDatum.Jahr, newContent, info);
+  }
+  
+  // Starte Animation: beide Karten gleichzeitig bewegen
+  requestAnimationFrame(() => {
+    // Alte Karte rausschieben
+    const endXOld = direction === 'next' ? -cardWidth : cardWidth;
+    oldCard.style.transform = `translateX(${endXOld}px)`;
+    oldCard.style.transition = 'transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1)';
+    
+    // Neue Karte reinschieben
+    newCard.style.transform = 'translateX(0)';
+    
+    // Nach Animation: alte Karte entfernen, neue Karte als aktuelle setzen
+    setTimeout(() => {
+      oldCard.remove();
+      newCard.style.position = 'relative';
+      newCard.style.transform = '';
+      newCard.style.transition = '';
+      
+      // Aktualisiere Index
+      currentAlbumIndex = newIndex;
+      
+      // Swipe-Gesten für neue Karte einrichten
+      if (currentBandAlbums.length > 1) {
+        setupSwipeGestures(newCard, overlay);
+      }
+    }, 300);
+  });
 }
 
 /**
@@ -437,10 +577,20 @@ function setupSwipeGestures(card, overlay) {
       isSwiping = true;
       // Verhindere Scrollen während Swipe
       e.preventDefault();
+      
+      // Visuelles Feedback: Karte während Swipe leicht verschieben
+      const maxDelta = Math.min(Math.abs(deltaX), 100); // Max 100px Verschiebung
+      const translateX = deltaX > 0 ? maxDelta : -maxDelta;
+      card.style.transform = `translateX(${translateX}px)`;
+      card.style.transition = 'none'; // Keine Transition während Swipe
     }
   }, { passive: false });
   
   card.addEventListener('touchend', (e) => {
+    // Reset visuelle Verschiebung
+    card.style.transform = '';
+    card.style.transition = '';
+    
     if (!touchStartX || !touchStartY || !isSwiping) {
       touchStartX = 0;
       touchStartY = 0;
