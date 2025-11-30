@@ -339,7 +339,7 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
   if (isMobile() && result && result.view) {
     // Warte zusätzlich, damit SVG gerendert ist
     setTimeout(() => {
-      setupMobileTouchHandlers(result.view, chartEl);
+      setupMobileTouchHandlers(result.view, chartEl, data); // Übergebe Daten für Swipe
     }, 300);
   } else {
     // Desktop: Standard Tooltip-Handler

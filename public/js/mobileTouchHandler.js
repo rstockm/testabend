@@ -3,7 +3,7 @@
  * Ersetzt Hover-Effekte durch explizite Touch-Events
  */
 import { isMobile } from './utils.js';
-import { showMobileAlbumCard } from './mobileAlbumCard.js';
+import { showMobileAlbumCard, setAlbumDataForSwipe } from './mobileAlbumCard.js';
 
 /**
  * Visueller Debug-Modus (zeigt Events auf dem Bildschirm)
@@ -80,8 +80,15 @@ function extractDataFromTooltip(tooltip) {
 
 /**
  * Richtet Mobile Touch-Handler für einen Chart ein
+ * @param {Object} chartView - Vega-Lite Chart View
+ * @param {HTMLElement} chartEl - Chart Container Element
+ * @param {Array} albumData - Optionale Album-Daten für Swipe-Funktionalität
  */
-export function setupMobileTouchHandlers(chartView, chartEl) {
+export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
+  // Setze Album-Daten für Swipe-Funktionalität
+  if (albumData) {
+    setAlbumDataForSwipe(albumData);
+  }
   if (!isMobile()) return; // Nur auf Mobile
   
   try {

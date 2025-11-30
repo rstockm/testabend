@@ -79,12 +79,46 @@ async function checkCoverExists(band, album, year = null) {
 }
 
 let currentCard = null;
+let currentAlbumIndex = 0;
+let currentBandAlbums = []; // Alle Alben der aktuellen Band
+let allData = null; // Gesamte Album-Daten für Band-Filterung
+
+/**
+ * Setzt die Album-Daten für die Swipe-Funktionalität
+ * Sollte vom Router aufgerufen werden, wenn die Daten geladen sind
+ */
+export function setAlbumDataForSwipe(data) {
+  allData = data;
+}
 
 /**
  * Zeigt modale Album-Karte auf Mobile
  */
-export function showMobileAlbumCard(datum) {
+export function showMobileAlbumCard(datum, albumData = null) {
   if (!isMobile() || !datum) return;
+  
+  // Wenn albumData übergeben wurde, verwende es, sonst verwende allData
+  const dataSource = albumData || allData;
+  
+  // Filtere alle Alben der aktuellen Band und sortiere nach Jahr
+  if (dataSource && datum.Band) {
+    currentBandAlbums = dataSource
+      .filter(d => d.Band === datum.Band)
+      .sort((a, b) => (a.Jahr || 0) - (b.Jahr || 0)); // Sortiere nach Jahr aufsteigend
+    
+    // Finde Index des aktuellen Albums
+    currentAlbumIndex = currentBandAlbums.findIndex(
+      d => d.Band === datum.Band && d.Album === datum.Album && d.Jahr === datum.Jahr
+    );
+    
+    if (currentAlbumIndex === -1) {
+      currentAlbumIndex = 0; // Fallback falls nicht gefunden
+    }
+  } else {
+    // Fallback: Nur aktuelles Album
+    currentBandAlbums = [datum];
+    currentAlbumIndex = 0;
+  }
   
   closeMobileAlbumCard(true);
   
@@ -249,11 +283,190 @@ export function showMobileAlbumCard(datum) {
     }
   });
   
+  // Swipe-Gesten für Album-Navigation hinzufügen (nur wenn mehrere Alben vorhanden)
+  if (currentBandAlbums.length > 1) {
+    setupSwipeGestures(card, overlay);
+    // Visueller Hinweis für Swipe-Funktionalität
+    addSwipeIndicator(card);
+  }
+  
   // Verhindere Body-Scroll
   const originalOverflow = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
   
   currentCard = overlay;
+}
+
+/**
+ * Aktualisiert die Karte mit neuen Album-Daten
+ */
+function updateCardContent(datum, card, overlay) {
+  const content = card.querySelector('.mobile-album-card-content');
+  if (!content) return;
+  
+  // Entferne altes Cover
+  const oldCover = content.querySelector('.mobile-album-card-cover-container');
+  if (oldCover) oldCover.remove();
+  
+  // Aktualisiere Titel
+  const title = content.querySelector('h3');
+  if (title) {
+    title.textContent = `${datum.Band} - ${datum.Album}`;
+  }
+  
+  // Aktualisiere Tabelle
+  const table = content.querySelector('table');
+  if (table) {
+    const rows = table.querySelectorAll('tr');
+    if (rows.length >= 3) {
+      // Jahr
+      rows[0].querySelector('td:last-child').textContent = datum.Jahr || '-';
+      // Note
+      rows[1].querySelector('td:last-child').textContent = datum.Note != null ? datum.Note.toFixed(1) : '-';
+      // Platz
+      rows[2].querySelector('td:last-child').textContent = datum.Platz != null ? datum.Platz : '-';
+    }
+  }
+  
+  // Lade neues Cover
+  const info = content.querySelector('.mobile-album-card-info');
+  if (info) {
+    loadCoverImage(datum.Band, datum.Album, datum.Jahr, content, info);
+  }
+}
+
+/**
+ * Navigiert zum nächsten/vorherigen Album
+ */
+function navigateToAlbum(direction) {
+  if (currentBandAlbums.length <= 1) return;
+  
+  if (direction === 'next') {
+    currentAlbumIndex = (currentAlbumIndex + 1) % currentBandAlbums.length;
+  } else if (direction === 'prev') {
+    currentAlbumIndex = (currentAlbumIndex - 1 + currentBandAlbums.length) % currentBandAlbums.length;
+  }
+  
+  const newDatum = currentBandAlbums[currentAlbumIndex];
+  const card = currentCard?.querySelector('.mobile-album-card');
+  
+  if (card && newDatum) {
+    updateCardContent(newDatum, card, currentCard);
+  }
+}
+
+/**
+ * Fügt visuellen Swipe-Indikator hinzu
+ */
+function addSwipeIndicator(card) {
+  const indicator = document.createElement('div');
+  indicator.className = 'mobile-album-card-swipe-indicator';
+  indicator.style.cssText = `
+    position: absolute !important;
+    bottom: 12px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    gap: 6px !important;
+    z-index: 5 !important;
+    opacity: 0.6 !important;
+  `;
+  
+  const dot1 = document.createElement('div');
+  dot1.style.cssText = `
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #f5f5f5 !important;
+  `;
+  
+  const dot2 = document.createElement('div');
+  dot2.style.cssText = `
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #f5f5f5 !important;
+  `;
+  
+  indicator.appendChild(dot1);
+  indicator.appendChild(dot2);
+  card.appendChild(indicator);
+  
+  // Entferne Indikator nach 3 Sekunden
+  setTimeout(() => {
+    if (indicator.parentNode) {
+      indicator.style.transition = 'opacity 0.5s ease';
+      indicator.style.opacity = '0';
+      setTimeout(() => indicator.remove(), 500);
+    }
+  }, 3000);
+}
+
+/**
+ * Richtet Swipe-Gesten für die Album-Karte ein
+ */
+function setupSwipeGestures(card, overlay) {
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  let isSwiping = false;
+  const minSwipeDistance = 50; // Mindestdistanz für Swipe in Pixeln
+  
+  card.addEventListener('touchstart', (e) => {
+    // Ignoriere Swipe wenn auf Close-Button geklickt wird
+    if (e.target.closest('.mobile-album-card-close')) {
+      return;
+    }
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isSwiping = false;
+  }, { passive: true });
+  
+  card.addEventListener('touchmove', (e) => {
+    if (!touchStartX || !touchStartY) return;
+    
+    touchEndX = e.touches[0].clientX;
+    touchEndY = e.touches[0].clientY;
+    
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = Math.abs(touchEndY - touchStartY);
+    
+    // Prüfe ob horizontale Bewegung größer als vertikale (Swipe-Geste)
+    if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 10) {
+      isSwiping = true;
+      // Verhindere Scrollen während Swipe
+      e.preventDefault();
+    }
+  }, { passive: false });
+  
+  card.addEventListener('touchend', (e) => {
+    if (!touchStartX || !touchStartY || !isSwiping) {
+      touchStartX = 0;
+      touchStartY = 0;
+      return;
+    }
+    
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = Math.abs(touchEndY - touchStartY);
+    
+    // Nur als Swipe behandeln, wenn horizontale Bewegung größer als vertikale
+    if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        // Swipe nach rechts -> vorheriges Album
+        navigateToAlbum('prev');
+      } else {
+        // Swipe nach links -> nächstes Album
+        navigateToAlbum('next');
+      }
+    }
+    
+    touchStartX = 0;
+    touchStartY = 0;
+    touchEndX = 0;
+    touchEndY = 0;
+    isSwiping = false;
+  }, { passive: true });
 }
 
 /**
