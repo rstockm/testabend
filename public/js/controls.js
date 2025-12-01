@@ -260,6 +260,7 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
       const li = document.createElement('li');
       li.className = 'band-item' + (selectedBands.includes(b) ? ' selected' : '');
       li.style.padding = '12px 8px'; // Größere Touch-Targets
+      li.style.cursor = 'pointer'; // Zeige dass es klickbar ist
       
       const nameSpan = document.createElement('span');
       nameSpan.className = 'band-name';
@@ -286,20 +287,27 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
   }
   
   renderList('');
-  input.addEventListener('input', () => renderList(input.value));
   
+  // Event-Listener für Mehrfachauswahl von Bands
   list.addEventListener('click', (e) => {
     const li = e.target.closest('.band-item');
     if (!li) return;
     
     const b = li.dataset.band;
+    if (!b) return;
+    
+    // Toggle: Wenn bereits ausgewählt, entfernen; sonst hinzufügen
     const idx = selectedBands.indexOf(b);
     if (idx >= 0) {
       selectedBands.splice(idx, 1);
     } else {
       selectedBands.push(b);
     }
+    
+    // Aktualisiere die Auswahl
     onSelectChange([...selectedBands]);
+    
+    // Liste neu rendern um selected-State zu aktualisieren
     renderList(input.value);
   });
   
