@@ -396,11 +396,24 @@
     display: none !important; /* Wird durch Modal ersetzt */
     visibility: hidden !important;
     height: 0 !important;
+    width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
     overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
   }
 
   .band-controls-row {
-    display: none; /* Wird durch Mobile Toolbar ersetzt */
+    display: none !important; /* Wird durch Mobile Toolbar ersetzt */
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Desktop Tags-Bar verstecken (wird durch Mobile Toolbar ersetzt) */
+  .band-content-area .tags {
+    display: none !important;
   }
 
   #header-controls {
