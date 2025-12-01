@@ -147,18 +147,20 @@ export class Chat {
       this.containerEl.className = 'chat-page';
     }
     
-    // Innerer Container für Messages (scrollbar)
-    const chatContainer = document.createElement('div');
-    chatContainer.className = 'chat-container';
+    // Messages Container (scrollbarer Bereich)
+    const messagesContainer = document.createElement('div');
+    messagesContainer.className = 'chat-messages-container';
     
-    // Chat-Messages-Bereich
+    // Innerer Messages-Bereich
     const messagesArea = document.createElement('div');
     messagesArea.className = 'chat-messages';
     messagesArea.id = 'chat-messages';
     
-    // Input-Bereich (außerhalb des scrollbaren Containers)
-    const inputArea = document.createElement('div');
-    inputArea.className = 'chat-input-area';
+    messagesContainer.appendChild(messagesArea);
+    
+    // Input Container (fixed am unteren Rand)
+    const inputContainer = document.createElement('div');
+    inputContainer.className = 'chat-input-container';
     
     const inputWrapper = document.createElement('div');
     inputWrapper.className = 'chat-input-wrapper';
@@ -173,7 +175,7 @@ export class Chat {
     // Auto-Resize für Textarea
     textarea.addEventListener('input', () => {
       textarea.style.height = 'auto';
-      textarea.style.height = Math.min(textarea.scrollHeight, 200) + 'px';
+      textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
     });
     
     // Enter zum Senden (Shift+Enter für neue Zeile)
@@ -187,7 +189,7 @@ export class Chat {
     const sendButton = document.createElement('button');
     sendButton.id = 'chat-send-button';
     sendButton.className = 'chat-send-button';
-    sendButton.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+    sendButton.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
     sendButton.setAttribute('aria-label', 'Nachricht senden');
     sendButton.addEventListener('click', () => this.sendMessage());
     
@@ -206,12 +208,11 @@ export class Chat {
     inputWrapper.appendChild(textarea);
     inputWrapper.appendChild(resetButton);
     inputWrapper.appendChild(sendButton);
-    inputArea.appendChild(inputWrapper);
+    inputContainer.appendChild(inputWrapper);
     
-    // Struktur: chat-page > chat-container (messages) + chat-input-area (fixed)
-    chatContainer.appendChild(messagesArea);
-    this.containerEl.appendChild(chatContainer);
-    this.containerEl.appendChild(inputArea);
+    // Struktur: chat-page > chat-messages-container (scrollbar) + chat-input-container (fixed)
+    this.containerEl.appendChild(messagesContainer);
+    this.containerEl.appendChild(inputContainer);
     
     // Willkommensnachricht nur hinzufügen, wenn noch keine Nachrichten vorhanden sind
     // Oder wenn nur eine Begrüßungsnachricht vorhanden ist (beim Neuladen)
@@ -469,13 +470,13 @@ export class Chat {
    * Scroll zum Ende der Nachrichten
    */
   scrollToBottom(smooth = false) {
-    const messagesArea = document.getElementById('chat-messages');
-    if (!messagesArea) return;
+    const messagesContainer = this.containerEl.querySelector('.chat-messages-container');
+    if (!messagesContainer) return;
     
     // Verwende requestAnimationFrame für zuverlässiges Scrollen
     requestAnimationFrame(() => {
-      messagesArea.scrollTo({
-        top: messagesArea.scrollHeight,
+      messagesContainer.scrollTo({
+        top: messagesContainer.scrollHeight,
         behavior: smooth ? 'smooth' : 'auto'
       });
     });
