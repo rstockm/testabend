@@ -393,7 +393,10 @@
 
   /* Desktop Controls verstecken */
   .band-panel {
-    display: none; /* Wird durch Modal ersetzt */
+    display: none !important; /* Wird durch Modal ersetzt */
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
   }
 
   .band-controls-row {
