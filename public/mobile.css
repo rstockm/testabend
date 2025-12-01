@@ -403,6 +403,11 @@
   #header-controls {
     display: none; /* Desktop Header Controls verstecken */
   }
+  
+  /* Controls-Bereich verstecken auf Mobile (wird durch Mobile Toolbar ersetzt) */
+  .controls {
+    display: none !important;
+  }
 
   /* Mobile Elemente sichtbar machen */
   .mobile-band-toolbar {
