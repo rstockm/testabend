@@ -477,7 +477,15 @@
   
   /* Sicherstellen dass band-panel wirklich keinen Platz einnimmt */
   .layout-band > .band-panel {
-    order: 999; /* Ganz nach hinten */
+    display: none !important;
+    /* Komplett aus Layout entfernen */
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
     flex: 0 0 0 !important;
     min-height: 0 !important;
     max-height: 0 !important;
