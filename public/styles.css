@@ -15,7 +15,6 @@
   --hover-bg: #2a2a2a;
   --tag-bg: #2a2a2a;
   --tag-text: #e5e5e5;
-  --header-height-mobile: 56px;
 }
 
 body {
@@ -65,7 +64,7 @@ nav a.active {
 }
 
 main {
-  padding: 0 8px 16px 0;
+  padding: 8px 8px 16px 0;
   max-width: none;
   margin: 0;
   background-color: var(--bg-primary);
@@ -667,8 +666,8 @@ pre#debug {
 .chat-page {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px);
-  max-height: calc(100vh - 60px);
+  height: calc(100dvh - 60px);
+  max-height: calc(100dvh - 60px);
   padding: 0;
   margin: 0;
 }
@@ -927,7 +926,7 @@ pre#debug {
     padding-right: 12px;
   }
   main {
-    padding: 0 12px 12px 0;
+    padding: 12px 12px 12px 0;
   }
   
   .chat-container {
@@ -936,11 +935,5 @@ pre#debug {
   
   .chat-message {
     max-width: 90%;
-  }
-}
-
-@media (min-width: 901px) {
-  main {
-    padding-top: 8px;
   }
 }

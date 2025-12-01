@@ -142,7 +142,12 @@ export class Chat {
    */
   render() {
     this.containerEl.innerHTML = '';
-    this.containerEl.className = 'chat-container';
+    // Behalte chat-page Klasse falls vorhanden, füge chat-container hinzu
+    if (!this.containerEl.classList.contains('chat-page')) {
+      this.containerEl.className = 'chat-container';
+    } else {
+      this.containerEl.classList.add('chat-container');
+    }
     
     // Chat-Messages-Bereich
     const messagesArea = document.createElement('div');
@@ -263,7 +268,7 @@ export class Chat {
     // Begrüßung: explizit schnelles Llama-3.1-8B-Modell verwenden
     const welcomeModel = GENERATION_MODEL_ID;
     console.log('API: Verwende Begrüßungsmodell (Schritt 1):', welcomeModel);
-
+    
     const requestBody = {
       model: welcomeModel,
       messages: apiMessages,

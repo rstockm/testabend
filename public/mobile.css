@@ -148,10 +148,10 @@
   flex-direction: column;
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
-  position: relative; /* Erstmal kein sticky, direkt unter Header */
+  position: sticky;
+  top: 53px; /* Unter Header (ca. Höhe) */
   z-index: 90;
   width: 100%;
-  flex-shrink: 0; /* Verhindert Schrumpfen */
 }
 
 /* Scrollbare Tags-Leiste */
@@ -163,8 +163,6 @@
   gap: 8px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
-    min-height: 0;
-    min-width: 0;
 }
 
 .mobile-tags-scroll-container::-webkit-scrollbar {
@@ -213,9 +211,6 @@
   z-index: 2000;
   flex-direction: column;
   overflow: hidden;
-  width: 100%;
-  max-width: 100vw; /* Verhindert horizontales Scrollen */
-  box-sizing: border-box;
 }
 
 .mobile-band-modal.active {
@@ -250,51 +245,7 @@
 .mobile-modal-content {
   flex: 1;
   overflow-y: auto;
-  overflow-x: hidden; /* Verhindert horizontales Scrollen */
   padding: 16px;
-  box-sizing: border-box; /* Wichtig: Padding wird in Breite eingerechnet */
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Edles Suchfeld für Mobile Modal */
-.mobile-modal-content .search {
-  margin-bottom: 20px;
-  position: relative;
-  width: 100%;
-  box-sizing: border-box; /* Wichtig: Padding wird in Breite eingerechnet */
-}
-
-.mobile-modal-content .search input {
-  width: 100%;
-  padding: 16px 20px;
-  font-size: 16px;
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: border-box; /* Wichtig: Padding und Border werden in Breite eingerechnet */
-}
-
-.mobile-modal-content .search input::placeholder {
-  color: var(--text-muted);
-  opacity: 0.7;
-}
-
-.mobile-modal-content .search input:focus {
-  outline: none;
-  border-color: var(--accent-blue);
-  background-color: var(--bg-secondary);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3);
-  transform: translateY(-1px);
-}
-
-.mobile-modal-content .search input:active {
-  transform: translateY(0);
 }
 
 .mobile-modal-footer {
@@ -377,12 +328,9 @@
   .layout-band {
     display: flex;
     flex-direction: column;
-    min-height: calc(100dvh - var(--header-height-mobile, 56px)); /* Viewport minus Header */
+    height: calc(100dvh - 53px); /* Viewport minus Header */
     gap: 0;
-    margin-top: 0;
-    padding-top: 0;
-    overflow-x: hidden;
-    overflow-y: auto; /* Gesamtes Layout darf scrollen */
+    overflow: hidden; /* Scrollen nur in Sub-Containern */
   }
 
   /* Desktop Controls verstecken */
@@ -425,10 +373,9 @@
   
   /* Hauptcontainer Anpassung */
   main {
-    padding: 0 !important;
-    margin: 0 !important;
-    min-height: calc(100dvh - var(--header-height-mobile, 56px));
-    overflow: visible;
+    padding: 0;
+    height: calc(100dvh - 53px);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
@@ -446,171 +393,83 @@
     display: flex;
     flex: 0 0 auto;
   }
-}
-
-/* ============================================
-   Mobile Album-Karte (Modale Touch-Interaktion)
-   ============================================ */
-
-/* Mobile Album Card Overlay - Robust für alle Mobile-Browser */
-.mobile-album-card-overlay {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important; /* Fallback für Browser ohne dvh */
-  padding: 0 !important; /* Kein Padding mehr, wird von der Karte selbst gehandhabt */
-  margin: 0 !important;
-  background: rgba(0, 0, 0, 0.85) !important;
-  /* backdrop-filter ist optional - viele Android-Browser unterstützen es nicht */
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px); /* Safari/iOS Fallback */
-  display: flex !important;
-  align-items: flex-start !important; /* Höher positioniert statt zentriert */
-  justify-content: center !important; /* Horizontal zentriert */
-  padding-top: 10vh !important; /* Etwas Abstand von oben */
-  padding-top: 10dvh !important; /* Fallback für Browser ohne dvh */
-  padding-left: 5vw !important; /* Gleichmäßige Ränder links */
-  padding-right: 5vw !important; /* Gleichmäßige Ränder rechts */
-  box-sizing: border-box !important;
-  z-index: 99999 !important; /* Sehr hoch, um über allem zu liegen */
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
-  /* Force hardware acceleration */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  /* Overflow hidden für Swipe-Animation */
-  overflow: hidden !important;
-}
-
-.mobile-album-card-overlay.active {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-}
-
-.mobile-album-card {
-  background: #1e1e1e !important; /* Explizite Farbe statt CSS-Variable */
-  color: #f5f5f5 !important;
-  border-radius: 16px !important;
-  width: 100% !important; /* Nutzt verfügbaren Platz im Overlay */
-  max-width: 420px !important; /* Maximale Breite */
-  max-height: calc(90vh - 10vh) !important; /* Höhe minus Padding oben */
-  max-height: calc(90dvh - 10dvh) !important; /* Fallback für Browser ohne dvh */
-  display: flex !important;
-  flex-direction: column !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
-  border: 1px solid #404040 !important; /* Explizite Farbe */
-  overflow: hidden !important;
-  position: relative !important;
-  margin: 0 !important; /* Kein margin mehr, Overlay-Padding sorgt für Ränder */
-  /* Smooth Transitions für Swipe-Animation */
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.mobile-album-card-close {
-  position: absolute !important;
-  top: 12px !important;
-  right: 12px !important;
-  width: 44px !important;
-  height: 44px !important;
-  background: #2a2a2a !important; /* Explizite Farbe */
-  border: 1px solid #404040 !important;
-  border-radius: 50% !important;
-  color: #f5f5f5 !important;
-  font-size: 24px !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  z-index: 10 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  transition: background-color 0.2s ease;
-  -webkit-tap-highlight-color: transparent; /* Entferne Touch-Highlight auf iOS */
-}
-
-.mobile-album-card-close:active {
-  background: #3a3a3a !important; /* Explizite Farbe */
-}
-
-.mobile-album-card-content {
-  padding: 20px !important;
-  overflow-y: auto !important;
-  flex: 1 !important;
-  -webkit-overflow-scrolling: touch !important;
-  background: transparent !important;
-  color: #f5f5f5 !important;
-}
-
-.mobile-album-card-cover-container {
-  width: 100% !important;
-  max-width: 300px !important;
-  margin: 0 auto 20px !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-  border: 2px solid #404040 !important;
-  background: #2a2a2a !important; /* Explizite Farbe */
-  display: block !important;
-}
-
-.mobile-album-card-cover {
-  width: 100% !important;
-  height: auto !important;
-  display: block !important;
-  aspect-ratio: 1 !important;
-  object-fit: cover !important;
-}
-
-.mobile-album-card-info {
-  width: 100% !important;
-}
-
-.mobile-album-card-info h3 {
-  margin: 0 0 20px 0 !important;
-  font-size: 20px !important;
-  text-align: center !important;
-  color: #f5f5f5 !important; /* Explizite Farbe */
-  font-weight: 600 !important;
-}
-
-.mobile-album-card-info table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-}
-
-.mobile-album-card-info tr {
-  border-bottom: 1px solid #404040 !important; /* Explizite Farbe */
-}
-
-.mobile-album-card-info tr:last-child {
-  border-bottom: none !important;
-}
-
-.mobile-album-card-info td {
-  padding: 12px 0 !important;
-  color: #f5f5f5 !important; /* Explizite Farbe */
-}
-
-.mobile-album-card-info td:first-child {
-  font-weight: 600 !important;
-  color: #d4d4d4 !important; /* Explizite Farbe */
-  width: 30% !important;
-  padding-right: 12px !important;
-}
-
-.mobile-album-card-info td:last-child {
-  text-align: left !important;
-  color: #f5f5f5 !important; /* Explizite Farbe */
+  
+  /* ============================================
+     Mobile Chat-Optimierungen
+     ============================================ */
+  
+  /* Chat-Seite: Vollhöhe ohne Padding */
+  .chat-page {
+    height: calc(100dvh - 53px); /* Viewport minus Header */
+    max-height: calc(100dvh - 53px);
+  }
+  
+  /* Chat-Container: 100% Breite, kein Padding seitlich */
+  .chat-container {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Messages-Bereich: Flex-Grow mit Padding */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    padding-bottom: 80px; /* Platz für fixed Input-Bereich */
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Input-Bereich: Fixed am unteren Rand */
+  .chat-input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+    /* Sicherstellen dass Input-Bereich nicht vom Keyboard verdeckt wird */
+    transform: translateZ(0);
+  }
+  
+  /* Input-Wrapper: Angepasst für Mobile */
+  .chat-input-wrapper {
+    padding: 10px 14px;
+    border-radius: 24px;
+  }
+  
+  /* Input-Textarea: Größere Schrift für Mobile */
+  .chat-input {
+    font-size: 16px; /* Verhindert Auto-Zoom auf iOS */
+    max-height: 120px; /* Reduziert für Mobile */
+  }
+  
+  /* Buttons: Größer für Touch */
+  .chat-reset-button,
+  .chat-send-button {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+  }
+  
+  /* Chat-Messages: Größere Schrift für Lesbarkeit */
+  .chat-message-content {
+    font-size: 16px;
+    padding: 14px 18px;
+  }
+  
+  /* Chat-Message: Mehr Platz auf Mobile */
+  .chat-message {
+    max-width: 85%;
+  }
 }
 
 /* ============================================
