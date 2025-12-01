@@ -151,6 +151,9 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
   const modal = document.createElement('div');
   modal.className = 'mobile-band-modal';
   
+  // Lokale Kopie der Auswahl - wird erst beim "Fertig"-Button übernommen
+  const localSelectedBands = [...selectedBands];
+  
   const header = document.createElement('div');
   header.className = 'mobile-modal-header';
   
@@ -223,7 +226,11 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
   const doneBtn = document.createElement('button');
   doneBtn.className = 'mobile-modal-done-btn';
   doneBtn.textContent = 'Fertig';
-  doneBtn.addEventListener('click', onClose);
+  doneBtn.addEventListener('click', () => {
+    // Erst beim "Fertig"-Button die Auswahl übernehmen und Hash ändern
+    onSelectChange([...localSelectedBands]);
+    onClose();
+  });
   
   footer.appendChild(doneBtn);
   
@@ -258,7 +265,7 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
     
     const items = filteredBands.map(b => {
       const li = document.createElement('li');
-      li.className = 'band-item' + (selectedBands.includes(b) ? ' selected' : '');
+      li.className = 'band-item' + (localSelectedBands.includes(b) ? ' selected' : '');
       li.style.padding = '12px 8px'; // Größere Touch-Targets
       li.style.cursor = 'pointer'; // Zeige dass es klickbar ist
       
@@ -290,6 +297,10 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
   
   // Event-Listener für Mehrfachauswahl von Bands
   list.addEventListener('click', (e) => {
+    // Verhindere Event-Propagation
+    e.stopPropagation();
+    e.preventDefault();
+    
     const li = e.target.closest('.band-item');
     if (!li) return;
     
@@ -297,17 +308,14 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
     if (!b) return;
     
     // Toggle: Wenn bereits ausgewählt, entfernen; sonst hinzufügen
-    const idx = selectedBands.indexOf(b);
+    const idx = localSelectedBands.indexOf(b);
     if (idx >= 0) {
-      selectedBands.splice(idx, 1);
+      localSelectedBands.splice(idx, 1);
     } else {
-      selectedBands.push(b);
+      localSelectedBands.push(b);
     }
     
-    // Aktualisiere die Auswahl
-    onSelectChange([...selectedBands]);
-    
-    // Liste neu rendern um selected-State zu aktualisieren
+    // Liste neu rendern um selected-State zu aktualisieren (OHNE Hash-Änderung)
     renderList(input.value);
   });
   
