@@ -78,7 +78,7 @@ export const DEFAULT_MODEL = RECOMMENDED_MODELS.BALANCED;
  * Validierungs-Modell:
  * Teureres, präziseres Modell für den zweiten Kontrollschritt
  */
-export const VALIDATION_MODEL = RECOMMENDED_MODELS.GEMINI;
+export const VALIDATION_MODEL = RECOMMENDED_MODELS.PREMIUM;
 
 /**
  * System-Prompt für den Chatbot
