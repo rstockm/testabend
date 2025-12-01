@@ -225,6 +225,39 @@ export class Chat {
     
     // Focus auf Input
     textarea.focus();
+    
+    // Keyboard-Handling für Mobile
+    this.setupKeyboardHandling();
+    
+    // Initialer Scroll nach unten
+    setTimeout(() => this.scrollToBottom(), 100);
+  }
+  
+  /**
+   * Keyboard-Handling für Mobile
+   */
+  setupKeyboardHandling() {
+    const textarea = document.getElementById('chat-input');
+    if (!textarea) return;
+    
+    // iOS Safari: Verhindere Viewport-Resize beim Keyboard
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+      // Speichere original content
+      const originalContent = viewport.content;
+      
+      textarea.addEventListener('focus', () => {
+        // Verhindere Auto-Zoom auf iOS
+        viewport.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+        // Scroll zum Ende wenn Keyboard öffnet
+        setTimeout(() => this.scrollToBottom(true), 300);
+      });
+      
+      textarea.addEventListener('blur', () => {
+        // Stelle original zurück
+        viewport.content = originalContent;
+      });
+    }
   }
   
   /**
@@ -420,12 +453,28 @@ export class Chat {
         }
       }
       
-      messageEl.appendChild(contentEl);
-      messagesArea.appendChild(messageEl);
+    messageEl.appendChild(contentEl);
+    messagesArea.appendChild(messageEl);
     });
     
-    // Scroll nach unten
-    messagesArea.scrollTop = messagesArea.scrollHeight;
+    // Scroll nach unten - mit kleinen Delay für Rendering
+    this.scrollToBottom();
+  }
+  
+  /**
+   * Scroll zum Ende der Nachrichten
+   */
+  scrollToBottom(smooth = false) {
+    const messagesArea = document.getElementById('chat-messages');
+    if (!messagesArea) return;
+    
+    // Verwende requestAnimationFrame für zuverlässiges Scrollen
+    requestAnimationFrame(() => {
+      messagesArea.scrollTo({
+        top: messagesArea.scrollHeight,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+    });
   }
   
   /**
@@ -696,7 +745,7 @@ export class Chat {
         loadingEl.id = 'chat-loading-indicator';
         loadingEl.innerHTML = '<div class="chat-message-content"><span class="chat-typing-indicator"><span></span><span></span><span></span></span></div>';
         messagesArea.appendChild(loadingEl);
-        messagesArea.scrollTop = messagesArea.scrollHeight;
+        this.scrollToBottom();
       }
     } else {
       const loadingEl = document.getElementById('chat-loading-indicator');
