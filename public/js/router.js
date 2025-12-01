@@ -1,7 +1,7 @@
 /**
  * Routing-Logik
  */
-import { parseHash, updateHash, setActiveNav } from './utils.js';
+import { parseHash, updateHash, setActiveNav, isMobile } from './utils.js';
 import { renderOverview, renderBandsSeries, renderScatterAll } from './renderers.js';
 import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend, buildMobileBandToolbar, buildMobileBandModal } from './controls.js';
 import { Chat } from './chat.js';
@@ -17,9 +17,6 @@ export class Router {
     this.chartEl = chartEl;
     this.controlsEl = controlsEl;
     this.chat = null; // Chat-Instanz wird persistent gehalten
-    this.controlsDetached = false;
-    this.controlsParent = null;
-    this.controlsNextSibling = null;
   }
   
   /**
@@ -77,6 +74,7 @@ export class Router {
     const sortBy = params.sort === 'count' ? 'count' : 'alphabetical';
     const showRegression = params.regression === 'true';
     const showThresholds = params.thresholds !== 'false'; // Standard: an
+    const isMobileView = isMobile();
     
     // Header-Controls erstellen (Desktop)
     this.createBandHeaderControls(params, showTitles, sortBy, showRegression, showThresholds, headerControls);
@@ -86,14 +84,6 @@ export class Router {
     
     // Layout erstellen
     const mainEl = document.querySelector('main');
-    if (!this.controlsDetached) {
-      this.controlsParent = this.controlsEl.parentNode;
-      this.controlsNextSibling = this.controlsEl.nextSibling;
-      if (this.controlsParent) {
-        this.controlsParent.removeChild(this.controlsEl);
-        this.controlsDetached = true;
-      }
-    }
     const layout = document.createElement('div');
     layout.className = 'layout-band';
     layout.id = 'band-layout';
@@ -107,34 +97,38 @@ export class Router {
       sortBy
     );
     
-    // 2. Mobile Band Modal (Versteckt per Default/CSS)
-    const mobileModal = buildMobileBandModal(
-      this.bands,
-      [...selected],
-      (sel) => this.updateBandHash(sel, showTitles, sortBy, showRegression, showThresholds),
-      () => mobileModal.classList.remove('active'), // Close Handler
-      this.data,
-      sortBy
-    );
-    // Modal direkt in Body hängen, damit es über allem liegt
-    document.body.appendChild(mobileModal);
-    // Cleanup-Referenz speichern für resetBandLayout
-    this.mobileModal = mobileModal; 
-    
-    // 3. Mobile Toolbar (Tags + Actions)
-    const mobileToolbar = buildMobileBandToolbar(
-      selected,
-      (bandToRemove) => {
-        const next = selected.filter(b => b !== bandToRemove);
-        this.updateBandHash(next, showTitles, sortBy, showRegression, showThresholds);
-      },
-      () => mobileModal.classList.add('active'), // Add Click Handler -> Modal öffnen
-      () => { 
-        // Settings Click Handler -> Fürs erste nur Alert oder später Bottom-Sheet
-        // Hier könnten wir ein weiteres Modal für Settings öffnen oder das Desktop-Control-Panel mobil-freundlich einblenden
-        alert('Einstellungen (Titel, Sortierung etc.) kommen hier hin.');
-      }
-    );
+    // 2. Mobile-spezifische Komponenten nur erstellen, wenn wirklich benötigt
+    let mobileToolbar = null;
+    if (isMobileView) {
+      const mobileModal = buildMobileBandModal(
+        this.bands,
+        [...selected],
+        (sel) => this.updateBandHash(sel, showTitles, sortBy, showRegression, showThresholds),
+        () => mobileModal.classList.remove('active'), // Close Handler
+        this.data,
+        sortBy
+      );
+      // Modal direkt in Body hängen, damit es über allem liegt
+      document.body.appendChild(mobileModal);
+      // Cleanup-Referenz speichern für resetBandLayout
+      this.mobileModal = mobileModal; 
+      
+      mobileToolbar = buildMobileBandToolbar(
+        selected,
+        (bandToRemove) => {
+          const next = selected.filter(b => b !== bandToRemove);
+          this.updateBandHash(next, showTitles, sortBy, showRegression, showThresholds);
+        },
+        () => mobileModal.classList.add('active'), // Add Click Handler -> Modal öffnen
+        () => { 
+          // Settings Click Handler -> Fürs erste nur Alert oder später Bottom-Sheet
+          // Hier könnten wir ein weiteres Modal für Settings öffnen oder das Desktop-Control-Panel mobil-freundlich einblenden
+          alert('Einstellungen (Titel, Sortierung etc.) kommen hier hin.');
+        }
+      );
+    } else {
+      this.mobileModal = null;
+    }
     
     // 4. Desktop Tags + Chart Container (Rechts)
     const right = document.createElement('div');
@@ -171,9 +165,14 @@ export class Router {
     right.appendChild(chartWrapper);
     
     // Layout zusammenbauen
-    // Mobile Toolbar muss ins Layout
-    layout.appendChild(mobileToolbar);
-    layout.appendChild(panel);
+    if (mobileToolbar) {
+      layout.appendChild(mobileToolbar);
+    }
+    
+    if (!isMobileView) {
+      layout.appendChild(panel);
+    }
+    
     layout.appendChild(right);
     
     this.controlsEl.style.display = 'none';
@@ -358,16 +357,6 @@ export class Router {
     if (layout) {
       mainEl.appendChild(this.chartEl);
       layout.remove();
-    }
-    if (this.controlsDetached && this.controlsParent) {
-      if (this.controlsNextSibling && this.controlsNextSibling.parentNode === this.controlsParent) {
-        this.controlsParent.insertBefore(this.controlsEl, this.controlsNextSibling);
-      } else {
-        this.controlsParent.appendChild(this.controlsEl);
-      }
-      this.controlsDetached = false;
-      this.controlsParent = null;
-      this.controlsNextSibling = null;
     }
     this.controlsEl.style.display = '';
     

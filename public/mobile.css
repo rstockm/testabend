@@ -162,7 +162,7 @@
   display: flex;
   gap: 8px;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
+    scrollbar-width: none; /* Firefox */
 }
 
 .mobile-tags-scroll-container::-webkit-scrollbar {
@@ -428,6 +428,11 @@
   /* Mobile Elemente sichtbar machen */
   .mobile-band-toolbar {
     display: flex;
+    flex: 0 0 auto;
+    order: -1; /* Toolbar ganz oben */
+    position: sticky;
+    top: 0;
+    z-index: 90;
   }
 
   /* Chart Anpassungen */
@@ -466,13 +471,6 @@
     flex-direction: column;
     overflow: hidden;
     min-height: 0; /* Wichtig für Nested Flex Scroll */
-  }
-  
-  .mobile-band-toolbar {
-    display: flex;
-    flex: 0 0 auto;
-    order: -1; /* Sicherstellen dass Toolbar ganz oben ist */
-    position: relative; /* Sticky funktioniert nur wenn position gesetzt */
   }
   
   /* Sicherstellen dass band-panel wirklich keinen Platz einnimmt */
