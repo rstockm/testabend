@@ -678,7 +678,7 @@ pre#debug {
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
@@ -686,6 +686,7 @@ pre#debug {
   background: var(--bg-primary);
   position: relative;
   overflow: hidden;
+  min-height: 0; /* Wichtig für Flexbox */
 }
 
 .chat-messages {
@@ -779,6 +780,9 @@ pre#debug {
   background: var(--bg-primary);
   position: relative;
   z-index: 10;
+  /* Sicherstellen dass Input-Bereich immer sichtbar ist */
+  display: block;
+  visibility: visible;
 }
 
 .chat-input-wrapper {

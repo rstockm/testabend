@@ -142,19 +142,21 @@ export class Chat {
    */
   render() {
     this.containerEl.innerHTML = '';
-    // Behalte chat-page Klasse falls vorhanden, füge chat-container hinzu
+    // Container sollte chat-page Klasse haben
     if (!this.containerEl.classList.contains('chat-page')) {
-      this.containerEl.className = 'chat-container';
-    } else {
-      this.containerEl.classList.add('chat-container');
+      this.containerEl.className = 'chat-page';
     }
+    
+    // Innerer Container für Messages (scrollbar)
+    const chatContainer = document.createElement('div');
+    chatContainer.className = 'chat-container';
     
     // Chat-Messages-Bereich
     const messagesArea = document.createElement('div');
     messagesArea.className = 'chat-messages';
     messagesArea.id = 'chat-messages';
     
-    // Input-Bereich
+    // Input-Bereich (außerhalb des scrollbaren Containers)
     const inputArea = document.createElement('div');
     inputArea.className = 'chat-input-area';
     
@@ -206,7 +208,9 @@ export class Chat {
     inputWrapper.appendChild(sendButton);
     inputArea.appendChild(inputWrapper);
     
-    this.containerEl.appendChild(messagesArea);
+    // Struktur: chat-page > chat-container (messages) + chat-input-area (fixed)
+    chatContainer.appendChild(messagesArea);
+    this.containerEl.appendChild(chatContainer);
     this.containerEl.appendChild(inputArea);
     
     // Willkommensnachricht nur hinzufügen, wenn noch keine Nachrichten vorhanden sind
