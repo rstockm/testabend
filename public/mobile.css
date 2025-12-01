@@ -471,6 +471,16 @@
   .mobile-band-toolbar {
     display: flex;
     flex: 0 0 auto;
+    order: -1; /* Sicherstellen dass Toolbar ganz oben ist */
+    position: relative; /* Sticky funktioniert nur wenn position gesetzt */
+  }
+  
+  /* Sicherstellen dass band-panel wirklich keinen Platz einnimmt */
+  .layout-band > .band-panel {
+    order: 999; /* Ganz nach hinten */
+    flex: 0 0 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
   }
   
   /* ============================================
