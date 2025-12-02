@@ -255,11 +255,13 @@
 }
 
   .mobile-settings-toggle {
-    padding: 12px 0;
+    padding: 12px 0 4px;
   }
 
   .mobile-settings-toggle .title-toggle-container {
     width: 100%;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 24px;
   }
@@ -267,6 +269,7 @@
   .mobile-settings-toggle .title-toggle-label {
     font-size: 16px;
     color: var(--text-primary);
+    flex: 1;
   }
 
   .mobile-settings-toggle .toggle-switch {
