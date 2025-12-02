@@ -179,7 +179,7 @@ export class Router {
     mainEl.appendChild(layout);
     
     if (selected.length === 0) {
-      this.chartEl.innerHTML = '<p style="padding: 40px; text-align: center; color: #a3a3a3;">Bitte wähle eine oder mehrere Bands aus der Liste links aus.</p>';
+      this.chartEl.innerHTML = '<p style="padding: 40px; text-align: center; color: #a3a3a3;">Bitte wähle eine oder mehrere Bands aus.</p>';
     } else {
       await renderBandsSeries(this.data, selected, this.chartEl, showTitles, showRegression, showThresholds);
     }
