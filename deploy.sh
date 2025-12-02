@@ -27,7 +27,7 @@ git -c safe.directory=/app/data/public archive HEAD public/ | tar -x -C "$TMP_DI
 # Kopiere Dateien, die nicht ausgeschlossen sind
 # Verwende find + cp statt rsync (funktioniert auf jedem Linux-System)
 cd "$TMP_DIR/public"
-find . -type f ! -path './.htaccess' ! -path './data/embeddings.json' -exec sh -c '
+find . -type f ! -path './.htaccess' ! -path './images/*' ! -path './data/embeddings.json' -exec sh -c '
   for file do
     dest="/app/data/public/$file"
     mkdir -p "$(dirname "$dest")"
@@ -43,4 +43,5 @@ echo "✅ Deployment abgeschlossen!"
 echo ""
 echo "Hinweis: Folgende Dateien wurden NICHT überschrieben (lokal behalten):"
 echo "  - .htaccess (API-Key)"
+echo "  - images/ (Album-Cover)"
 echo "  - data/embeddings.json (zu groß)"
