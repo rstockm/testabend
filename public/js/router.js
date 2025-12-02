@@ -3,7 +3,7 @@
  */
 import { parseHash, updateHash, setActiveNav, isMobile } from './utils.js';
 import { renderOverview, renderBandsSeries, renderScatterAll } from './renderers.js';
-import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend, buildMobileBandToolbar, buildMobileBandModal } from './controls.js';
+import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend, buildMobileBandToolbar, buildMobileBandModal, buildMobileSettingsModal } from './controls.js';
 import { Chat } from './chat.js';
 import { cleanupScatterKeyboardNav } from './scatterKeyboardNav.js';
 
@@ -17,6 +17,8 @@ export class Router {
     this.chartEl = chartEl;
     this.controlsEl = controlsEl;
     this.chat = null; // Chat-Instanz wird persistent gehalten
+    this.mobileModal = null;
+    this.mobileSettingsModal = null;
   }
   
   /**
@@ -108,10 +110,26 @@ export class Router {
         this.data,
         sortBy
       );
-      // Modal direkt in Body hängen, damit es über allem liegt
       document.body.appendChild(mobileModal);
-      // Cleanup-Referenz speichern für resetBandLayout
-      this.mobileModal = mobileModal; 
+      this.mobileModal = mobileModal;
+      
+      const settingsModal = buildMobileSettingsModal({
+        showTitles,
+        sortBy,
+        showRegression,
+        showThresholds,
+        onApply: (nextState) => {
+          this.updateBandHash(
+            selected,
+            nextState.showTitles,
+            nextState.sortBy,
+            nextState.showRegression,
+            nextState.showThresholds
+          );
+        }
+      });
+      document.body.appendChild(settingsModal.modal);
+      this.mobileSettingsModal = settingsModal.modal;
       
       mobileToolbar = buildMobileBandToolbar(
         selected,
@@ -119,15 +137,15 @@ export class Router {
           const next = selected.filter(b => b !== bandToRemove);
           this.updateBandHash(next, showTitles, sortBy, showRegression, showThresholds);
         },
-        () => mobileModal.classList.add('active'), // Add Click Handler -> Modal öffnen
-        () => { 
-          // Settings Click Handler -> Fürs erste nur Alert oder später Bottom-Sheet
-          // Hier könnten wir ein weiteres Modal für Settings öffnen oder das Desktop-Control-Panel mobil-freundlich einblenden
-          alert('Einstellungen (Titel, Sortierung etc.) kommen hier hin.');
-        }
+        () => mobileModal.classList.add('active'),
+        () => settingsModal.open()
       );
     } else {
       this.mobileModal = null;
+      if (this.mobileSettingsModal) {
+        this.mobileSettingsModal.remove();
+        this.mobileSettingsModal = null;
+      }
     }
     
     // 4. Desktop Tags + Chart Container (Rechts)
@@ -364,6 +382,10 @@ export class Router {
     if (this.mobileModal) {
       this.mobileModal.remove();
       this.mobileModal = null;
+    }
+    if (this.mobileSettingsModal) {
+      this.mobileSettingsModal.remove();
+      this.mobileSettingsModal = null;
     }
     
     // Chat-Container entfernen falls vorhanden

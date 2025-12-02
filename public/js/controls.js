@@ -321,6 +321,112 @@ export function buildMobileBandModal(allBands, selectedBands, onSelectChange, on
 }
 
 /**
+ * Mobile Settings Modal erstellen
+ */
+export function buildMobileSettingsModal({ showTitles, sortBy, showRegression, showThresholds, onApply, onClose }) {
+  const modal = document.createElement('div');
+  modal.className = 'mobile-band-modal mobile-settings-modal';
+  
+  const state = {
+    showTitles,
+    sortBy,
+    showRegression,
+    showThresholds
+  };
+  
+  const header = document.createElement('div');
+  header.className = 'mobile-modal-header';
+  
+  const title = document.createElement('h3');
+  title.className = 'mobile-modal-title';
+  title.textContent = 'Optionen';
+  
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'mobile-modal-close';
+  closeBtn.innerHTML = '×';
+  closeBtn.setAttribute('aria-label', 'Schließen');
+  
+  header.appendChild(title);
+  header.appendChild(closeBtn);
+  
+  const content = document.createElement('div');
+  content.className = 'mobile-modal-content';
+  
+  const list = document.createElement('div');
+  list.className = 'mobile-settings-list';
+  
+  const addToggle = (label, checked, handler) => {
+    const toggle = createToggle(label, checked, (event) => {
+      handler(Boolean(event?.target?.checked));
+    });
+    toggle.classList.add('mobile-settings-toggle');
+    list.appendChild(toggle);
+  };
+  
+  addToggle('Albentitel', state.showTitles, (value) => {
+    state.showTitles = value;
+  });
+  
+  addToggle('Nach Anzahl', state.sortBy === 'count', (value) => {
+    state.sortBy = value ? 'count' : 'alphabetical';
+  });
+  
+  addToggle('Regression', state.showRegression, (value) => {
+    state.showRegression = value;
+  });
+  
+  addToggle('Schwellen', state.showThresholds, (value) => {
+    state.showThresholds = value;
+  });
+  
+  content.appendChild(list);
+  
+  const footer = document.createElement('div');
+  footer.className = 'mobile-modal-footer';
+  
+  const applyBtn = document.createElement('button');
+  applyBtn.className = 'mobile-modal-done-btn';
+  applyBtn.textContent = 'Übernehmen';
+  
+  footer.appendChild(applyBtn);
+  
+  const closeModal = () => {
+    modal.classList.remove('active');
+    if (typeof onClose === 'function') {
+      onClose();
+    }
+  };
+  
+  const openModal = () => {
+    modal.classList.add('active');
+  };
+  
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+  
+  applyBtn.addEventListener('click', () => {
+    if (typeof onApply === 'function') {
+      onApply({ ...state });
+    }
+    closeModal();
+  });
+  
+  modal.appendChild(header);
+  modal.appendChild(content);
+  modal.appendChild(footer);
+  
+  return {
+    modal,
+    open: openModal,
+    close: closeModal
+  };
+}
+
+/**
  * Band-Panel erstellen
  */
 export function buildBandPanel(allBands, selectedBands, onSelectChange, data, sortBy = 'alphabetical') {
