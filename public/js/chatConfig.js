@@ -54,17 +54,6 @@ export const RECOMMENDED_MODELS = {
     contextWindow: 128000,
     // Geschätzte Kosten: ~$0.1-0.5/M tokens oder kostenlos
     costLevel: 'budget'
-  },
-  
-  // Gemini 2.5 Flash: Schnelles, effizientes Modell für Validierung
-  GEMINI: {
-    id: 'google/gemini-2.5-flash',
-    name: 'Gemini 2.5 Flash',
-    description: 'Schnelles, effizientes Modell von Google, gut für Validierung',
-    provider: 'Google',
-    contextWindow: 1000000,
-    // Geschätzte Kosten: Sehr günstig, ähnlich wie Flash-Modelle
-    costLevel: 'balanced'
   }
 };
 
@@ -78,7 +67,7 @@ export const DEFAULT_MODEL = RECOMMENDED_MODELS.BALANCED;
  * Validierungs-Modell:
  * Teureres, präziseres Modell für den zweiten Kontrollschritt
  */
-export const VALIDATION_MODEL = RECOMMENDED_MODELS.PREMIUM;
+export const VALIDATION_MODEL = RECOMMENDED_MODELS.BUDGET;
 
 /**
  * System-Prompt für den Chatbot

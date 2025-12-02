@@ -2,7 +2,6 @@
  * Custom Tooltip-Handler für Album-Cover-Anzeige
  * Lädt Cover-Bilder lazy beim Hover
  */
-import { getCoverImagePath } from './utils.js';
 
 /**
  * Generiert Dateinamen für Album-Cover (identisch zur Python-Version)
@@ -37,29 +36,29 @@ async function checkCoverExists(band, album, year = null) {
   // Versuche zuerst mit Jahr (falls vorhanden)
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const pathWithYear = getCoverImagePath(filenameWithYear);
+    const coverPathWithYear = `images/covers/${filenameWithYear}`;
     
     try {
-      const response = await fetch(pathWithYear, { method: 'HEAD', cache: 'no-cache' });
+      const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
       if (response.ok) {
         return { exists: true, filename: filenameWithYear };
       }
-    } catch (error) {
-      console.debug('Cover check failed (with year):', pathWithYear, error);
+    } catch {
+      // Weiter zu Fallback ohne Jahr
     }
   }
   
   // Fallback: Versuche ohne Jahr
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const pathWithoutYear = getCoverImagePath(filenameWithoutYear);
+  const coverPathWithoutYear = `images/covers/${filenameWithoutYear}`;
   
   try {
-    const response = await fetch(pathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
+    const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
     if (response.ok) {
       return { exists: true, filename: filenameWithoutYear };
     }
-  } catch (error) {
-    console.debug('Cover check failed (without year):', pathWithoutYear, error);
+  } catch {
+    // Cover nicht gefunden
   }
   
   return { exists: false, filename: null };
@@ -140,7 +139,7 @@ async function addCoverToTooltip(tooltipElement) {
       return; // Cover nicht vorhanden
     }
     
-    coverUrl = getCoverImagePath(result.filename);
+    coverUrl = `images/covers/${result.filename}`;
     coverUrlCache.set(cacheKey, coverUrl);
   } else if (coverUrl === null) {
     // Bereits geprüft, nicht vorhanden

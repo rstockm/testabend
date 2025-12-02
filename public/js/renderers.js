@@ -2,11 +2,10 @@
  * Chart-Rendering-Funktionen
  */
 import { CONFIG, getDarkThemeConfig, getBandPalette } from './config.js';
-import { generateYearRange, calculateYDomain, calculateMinMaxPerYear, isMobile, simplifyYearLabels } from './utils.js';
+import { generateYearRange, calculateYDomain, calculateMinMaxPerYear, isMobile, simplifyYearLabels, uniqueSorted } from './utils.js';
 import { polynomialRegression, generateRegressionPoints } from './regression.js';
 import { setupCoverTooltipHandler } from './coverTooltip.js';
 import { setupScatterKeyboardNav } from './scatterKeyboardNav.js';
-import { setupMobileTouchHandlers } from './mobileTouchHandler.js';
 
 /**
  * Overview-Chart rendern
@@ -95,7 +94,7 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
         data: { values: filtered },
         mark: { 
           type: "point", 
-          size: 160, // Doppelte Größe für bessere Sichtbarkeit
+          size: 80, 
           filled: true, 
           opacity: CONFIG.OPACITY.POINT, 
           color: CONFIG.COLORS.POINT 
@@ -207,24 +206,12 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
   
   chartEl.innerHTML = '';
   try {
-    // Auf Mobile SVG-Renderer erzwingen (für Touch-Handler)
-    const embedOptions = { 
-      actions: false,
-      ...(isMobile() ? { renderer: 'svg' } : {})
-    };
-    const result = await vegaEmbed(chartEl, spec, embedOptions);
+    const result = await vegaEmbed(chartEl, spec, { actions: false });
+    setupCoverTooltipHandler();
     
-    // Mobile Touch-Handler einrichten - warte etwas länger für Rendering
-    if (isMobile() && result && result.view) {
-      setTimeout(() => {
-        setupMobileTouchHandlers(result.view, chartEl);
-      }, 300);
-    } else {
-      // Desktop: Standard Tooltip-Handler und Keyboard-Navigation
-      setupCoverTooltipHandler();
-      if (result && result.view) {
-        setupScatterKeyboardNav(filtered, result.view, chartEl);
-      }
+    // Setup Keyboard-Navigation
+    if (result && result.view) {
+      setupScatterKeyboardNav(filtered, result.view, chartEl);
     }
   } catch (e) {
     chartEl.innerHTML = '<p style="padding: 40px; text-align: center; color: #ff6b6b;">Fehler beim Rendering: ' + e.message + '</p>';
@@ -318,7 +305,7 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     // Wir nehmen window.innerWidth, da chartEl.clientWidth manchmal noch 0 ist
     chartWidth = Math.max(300, window.innerWidth - 24); 
   }
-
+  
   const spec = {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     description: "Zeitreihe für Band/Bands",
@@ -328,25 +315,8 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     layer: layers
   };
   
-  // Auf Mobile SVG-Renderer erzwingen (für Touch-Handler)
-  const embedOptions = { 
-    actions: false,
-    ...(isMobile() ? { renderer: 'svg' } : {})
-  };
-  const result = await vegaEmbed(chartEl, spec, embedOptions);
-  
-  // Mobile Touch-Handler einrichten - warte etwas länger für Rendering
-  if (isMobile() && result && result.view) {
-    // Warte zusätzlich, damit SVG gerendert ist
-    setTimeout(() => {
-      setupMobileTouchHandlers(result.view, chartEl, data); // Übergebe Daten für Swipe
-    }, 300);
-  } else {
-    // Desktop: Standard Tooltip-Handler
-    setupCoverTooltipHandler();
-  }
-  
-  return result;
+  await vegaEmbed(chartEl, spec, { actions: false });
+  setupCoverTooltipHandler();
 }
 
 /**
@@ -645,12 +615,9 @@ function createLineLayer(bestPoints, rangeYears, domainMinY, domainMaxY, selecte
  * Punkte-Layer erstellen
  */
 function createPointLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
-  // Doppelte Punktgröße für bessere Sichtbarkeit und Touch-Interaktion
-  const pointSize = CONFIG.UI.POINT_SIZE * 2;
-  
   return {
     data: { values: allPoints },
-    mark: { type: "point", size: pointSize, filled: true, cursor: "pointer" },
+    mark: { type: "point", size: CONFIG.UI.POINT_SIZE, filled: true, cursor: "pointer" },
     encoding: {
       x: { 
         field: "Jahr", 
@@ -774,4 +741,841 @@ function createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selecte
       }
     }
   };
+}
+
+/**
+ * Jahre-View rendern (nur Mobile)
+ */
+export async function renderYearsView(data, containerEl) {
+  // Alle verfügbaren Jahre extrahieren und sortieren
+  const yearsSorted = uniqueSorted(data.map(d => d.Jahr).filter(y => y != null));
+  const years = [...yearsSorted]; // Kopie für Navigation (aufsteigend)
+  const yearsDescending = [...yearsSorted].reverse(); // Absteigend für Select
+  
+  if (years.length === 0) {
+    containerEl.innerHTML = '<p style="padding: 40px; text-align: center; color: #a3a3a3;">Keine Daten verfügbar.</p>';
+    return;
+  }
+  
+  // Container für Jahre-View erstellen
+  const yearsView = document.createElement('div');
+  yearsView.className = 'years-view';
+  
+  // Jahr-Selektor erstellen
+  const yearSelector = document.createElement('div');
+  yearSelector.className = 'year-selector';
+  
+  const selectorLabel = document.createElement('label');
+  selectorLabel.textContent = 'Jahr:';
+  selectorLabel.className = 'year-selector-label';
+  
+  const select = document.createElement('select');
+  select.className = 'year-select';
+  
+  // Jahre in Select hinzufügen (absteigend)
+  yearsDescending.forEach(year => {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    select.appendChild(option);
+  });
+  
+  yearSelector.appendChild(selectorLabel);
+  yearSelector.appendChild(select);
+  
+  // Multi-Container Struktur erstellen
+  const viewContainer = document.createElement('div');
+  viewContainer.className = 'years-view-container';
+  
+  const viewport = document.createElement('div');
+  viewport.className = 'years-viewport';
+  
+  // Drei Jahr-Container erstellen (müssen let sein, da sie in rotateContainers neu zugewiesen werden)
+  let prevContainer = document.createElement('div');
+  prevContainer.className = 'year-container prev';
+  let prevList = document.createElement('div');
+  prevList.className = 'years-album-list';
+  prevContainer.appendChild(prevList);
+  
+  let currContainer = document.createElement('div');
+  currContainer.className = 'year-container curr';
+  let currList = document.createElement('div');
+  currList.className = 'years-album-list';
+  currContainer.appendChild(currList);
+  
+  let nextContainer = document.createElement('div');
+  nextContainer.className = 'year-container next';
+  let nextList = document.createElement('div');
+  nextList.className = 'years-album-list';
+  nextContainer.appendChild(nextList);
+  
+  viewport.appendChild(prevContainer);
+  viewport.appendChild(currContainer);
+  viewport.appendChild(nextContainer);
+  
+  viewContainer.appendChild(viewport);
+  
+  yearsView.appendChild(yearSelector);
+  yearsView.appendChild(viewContainer);
+  
+  containerEl.innerHTML = '';
+  containerEl.appendChild(yearsView);
+  
+  // Multi-Container State
+  let currentYearIndex = years.indexOf(parseInt(select.value));
+  if (currentYearIndex === -1) {
+    currentYearIndex = 0; // Fallback falls Jahr nicht gefunden
+  }
+  let currentYear = years[currentYearIndex];
+  
+  console.log('[YearsView] Setup complete, currentYear:', currentYear, 'currentYearIndex:', currentYearIndex, 'years:', years);
+  const CHUNK_SIZE = 10;
+  
+  // State für jeden Container
+  const containerStates = {
+    prev: { year: null, yearIndex: -1, albums: [], loadedStart: 0, loadedEnd: 0, scrollTop: 0, observer: null, topSentinel: null, bottomSentinel: null },
+    curr: { year: null, yearIndex: -1, albums: [], loadedStart: 0, loadedEnd: 0, scrollTop: 0, observer: null, topSentinel: null, bottomSentinel: null },
+    next: { year: null, yearIndex: -1, albums: [], loadedStart: 0, loadedEnd: 0, scrollTop: 0, observer: null, topSentinel: null, bottomSentinel: null }
+  };
+  
+  // Viewport State
+  let viewportOffset = 0; // 0 = curr, -33.33 = prev, +33.33 = next
+  let isShifting = false;
+  let transitionTimeout = null;
+  
+  // Swipe-Gesten State (auf Viewport-Ebene)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let isScrolling = false;
+  let touchMoved = false;
+  let currentSwipeOffset = 0;
+  const SWIPE_THRESHOLD = 50;
+  const SWIPE_MAX_VERTICAL = 50;
+  const SWIPE_MAX_TIME = 500;
+  
+  
+  // Funktion zum Laden der Cover-URL (verwendet die gleiche Logik wie coverTooltip.js)
+  function sanitizeFilename(text) {
+    if (!text) return '';
+    return String(text)
+      .replace(/[<>:"/\\|?*]/g, '')
+      .replace(/\s+/g, '_')
+      .replace(/^_+|_+$/g, '')
+      .substring(0, 100);
+  }
+  
+  function getCoverFilename(band, album, year = null) {
+    const bandSafe = sanitizeFilename(band);
+    const albumSafe = sanitizeFilename(album);
+    if (year) {
+      return `${bandSafe}_${albumSafe}_${year}.jpg`;
+    }
+    return `${bandSafe}_${albumSafe}.jpg`;
+  }
+  
+  async function getCoverUrl(band, album, year) {
+    // Versuche zuerst mit Jahr
+    if (year) {
+      const filenameWithYear = getCoverFilename(band, album, year);
+      const coverPathWithYear = `images/covers/${filenameWithYear}`;
+      try {
+        const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
+        if (response.ok) {
+          return coverPathWithYear;
+        }
+      } catch {
+        // Weiter zu Fallback
+      }
+    }
+    
+    // Fallback: Versuche ohne Jahr
+    const filenameWithoutYear = getCoverFilename(band, album, null);
+    const coverPathWithoutYear = `images/covers/${filenameWithoutYear}`;
+    try {
+      const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
+      if (response.ok) {
+        return coverPathWithoutYear;
+      }
+    } catch {
+      // Cover nicht gefunden
+    }
+    
+    return null;
+  }
+  
+  // Funktion zum Erstellen eines Album-Items
+  async function createAlbumItem(album) {
+    const item = document.createElement('div');
+    item.className = 'years-album-item';
+    item.dataset.platz = album.Platz; // Speichere Platz für späteren Zugriff
+    
+    // Cover-Container (links)
+    const coverContainer = document.createElement('div');
+    coverContainer.className = 'years-album-cover';
+    
+    const coverImg = document.createElement('img');
+    coverImg.className = 'years-album-cover-img';
+    coverImg.alt = `${album.Band} - ${album.Album}`;
+    coverImg.loading = 'lazy';
+    
+    // Cover-URL laden
+    const coverUrl = await getCoverUrl(album.Band, album.Album, album.Jahr);
+    if (coverUrl) {
+      coverImg.src = coverUrl;
+      coverImg.onerror = () => {
+        coverContainer.style.display = 'none';
+      };
+    } else {
+      coverContainer.style.display = 'none';
+    }
+    
+    coverContainer.appendChild(coverImg);
+    
+    // Info-Container (rechts)
+    const infoContainer = document.createElement('div');
+    infoContainer.className = 'years-album-info';
+    
+    const albumTitle = document.createElement('div');
+    albumTitle.className = 'years-album-title';
+    albumTitle.textContent = album.Album;
+    
+    const bandName = document.createElement('div');
+    bandName.className = 'years-album-band';
+    bandName.textContent = album.Band;
+    
+    const details = document.createElement('div');
+    details.className = 'years-album-details';
+    
+    const noteSpan = document.createElement('span');
+    noteSpan.className = 'years-album-note';
+    noteSpan.textContent = `Note: ${album.Note}`;
+    
+    const platzSpan = document.createElement('span');
+    platzSpan.className = 'years-album-platz';
+    platzSpan.textContent = `Platz: ${album.Platz}`;
+    
+    details.appendChild(noteSpan);
+    details.appendChild(platzSpan);
+    
+    infoContainer.appendChild(albumTitle);
+    infoContainer.appendChild(bandName);
+    infoContainer.appendChild(details);
+    
+    item.appendChild(coverContainer);
+    item.appendChild(infoContainer);
+    
+    return item;
+  }
+  
+  // Funktion zum Laden eines Jahres in einen Container
+  async function loadYearIntoContainer(containerKey, year, targetPlatz = null) {
+    console.log('[YearsView] loadYearIntoContainer:', containerKey, year, 'targetPlatz:', targetPlatz);
+    const state = containerStates[containerKey];
+    const container = containerKey === 'prev' ? prevContainer : containerKey === 'curr' ? currContainer : nextContainer;
+    const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
+    
+    if (!container || !list) {
+      console.error('[YearsView] Container or list not found for:', containerKey);
+      return;
+    }
+    
+    // Alben für das Jahr filtern und sortieren
+    const albums = data
+      .filter(d => d.Jahr === year && d.Platz != null)
+      .sort((a, b) => a.Platz - b.Platz);
+    
+    console.log('[YearsView] Found', albums.length, 'albums for year', year);
+    
+    state.year = year;
+    state.yearIndex = years.indexOf(year);
+    state.albums = albums;
+    
+    // Leere Liste
+    list.innerHTML = '';
+    state.loadedStart = 0;
+    state.loadedEnd = 0;
+    
+    // Bestimme Ziel-Index basierend auf Platz
+    let startIndex = 0;
+    let endIndex = Math.min(CHUNK_SIZE * 2, albums.length);
+    let targetIndex = null;
+    
+    if (targetPlatz !== null) {
+      targetIndex = albums.findIndex(a => a.Platz === targetPlatz);
+      if (targetIndex !== -1) {
+        const VIEWPORT_SIZE = 15;
+        startIndex = Math.max(0, targetIndex - Math.floor(VIEWPORT_SIZE / 2));
+        endIndex = Math.min(albums.length, targetIndex + Math.ceil(VIEWPORT_SIZE / 2));
+        console.log('[YearsView] Target index:', targetIndex, 'loading range:', startIndex, '-', endIndex);
+      }
+    }
+    
+    state.loadedStart = startIndex;
+    state.loadedEnd = endIndex;
+    
+    // Lade initialen Bereich
+    const chunk = albums.slice(startIndex, endIndex);
+    console.log('[YearsView] Loading chunk of', chunk.length, 'albums');
+    for (const album of chunk) {
+      const item = await createAlbumItem(album);
+      list.appendChild(item);
+    }
+    
+    // Setup Lazy Loading für diesen Container
+    setupContainerLazyLoading(containerKey);
+    
+    // Scroll-Position setzen wenn targetPlatz gegeben
+    if (targetPlatz !== null && targetIndex !== null && targetIndex >= startIndex && targetIndex < endIndex) {
+      requestAnimationFrame(() => {
+        const items = Array.from(list.querySelectorAll('.years-album-item'));
+        const targetItem = items.find(item => parseInt(item.dataset.platz) === targetPlatz);
+        if (targetItem) {
+          targetItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }
+      });
+    }
+    
+    console.log('[YearsView] loadYearIntoContainer complete for', containerKey);
+  }
+  
+  // Funktion zum Setup von Lazy Loading für einen Container
+  function setupContainerLazyLoading(containerKey) {
+    const state = containerStates[containerKey];
+    const container = containerKey === 'prev' ? prevContainer : containerKey === 'curr' ? currContainer : nextContainer;
+    const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
+    
+    // Alten Observer trennen
+    if (state.observer) {
+      state.observer.disconnect();
+    }
+    
+    // Entferne alte Sentinels
+    if (state.topSentinel && state.topSentinel.parentNode) {
+      state.topSentinel.remove();
+    }
+    if (state.bottomSentinel && state.bottomSentinel.parentNode) {
+      state.bottomSentinel.remove();
+    }
+    
+    // Neuer Observer
+    state.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        
+        if (entry.target === state.topSentinel) {
+          loadChunkUpForContainer(containerKey);
+        } else if (entry.target === state.bottomSentinel) {
+          loadChunkDownForContainer(containerKey);
+        }
+      });
+    }, {
+      root: container,
+      rootMargin: '200px'
+    });
+    
+    // Update Sentinels
+    updateContainerSentinels(containerKey);
+  }
+  
+  // Funktion zum Aktualisieren der Sentinels für einen Container
+  function updateContainerSentinels(containerKey) {
+    const state = containerStates[containerKey];
+    const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
+    
+    // Entferne alte Sentinels
+    if (state.topSentinel && state.topSentinel.parentNode) {
+      state.topSentinel.remove();
+    }
+    if (state.bottomSentinel && state.bottomSentinel.parentNode) {
+      state.bottomSentinel.remove();
+    }
+    
+    // Top-Sentinel
+    if (state.loadedStart > 0) {
+      state.topSentinel = document.createElement('div');
+      state.topSentinel.className = 'lazy-load-sentinel';
+      state.topSentinel.style.height = '1px';
+      state.topSentinel.style.width = '100%';
+      if (list.firstElementChild) {
+        list.insertBefore(state.topSentinel, list.firstElementChild);
+      } else {
+        list.appendChild(state.topSentinel);
+      }
+      if (state.observer) {
+        state.observer.observe(state.topSentinel);
+      }
+    }
+    
+    // Bottom-Sentinel
+    if (state.loadedEnd < state.albums.length) {
+      state.bottomSentinel = document.createElement('div');
+      state.bottomSentinel.className = 'lazy-load-sentinel';
+      state.bottomSentinel.style.height = '1px';
+      state.bottomSentinel.style.width = '100%';
+      list.appendChild(state.bottomSentinel);
+      if (state.observer) {
+        state.observer.observe(state.bottomSentinel);
+      }
+    }
+  }
+  
+  // Funktion zum Laden nach unten für einen Container
+  async function loadChunkDownForContainer(containerKey) {
+    const state = containerStates[containerKey];
+    const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
+    
+    if (state.loadedEnd >= state.albums.length) {
+      return;
+    }
+    
+    const endIndex = Math.min(state.loadedEnd + CHUNK_SIZE, state.albums.length);
+    const chunk = state.albums.slice(state.loadedEnd, endIndex);
+    
+    for (const album of chunk) {
+      const item = await createAlbumItem(album);
+      list.appendChild(item);
+    }
+    
+    state.loadedEnd = endIndex;
+    updateContainerSentinels(containerKey);
+  }
+  
+  // Funktion zum Laden nach oben für einen Container
+  async function loadChunkUpForContainer(containerKey) {
+    const state = containerStates[containerKey];
+    const container = containerKey === 'prev' ? prevContainer : containerKey === 'curr' ? currContainer : nextContainer;
+    const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
+    
+    if (state.loadedStart <= 0) {
+      return;
+    }
+    
+    const startIndex = Math.max(state.loadedStart - CHUNK_SIZE, 0);
+    const chunk = state.albums.slice(startIndex, state.loadedStart);
+    
+    // Speichere Scroll-Position
+    const scrollTop = container.scrollTop;
+    const scrollHeight = container.scrollHeight;
+    
+    // Füge Items am Anfang ein
+    const fragment = document.createDocumentFragment();
+    for (const album of chunk) {
+      const item = await createAlbumItem(album);
+      fragment.appendChild(item);
+    }
+    
+    if (list.firstElementChild) {
+      list.insertBefore(fragment, list.firstElementChild);
+    } else {
+      list.appendChild(fragment);
+    }
+    
+    // Warte auf Layout-Update
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    
+    // Stelle Scroll-Position wieder her
+    const newScrollHeight = container.scrollHeight;
+    const heightDiff = newScrollHeight - scrollHeight;
+    container.scrollTop = scrollTop + heightDiff;
+    
+    state.loadedStart = startIndex;
+    updateContainerSentinels(containerKey);
+  }
+  
+  
+  // Funktion zum Verschieben des Viewports
+  function shiftViewport(direction, animated = true) {
+    if (isShifting) return;
+    
+    // Prüfe Grenzen
+    if (direction < 0 && currentYearIndex <= 0) {
+      // Zurück zum aktuellen Jahr
+      viewport.classList.remove('shifting');
+      viewport.style.transform = `translateX(-33.33%)`;
+      viewportOffset = 0;
+      return;
+    }
+    if (direction > 0 && currentYearIndex >= years.length - 1) {
+      // Zurück zum aktuellen Jahr
+      viewport.classList.remove('shifting');
+      viewport.style.transform = `translateX(-33.33%)`;
+      viewportOffset = 0;
+      return;
+    }
+    
+    isShifting = true;
+    if (transitionTimeout) {
+      clearTimeout(transitionTimeout);
+      transitionTimeout = null;
+    }
+    
+    if (animated) {
+      // Berechne Ziel-Position
+      const targetOffset = direction * 33.33;
+      const targetTransform = `translateX(${-33.33 + targetOffset}%)`;
+      console.log('[YearsView] Setting transform to:', targetTransform, 'direction:', direction);
+      
+      // WICHTIG: Entferne shifting-Klasse für Transition, dann setze Transform
+      viewport.classList.remove('shifting');
+      
+      // Warte einen Frame damit die Klasse entfernt wird
+      requestAnimationFrame(() => {
+        viewport.style.transform = targetTransform;
+        console.log('[YearsView] Transform applied');
+        
+        // Nach Animation Container rotieren
+        const onTransitionEnd = (e) => {
+          // Prüfe ob es die richtige Transition ist (transform)
+          if (e.target !== viewport || e.propertyName !== 'transform') return;
+          
+          console.log('[YearsView] Transition ended, rotating containers');
+          viewport.removeEventListener('transitionend', onTransitionEnd);
+          if (transitionTimeout) {
+            clearTimeout(transitionTimeout);
+            transitionTimeout = null;
+          }
+          rotateContainers(direction);
+          isShifting = false;
+        };
+        
+        viewport.addEventListener('transitionend', onTransitionEnd, { once: true });
+        
+        // Fallback: Falls Transition nicht feuert (z.B. wenn bereits am Ziel)
+        transitionTimeout = setTimeout(() => {
+          if (isShifting) {
+            console.log('[YearsView] Transition timeout, forcing rotation');
+            viewport.removeEventListener('transitionend', onTransitionEnd);
+            rotateContainers(direction);
+            isShifting = false;
+          }
+          transitionTimeout = null;
+        }, 500);
+      });
+    } else {
+      rotateContainers(direction);
+      isShifting = false;
+    }
+  }
+  
+  // Funktion zum Rotieren der Container (prev → curr → next)
+  async function rotateContainers(direction) {
+    if (direction === 0) return;
+    
+    console.log('[YearsView] rotateContainers called, direction:', direction, 'currentYearIndex:', currentYearIndex);
+    
+    // Speichere Scroll-Position des aktuellen Containers BEVOR Rotation
+    const oldCurrScrollTop = currContainer.scrollTop;
+    const oldCurrItems = Array.from(currList.querySelectorAll('.years-album-item'));
+    const visibleItem = oldCurrItems.find(item => {
+      const rect = item.getBoundingClientRect();
+      const containerRect = currContainer.getBoundingClientRect();
+      return rect.top >= containerRect.top && rect.top <= containerRect.bottom;
+    });
+    const targetPlatz = visibleItem ? parseInt(visibleItem.dataset.platz) : null;
+    console.log('[YearsView] Target platz:', targetPlatz, 'old scrollTop:', oldCurrScrollTop);
+    
+    // Aktualisiere Jahr-Index
+    currentYearIndex += direction;
+    currentYear = years[currentYearIndex];
+    
+    console.log('[YearsView] New year:', currentYear, 'new index:', currentYearIndex);
+    
+    // Select SOFORT aktualisieren
+    select.value = currentYear;
+    console.log('[YearsView] Select updated to:', select.value);
+    
+    // Rotiere Container-States und DOM-Referenzen
+    if (direction > 0) {
+      // Nach rechts: zum nächsten Jahr
+      // curr → prev, next → curr, neues Jahr → next
+      const tempState = { ...containerStates.prev };
+      containerStates.prev = { ...containerStates.curr };
+      containerStates.curr = { ...containerStates.next };
+      containerStates.next = tempState;
+      
+      // DOM-Referenzen rotieren
+      const oldPrev = prevContainer;
+      const oldCurr = currContainer;
+      const oldNext = nextContainer;
+      
+      // Neue Referenzen: curr wird prev, next wird curr, prev wird next
+      prevContainer = oldCurr;
+      prevList = prevContainer.querySelector('.years-album-list');
+      currContainer = oldNext;
+      currList = currContainer.querySelector('.years-album-list');
+      nextContainer = oldPrev;
+      nextList = nextContainer.querySelector('.years-album-list');
+      
+      // Klassen aktualisieren
+      prevContainer.className = 'year-container prev';
+      currContainer.className = 'year-container curr';
+      nextContainer.className = 'year-container next';
+      
+      // Scroll-Position basierend auf targetPlatz setzen
+      if (targetPlatz !== null) {
+        requestAnimationFrame(() => {
+          const items = Array.from(currList.querySelectorAll('.years-album-item'));
+          const targetItem = items.find(item => parseInt(item.dataset.platz) === targetPlatz);
+          if (targetItem) {
+            targetItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+          } else {
+            // Fallback: alte Scroll-Position
+            currContainer.scrollTop = oldCurrScrollTop;
+          }
+        });
+      } else {
+        requestAnimationFrame(() => {
+          currContainer.scrollTop = oldCurrScrollTop;
+        });
+      }
+      
+      // Nächstes Jahr laden (im Hintergrund)
+      if (currentYearIndex + 1 < years.length) {
+        const nextYear = years[currentYearIndex + 1];
+        loadYearIntoContainer('next', nextYear, targetPlatz);
+      } else {
+        // Leere next-Container wenn kein nächstes Jahr
+        nextList.innerHTML = '';
+        containerStates.next = { year: null, yearIndex: -1, albums: [], loadedStart: 0, loadedEnd: 0, scrollTop: 0, observer: null, topSentinel: null, bottomSentinel: null };
+      }
+    } else {
+      // Nach links: zum vorherigen Jahr
+      // curr → next, prev → curr, neues Jahr → prev
+      const tempState = { ...containerStates.next };
+      containerStates.next = { ...containerStates.curr };
+      containerStates.curr = { ...containerStates.prev };
+      containerStates.prev = tempState;
+      
+      // DOM-Referenzen rotieren
+      const oldPrev = prevContainer;
+      const oldCurr = currContainer;
+      const oldNext = nextContainer;
+      
+      // Neue Referenzen: curr wird next, prev wird curr, next wird prev
+      prevContainer = oldNext;
+      prevList = prevContainer.querySelector('.years-album-list');
+      currContainer = oldPrev;
+      currList = currContainer.querySelector('.years-album-list');
+      nextContainer = oldCurr;
+      nextList = nextContainer.querySelector('.years-album-list');
+      
+      // Klassen aktualisieren
+      prevContainer.className = 'year-container prev';
+      currContainer.className = 'year-container curr';
+      nextContainer.className = 'year-container next';
+      
+      // Scroll-Position basierend auf targetPlatz setzen
+      if (targetPlatz !== null) {
+        requestAnimationFrame(() => {
+          const items = Array.from(currList.querySelectorAll('.years-album-item'));
+          const targetItem = items.find(item => parseInt(item.dataset.platz) === targetPlatz);
+          if (targetItem) {
+            targetItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+          } else {
+            // Fallback: alte Scroll-Position
+            currContainer.scrollTop = oldCurrScrollTop;
+          }
+        });
+      } else {
+        requestAnimationFrame(() => {
+          currContainer.scrollTop = oldCurrScrollTop;
+        });
+      }
+      
+      // Vorheriges Jahr laden (im Hintergrund)
+      if (currentYearIndex - 1 >= 0) {
+        const prevYear = years[currentYearIndex - 1];
+        loadYearIntoContainer('prev', prevYear, targetPlatz);
+      } else {
+        // Leere prev-Container wenn kein vorheriges Jahr
+        prevList.innerHTML = '';
+        containerStates.prev = { year: null, yearIndex: -1, albums: [], loadedStart: 0, loadedEnd: 0, scrollTop: 0, observer: null, topSentinel: null, bottomSentinel: null };
+      }
+    }
+    
+    // Viewport zurücksetzen (OHNE Transition, da wir bereits am Ziel sind)
+    viewportOffset = 0;
+    viewport.classList.remove('shifting');
+    viewport.style.transition = 'none';
+    viewport.style.transform = `translateX(-33.33%)`;
+    requestAnimationFrame(() => {
+      viewport.style.transition = '';
+      console.log('[YearsView] Viewport reset to -33.33%, transition restored');
+    });
+
+    // DOM-Reihenfolge anpassen, damit prev/curr/next im Viewport stimmen
+    viewport.replaceChildren(prevContainer, currContainer, nextContainer);
+  }
+  
+  // Setup Swipe-Gesten auf Viewport-Ebene
+  function setupViewportSwipeGestures() {
+    viewContainer.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      if (isShifting) return; // Verhindere Swipe während Transition
+      
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchStartTime = Date.now();
+      isScrolling = false;
+      touchMoved = false;
+      currentSwipeOffset = 0;
+    }, { passive: true });
+    
+    viewContainer.addEventListener('touchmove', (e) => {
+      if (e.touches.length !== 1) return;
+      if (isShifting) return;
+      
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = Math.abs(touch.clientY - touchStartY);
+      
+      touchMoved = true;
+      
+      // Prüfe ob vertikales Scrollen
+      if (deltaY > SWIPE_MAX_VERTICAL && deltaY > Math.abs(deltaX) * 1.5) {
+        isScrolling = true;
+        return;
+      }
+      
+      // Horizontales Swipe
+      if (Math.abs(deltaX) > 10) {
+        e.preventDefault();
+        
+        // Berechne Viewport-Offset (in Prozent)
+        const containerWidth = viewContainer.clientWidth;
+        const offsetPercent = (deltaX / containerWidth) * 100;
+        currentSwipeOffset = offsetPercent;
+        
+        // Begrenze Swipe
+        const maxOffset = 33.33;
+        const clampedOffset = Math.max(-maxOffset, Math.min(maxOffset, offsetPercent));
+        
+        // Verschiebe Viewport während Swipe
+        viewport.style.transform = `translateX(${-33.33 + clampedOffset}%)`;
+        viewport.classList.add('shifting');
+      }
+    }, { passive: false });
+    
+    viewContainer.addEventListener('touchend', (e) => {
+      if (!touchMoved || isScrolling || isShifting) {
+        viewport.classList.remove('shifting');
+        viewport.style.transform = `translateX(${-33.33 + viewportOffset}%)`;
+        return;
+      }
+      
+      const touch = e.changedTouches[0];
+      if (!touch) return;
+      
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = Math.abs(touch.clientY - touchStartY);
+      const deltaTime = Date.now() - touchStartTime;
+      
+      // Prüfe ob es ein Swipe ist
+      if (deltaTime > SWIPE_MAX_TIME) {
+        viewport.classList.remove('shifting');
+        viewport.style.transform = `translateX(${-33.33 + viewportOffset}%)`;
+        return;
+      }
+      
+      if (deltaY > SWIPE_MAX_VERTICAL && deltaY > Math.abs(deltaX) * 1.5) {
+        viewport.classList.remove('shifting');
+        viewport.style.transform = `translateX(${-33.33 + viewportOffset}%)`;
+        return;
+      }
+      
+      if (Math.abs(deltaX) < SWIPE_THRESHOLD) {
+        viewport.classList.remove('shifting');
+        viewport.style.transform = `translateX(${-33.33 + viewportOffset}%)`;
+        return;
+      }
+      
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Bestimme Richtung
+      const direction = deltaX > 0 ? -1 : 1;
+      
+      // Prüfe ob Swipe stark genug für Jahr-Wechsel
+      const containerWidth = viewContainer.clientWidth;
+      const swipePercent = (Math.abs(deltaX) / containerWidth) * 100;
+      
+      if (swipePercent > 20 || Math.abs(currentSwipeOffset) > 15) {
+        // Jahr wechseln - WICHTIG: Entferne shifting-Klasse BEVOR shiftViewport aufgerufen wird
+        viewport.classList.remove('shifting');
+        shiftViewport(direction, true);
+      } else {
+        // Zurück zum aktuellen Jahr
+        viewport.classList.remove('shifting');
+        viewport.style.transform = `translateX(-33.33%)`;
+        viewportOffset = 0;
+        console.log('[YearsView] Swipe cancelled, returning to current year');
+      }
+    }, { passive: false });
+    
+    viewContainer.addEventListener('touchcancel', () => {
+      viewport.classList.remove('shifting');
+      viewport.style.transform = `translateX(-33.33%)`;
+      viewportOffset = 0;
+      touchMoved = false;
+      isScrolling = false;
+      currentSwipeOffset = 0;
+    }, { passive: true });
+  }
+  
+  // Initialisierung
+  async function initialize() {
+    console.log('[YearsView] Initializing, currentYear:', currentYear, 'currentYearIndex:', currentYearIndex);
+    
+    // Lade aktuelles Jahr
+    await loadYearIntoContainer('curr', currentYear);
+    console.log('[YearsView] Loaded curr year:', currentYear);
+    
+    // Lade vorheriges Jahr (falls vorhanden)
+    if (currentYearIndex > 0) {
+      const prevYear = years[currentYearIndex - 1];
+      await loadYearIntoContainer('prev', prevYear);
+      console.log('[YearsView] Loaded prev year:', prevYear);
+    }
+    
+    // Lade nächstes Jahr (falls vorhanden)
+    if (currentYearIndex < years.length - 1) {
+      const nextYear = years[currentYearIndex + 1];
+      await loadYearIntoContainer('next', nextYear);
+      console.log('[YearsView] Loaded next year:', nextYear);
+    }
+    
+    // Setup Swipe-Gesten
+    setupViewportSwipeGestures();
+    console.log('[YearsView] Swipe gestures setup complete');
+    
+    // Event Listener für Select
+    select.addEventListener('change', async (e) => {
+      const newYear = parseInt(e.target.value);
+      const newIndex = years.indexOf(newYear);
+      const direction = newIndex - currentYearIndex;
+      
+      console.log('[YearsView] Select changed:', newYear, 'direction:', direction);
+      
+      if (direction !== 0) {
+        // Lade direkt ohne Animation
+        currentYearIndex = newIndex;
+        currentYear = newYear;
+        await loadYearIntoContainer('curr', newYear);
+        
+        // Lade Nachbarn
+        if (newIndex > 0) {
+          await loadYearIntoContainer('prev', years[newIndex - 1]);
+        }
+        if (newIndex < years.length - 1) {
+          await loadYearIntoContainer('next', years[newIndex + 1]);
+        }
+      }
+    });
+  }
+  
+  // Starte Initialisierung
+  await initialize();
+  console.log('[YearsView] Initialization complete');
 }

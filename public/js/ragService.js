@@ -211,7 +211,7 @@ export class RAGService {
       const band = album.Band || 'N/A';
       const albumName = album.Album || 'N/A';
       const year = album.Jahr || 'N/A';
-      const note = album.Note.toFixed(2);
+      const note = album.Note;
       // Verwende === für noch stärkere Hervorhebung der Zahlen
       context += `| ${band} | "${albumName}" | ${year} | ===${note}=== |\n`;
     });
@@ -221,7 +221,7 @@ export class RAGService {
     // Redundante Hervorhebung: Liste alle Noten nochmal explizit auf
     context += '🚨🚨🚨 EXAKTE NOTEN - MUSS VERWENDET WERDEN 🚨🚨🚨\n';
     sortedAlbums.forEach((album) => {
-      const note = album.Note.toFixed(2);
+      const note = album.Note;
       context += `  🚨 "${album.Album}" von ${album.Band} (${album.Jahr || 'N/A'}): ===${note}=== 🚨\n`;
       context += `     WICHTIG: Wenn du über "${album.Album}" sprichst, ist die Note ${note}, NICHT eine andere Zahl!\n`;
     });
@@ -231,10 +231,10 @@ export class RAGService {
     // Beispielpaare für richtige/falsche Verwendung - mit mehreren Beispielen
     if (sortedAlbums.length > 0) {
       const firstAlbum = sortedAlbums[0];
-      const exampleNote = firstAlbum.Note.toFixed(2);
-      const wrongNote1 = (firstAlbum.Note + 0.3).toFixed(2);
-      const wrongNote2 = (firstAlbum.Note - 0.2).toFixed(2);
-      const wrongNote3 = (firstAlbum.Note + 0.5).toFixed(2);
+      const exampleNote = firstAlbum.Note;
+      const wrongNote1 = firstAlbum.Note + 0.3;
+      const wrongNote2 = firstAlbum.Note - 0.2;
+      const wrongNote3 = firstAlbum.Note + 0.5;
       
       context += '📋 BEISPIEL FÜR KORREKTE VERWENDUNG:\n';
       context += `❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote1}\n`;
@@ -245,8 +245,8 @@ export class RAGService {
       // Wenn mehrere Alben vorhanden, zeige auch ein Beispiel mit dem letzten Album
       if (sortedAlbums.length > 1) {
         const lastAlbum = sortedAlbums[sortedAlbums.length - 1];
-        const lastNote = lastAlbum.Note.toFixed(2);
-        const wrongLastNote = (lastAlbum.Note + 0.3).toFixed(2);
+        const lastNote = lastAlbum.Note;
+        const wrongLastNote = lastAlbum.Note + 0.3;
         context += `📋 WEITERES BEISPIEL:\n`;
         context += `❌ FALSCH: "${lastAlbum.Album}" erreichte eine ${wrongLastNote}\n`;
         context += `✅ RICHTIG: "${lastAlbum.Album}" erreichte eine ${lastNote} (GENAU diese Zahl aus der Tabelle!)\n\n`;
@@ -264,11 +264,11 @@ export class RAGService {
       if (lastYear > firstYear) {
         context += `📈 ENTWICKLUNG (EXAKTE ZAHLEN): Von ${firstYear} bis ${lastYear}: `;
         if (maxNote > minNote + 0.1) {
-          context += `Die Noten steigen von **${minNote.toFixed(2)}** auf **${maxNote.toFixed(2)}** - das ist eine VERBESSERUNG!\n`;
+          context += `Die Noten steigen von **${minNote}** auf **${maxNote}** - das ist eine VERBESSERUNG!\n`;
         } else if (minNote > maxNote + 0.1) {
-          context += `Die Noten sinken von **${maxNote.toFixed(2)}** auf **${minNote.toFixed(2)}** - das ist ein Verlust.\n`;
+          context += `Die Noten sinken von **${maxNote}** auf **${minNote}** - das ist ein Verlust.\n`;
         } else {
-          context += `Die Noten bleiben relativ stabil (**${minNote.toFixed(2)}** - **${maxNote.toFixed(2)}**).\n`;
+          context += `Die Noten bleiben relativ stabil (**${minNote}** - **${maxNote}**).\n`;
         }
         context += '\n';
       }
@@ -295,9 +295,9 @@ export class RAGService {
     context += 'BEISPIEL:\n';
     if (sortedAlbums.length > 0) {
       const exampleAlbum = sortedAlbums[0];
-      const correctNote = exampleAlbum.Note.toFixed(2);
+      const correctNote = exampleAlbum.Note;
       context += `Wenn "${exampleAlbum.Album}" von ${exampleAlbum.Band} in der Tabelle steht mit Note ${correctNote},\n`;
-      context += `dann ist die Note ${correctNote}, NICHT ${(exampleAlbum.Note + 0.3).toFixed(2)}, NICHT ${(exampleAlbum.Note - 0.2).toFixed(2)}, NICHT irgendeine andere Zahl!\n\n`;
+      context += `dann ist die Note ${correctNote}, NICHT ${exampleAlbum.Note + 0.3}, NICHT ${exampleAlbum.Note - 0.2}, NICHT irgendeine andere Zahl!\n\n`;
       
       // Wenn nur ein Album vorhanden, betone das besonders
       if (sortedAlbums.length === 1) {

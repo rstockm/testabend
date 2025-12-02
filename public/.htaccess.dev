@@ -1,0 +1,72 @@
+# .htaccess für ENTWICKLUNGSUMGEBUNG
+# 
+# Diese Datei verhindert Caching während der Entwicklung
+# Kopiere diese Datei zu .htaccess während der Entwicklung
+# 
+# Für Produktion: Verwende .htaccess.example und passe die Cache-Zeiten an
+
+# Fallback auf index.html für SPA-Routing
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# API-Key als Umgebungsvariable setzen (wird von api-proxy.php verwendet)
+# Ersetze DEIN_API_KEY_HIER mit deinem echten OpenRouter API-Key
+SetEnv OPENROUTER_API_KEY "DEIN_API_KEY_HIER"
+
+# ============================================
+# CACHE VERHINDERN FÜR ENTWICKLUNG
+# ============================================
+
+# CSS und JavaScript: KEIN CACHING
+<FilesMatch "\.(css|js)$">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </IfModule>
+</FilesMatch>
+
+# HTML: KEIN CACHING
+<FilesMatch "\.(html|htm)$">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </IfModule>
+</FilesMatch>
+
+# JSON-Dateien: KEIN CACHING (für Daten-Updates)
+<FilesMatch "\.(json)$">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </IfModule>
+</FilesMatch>
+
+# Bilder: Kurzes Caching (kann bleiben, da sich selten ändern)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 hour"
+  ExpiresByType image/jpeg "access plus 1 hour"
+  ExpiresByType image/png "access plus 1 hour"
+  ExpiresByType image/gif "access plus 1 hour"
+  ExpiresByType image/svg+xml "access plus 1 hour"
+</IfModule>
+
+# Gzip-Kompression (kann bleiben)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Sicherheit: .htaccess selbst schützen
+<Files ".htaccess">
+  Order allow,deny
+  Deny from all
+</Files>

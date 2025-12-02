@@ -840,12 +840,12 @@ export class Chat {
     bandsWithData.forEach(([bandName, data]) => {
       prompt += `=== ${bandName} ===\n`;
       prompt += `Anzahl Alben: ${data.count}\n`;
-      prompt += `Erste Note (${data.albums[0].Jahr}): ${data.firstNote.toFixed(2)}\n`;
-      prompt += `Letzte Note (${data.albums[data.albums.length - 1].Jahr}): ${data.lastNote.toFixed(2)}\n`;
+      prompt += `Erste Note (${data.albums[0].Jahr}): ${data.firstNote}\n`;
+      prompt += `Letzte Note (${data.albums[data.albums.length - 1].Jahr}): ${data.lastNote}\n`;
       prompt += `Trend: ${data.trend === 'rising' ? 'Steigend (Verbesserung)' : data.trend === 'falling' ? 'Fallend (Absturz)' : 'Stabil'}\n`;
       prompt += '\nAlle Alben:\n';
       data.albums.forEach(album => {
-        prompt += `  - "${album.Album}" (${album.Jahr}): ${album.Note.toFixed(2)}\n`;
+        prompt += `  - "${album.Album}" (${album.Jahr}): ${album.Note}\n`;
       });
       prompt += '\n';
     });

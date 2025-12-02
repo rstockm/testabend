@@ -2,7 +2,7 @@
  * Routing-Logik
  */
 import { parseHash, updateHash, setActiveNav, isMobile } from './utils.js';
-import { renderOverview, renderBandsSeries, renderScatterAll } from './renderers.js';
+import { renderOverview, renderBandsSeries, renderScatterAll, renderYearsView } from './renderers.js';
 import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend, buildMobileBandToolbar, buildMobileBandModal, buildMobileSettingsModal } from './controls.js';
 import { Chat } from './chat.js';
 import { cleanupScatterKeyboardNav } from './scatterKeyboardNav.js';
@@ -55,6 +55,9 @@ export class Router {
         break;
       case 'testteam':
         await this.handleTestteam();
+        break;
+      case 'jahre':
+        await this.handleJahre();
         break;
       default:
         await this.handleOverview();
@@ -329,6 +332,34 @@ export class Router {
   updateBandHash(selected, showTitles, sortBy, showRegression, showThresholds = true) {
     const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, showThresholds);
     updateHash('band', q);
+  }
+  
+  /**
+   * Jahre-Route (nur Mobile)
+   */
+  async handleJahre() {
+    // Nur auf Mobile anzeigen
+    if (!isMobile()) {
+      // Auf Desktop zu Overview umleiten
+      updateHash('overview', {});
+      return;
+    }
+    
+    this.controlsEl.innerHTML = '';
+    this.chartEl.innerHTML = '';
+    this.resetBandLayout();
+    
+    const scatterContainer = document.getElementById('scatter-container');
+    if (scatterContainer) {
+      scatterContainer.remove();
+    }
+    
+    const mainEl = document.querySelector('main');
+    if (!mainEl.contains(this.chartEl)) {
+      mainEl.appendChild(this.chartEl);
+    }
+    
+    await renderYearsView(this.data, this.chartEl);
   }
   
   /**

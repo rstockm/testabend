@@ -27,7 +27,7 @@ Starte den Python-Webserver im public-Verzeichnis und öffne die App im Browser:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020
@@ -38,7 +38,7 @@ cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 80
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: sleep 1 && open http://localhost:8020</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: sleep 1 && open http://localhost:8020</summary>
 
 ```bash
 sleep 1 && open http://localhost:8020
@@ -78,7 +78,7 @@ Prüfe, ob der Server läuft, und öffne die App im IDE-Browser:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: lsof -ti:8020 || echo "Port 8020 ist frei"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: lsof -ti:8020 || echo "Port 8020 ist frei"</summary>
 
 ```bash
 lsof -ti:8020 || echo "Port 8020 ist frei"
@@ -147,29 +147,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 2}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 2}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -177,8 +177,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:2}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":2}"
 }
 ```
 Status: **completed**
@@ -225,7 +225,7 @@ Prüfe den Serverstatus und starte ihn ggf. neu:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: kill 4942 2>/dev/null; cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: kill 4942 2>/dev/null; cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020</summary>
 
 ```bash
 kill 4942 2>/dev/null; cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020
@@ -236,7 +236,7 @@ kill 4942 2>/dev/null; cd /Users/rstockm/Documents/GitHub/testabend/public && py
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: sleep 2 && curl -s -o /dev/null -w "%{http_code}" http://localhost:8020</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: sleep 2 && curl -s -o /dev/null -w "%{http_code}" http://localhost:8020</summary>
 
 ```bash
 sleep 2 && curl -s -o /dev/null -w "%{http_code}" http://localhost:8020
@@ -322,29 +322,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 3}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 3}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -352,8 +352,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:3}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":3}"
 }
 ```
 Status: **completed**
@@ -436,29 +436,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_click&quot;,
-      &quot;description&quot;: &quot;Perform click on a web page&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;element\&quot;: \&quot;Zeitreihe Band Link\&quot;, \&quot;ref\&quot;: \&quot;ref-oooibdzfby\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_click",
+      "description": "Perform click on a web page",
+      "parameters": "{\"element\": \"Zeitreihe Band Link\", \"ref\": \"ref-oooibdzfby\"}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_click&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_click",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -466,8 +466,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_click&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;click\&quot;,\&quot;success\&quot;:true,\&quot;details\&quot;:{\&quot;doubleClick\&quot;:false,\&quot;button\&quot;:\&quot;left\&quot;},\&quot;pageState\&quot;:{\&quot;url\&quot;:\&quot;http://localhost:8020/#band\&quot;,\&quot;title\&quot;:\&quot;Alben-Dashboard (Lokal)\&quot;,\&quot;snapshot\&quot;:{\&quot;ref\&quot;:\&quot;ref-v52b3f0l64\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;body\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-zlew7k27pr\&quot;,\&quot;role\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;header\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-hw4pthjrdp\&quot;,\&quot;role\&quot;:\&quot;heading\&quot;,\&quot;name\&quot;:\&quot;Alben-Da hboard\&quot;,\&quot;tag\&quot;:\&quot;h1\&quot;,\&quot;children\&quot;:[],\&quot;level\&quot;:1,\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-24dbjj5605m\&quot;,\&quot;role\&quot;:\&quot;navigation\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;nav\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-5q1y2bbo2fp\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Über icht\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#overview\&quot;},{\&quot;ref\&quot;:\&quot;ref-oooibdzfby\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Zeitreihe Band\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;focused\&quot;,\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#band\&quot;},{\&quot;ref\&quot;:\&quot;ref-wpfysfnsdfq\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Alle Wertungen\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#scatter\&quot;}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-duwkhqb47fu\&quot;,\&quot;role\&quot;:\&quot;main\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;main\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-5u54p610snc\&quot;,\&quot;role\&quot;:\&quot;graphics-document\&quot;,\&quot;name\&quot;:\&quot;Anzahl Alben pro Jahr\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-5ey28s5kpof\&quot;,\&quot;role\&quot;:\&quot;form\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;form\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}}}&quot;
+  "selectedTool": "browser_click",
+  "result": "{\"action\":\"click\",\"success\":true,\"details\":{\"doubleClick\":false,\"button\":\"left\"},\"pageState\":{\"url\":\"http://localhost:8020/#band\",\"title\":\"Alben-Dashboard (Lokal)\",\"snapshot\":{\"ref\":\"ref-v52b3f0l64\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"body\",\"children\":[{\"ref\":\"ref-zlew7k27pr\",\"role\":\"banner\",\"name\":\"\",\"tag\":\"header\",\"children\":[{\"ref\":\"ref-hw4pthjrdp\",\"role\":\"heading\",\"name\":\"Alben-Da hboard\",\"tag\":\"h1\",\"children\":[],\"level\":1,\"states\":[\"readonly\"]},{\"ref\":\"ref-24dbjj5605m\",\"role\":\"navigation\",\"name\":\"\",\"tag\":\"nav\",\"children\":[{\"ref\":\"ref-5q1y2bbo2fp\",\"role\":\"link\",\"name\":\"Über icht\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#overview\"},{\"ref\":\"ref-oooibdzfby\",\"role\":\"link\",\"name\":\"Zeitreihe Band\",\"tag\":\"a\",\"children\":[],\"states\":[\"focused\",\"readonly\"],\"url\":\"#band\"},{\"ref\":\"ref-wpfysfnsdfq\",\"role\":\"link\",\"name\":\"Alle Wertungen\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#scatter\"}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]},{\"ref\":\"ref-duwkhqb47fu\",\"role\":\"main\",\"name\":\"\",\"tag\":\"main\",\"children\":[{\"ref\":\"ref-5u54p610snc\",\"role\":\"graphics-document\",\"name\":\"Anzahl Alben pro Jahr\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-5ey28s5kpof\",\"role\":\"form\",\"name\":\"\",\"tag\":\"form\",\"children\":[],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}}}"
 }
 ```
 Status: **completed**
@@ -487,29 +487,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 3}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 3}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -517,8 +517,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:3}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":3}"
 }
 ```
 Status: **completed**
@@ -625,29 +625,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_take_screenshot&quot;,
-      &quot;description&quot;: &quot;Take a screenshot of the current page. You can&#39;t perform actions based on the screenshot, use browser_snapshot for actions.&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;fullPage\&quot;: true}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_take_screenshot",
+      "description": "Take a screenshot of the current page. You can't perform actions based on the screenshot, use browser_snapshot for actions.",
+      "parameters": "{\"fullPage\": true}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_take_screenshot&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_take_screenshot",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -655,8 +655,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_take_screenshot&quot;,
-  &quot;result&quot;: &quot;{\&quot;success\&quot;:true,\&quot;filename\&quot;:\&quot;page-2025-11-14T23-38-52-162Z.png\&quot;,\&quot;savedPath\&quot;:\&quot;file:///var/folders/v_/b8jyt6dn2n78h0n1ybzmgtmw0000gp/T/cursor/screenshots/page-2025-11-14T23-38-52-162Z.png\&quot;,\&quot;dataUrl\&quot;:\&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABvYAAAYKCAIAAACDRcuEAAABK2lDQ1BTa2lhAAAokX2QMUvDUBSFv1cKomYRFR0cMnbRppWmDdahqbXo2Cqk3dI0FLFNQxrRvas/wtlNcBGhs4uT4CTi4i4IrpXXDClIPNPHuQfuPRdSmwBpDQZeGDTqpmq12urCBwLBTLYz8kmWgJ/XKPuy/U8uSYtdd+QAX0AYWK02iC6w1ov4SnIn4mvJl6EfgriRHJw0qiDugUxvjjtz7PiBzL8B5UH/wonvRnG90yZgAVvUGTKkRx+XLE3OOcMmi0YNgxK71KhQoUCFHHlKGOgU0KhiUqRKkUN0SuTJcTBjA13+M1o5fof9yXQ6fYy94wnc6bD0EHuZPVhR4Ok59uIf+3Zgz6w0kHJN+F4H5RZWP2F5DGzIcUJX9U9XlSM8HHZQyaORQ/8FDJRN2vTWQQEAACAASURBVHic7N13XFPX2wDwc5ObQQh7CrIFBBlSFbDuXdyK2lK11rqt1p8dFrTa1r3Ha13V2jqw1q212mktFlEREUQREUSQoWwIkIQk9/3j2Os1CSFAQoI+30//ODm5uffc1JuQ557zPISrqysCAAAAAAAAAAAAAACAtoll6AEAAAAAAAAAAAAAAABA80GIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGQYgTAAAAAAAAAAAAAADQhkGIEwAAAAAAAAAAAAAA0IZBiBMAAAAAAAAAAAAAANCGkYYeAAAAAJ3p0qVLZGRkjx493N3dDT0W0Obl5OTEx8efPHkyKSnJ0GMBAAAAAAAAAE0IV1dXQ48BAACADqxevXrixImGHgV4BcXGxi5evNjQowAAAAAAAACABkGIEwAAXgWHDh3q3bs3boufplZlXqgtSKyvykOUoUcG2hwCccxdBE7dzL2H8h2CcF9cXNzkyZMNPTIAAAAAAAAAUI9tYWFh6DEAAABokdWrV48YMQK3n/279ln8OklJukJSZehxgbZKIamSlKRXZZyT15WauvZECLm5udnb2//111+GHhoAAAAAAAAAqGG8szjZbDabzaYfSqVSbZ4CAIDXTZcuXU6dOoXb+Rc/qn1yzdAjAq8UQftw54j/w+2xY8dCXk4AAAAAAACAETLeiurnz59PYejVq5c2TwEAwOsmMjISN579uxbim0Dnap9ce/bvWtym/7EBAAAAAAAAgFFpjYrqHTt2PHToEEJIKBQihCiKun///tixYxsZGfnS2LhcrjZPAQDA66ZHjx44/2Zl+im6835Bfey/NdcyJRTk4gRNRBAo3Js3qaeprxMH91Smn8J5OfE/NgAAAAAAAAAwNq0xi3P27NlCoRDHNxFCBEH4+fkZ7QJ5AF5bQqFw+/btsbGx3bt3xz3e3t779+/ft28fXLDGzN3dHSFUlXmB7skoqJ//fVnCA4hvguagKJTwQDLv+7L7BfV0J/4Hhv+xAQAAAAAAAICxaY0QZ58+fVQ758yZ0wqHBgBob+LEiV5eXlZWVvPmzcM9c+fOdXR0dHJymjVrlqFHBxpRW5BItw//WwPBTdBCFIVi/62hHzL/gQEAAAAAAACAsdF7iLNnz558Pl+1f+DAgfo+NACgSXJzc3GjvLwcN549e4YbhYWFhhsX0Ep9VR7dvpYpMehYwCuC+Q+J+Q8MAAAAAAAAAIyN3nNxTps2TW2/UCjs3Lnz7du39T0AAICWLl68yGazHR0djx07hns2bdqUm5srl8tPnDhh6NGBxjCmbcIUTqATL/1Dgn9UAAAAAAAAACOm3xAni8Xq2rVrQ8/OmjULlqsDYFTOnz/PfCiVSmNjYw03HB3r0KFDXl6eRAIzHHXJwq2ffdAH9aLCwlu7JJWPDDUME2sfxzfmsHkWT1O+q34S/183weY+TwOtkIkpRb2GPQCEEMFis0gBbivqayhKYegRAQAAAAAAAIBW9BviHDlyJLP6eXx8fHh4OJvNxg/ffPNNHR7LxsZmxYoVfn5+NjY2bDa7RiQqLCrasWPH77//rvmFvr6+ixYt6tSpk6mpKUmSFEWJxeKioqLvv//++PHjqtv36dPn448/ph+ePXt2//79fn5+S5YsCQgI4HK5BEHU1dU9ffr03Llzu3bt0uE5AqAPQqGQzWbLZLKamhoNm5mYmHC5XIqiqqqq6M4jR45YWFiIxeLIyMhWGWzzffPNN56enhRFffrpp+np6c3YQxs6WRyrIthqkoSopZDVoWYFszgCO48BWxBCyC6QZ+GecWZCM3aiEx6Dt3MFDggh00HBdw73VtTXIIQEdp18RhzGG5Rmnsm78lWrjYdg8wgWyeaYIIKtkIqYMyDx2IyTXadJTt0W4nZu3NKyhz8baiQ8Ho/P55uamhYXF9fXNxibVntVtq1LFQAAAAAAAKAT+g1xTp48mfnw4MGDZmZmQUFB+CGXyx00aNAff/zR8gN99NFHs2bNYrFepBY1Mzc3Mzfftm1bYWHh6NGjmUEZGpfLPXToED0ejCAIExMTDw+P5cuXR0dHT506NTU1lblBcHCwj48P/bBXz543b9788ccfmUc3MTFxd3f/6KOPRo8ePWXKlKKiopafIwB68tNPPxEEIZPJRo4cqWGzvXv3Wltb4+u6tLQUd/L5fIIguFxuaw22mczNzT09PfEFPm7cuBUrVjRjJ23lZDHHN+Y5BE3VcuNHf/6vMvdyM45i6hBCt02sfQgWSSlkzdhPC5E8SxzfRAgRBFtg20lUeKP1h8HkPWy/wLaT2qcoSi4uz6otvVecFisuz2z1oWlEEOrbrW7Hjh1OTk4IoeTk5CVLljS0mdqrsm1dqgAAAAAAAACd0GO5IR6P5+fnRz+sr6+Pi4tTyuj3/vvvt/xA/fv3nzNnDjPCyNSuXbs///jDyspKqd/KyurSpUtK8U0lAoHg6NGjw4YN07CNqVB48ODBho7u6ur63XffaXESABg74r94B2HQwEfzVFVV0XNUr1y50mrH3b9//7lz586dO8ecz946mva/icVu3lGq8uIoSv5f+wozvuk76mjw1CT8H8HWb7BJJqmoefb8XpRcVltTdFOvh2shgmCbWPvYeI/2HX3Uwn2AoYdjjCwtLXF8EyEUGBjYFj9zAAAAAAAAAK1MjyHOSZMmMX+W4MpCp0+fViheLIcMDg6m160329ixYzVvYGZuvnXrVqXO/fv329jYNLpzgiDWrl2LJ6+pFRgYyOPxNOzB09Nz8ODBjR4IAKBXU6dOPXz4cExMzOXLzZmu2DxCoZAkSZIkjTxGo5CKmvlCmfjeT0MKk7bn/vvVo0ufMJ9i88wIgo3/Q0jvp5/166y8q6sKErekHxvWVjJIEgTbo/8mU/tgQw/E6Lz77rt0myTJt956y6DDAQAAAAAAALQBepxYNGHCS0nZfvrpJ4SQTCbLzMz09fXFnWw2e8KECT/++GPLD0dR1OPHj+Pj4z09PTt37mxiYsJ8NjQ0lFnAPSoqqmPHjswNCgoKDhw4cPr06Y4dO44dO3b06NH0UyRJ7tq16+2339Zw9JqamoSEhKtXrzo7O7/99ttCoZD57Jw5cxpNCQoA0CuRSHTkyBFDj6L1lNw/LipKauhZ115fk/znd26qC65XF1xv9oHqa0uephh+rrpCVld6X032ZGOQeX5KXdkDhBDBIk0d37B0H2jlNZQgnt/es3AfUPMsxdBjNC59+vRhPhw1atTFixcNNxwAAACvlFmzZrVr1w5PecnNzTX0cAAAAOiMvkKcVlZWrq6u9EO5XE7/Pjl9+nR0dDT9VFRUVMtDnHK5/K233nry5Andc/jw4S5dujC3mT59+rx583B75syZzKdKSkqGDBkik8kQQomJiYmJiY8fP16wYAG9QWBgoEAgqK2tVXv0ysrK/v37089u3br177//trW1pTdwcHBo4QkC0CbweLyAgAAvL6+ioqK0tLSysjINGxME0bFjRy8vLw6Hk5OTc/fuXalUqroNnkMtEolwJXQ3N7ewsLCSkpJLly4xtzQ3N+/atauZmdnt27cfP36sejiBQGBiYkJRlNpRcblcPz8/Dw+Purq6a9euVVZWNnqyLBarS5cuzs7OCQkJT58+VXrW2tqaIAh6lrqNjQ0umVJWVkZRlLr96Zi0Ol9ana/2KVv/KDq+Ka8X5fz9mdrN+JYeQqdwnll7gkVKq/NrnqWoicQRLDPn7gQiEEL1dSV1pfcJFmnmFI4QYvMs6K3MXXpSMglCSFR0UyETEwTLzPl5ubn62md1ZQ8INk/o+IawXVdKLi1OOyxnFOQh+VYWrn255q4kz1xaUyQuy6x6coVSyJUGIrAPIrnmCCFKUa8hYkuwOKYOwWbOPRAlFxUm1jxLVcjqGtpYq3dAC/L6WvooVbn/VOX+U51/za3PKtxj4dqn4MZmpZewSD7fqoOJtQ/fylshq60ruV9bek9aXYDQS/94SL4VnfGzrjyzvuYpiyMQOr5h5hSukEvqyjJFBddk4gq1oyL5Vubte/IsXBVyaV3ZA1HBDQ1vRWvy9fU1MzNDCD1+/NjKysrc3NzFxUUoFIpEzZxrrITH43Xq1Alf7FlZWRkZGTrZLQAAALUsLCzWrl2LEBKLxdHR0fjPOVUbN240NTVFCH3xxRd0znc9GTRokEAgQAhdvnwZQpwAAPAq0VeIc/r06cyH9+7do9en//TTT59//jm9bLNDhw4t/+ny2WefMeObCKEPPvggLi7OwuLFb+zQbt1ww8bGxtHRke6nKGr06NE4vknbvXt3v3796EydBEG89957u3fvVnv0UaNGMaOfMpls9erVmze/+Mlqbm7ekrMDwPhxudyPP/64V69ezBXZ2dnZixcvVlvsa+LEiePHj2fWA5HL5VeuXFm/fj1zs7CwsGXLliGEkpKSUm7fnvzeexwOB19ldIhz2LBh06dPZ+aLoCgqKSlp+fLlzOt669at7du3x2tgKypeBH0Igli6dGlYWBg98gULFtTX11+7dm3NmjUNnez27dvbt2+PXzJz5sz6+vrz58/v3bsXb+Dk5LRv3z7mS/bv348bW7Zs0UmNtWbjW3m3D/+cfvjojwVyifL/IDbXzHPwDlN75VTF0pqirIszJFV5L7YkTbwG78DtmuI7mT9P5gjsPAd/o/RCj/6bcCPj7Nt1pRlsvjW9jagwsfhurMfAF7lEKh79Lq94hBBCiGj/5mLbjuOV9iaX1eb+s6Ty8d/MTvd+67mmzz/Yb+/vrPbczZzCvN7aQz90CJ6OEHp8OaY8W3mGoPbvQPNU5cXRbYKtnOrEyjPCpdfXLJUEppKqvIcXPqivLX5xRs5v0qHSgpvb5OIKl55fMl+ikEtzryyryP5VaVeOIbMcQ+Ywe+Sy2ry4L5ERiIqKwo0LFy64u7tHREQQBPH222+3PLE1i8X64osvmBc7/sl98ODBM2fOtHDnAAAA1LKwsHBzc8Ptr7/+mjnThcnPzw9/OFtZWek7xAkAAOBVpa9cnEqlmZlVhsRiMXOOFUEQU6ZMacmxHj9+rLqETSqVbtiwgdljZm6OiwINHz6c2V9SUqL2e/Tq1avMh6GhoWqPXlNTozqBS2l+GTPfaMeOHf9ozKlTpxo7aQCMy+bNm3v37q2UcdLT03Pbtm2qaSgnTJgwceJEpXrHbDa7b9++MTExzE76tc7OzlM/+ADHN5mio6M//PBDpXy4BEF07dr1yJEjzH56V0rFwTZs2BAeHq40SA6H06tXr/379yslncC2b9/u4uLCfAmHwxkzZsx7kycrHUuVYZNyski+11u76IdPU75TXcxOsLkdhn6nGt1DCHFNHb1HHCZNbFWfajaOqaNbv/Vqn3IOX6Qa30QIsUmBx4AtQscu6l7UIL6ll+eQnar9bn3XmDl3Z/a0wjvAt/Sk29UF15hPte/xhVvfNarxTYQQz9yl47izfCsvtfs0cw5Xim8ihFhsrnvftSbWPsxOK6+hSvFN/K66998gdGjau6oPb7zxBr5RcfHixWPHjuHOAQN0UJdp3bp1qhc7n8+fOXPmwIEDW75/AAAAmgUFBUF6ZQAAAPqjl1mcrq6uzGXaCoVCKWZ3/vx5es04rhe0Y8eOZh8uMzNTbb9SjBIvGC8sLKRvJGJ2dnapqamqL1cKpjRUm0jtkliJRKJQKNSWWXd3d8dTyTRonXWsAOgKm8329PSkKCorKwvXK+/Vq5eXlxdBEA4ODl9++eVXX31Fb9y9e/f3338ft7Ozs69evVpXVxceHh4QEEAQRK9evR4/fqyaNBPPvK6qqkpLS8vMzMSzwm1tbXv37o03uHTp0pkzZwiC6N+//7Bhw0iSFAqFkyZN0jzza9GiRf7+/viiy8rKivvnH5LD6d27t5ubG0EQjo6OS5YsUYq6stlsFxeXurq6K1euJCYm2traTpgwwcrKCiH0TlTUqdOnRSJRYWHhxo0bEUIfffQRjuRu27YNL1S/edOQxb5deizj/Beeqyu9X3hL5YOXYHkO3EZHxChKLiq4IZNWmTmFkzwLhBDJs/AZefj+qUgFYy05k6K+Dhc3Z4YIa0vu4qXlqjNGeeYuL14rl7LYXFwsyD5wip1/1Is9lN6rK3sgdOhCb+8V8e2Ds1E4x6U2TO0CcUNckcXmWXAYYcr23aPTT4zS1TvQ+Ejsgz0GbqH3X5x2mH6KI7C39R1HP5RUPa4tuce36mBi5Y172KTALmBy3pWvVPaKzNqF4R2Ky7M4pg4kI1GAc/foh798gNsm1j5ufVYzX6iQSylKxiYFCCFzl17NOyld6d+/P0mSCKEHDx7IZLKnT5+Wlpba2NhYWlq6ubmp/cLV0vz58zt16oQv9tTU1Pj4eFtb2+7du7u4uCCEFi5cmJ+fn56ertOzAQAAoOzDDz9MTEyEeZoAAAD0QS8hztmzZzMfslisbdu2MXtwphWak5OTg4OD6lxILSUnJ6vtLywsVIozurq6FhYWMlepY6pTw1ThEIaqqgZy9jUU4gTgVbVv377Tp0/j9vHjxyMjI6dNm4ZnQHfq1Onu3bu4eBcdMfztt9/oT4bTp0/T20+cOPHYsWNKuSMQQqmpqUqLmyIjI3Hj6tWrOKSI73ncvn172bJlOGCqIcQZGhrat29f3N67dy+9UvXo0aO9e/fGxwoKCjIxMamreylHoVgsnjFjBp3T8+zZs8eOHcPzPUNDQy9duqRQKPBU7tmzZ+MQ56VLl3CI04CsPCOsvIbitkIuzf7jI6RSedy6w3B6SqO8XpR+YrSsrgQhRBCsDsMP4Cgh19TRPnBK0S01MyIRQjJJReb59xBC/hN+4QqdcWfmLx9QcvW5t7DcK8sqc/+RSyoJgkVRCo6po1O3hfSzDy/OEBUm4na7LvMdgqfhcuQuPb98cG6i9u9ATfGdrIszFDIxQsjGN9Klx1LczzN3w8fVyTugymdkrKQyByHEInmkwA4HE3E48tFfH4vLH9Jb2vq9qGtXmPTN05Tn6Q4EdgE+I55HQs3b92zoQOXZv+bGLaEUcoQIp9CF9gHv4X5m0XbmG0tR8qxfZ4mKbiFKIbD19xq6jx6boYwdOxY3zp49ixuXLl0aP348QmjSpEmrVq1q3m6Dg4MjIiJwe/Xq1fHx8bj9ww8/rF27NigoiCCIJUuWTJo0SRcnAQAAoEFsNnvdunVKOc0aZWlp2blz53aOjnfv3UtLS6MToKmF88Lz+fxbt241NBWGicVidevWzc3N7dq1a5CaEwAA2jS9hDgHDRqk1NO/f3/NL5k1a9by5cubd7jy8vKGnpLJZMzFsHjVqgmf34yjQLwSAA1SU1Pp+CZ28uTJ8PBwPG0qNDQUhzgHDhyIp2gVFRUp3fk4efJkz549fX19CYIICgq6desW81mZTKaavMnOzg43lKKH169fHzZsWKNjpoMpycnJSpn44uLi+vTpg7PxBgUFXb/+Uvma77//Xqlm0YULFyZMmIDX2CrlqTASXDNn1z4r6YePL39eX/tMdTNrn9F0O/u3D3F0DyFEUYrsX2cHTIrDdcCtvUdqH+BrVNavs+gCQXSckX62KHkXHd9ECBUmbTd36YVnWQpsO5F8K5m4wa8AJhzOw/FNhFBpxkm7gEl8Cw/8kGfpJS7P1NM7wGJzlZaK4yjzk/gV1fkJzM6nKXuL7x7CbWaZoNriNElVHp7ByjGxZXNM5SpzSOvrSnL/WUw9D1tThTe32XQch0OWBMFm88zxFFoTG1/6JTl/LxIVPp9WXFtyL/vXOd7DD2h5UvogEAg8PDzw9X758mXcefLkSRzi7PZfQu1mGDfu+dzY3377jY5vYjExMSdPnuTz+Q3dyAQAAKBbTk5O0z744Lv/0pRrNnjw4Llz5yplN3r27NnHH3+sWkAyMjJy0qRJdJ6iKVOmUBSVk5OzaNGimhr1ay9WrlwZEhKCc5i8//77Mpns+++/V/qbFgAAQFuh+xBn586d1Wav0+ytt95qdogzODhY7fcQn89X+jrMz89HCD0rLmZ2UhSluqQdc3JyKigowO179+41b3hKnj171mhtpYa+gwEwWhcuXFDt/P3333GI08/PD/f06NEDN1JS1FSmTklJ8fX1RQh16dJFKcSZl6emwEtiYuKbb76JEOrTp4+5uXlsbGyTrlNPz+f5EM+fP6/67IoVKxp6oeonRlZWFm60a9dO+wG0GoLF9hqyE8fmEEKlmWeUavXQBLYBL17F5grbdX1pP//tgWvqiAiW6iTQZpDLalULoDPzbFIKmdIwECOXIt+qAzMAqkFdWYaivpbZU1ucRoc4uaYOOMTZau8Ai8117b2ifY+lD85Ficuf//tRyMR0EBYPgM01J3lmbK4518yJ2Y9UQpyiwkSKMR5KIReXZ9HL80mehVxSxSJNSL417pFJKitz/mLuoeZZSl3pfRObjs0+qRYaFxmJf2TeuXOH7qyqqiooKHBycuJyuT169FAKUGrJx+d5iPnvv5X/5VMUlZ+fjxNreHl50dcyAAAA3aIoKj09HScIGhsZ+U9c3MOHDzW/5NNPP1U7Ucbe3v67775bsGABc9Ll0KFD8XogJoIgPDw8Dh48uHDhQtUZmpMmTXJycmL2kCQ5Y8aM6urqP//8s+mnCAAAwMB0H+KcNWtWM15lZWXl7e2tzVICVXT0RInqjA9cdR0HOmnZ2dlNXSvRErdu3WrJVBQAjNPt27dVO+kkEnT+WWvr5+GVIUOGDB48WGl7ugwI/vOXSfVGPY5WTJo0CefJDQkJCQkJkclkhYWFl//++9Tp0xKJppXR+C4IbqiNtzaEoijVBFJqh2c8nEI/5Zk/z0EsrSl6cnW12s0IFsmsctMhYq+GfZJ8a3qGY0vUld5X7eSY2tPtdl3ma3g5R2Cv4VkmOoxIU53+qad3IOu3OTh+ihDBMXXgW3rZB72Po6ssNtd7xKGMU2OloiJ6FNbeIy3dB5q269KkZePMBe+YXOUEmZNJ68rUvPO1pekGDHEO+u8z4a+//mLmv7527Rqecz1u3LjmhThNTExwY82aNarP0p88od26QYgTgNcHV9jO1LGLwLYT38qLZ+ZM8q1ZpImhB6WGQlYnE5dJqvPF5Vm1JXdripKkokJDD6qZli5diqtBEgSxatWqqKgoDUvOLSws+vXrh9vl5eUJCQlVVVXh4eE4YTqPx5s0adLq1c//pOnevfuHH36I21KpNDU1NT8/v1u3bu3atSMIwsTEJDo6eu7cuUqHcHJyksvl9+7de/jwYYcOHQIDn98XnDFjBoQ4W4gkST6fz+PxuFwuh8Nhs9mtXHKToii5XF5fXy+VSiUSiVgsVs2CBYCRM/h1pCWjutx0H+LEk6podXV1Dc2RVCqQOnfOnIUff9yMI/r5+VlaWlZUVCj1KyXVkslkOOShlLvT2dm5GQcF4HWj4fOUoqiqKuUyMgihkpISiqIIgqBndjPz8GrYoZYrRqVS6fTp07/++uvAwEC8N5IkXVxcJr/33qTJk//8888tW7ZoeDmbzcaDr62t1bCZEs3pn4yQWfsezLo92b/NoeRStVuyuU2YgM/mmMjqtNiuUQq5ah9L65GwONoGASlKzYGU6OkdqK8tqa8t+a9dXFucVp513nPITlwgiE0KrDqMfHr7W4QQybfyGLjF1L6z9sOgUVpMKWXGjutr1GQqqK8pUu1sHc7OznRY89NPP1W7jY+PD5fLlUrV/wPWAF/smj92EELOjRUDBAC8Aki+lVWH4ZYeg+l57kaORZpwhc5cobNZu1DcU1N8p+LR7+UPz2uZqsV41NXVrVy5Ei+UMTMzW7JkiYZFM7169RKLxfhG8ty5c3FWooMHD65atSokJAQhhJcKYbNmzcKf8DKZ7P3338c/DPfs2TMuMvKDadNwxVcLC4vKl4soUBQVHR2Nkynhheo475BQKGSxWG3uTz5jwGazhUKhUCik0wUYCkEQJEmSJEnf5pRIJCKRSCQSyeWN/00IgAEZz3WkJaO63HQc4hwwYIDS2vD+/furBh+xr7766u23X5RW6PNf3Y+m4nA4P/3005AhQ5idEyZMoEstYxkZGbhx5coVqVRKj5PP569cufKLL75Q2u3w4cM/++wz+ufQ999///333zdvhAAYM4VCwWazSZJUe6uAZmZmhhtKtXfwh5rqX424DDq+gqqrq3EPnYTh9u3bqampqkfh8/lisVjtsnS1JBJJdHQ0SZLDhg3r3r27l5cXjqISBDFo0CCSJDds2NDQa2UyGYfDaWjwrwbSxMZjwIs4b178CnHFo4Y2lr1c7vxJgvJ8N5JviRNEUpSivrYY6Y28rhwJHHC7MGm7XPpScg8WyUcUpZBLEEKigms6PG6rgZmEIQAAIABJREFUvQOUQl6afgKHOBFC5u3fxCHO9t1jmPFNceUjUcF1mbhcJqlqH/55sw/3YoeMqax8S0/VDfiWXi0/SvNMnNh45SiCIMaMGfPTTz81dedyuRxnAT58+LDqT1YcAJXL5Tdv3mzqngEAbQhX2M4u4D3mbb82ytQu0NQu0Dn0k+J7PxanHWxbkzqTkpIuXbqEl593795dQwaS8+fPq00l9OOPP+IQp6WlJd1J3yTbvHkz86/ZEydPBnfubG9vj6OcSgt3bt++Tcc3EUIHDhwYP348QRAEQXTq1ImZNQU0iiRJCwsLCwsL/JCiKKlUWl9fL5PJ5HK5QqGgKKo1x0MQBIvFwr9xOBwOl8vl8Xg8Hs/GxqaysrKyshImdQIjZGzXkZaM6nLTcYjzgw8+YD4sKirSEDH54YcfmCFOExOT8PDwa9ea83vV1dX17Nmzhw8fPnv2rI+PzzvvvDNmzBilbZj5OhMSEvr06UM/jIyMfPbs2TfffEP/8pk8eXJ0dDSzxJDq0lQAXg1isRiHBfv27atUdYfm6+tLz3lUmys2JCSELg9C69z5ebCGDlnSHwiFhYVHjx7V1SnIZLKzZ8/iEsxBQUEffvihi4sLvv+vIcRZV1fH4XBw6k/jrBHUYoTHwK30yuuqvLjSjJOaNqcUclktvTi6NOMkpdDNtxFBEE36Nq6vfUYvl655lqpltk0d0Ns7oEouezF3mCPEKVwJc9cXt/ruHRsqFRXQD218x5pYebfwoLiwO8a38lZNJyqw66Tuda0hPDwcNxISEnBWGaYuXbrg5LkRERHNCHGKxWI8l/zOnTvwkxWA15ND55nt3lBep9zW2flH2flHFd7aie+TtRWbNm0KCQnBS3YWLVo0ceJEzYUKOBxOaGios7Ozubm5ubk5/huPydnZmZ6t/++//yo9u3Tp0ob2rHS7HUcT8LQpqEHXJFZWVvQ7hpepNpowSt/wylm5XE4v/uDxeHjNLw4hlZeXa6haDEDrM8LrSEtGdbnpMsTJZrODg4OZPb/99puG7XNyciorK+kQNUJo5syZzQtx4vVry5cvb6hmUXl5eWxsLP0wOjo6Li4ORzewOXPmzJ49u7CwsK6url27dgLBS4sfRSLRuXPnmjcwAIzckydPcJGf4cOHnz17Vu2tITrtQ0M3LUaNGqUa4hw6dChu0FWAEhIS8I33rl27quwDCQQCNzc3hFBBQYE20yptbW1JkpRKpcxUmKmpqfPmzTt16hS+j2Rtbd1Qosz09PSwsDCE0JgxY1RDnEuXLg0KCiIIYvny5WonnDaJvb29UhbgVuDQeQa9Ck8mqXx8OabRl4jyr1m4Pc/rb+09sjTjFPNZS4/BXGE7hJBcWq30lGYm1r41z5qQ8LQy9x9zl+fT8G393lYKcZraB5s6PI+el9w/oVApvNMSenoHVNl3epFKpV5UiBDiWbjS8WhxRRYzvknyrVse38STT+nK7Cw216nbgoIbLyb52vq/wxUaJnNLt27dcG5ckUikdtHigQMHzp49y2az7e3t7ezsioubNoU2MzMTf/IMGTJENcRpa2trZ2eHEHr48CFeCAkAeJUIbP2du8e0lWXpzdDujbnmLr3yE9bUluimOKq+URQVExOza9cugiA4HM6aNWvmz1efd9vNze3rr7+2s7PTnGYE/zmHb2g1aa7Q06dPlXpgcXpT8Xg8W1tbHBcWi8W1tbVGOztSIpFIJBKSJAUCAZ/Pt7KyEggEJSUlbSWKBF5hbeg60pIBLzeWFttoa/z48fQNNOyHH37Q/JK4uDjmQ7VRj0ZpM7/ys88+Yz6sqKhQXZlOEISTk5OXl5dSfFMul0+ePLkZAwOgTThy5AhuODk5bd++XfWPyJiYmC5dnle4Vls5HU/zVLpM3nvvvQ4dOuB2QkICbvz22284H4ednd2yZcuY27NYrP/7v//btGnTpk2bxo0bp83I9+zZs3///sOHD48ePZrZb2Jigqdgy2QyDYWAjh8/jhteXl7TXp6BPnTo0O7du5uamvJ4vPv31VRl0RIdLhk0aFCzd9I8pvbBzOkqFdm/mbv2tvKKUPsfXYWmJP3F/DiXHsssPQYTLDauw+MYMtu933qnbgudui209Xun0QHgBd2YY5e5Jja+BFvbbDIVj36nU2daug90Cv2YxXmexdXCfUCHYfvxMNp1/UjnCbd1+A7QOAJb+j++lZeF+wDvEYfMnLvTG1TmXEIISatfxDT5ll5mTs9/sPEs3HzHHNPR+SHR0yS6bR8wxSn0E4GtP9/K2zFkVvvwaF0dpalw7jOEUEPJuxUKBX0larOkXcmpU8/j0f3796dvvWC2trbfffcd/uRxdXVt+tgBAEbNqsNwn5FHXuH4JmZqF+gz8ohVh+GGHoi2cnNzDx06hNteXl7jIiNVtwkPD9+5c6e9vT39pymeIqT6y5/+zaz0UxTom1AodHZ25vF4MpmsoqKiqqrK+OMyMpmsqqqqoqJCJpPxeDxnZ2e6ZgAABtEWryMtGeRy0+Uszqiol1LblJaWFhU1UrjgwIEDI0aMoB9yOJzhw4erzbqiAc6kyay+ykRR1KJFi1STvJw7d04qlW7cuFHzd6FEIpk9e3ZLYhwAGLnExERcRxIh5Onpefz48czMzKSbN8USSZcuXXx9felURxUVFT/++GND+4mKiurTp8/NmzcpiurWrZuTkxPuv3TpUmYmLieN6uvr169fHxMTg/9yPXDgQEpKSmZmpru7e79+/fA0LplMdvjwYW1GfuXKFVyWfcaMGUFBQVevXi0qKgoODp4wYQL+a5iZX0nVvXv3Tp44ETluHEIocty4Hj17JiQkyGSybt264cmkODjbjNomtOLiYrzcYPz48f7+/vfu3Tt//nxJiQ4KkTeqffeX5mza+k2w9ZvQ0MalGafy4pcjhKoLrhcl73YMmY373futpyh5fW0xR2BHEC8+KgsSNdVxwurKMwW2z1c9m7UL8x31E0Io48yEurIHjb5WLq3O+nVOh4jny+7sA96zD3hPWvuU5FkxK54Xpx2S63QKp27fAZrXkF0anpWK8ksyTiCEKEV9zbNUU/ug5696a49cVosoBZujyz8F8q9tsHDpTfKt8UP7gMn2AQa+h0eSpL+/P25ryF9x6tQpXFmiZ8+eW7dubdIhkpKSfv/9d/xx8eGHH44YMSIpKam0tLRTp07du3fHHxcFBQVQTh2AV4xdwGTn0E8MPYomcLYhAt1Y3s4sF1vCxowQ8BBCqFaCSqupvBIqM19x57Eiv7TB1C9uvVeSfKvitEOtOujmOnr0aK9evTw8PBBCuCKQknfffRd/PkskkuPHj1+4cAGvJXJ1dd29ezdzy2vXruFy6hwOx8TERDVrPNAHCwsL/AO8rq6OTrvP5O7uHhYWFhQU5OXl5eDggEMbIpHo6dOnWVlZd1JTr12/npOTo27feocXgZmZmZmYmNjb27PZ7Fc1Lz8wcm36OtJSK19uugxxenm9VKbgr7/+avQld+/erampYRZZHjVqFA5xKoWumTNalZ4SiUR9+vSJiYl55513lOKVd+/e/fLLLxsKc/z6669paWkxMTG9e/fGhQiYpFLpjz/+uGHDBqUiUEqr2KQNLGozzkSwAKj12Wef7dmzB+diFwgEwcHBSkknEEK1tbULFy5Uu35HLpenpaUFBwc7OTmNHDmS+VReXt7GjRuZPVeuXLG3t582bRqeyzlw4MCBAwfSz1IU9cUXX2g5g33//v3h4eHm5uYEQYSHh9O5/LCKiopt27Zp3sN3+/e3c3J68803cXEkpRy+ubm5mmuyN+r48eNLlizBk8QDAgICAgIKCgp+//33luxTSwTZzAJ8Rcm7Sb41HQ8lCDbX1JG5wZOENdX5CY3u51nKd9YdRjDDgnh3Wg5DVHgj59Jn7v1fpFLl/leACKt8fKkgsZH/v82jq3dAG1VP4nMufaKQifHD/BsbO0Tso8O4dFZQeb1IWl1AT7ZtCUV9zcML03zHnFD+X4OQQi4tzTjZ+oU4RowYgX/ElpeXa7gzmpCQUF9fz+FwBAJBYGBgU1Nqbt261dHREWefcHNzo29jYCKR6OOPP27BSQAAjE7bim/2CWD3C2L5OqtZYCfgIQGPcLEl3uzIQghl5Cv+TlX8k6a+Ri0+5bYS5YyJiTl8+LDqrzDM3d0dN44ePcrMwtxXpURtaWmpTCbD+4mIiKBn7mOrVq1ycHDAOUDT09P1cB6vIzouIxKJamtrlZ4dPnz46NGjVX9N4AlrQqHQy8sL33dMSUk5c+ZMU2c46Up1dbVcLhcKhfhcIMoJWtmrcR1pqdUuN12GOAMCAprxqoYWp0dERDT0ErVPrVy5cuXKle7u7nhFbX5+flpamubc1TgL4YcffshmswMDA318fGxtbXE5gtu3b6sNoiOEdu3atWuXpik5WFBQUKPbAGAkJBLJ+++/P3v27CFDhuAkIEwymSwxMXHt2rWqWepwKJ+iqMWLF8+aNYsOVeDOO3fufP3116qHO3nyJEVRUVFRzNsbFEXdvXt369atBQUvluvSNxiU7jRgVVVVUVFRn376aa9evZh/H0ul0sTExNWrVzPvNNDBWaVdrVy5ct68eYMGDWIm5xWLxXFxcUozxeiTVR0Jfd9Faefx8fE7d+4cP348zvTXqqgmJJOiV4VjTxLWSGuK7AOnkDwLZr+oKCn/2jrmNEwKUcy9MDeWVOU9OBtlFzDZymsoHU2j8P8FxtiohsdZkfPHoz//167rfKUy31JRfv61DZW5L+V+peTq7jYxd64SnacUckb7pZdr/w40RMN5KeRSccXD2mdpoqe3KrJ/ZT5V+yw148wE975r6WpLCKGqvCtPEta07x7zIsRJv9UvnaDyNcKslcRsiysePbww/aUdIlRdeP1J/Epz1z6Ml7RSVkr6Jsfff/+tecuUlBT8N8Po0aNxiFPtVdnQpRoTE6P6cSGTyf7+++/du3fDrB8AXiVWHYa3lfhmqA9rXA/SxVbbW4C+zixfZ9awbuwT8bIbD9R81ziHfiITl5c/NOrfulhVVdXGjRujo9WnSaE/xplZRBwdHZXSE2FPnz51dnZGCE2bNu369et0AvSpU6fiXMwURdHVL0EL0UGK6upqpW/Pfv36zZo1S2nmkwZ4XsWkSZP27NnT6J8B+lBbW0tRlJmZmY2NjVwubzR6AICuvErXkZZa53IjIPMUAIApJCTEz8/PwcFBoVCUl5U9ysn5999/tZ+V7Onp2b59+/Ly8gcPHjQ6GdPOzs7Ly4vNZufl5eXm5rZk2Kampp06dcJxUtWbYI0iCKJ9+/aurq5isTgtLU3niZBNTU2FQqFMJtMmd3BTPX78GCGUuTeU7hm4Ujl9frMQXGE7rrAdItj1NYXS6nwNYbtGdsTmESw2JRM3bw8k35pr5sTmmsnqSiVVufScR/3T2TvQ5AOz2DwLd4Jg6/V8SZ4lR+iIKIW48jElV/9v/s8vXkye9Z5xAxd/0NN4WgdBEC4uLi4uLgqF4sGDB/q4JAEAhiWw9fcZecTQo9DK9MHkgODmp4/8K0W+73f1KdsenHvXSKoP0evKKYoaNmyY6gZffvklXS8IIfTRRx89fPgQIbRlyxZcD5OiqMzMzDupqR6enkFBQfRtKuYOfX19N2/ejG+0UxSVnZ399OlTb29v+h5zenr6J588j3qfOHECl15Yv369UrXMkydPmpiYIITWrl2rVDQCYDihntp5Z4tjYsaMHdvsPZ8+dWr1mjW6GGOTCQQCvP43Pz8fqg+BVvBKXkda0vflpstZnACAV0BycnJycnKzX56dnZ2dna3lxsXFxU2tjNyQmpqaGzduNPvl+N6+/m7v19TU1NToOGuk/lFSUQGzrnfzdySXUOpX1GlFJi6TiRssG6VPOnsHmnxghVxcrve8kDJJhUxSocWGrxSKonJzc1t4TwUAYMycX85GbZyshMSCkaTalenaGxDMbm9LbDsnKxcp34p27h6T+XPbKJe6atWqI0eOqNagOHz48PLlywmCIAjCx8fHx+f5yoPS0lLVGgwZGRnLly9ftmwZ3t7Ly4s5Aaqqqmrt2rX6P5XXAl71WFdXx4zL2NnZrVmzRu2KWu2NGTvW08srJiZGV78OtFdbW8tms01MTGxtbekpwADozyt5HWlJ35cbhDgBAOCVQCB61XjIB8kU0nmxcfDaIRCF0Fv0AwAAMH4OnWcaf/10KyERM56j/eJ0DXydWTHjOWuO1ytFOU3tAh06z3x6+9uWH6KF1OYaYpLJZEuXLqXnYNKZhZKSkj799NOvvvrKzMwM91AUlZSUtHfv3j179qju5/r16xs2bJg5cyZdJxPv/N69e0uXLmVmW6IXJ6mmmKefanTYrycrKytc95mZ0s3Ozm779u3aL6rVIDg4ePv27fPnz2/96Ex1dTWHw+HxeFZWVuXl5a18dPBaeYWvIy3p9XKDheoAANC24YXqOcci6yufz0LdX/b1PXF4Y68DoBH+/GsfWH+J2xwLF/cJJ1+BheoAgFcYV9jOf8JFQ4+icV+9y2nh/E0lGfmKr46oSaB871iEVFSowwMZBI/H69Spk0QiefDggWpeeFW2trZeXl4kSd69excXYQc6QZIkDh1UVFRIpVK6f9++fS2cd6YkJSVl+vTpOtyhlrhcLo6P5+bmKtU3BkBXXvnrSEv6u9xgFicAALwKBE7dKv8Lcb4pXvzj92VaJ1AFQA2CQDOmWiP0vAyXwKmboUcEQJvk7e09ceJEnMjl4MGDuPOtt94KDw9HCF2+fFkpFaBRCQwM/OKLL0xMTE4cP37wkI6LdKt9Z1rILuA9nexHr6YPbun6dFW+zqzpg0nVvJx2Ae/lX1un22O1PolEcuvWLe23LykpKSkp0eeIXlMWFha4JiczLrM4Jka3cRk8B21xTEzr5xOUSqVisZjP51tYWECq7jZkwoQJEydOrK+vX7duXWJioqGH04hX/jrSkv4uNwhxAgBA25aTk+Pu7m7uPbQy/RTu6ejE+Waq9eF/a65lSiDQCZqKIFC4N29iT1NfJw7dae49FP9jM+jQADAiHA5ny5Ytjo6OAoEgNjY2NjZW7WadOnUKDQ1FCPn4+NCBvL59+wYFBeHFsMYc4pw9ezZeIzx+wgSdhzjVvjMtQfKt7PyjdDE0PQr1YbWkvpAGA4LZqTkKpRrrdv5RT29/KxPDqlvQUmw2G4dmmKkD+/Xr15K6KBqMGTs24dq11q8NXVtbi2MuFRUVhk1W0KtXr3fffVe1v7q6+s6dOwkJCbgqF0AITZo0iSRJDoczc+ZMIw9xvibXkZb0dLlBiBMAANq2+Ph4d3d3vkOQhd9YOsrp68RZMcGysZcCoBULv7F8hyD8j83QYwHAWIwcOdLT0xO3x40b11CI0/h5e3vPnj0b1wBUKslSWVmJG0qrg9evX89msxFCS5cuVSoFa0BWHYYbegiNG9dDjz++xvUgbzyQKnVadRhenKbj8DR4DeF6UBKJhLmkdNasWfo74qxZs1o/NCOTySQSCY/HEwqF9AegQXTo0KGh1EABAQFRUVE1NTXz5s17+vRpqw/N6EgkEpIkcXVyQ4+lEa/JdaQlPV1uOl4lAQAAoJWdPHkSN+x7RgvaQwpOoGOC9uH2PaNxm/7HBgCIiIig2zweLywszKDDaT4PDw8/Pz8/Pz/VU9iyZUtqampOTs66dS8tdg4ICMAvoevAGANLj8GGHkIj+gSwdVJiqCEutkSfAOUposb/toA2AYdmxGIx3TN8+HCdlEZpiJeX1/DhBrhvgc8Rn68xMzU13bNnj4eHh6EHYnirV6/Ozs6+d+/ehg0bDD2WRrw+15GW9HG5wSxOAABo25KSkmJjY3FGM+eI/3v271p6LicALWThN5aOb8bGxiYlJRl6RAAYBUtLSycnJ2bPuHHjrl+/brgR6UVxcXF0dLShR6EVrrCd8RdS7xek98kl/YJY/6S9tNzP1C6QK2z3ChQdAgZEkiSPx6MoSiKR0J2jR4/W93FHjx59/vx5fR9FiUQioSiKx+ORJGkMRYdEItHUqVNxm8Ph+Pj4vP32235+frhgy6JFi+bMmWPoMRpYcnLyvHnzDD2Kxr1W15GW9HG5QYgTAADavMWLF7u4uPTu3RvP5TT3HlqVeaG2ILG+Kg9BLk7QVATimLsInLqZew/F69MRQnFxcYsXLzb0yAAwFu+88w5uPHv2zN7eHiHk7+/f7D/QCYLw8fHx9/evqalJS0srKCjQsHFgYGCHDh14PN7jx49v375dV1entIG5ublAIEAIlZWV4WoGQUFBAQEB2dnZd+7cqampobfk8XhWVlY21tb4IZvNdnR0xLMqcB1qLpdrbW2NE2ZVVVUhhPAGNEdHR4IgEEJFRUVKw3Bzc/P397e2ts7Pz79z546+a3eYOnbR6/5bztmG0HmVIVW+zixnGyK/9KXvflPHLtKHRvr7FrQJfD4flwehe9zd3XVeHUVVcHCwu7t76+cBl0qlPB6Pz+cbw8JnhULB/Ny+cePGjRs3VqxY0aVLF4SQs7Oz6kt4PF5ISIibm5tUKs3KykpNTdWwf0dHR39/fysrq/T09Pv37ysUChMTE5wvsrq6mj60ra0tXgyOP+3Nzc179+7NZrN//fVXZsCuqYfu1q0bm81OSUl59OiRhi19fX2Dg4PLy8uTk5NVi4nR33rl5eXMwWAWFhbBwcHOTk51YjH+3qRUKhVo/73ZEq/bdaQlnV9uEOIEAIBXweTJk1evXo3ncvIdgujIFAAtFxsbC/FNAJj69u2LG8ePH584caKlpSVBEBERET///HNTd9W/f/958+bhXz5YUVHRp59+WlZWprTl6NGjp0yZwuPx6B6Koq5cuaKUQHPz5s14humxY8csLCwGDx6Mo5B4+z/++GPbtm34B96MGTOGDh1Kv5Akyf379yOE6urqIiMjEUJTpkwZM2YMQujJkyczZ84MCAhYv34981hr/ivVOn78ePpHoL+//5IlS6ysrJhbPnr0aNGiRbr6oahKYNtJT3vWlUC3VsoPFujGyi99aSKnwLZTOYQ4QQvgjx1mTt7w1krNERYW1vqhmfr6eh6Px+PxjCHEqda33367Z88e/Lnt5eWVlZVFP/X555/37t2b/tjHIaQffvjhzJkzSjuxtLTcsGEDM0gqlUp37doVHByMv+Pu37//8ccf46cOHDiA97lw4cKlS5da/3dvLC0tjT669od+//33IyMjcU5njKKov/76a/PmzczNOBzOihUrAgMDmfuUyWS7du26ePEi3bNu3Tqct/T8+fM7d+6k+wUCwbp165SWgctkstOnT3///ffMTu2/N1vidbuOtKTzyw1ycQIAwCti8eLFY8eOjY2NNdrvMNC25OTkxMbGjh07FuKbADB5eHiYm5vjXz6//fbb1atXcX8z0l25ubl9+umnzPgmntjyf//3fyzWS3+l9+/ff+bMmcz4Jp7+2bt370WLFjE76Rf27t17yJAhzF+GBEEMHjz4ww8/bOo4mTvRzNHRce3atUrxTfym7dixQ+mkdIhvpcdcZjrhrf8pnA0dyPjfHGDkuFwujg3RPYFBrXQrPai1DsSEzxSftXFizovHKwmwzz//vE+fPkqf2Fwud+bMmf3792d2kiT5zTffKE0C5XK5CxYs8Pb2xg/VfvIz45tM2h963bp1EyZMYMY38bEGDhy4b98+ukcgEBw+fDgoKEhpnyRJzp8/f8GCBapjYG5JkuSuXbtU01ySJDl+/PjJkyczO/XxvanqdbuOtKTzyw1mcQIAwKsjKSkJsiUCAIBevfvuu7iRnZ0tk8lOnDiB50K2b9/e3NwcL+jWEp42IhaL7969S1FUp06dTExMEELW1tYrV66k7y4EBAR88sknuF1VVZWQkFBeXh4eHu7u7o6nlObn56uWdHd0dKQo6sGDB/fv33d2du7SpQv+2RYREbF3716JRPLHH3+IxeIOHTrgHz8URZ0+fRqn4FQ72tzc3FOnTiGExo4di3v++OOP6upqiqLwenmhUPjNN9/gxYwymSwxMfHBgwchISF4Do69vf2mTZsWLlzY9Le8cTwzNas1jYpeCw1pPpDxvznAyHE4HISQXP5idrBeC6QwtdqBmPCZ4rM2Tv369aPbmZmZuDFx4sQ+ffrgdl5eXkJCglAofPPNNy0tLRFCn3zyybNnz9LS0vAG69evpyOV1dXVd+7cwd815ubmahe/0/CrSktLHz9+zOPxcLBV+0M7ODgEBj7Pm3z79u2TJ0+amZkNHDjwjTfewN+Jb7zxxq1btxBCI0aMwBXtKIo6f/58XFycj4/PsGHD8Pfm4MGDd+7cyZwRqWT79u12dna4nZ+ff/PmTTs7u5CQEPwlGxUVVVZW9ssvvyi9qtHvzSb+j3rJ63YdaUnnlxuEOAEAAAAAANBW165dcePChQt4XXlFRQVeqz5+3Ljv9u9v0t6Ki4vff/99egXc/v37cb7Lzp07C4VCvG7rf//7H/6VVVFRMWXKFPyj7uDBg1999VVoaCheJ64a4kQIbdiw4fLly7jdt29fPN+TIAhfX9/U1NSMjIyMjIzBgwfjEKdUKmXOoFFVVVWFN6BDnEeOHHn69Cm9wbRp03A6M7lcPn/+/MePHyOEfvrpp6FDh+JaEL6+vo6OjqqJO1uO5KuZVWRUbMxaKcSpeiDjf3OAkcMT7hQKBd3j4ODQOodutQMx4TNVmmZoPIKCgmbOnInbNTU1dG5K+vbbzZs3ly1bhtt79uw5cOAA/oaaPn36//73P3w7qmPHjniD3Nzc2bNn0zvfunWrj4+PhqNTFLV8+XKl8nraH5qurlNWVkbfxrt8+fKyZctw6DMsLAyHOOm5n/Hx8bt27UII3b179/z587t27cKpQt94442GqvzhfKC4ffHixe3bt+M2l8uNjY01NTVFCE2dOlXqcJslAAAgAElEQVQ1xNno96aGd6ZRr9t1pCWdX26wUB0AAAAAAACthIWF4dXiOD8X7vz3339xo/+AAU3aG0VRCxcuZGb4Yj7Es1qY6xBjYmKYk1a++uorPP2By+XitfNM+fn59O80/BuSnoFCr0PULfo385nTp3F8E7tw4cKTJ09wOzw8XB+HZpEm+titDgl4WmyknwMZ/5sDjBy+xcL8pBIKha1z6FY7EBM+U+0TdOiVmZnZvv/s37//5MmTa9eupae8HT58GDe8vLzwgGUyGR1kxIkOV6xYgdvt27fHDXxvDN+OUppZ/9lnn2mYGokQ+vPPP5UCi006NM3c3NzV1ZV+uHz58vHjx48fPx5HM5n/3nx9fekkLfX19dOnT8dbNhTfZJ5gRUUFHd/Ed/Kio6NxWyAQqM4c1Ov35ut2HWlJ55cbzOIEAAAAAABAK+PGjcONrKwsOqPWyZMncSJOKysrFxeXvLw8LfdWXl6uVFaosrKyrKzMxsYGT9WJi4tzcHDAS78RQrgKEBM98SEsLIwOuWIZGRlKG4tEIvxD0VQg0PqMm4Cutx4QGEgXqVB6qnPnzqqlJwAAAKhFEARemq2EoqgjR46cPXsWPwz7r3ANSZJKH790okmBQMDlcqVSKX3/rKysDKcZodXX1+fn5+MsKGr9888/Sj1NOvTly5dHjRqFN969e3dRUVFycnJ8fDyeucmUnJyMY6B2dnanTp3Kzs5OSkr6559/NNdex/z8/HDjwYMHSk/h7278rdqlS5dr164xn239702gcxDiBAAAAAAAoHEkSfr7++O2k5OTUilzLCoqSqnsuAb03Eam/Px8HOLEqwWZ0x4HDhzY0K4CAwOVQpz06kWa5rk5LSQUCumJNr6+vr6+vmo30/DLuSUUsjojn6tYK2mliZy1KsniFLI69ZsCoB2KogiCIAiCnoAmEolaZ16YQWqaq862Myx6JMyZbtOmTWMm/WDWk9H8TZGUlERPn1SbNiQvL0/DB7XqN0uTDp2RkfHLL78MGzYMdzo6OkZERERERMhkstu3b2/fvp1OBr13796QkBA8VIIgvLy8vLy8JkyYUFNT888//+zcuZO54lsJPWmUTlTKVF1djWvide3aVSnEqdfvzdftOtKSzi83WKgOAAAAAABA4yIiIuhfmAKBIIiB3oaez6INtcmn6EMwixJgEhV4M4lEUl1d3axz0gupVKo6Tjz+8vJyfRxRJi7TYitDKq1upXCJ6oGM/80BRg5/FtEz8hBCzCS8etVqB2LCZ6r6CWwQVVVVw/6zatUqun/MmDHMzZgRIrXfFLiBFx8UFBTgLZnV2GlqJ41q0KRDI4R27Njx5ZdfpqenM19IkmTXrl337t1Lh18VCsWcOXP27NlDjxYzNTUdOnTot99+q6FADR39ZLPUxLvoL1lmcfNW8LpdR1rS+eUGszgBAAAAAABoHF6NrpmJiUlISEhycrI2O1RbuJaefoJX2F29enXWrFn4Z6TSb1qjIhKJJBIJnsi5dOlSXJ+31Uiq87lCo64bnldCtU5R9bwS5RCnpDq/FY4LXmH19fUkSbLZbDoMkZWV1To1mrOyslrhKErwzSe9Tntvnvj4+KKiIpz3Y+jQoYcOHaJn5925cyc4OBiHL6dPn655P8nJyb1790YI2djYcDgc5pkSBKGaN1OzJh0aS0xMTExMRAj5+/v369evf//+uNA5l8udO3cunS6ToqizZ8+ePXuWw+GEhoYOGDCga9eueI25k5PTsGHDGkp78uTJE5wb2ltd6SRcqB0Po0ln2kKv23WkJZ1fbjCLEwAAAAAAgEaYm5vTP/x27tw5RkVFRQV+9u2339ZynxYWFkrzZRwdHS0tLXH79u3buOQ6nmlCEISeygRhzahnqlTjqLCwEDfefPNN3Y1LK+Jy4/39hmXmN7imUt8HMv43Bxg5qVSK59nRPS0sLa29O611ICZ8pvisjc2WLVtwg81mMxNf0guu7e3tWeqmLjLRG5MkqZRZZfXq1XTKES016dBK7t27t2PHjsjISDoJpqenp+pm9fX18fHxy5cvHzt2rFgsxp3dunVraLd309Jww8fHR6mOTVBQEP1ll5KS0qTRttDrdh1pSeeXG4Q4AQAAAAAAaMT4cePwLyW5XH7hwgXV5Xh0EQZ/f38ta4MSBLF582b6Bw+Lxdq8eTP9WhziRAg9e/YMN9auXcvM2+Xk5HTu3LkLFy5cuHCBLh/RVPTPRZIkmxpC7d+/P/Mh/Rt15MiRgYGBdD+Hwzlw4AAe5//+97/mjVOz2pK7+titDt153EohTtUDGf+bA4wcXm7MXBesoZi1bl1rrQMx4TOlM2wYlTt37tD1dsLCwuhKbtnZ2XjdN0mSW7duZb5k0KBB+OP3559/xiHIyspKeie+vr6HDh36+OOPFy5ceODAATwfs0madOgffvjhl19++eWXX7788kvmlnRW0KqqKoQQj8f7+eef8ZZ04k68tLympga36Ztqqq7fuIEbZmZmS5YsoftNTU2//vpr3BaJRK28UP11u460pPPLDRaqAwAAAAAA0Ij+AwbgxsOHD9VWOThx4gRdKHbIkCG//vqrNrs1Nzc/depUbm4uRVFubm50uPPy5ct0odtNmzZt3LiRIAgTE5PDhw+np6c/fPjQw8MjJCQEx0Pr6upUy9FqiVlwdvPmzQ8fPszIyNi9e7eGl0ilUi6Xi0OZXbt2zc/PX7lypUwm27dvX48ePYRCIUEQa9euzc7OTktLs7a2DgsLw9sjhI4ePdq8cWpWU5Skj93qUH4plZGv8HXW7/ySjHxFfqnyQnXjf3OAkcM3QuirGCGUk5OTkpLSjHBYk6SkpOTk5Oj1EGrhM6Vv/xibjRs37tixA98ki46Opu8bHTp06L333kMIdejQ4ciRI2lpaaWlpQEBAfRS6Hv37tFfXgsXLjx48CCeiW9jY8MsE1RcXGxnZ9ekIWl/6Bs3buCUL2FhYVu2bLl27VpFRUXPnj27dOmCt/zrzz9xwKuwsBCvnJg7d263bt1u3LjB5XIjIiJwOT78ndvQeNLS0tLS0gICAvCqgiNHjqSnp1taWnp7e+MvWYqitm3b1qRzbLnX7TrSks4vN5jFCQAAAAAAgCYuLi64ACtC6JdfflG7TWlpaWlpKW6PHDlSm90+fvyYoiiSJD09Pb28vOj4Zn5+PnPxYHp6+urVq/E0GS6XGxwcHBkZ+cYbb+D4pkwm++yzz5p9akVFRXQJIDab7evrO2jQIM0vofOXEQTh7OwcGhqKFzbW1NTMnTsXLzfDBXBHjRrVq1cv+hfdrl271BbwbTmpqLCmuFWzfzbD36l6n8ipeoia4jtSUYNznQDQhkwmk0gkBEEwlzA3lAZRh1rhEKp4PB5BEMzyOMbm0aNHd+8+n5rt4+PTqVMn3D569OiFCxdw29LSsmfPnqNGjaKDjOXl5cuWLaN3IpVK582bp1SFRiaTfffdd/QCAu1pf+gDBw7QxfF8fX2nTJmyYMECOr5ZUFBw5uxZ3N61axfOWUkQRGho6Lx582bOnOni4oKfjYuL0/xt8vnnn+fl5dFD6t69u5+fH/0lu3v37vj4+KaeZgu9VteRlvRxuUGIEwAAAAAAAE1Gjx6NG3K5/K+//mpos7i4ONxwc3PD8Ue6Yixz4ifdmZeXt2zZMrwuj5aRkaG6mjs+Pn7Tpk1KW1IUlZqaOmPGjOzsbLqTPpCi4fqk8pdnoX7yySfJycl0AYQXY/6vR2nW6rp1637//Xe1cy5KSkoWLFhA/7CkFRUVxcTE/Pzzz6pvgtopsc1Q8eh3nexHf/5Jk6vWAtKhvBLqnzTl/+nG/7aANgGXteHz+XTP+fPn9VrDJCsr6/z58/rbf0PwOdJlfAxFc4HpjRs30h+hH330Ed3/zTffnD17VimtoUwm++2336ZOnaq0FrikpGTq1KkzZszYunXrd999Fx0dPXbs2JMnT9L/l9V+ODcUitLy0DU1NVFRUf/++6/SfiQSyS+//DJ9+nR6+UJycvKUKVNycnKYhdfx/5r169evXbuW7qHHyXzTKIqaN29ecnKy0stramq+/fZb5pdR8743m+f1uY60pI/LjXB1ddXh7gAAAAAAAABNYmFh4ePjI5FIMjMz6R94atna2np5efF4vJycnNzcXJ0PAyFUXV2tZdjR1NSUx+PV1NSoZtESCoWenp7W1tZPnz59+PBhK9QmJvlWAe/+re+jtFCoD2vhKI4WGzbHlrP1Nx4o/49LO9JPJi7X0xHB64PNZru5uSGEysrK6OBUv379lIrV6NCiRYv+/ru1r2iSJK2trfEUe81BRiPn6urq5uYmk8kyMzNLSkqUnuVyuSNGjMDtixcv1tbWMp/dv38/TvF57NixH374QbeHZjI3N/fz81MoFKmpqZpTMTo6Onp7e5eVlaWnpzf1rhhJkh4eHu3atauvr3/06JGeVhJo6TW5jrSkp8sNQpwAAAAAAACANs85/HM7/yhDj6IR0weTA4KbXLy+UX+lyPf9rjy7qvjej/nX1un8WK+Jt956Kzw8HCfGvXz5suaNSZJcvHgxi8Wqr69ftWpVa42xVdnY2FhYWIjFYuZ08sUxMWPGjtX5sU6fOrV6zRqd77ZR5ubmfD6/srKSzjrySmKxWGfOnMGrtgsKCugEI87OzpMnT+7duzfebMqUKcXFxYYe7KvmdbiOtKSnyw3KDQEAAAAAAADavOK0g8Yf4tz3u6y9LaHbukMZ+QrV+CZ+Q3R4FJ3gcDhbtmxxdHQUCASxsbGxsbGGHlGD+vbtGxQUhFe/Nhri5HK5OB76CqusrLSwsODz+WKxmF6PvHrNGk8vL93WS0lJSTFIXIbL5eJls5WVla1/9NakUCj++OOPiIgIhJCTk9OZM2dqa2txRTt6m7y8PIhv6sMrfx1pSX+XG+TiBAAAAAAAALR5UlFh4a2dhh5F47adk+kwKWdeCbXtnJr4ZuGtnUZYaGjkyJGenp4CgQAhNG7cOEMPBzSBTCbDpcmEQiGzPyYmRofJBLOysmJiYnS1tybB51VeXm60hYZ0aNeuXVevXqUfCgQCZnzz+vXrs2fPNtDQXnGv/HWkJf1dbhDiBAAAAAAAALwKnt7+1vhLq5eLqDXH6zPydVC8IiNfseZ4fblIOWBaU3zn6e1vW75/ncMTxzAejxcWFmbQ4YCmKS8vl0gkJEmamZnRncXFxfPnz09JSWn5/lNSUubPn2+QyYNmZmYkSUokEhx+euXJZLKVK1dGR0cnJCTk5eXV1dXV1tbm5OT8+eefy5cv//rrr5Wq9AAdeoWvIy3p9XKDherKuFwu3ZbL5U3Ne0qSJIv1PHCsUCheh1tADWGxWDjBB6ZUXg0AAAAAAACdy09Y4zPyiKFH0YhyEfXVkfoW5uVUm38Ty08wxvWJlpaWTk5OzJ5x48Zdv37dcCMCTVZSUuLs7GxiYiKXy+kyNcXFxdOnT29hPkED5g2k5zBqLo/z6klNTU39f/buPCDqOvH/+GcuhuEYbgS5BDxQFC1MvI8sTW1rzb5aZvdBWZlbu7W1drfbdrnVpm1rd5lXtpZmaZZHeZsaCCoCAgrIfR/DMDO/P97b5/fZzwACojD2fPz1ns+85/15fz4yOLzmfaSkdHcvfosuyvdRO53vtxsR5/9ITEz89NNP5YcFBQWTJ0/uUAuHDx/W6f77ScXhcAwaNKir++gyli1bNnr0aPnh4sWLly1b1q09AgAAwEWuvjQ9d8eiqPEvdHdHzu7dzc0pOfbrx+gjAjUdeuGpUsfnO5ud908Xcncsqi9N76I+dqUbbrhBFIqLi4ODgyVJGjRokF6vdx4UYjabxWT28vJyMU4iISFh8ODB2dnZqampdXV1ysomk8nHx6eN89bX1yt39hB8fX2HDRsWGhKSlp5+5MiR9mzT3K9fv8TExPT09NTU1N/sGDeLxSL++by8vBwOR0NDg/zU3158cfeePcnJybGxsR1qMysr65133umufZ9NJpOYM1tcXNz2vt5AV7n43kftdAHebl0ccYaFha1bt66NCg0NDeXl5cXFxUeOHHn//fdra2u7tgPnSDmEU4xD7GgLGk3HPqBcxOSoV1DdW/QQ4hNhc3Oz6sOioNFozGZzeypYrVb5CygAAIBuVJG5Qe/uFzbike7uyNnty7Dvy2iaMFg3KUHbnj2Ijufbt6bYtx9pdZ5Z/r7XKjI3dHU3u8bEiRNFYc2aNTfddJOvr69Go5k2bdr69etVNRcvXizGe65evdrHx2fKlCnyH1kOh+O7775744035JDx/vvvv/zyy9s4b0FBwV133SU/nDJlyvz581V/mxQXFz/88MPl5eUttnDDDTfMnTtXnqDmcDj27dv37LPPdvweXAxqa2t1Ol1AQIC3t7dGo1H+CbB169atW7deffXVv//979uzd8ovv/yybt26DRu67SfWw8NDBC5lZWU9LZrAxe1ieh+104V5u3VxxGk2m1XLpqp4eXkFBQUNGDBg3Lhx995777Fjx1566SWmJwDdIiwsTAyttVqt1157rXOF6dOn33///SLivOaaa5wrTJ06dcGCBWJc/a233npBeg0AAHAWJUc+kSTJJVJOSZK2H7FtP2ILC9AMidL2C9NGBGoCvDUeRkmSpHqLVFbjOFXqOJFvT82155e1NXgwf99r4sJ7oOjoaPG9uMPh2LRpU3R09PTp0yVJuvrqq50jTnmgyfjx40NCQpRPaTSaKVOmNDc3v/XWW53oxh//+McW89Dg4OD33nvvoYceysvLUz3Vt2/fUaNGqfqQlJT02GOPvfTSS53ow0VAbIIcEBDg5eWl0+lqamqUz27YsGHDhg19+vQZmZQ0JCEhNja2V69eIiWora0tKirKyspKSUnZu3dvTk5O912E5O3tLSbMlpWVXfS7qKMHujjeR+10wd5u3TlRXaPRDBw48MMPP3z//fdfeeWVbuwJ8NuUn59vtVoNBoPBYIiIiDh16pSqwrhx40RBr9cPGDDg+PHjqgryWgRpaWnno4ePPvro2LFjxZf527ZtOx+nAAAAF6WSI580N1a4xIx1Ib/MkV9m+/Zgx3YCkOXuWNRjx29KkjR37lxRyM7Obm5u/vzzz0XEGR4ebjabnSeSCyEhIQ6HIyMj49ixY2FhYYmJiWI457Rp05YtWybmOX777beVlZWqF4aGhsq55I7t20XBx8dn0qRJolxRUbF79+7q6uqRI0dGRUVpNBqj0Thv3ry//e1vqqaCgoIkSTp58mRqaqqfn9/YsWNFHyZMmPDmm28qZ5j+plRVVdlstuDgYJPJZDAYamtrVVsv5OTk5OTkrFy1qvv62Co3NzcvLy8xLLe4uJjxm+guLv0+aqcL/HbrEWtx3nHHHUOHDp03b153dwT4zcnOzh4wYIAkSZMmTvz4E/XX/v3795fLV111lXPEKVfYsmXL+eiej4+P+G3Y9vBwAAAAZxWZGyyV2WGjHvcMGtLdfTmP6kpS83e/2DPX35QNHz5cFDZu3ChJ0pkzZyorK8Vc9f+7/vr33n+/tRe+8sor8vfcEydOfPTRR8VYmQEDBoidUo4cOXLkyBHlS4xG4/Lly0X56NGj8kfccePGNTY2iiU+58+fb7VaJUn6+OOP//rXv15yySWSJMXHx7fYh+XLl8sN9u3b980335Qv6scffzzne+OqamtrrVZrYGCg0Wj09fVtbGysr6/v4dvt6vV6Dw8Pd3d3sR5iaWkp62+ie7ni+6iduuXt1uG1Jjvqx1/99NNPqampZ86caXEt58TExPnz55/vzgBQ2bVrlygMv+wy1VNhYWHi95Fw6aWXqioYjUYx4chmsx08ePD8dxYAAKBj6kvTT6y/ufDg0u7uyPlSeHDpifU39/B8MykpyWg0yitpioM//fSTKFze+v6u+fn5ynk827Ztk/9C7tevX2uveu2118RuRTU1NX/+85/l4xs2bJg1a9asWbPuvvtukW8KK1asEAVfX1/n1mpra+V8U5KkzMzMsrIyUR42bFg7rv5iZrFY8vPzKyoqJElyd3f39/f38fER/9Y9jdFo9PHx8ff3F3/gVFRU5Ofnk2+iJ3Ch91E7dePb7fyO4rTZbPfcc4/qoJub21133ZWcnKxa4/mBBx749ttvs7Ozz2uXACht3rz59ttvlyQpIiJC9dRVV12lfBgYGGgwGJQfB8eMGSMKBQUFzi1HREQMGDDA39//1KlTaWlpLc4/EoM0LRaLGK/u6+s7YcIErVa7ceNGo9FoMBjkjNVsNgcEBIiPqmL0vslk8vDwcDgcLS4MbzabDQaD3LL4zePt7S1+w4ovWiIiIkaMGHHmzJnU1NTWpkcJMTEx/fv3N5lM6enpGRkZDodDo9H4+/uLT70t/rLuxOUbDIZRo0b5+fmlp6dnZmb+ZnfqBACgyxUd/ndF5vqgwbcEDbqxu/vSZUrSV5Qc+biptrC7O3J2119/vShkZWXJo5PWrl179dVXS5Lk5+fX4opJkiQ5TyGqra0Vf/l7eni0eK77778/JiZG/Cn68MMPKz+7ygwGw4gRI8LCwsxms9lsdv4YrOTcsdLSUvG5VHzZj4qKipqaGh8fH5HLGI1Gh8PR1NRktVqbm5ttNpvdbr/An2w1Go1Wq9XpdHq93mAwuLm5yTtWVVVVVVVVXRyj5HAx6YHvo3bqUW+3bpio3tTUtHTp0rVr165du1b83yBoNJqnnnrqtttuc37JhAkTfn/ttf369w8JCfH09HQ4HFVVVbm5uampqevXrxczFFqk0+nuuOOO4cOH9+3bNzg4WK/XNzU1FRUVZWZm7t69+xOnabktCgkJ+ctf/jJ69GiTyaTRaGw2W21t7aZNm1599VXVirCtGTZs2GOPPRYREeHr6+twOGpqajIyMl588UXn/7OVtFrtjTfeOG/evODgYHd3d61Wa7fbGxoa8vPz33vvva+++qrtk3b0ppnN5o8++khe2zszM/ORRx6Jj49ftGhR//793d3dxTo41113nfwSNze3hx56aNq0aX5+fm5ubhaL5cyZM5s2bXrjjTfac1vQE1RVVdXU1Hh7exuNxl69ehUVFclPJSUlicKRI0cGDx6s0WgmTJignJAuR5x79uxRtpmUlLRgwQI/Pz/lwczMzEWLFqmSvs8++0yj0VRXVz/99NN//etfPX79qPrzzz+/+eabym9B5s2bJ9ay2Ldv3zPPPCNJ0osvviimyT/wwAPOX42sWLFC7Ewnf6ReuHCh2MfzzTffDA8Pv+aaa+RtMSVJys3NXbRokfydvGzkyJELFy5Ufn61Wq3Lli0rKSl5+umnRVeffPLJc7z8+++///XXX1f+PrTZbB9++OHatWslAADQFZpqC/P3vFR0+N9+fa/2jZ7iulPX60pSK09ursjc0NxY0d19aRe9Xj9o0CBR7t2799///nfnOjfeeOPLL7/sfLy0tFR1pMXIUjZ+/PgZM2aI8j/+8Y/8/HxVhaioqGeffTYoKEj+C/ysnBf6bLsPv03Nzc1lZWWVlZVeXl5eXl7GX3V3v/4/MaqgtrbWZuvkcrfA+dbz30ft1I1vt25bi7OoqGjmzJlbt27V6XTywcTERFU1Dw+PpUuXylGLoNFofH19fX19xQqeu3btuueee5zvXUxMzKeffqoKGtzc3CIiIiIiIiZNmjRv3ry5c+c6hxpKfn5+GzduFHs/CTqdzsfHZ/bs2ZMnT77iiivEei6t0Wq17777rmoPPj8/v6SkpHXr1u3YsSM5ObnFF06ePHnx4sWqga5ardbT07N///4vvfTS008/feeddx4+fNj5tZ27ab6+vnFxcfLD0JCQmJiY1atXy6GnSHvl8qRJk958801lSGQymaKjo++99965c+e2dl3ogdLT08VPy+WTJq1YuVIc1Gg0YWFhkiTV1dWtWrVq8ODBYv0jZcQp/8Bs2rRJPjhgwICnnnrK+VNj3759lyxZcuuttzovVWEwGF588UXlpHjRgba7Lf9ktlFT+ZRcvvzyy8XlKEVFRS1btmz27NnKr5j69ev35JNPqto3GAzz58+XU13Vs524fL1ev2TJEtUoAJ1Od+eddxqNxs8++6z1ewAAADqmubGi5MgnJUc+cfMK9QxJ9AiMd/eLNXqH6d39tXpTOxq40OzNDc2N5Zaa/MaKrPrStLozP7vEsE2ladOmyR+NPDw8EhISnOuo/nLpnN69e//pT38S5e++++6HH35QVRg5cqTqo53NZrPZbFqtVvlHDTrNZrOJQVt6vd7d3d1oNLq5uRkMBp1O1/5MuUs4HA6bzWa1WpuamiwWS2NjI8M24Sp6zvuonXrU2607f5WXlJS8/fbbDzzwwP/vjV4/bdq0b775RjyMi4tbuXLlWUPr0aNHf/LJJ/ImfcLMmTNfeOEFZTznLDIycuvWrcnJybt3726xglarXbdunTLfVAoICPjyyy+nT5/eRjL92quvqvJNpfHjx69atWrOnDmq4wsWLLjvvvva6Ln4fPDZZ58988wzq1evVh4/l5um8vHHH7d2A2fMmPHKK6+09gYzm80ffvhh22NU0XNs3bpVfKwcftllcsQ5YsQI8e+bmpr6888/22w2nU43cOBA+VV6vV4sV9TY2ChPVA8ICHjppZfEC8vLy3ft2pWVlTVixIjLLrtMr9cHBAS8+uqrDz/8sKoD4i1mtVqPHj2amprq5uZWUlLywgsveHt733jjjSJp3bFjx759+8RwyHO83sGDBzscjoMHD+7evbu+vn7y5MniyxV3d/d77733rbfeEtX8/f3lH3KLxXLo0KFdu3bFxsYmJSWFhISMHDnSueXOXb4Yu1pZWbljx47Dhw9HRUXNnj1b3JMbbrhh7dq1LBIEAECXa6otbMrc0JO3IL9oiNnobTOZTJdccsmhQ4c6fRaDwbB48WIxeubUqVP/+Mc/nOvMnTtX/mi3Zs2ajU+IV8kAACAASURBVBs3ihGakZGR//rXvzp9ajhrbm4WY7i6uyOAC+N91And/G3Vu+++e//99yuTsiuvvFKOON955512Dsq95JJLrrzySnntaqPR+Nxzz6niuebm5qamJo//XbTFYDC88frrI1r52jA4OLjt80ZGRj711FNivqozjUZz1bRpbbeQkJBw6623fvTRR/KRpKSks+abcvtPP/30nj178vLy5IOdvmkq3q2vLOPu7v63v/2t7S8QjEZji9/Qogf66aefxOKS0dHR8sHJv677vnnzZkmScnJyYmNjTSZTUFBQSUmJJEmjRo0SPwMZGRnyq/7+97+LoccFBQV33323WCtk06ZNffv2feONNzQaTVxc3Lhx45y3nqysrLz33nuV87j3798vuiEiziNHjjh/Fd9pS5cu/frrr0V527ZtDz744LRp0yRJukyx59LChQvFtVit1jvvvFOs+Llly5Z33nnn+eefdx5yfi6XX1FRcfvtt4s1Rvfs2bNu3bo1a9bo9Xq9Xj9s2LC9e/d21YUDAABcSGazOTw8XJSXLl3q/KfHBx98IL41nzNnzrlEnH//+9/FnJjGxkbnb5SFPn36iMLKlStXrVolHxdrGQEAXN1531G9bRaLJTc3V3lEThUTEhJUCWNKSsqiRYtGjRo1ceLEDz74QDXfU7kh+80336yca2C325966qkhQ4YkJiaOHj36gw8+UL7Q22yWlxRskdVq3bVr14svvrhkyRLnbVVaTDqcW0hJSfn444+PHj3qPGT3kUceUc7WX7JkiapCXl7esmXLbrvttuXLlxcXFyuf0mq17733nvzwXG5aG53PycnZsmXLnj17du7cKUnS3/72N9UMejEm96uvvvr2m2/ERmBwIXa7XSzBKbZvEwfFVG6bzSZmZO/YsUMcl/cgGjt2rCjIu2F6eXmJOLK5ufnBBx9UroWcmZn56a9L3w4fPty5D08++WTbG/50oVOnTsn5pvDOO++Igo+Pj3xQLFQvSdIzzzyj2tHoqaeecl6V6Vwu/7nnnhP5pmCxWA4cOCDKffv27eR1AgAAdLf/u/568aW4zWbbuHGjxcn27dtFzUGDBnV6Duadd9whJhs5HI7HH3+8rq6uxWryx7PIyEj5YEhIyO9///vOnRcA0KN0/5ojeXl58vdpYqanKIwbN05Z7ejRo8oJ3S+//HJRUdGf//xn+UhY795yWbXQ3vbt29esWSPKFRUVL7/8cnR09IQJE+QKAwcOFOGds+bm5t///vfyZiZvvfXWihUrhg0bJleQv5ZsTUlJycSJE+Vs0Wg0/rhjh3KMpMFgmDFjhtg+aMqUKZ6ensqXHz58+MYb/7vz4969e1944YXvv/++t+Jiw8PDY2JiRA/P5aa16NtvvvmD07egkyZNUh157LHHlNsfJScnL1y4sO2W0aMcPHhw+vTp4h937dq1Xl5e4ut0eYDwpk2bxMbro0aNEvt0ycvGf//996Ig//gVFxc3NDSoTvHTzp0333KLJElijyCl5ubmrKys83yJ/9+xY8dUR8RGdQaDwWAwyAfFMr42m815QIHD4Th06JDqjdDpy3c4HM6rOuTl5Ym58GcdSw4AANBjXf7rxKDMzEznFcklSfr888+vvfZasQjS1KlTv/32246eYsSIEbN+3V6ysrJy5syZqgp5eXlicfPs7OwBAwaIYZthYWGpKSnRMTEJCQksxAkAF4fu/22uGpbo7e0tCkuWLHEez6i0cuVKZVpn+t8Z6Eq9nYK8ds4ElyTp0UcfVW3W/PDDDysnzBqNRm9v79a2Vm9ubp49e7byv3OLxXLTvHnr1q1TzqOfOXOmiAhvueUW5cvr6+tFrqQ0d+7cLVu2KP8nTk5Ofuyxx7r2pok5uc75ZlxcnGpbmK+++kq1vfs777wzcuTIFhcrRM+0adMmEXGOGDFi7dq1V155pTj+069TqqurqysqKvz8/CIiIsTwYTHes6KiQo7zeoeG/rfQu7dqmKSSctMqwTkQPK+UM+tlIuKUH8bGxopxBM6jNYXDhw+rIs5OX36LAw1aOy8AAICriIiIkLd+be3TUVlZWVlZmRjmcs0113Qi4pTnGImvqMePH6+qUFlZKSLOTz/99LnnntNoNBqNpn///vIXz3IHAAAurZsnqosQsHMvtFgsyqmgynkN27ZtU9YcMGDAtm3bkpOT5fy0/cRChEqFhYWq3T/k4WzO1q5de+bMGdXBEydOyHN7hX79+omCck9zkR4679heVFR0YP9+5ZFLL720HZcitX3TnLWYlspLNAp2u12kqyr33ntvO7uEnuDEiRPinRgbG6sckPj1xo1ynZ9//lns9D106NDhw4fLmxHJFXx8feWypiXiKedVDi6wFkcQdLSOcnEJodOXr3xLAgAAXDTkCeA2m02e9+NMXhApKipKfGSSP4nZW9/W1SbXacdHO+Hnn3/+4x//qByb4nA4Dhw48MQTTzhXlj+hOW8ta3c6NR/nAKAn6P5RnKppmC0Oh+zTp88111wzfPhwf39/Dw8Pd3d3o9FoMBhaS+g2b96s2g+nV69eCxcuXLhwYV1dXVZW1tatWz/++OP6+vq2+1ZdXd3ibuk1NTXKLX3aCAr3/28WKfvll1+UXzDKk9NVAyR/+eWXFl+elp4+UrFRu7mlrYE6etNUmpubnefzSpIU+utQNaG1lTctFktDQ0Nrm9GjB8rOzu7fv7+Hh4fZbBbLUFZWVirXx/zmm2+uuOIKsSeYfFC5ZnzVrwMP6+rq1q5d63wKd3f3xsbGCzxms3NOnjwptmDyVQSXSsrVKoSL6fIBAADO3T//+c9//vOfZ622bNmyZcuWKY/cddddrVW+4447VEdeeOGF9ndJLORlNBrj4+MtFktGRobVapUkScxnUnr88cdba0Q5K05oaGhwbgEAcIF1f8SpmkWu2tZj7ty5jz76aDu3CJfV19c//fTTzz33nPNTnp6eCQkJCQkJCxYsOHHixOuvv75169Y22mnxeIu5Z4t27drV4vG9e/c++OCD8kMxsEun06mGhrW2k7JqcUBVkti5m6bS0Mq1BwYGKh+eOnWqtRYKCwvlDVvQ8+3atUvM1pk3b574gTx8+LCywtGjR8Vs7mHDhokhnw6HQwztFM4UFYlCVVXVypUrz3eH5a/NAwICVEt5ms3mTi9XLysvLw8ICNDpdKNGjdq9e7fyKb1ef8kll6jqX+DLBwAAQOdYLJaDBw92dy8AAF2s+yeqy3O0BXlpTjc3tw8++ODJJ5/sXFS3Zs2aJ554oo1xmmIFlqVLl958882daL+dWtskuqysTNUZkZuoqrU2RlJ1XF7W8xxvWnsY/3eabW1tbWs123gKPZC8JsOMGTNE4ZtvvlHVyczMlCTJ398/KChIkqTTp08rn/3x14U7e/Xq1eLI4gEDBgwcONB5bdz2kLd6l8lLQDjvOa7ad6tz5Nj08ccfV/X5lVdecV714rxePgAAAAAAaEM3R5wzZsxQjVuUl2L561//6rxfTUNDQ2FhYVZW1qFDh7Zv39524//5z38SExPvuuuu/fv3O69oKXviiSecF6XuKs6zWYURI0YoH4oxcaqFMiVJSkxMbE+zTU1NonDuN+2sSv83nO3Tp09rNcW+NHAVlZWVIpUWgXtzc7NynU1B3mhL1Nm3b5/y2erqahE76nS6t99+W7l7jyRJCxcu/Mc//vHaa68tWrSo/b2Sp3Wr3jKSJKWkpIjC1VdfrTxuNpudZzB1wuLFi8XvDb1e/69//Wvx4sW33XbbE088sXLlSrEXp8r5uHwAAAAAANAe3TlRXafTPfPMM8ojdrtd3ptbuTWeJElpaWn3339/0a9TQcXQxSNHjpx1OurOnTt37twpRoFNnTp1ypQpiYmJqvRh9uzZcrTatUaOHKmcyStTzXKVc5ympiblAMzExETReZUhgwcrH8rjJbvqprVB2ZrzUqpKPj4+nT4LukV6erqcJKqmfgtbtmyZP3++/PPjvOXlY4899u677xoMBj8/v5UrV6amph46dCgwMHD8+PFi4KckSe+++277u3Ty5MnRo0dLkhQTE/POO+/s379/3759ItyUA1ZfX99PPvlk49dfV1RWDhgwYPLkyc4Dojuhurr6D3/4w1tvvaXT6fR6fVxcnHI3sK1bt6p2VD8flw8AAAAAANqj20ZxarXa9957z8vLS3nwyJEjYpnLgIAAZUjR1NQ0e/ZsVbh2xRVXdCiqKy8vX7Fixe23337ZZZepdjkfOnToOVxKW6655hrng1qtdsKECcojJSUloqCawN7a8NLE4cOVD8WCmOfjpjlLS0tTPnRzcxs7dqxztVmzZsnT5+Eq5EGakiRt27bNuYLFYpF/VhsbG/Pz81UVSkpK/vjHP4rByCaTacSIEcnJybNmzZIDvuXLl3do5aP169fLS99GRERcd9111113nXhYWlq6evVqUQ4ICLj5llsWLFgwdepUvV5fXFzcJfta5ubmLlq0SF49Q6irq3v55Ze3bNniXL/LLx8AAAAAALRH94RQsbGxmzZtSkpKUh1/+eWXRUG1bbfVapW3FpHdeeedrbW/atWqL3+1evVq1bp4Fovlww8/VB5RDersQpGRkc8//7zq4JIlS/z8/JRH5GUQN2zYoDweHx9/0003qV7+1FNPyYmJsGLFinO/ae20efNmVbNLliwJCAhQHomJiWlxryf0cLt27ZKTQflnUkUeOynW5XR24sSJRYsWqb5FEEtnPvnkk8uXL3d+SRtxZHV19V/+8pfMzMwW63z44Yfr169XLUORmpq6YMECUVb+rMpRaYvbhTm/WYRffvnltttuu+GGGxYtWvT888/feOON//d//7dt2zb56xlVx7rq8sXiFW10DAAAAAAAyDSRkZFd2NzAgQO/+OIL+aHD4XjppZfkh8HBwVFRUfHx8SEhIc6v/eqrrx577DFR9vDwUM3vXrZs2euvvy7+2tfpdJ999llCQoKygs1mG/zr9O2UlBRlapmXlzd16lT5oZub2+eff67c5igjI+Paa6+VJGnUqFHvv/++fPzMmTPOc1HFALdevXrJD2+//fY9e/aIclpamvPoxe+//37VqlU7d+6cPHnynDlzxowZo6owduxYMX7T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bG5ubrarGKRYFw8AAAAA+zAkYq+SkpKqqqopU6Zs3rx5zZo1TU1N+34+mUxOmzZtxowZubm577777vr167u6ugb+cQUFBfn5+Tk5OW1tbZnXe/0x0zXXXFNZWdnT03PHHXds2bJl4J81FBzy4gsLC2+55ZYoit5777177733UNQIAAAAAIOU5Yhzzpw5F198cX5+fvrKeeed19nZ+cADD6xZs6bv83l5eVdfffWUKVMSiUS4snDhwiiKampq7rnnnu7u7oF86C233JKTk9P3ek9Pz+bNm997770//OEPu3btSl8vKCiorKwM0erJJ5+8ZMmSQX3X7DgcxSeTyWQyGUXR8OHDD0WNAAAAADB42dyoftJJJy1evDgz3wzy8vI+85nPzJ8/v9f1wsLCL33pS1OnTk3nm2kVFRU333xzYWHhwdSTTCYnTZr0sY997Etf+tLIkSPT19vb23f/R+L5zjvvDG7mr3/969/4xjduuummg6lwEA6+eAAAAAAYyrK2inP27NkXXHBBGK9cufK1117bvHlzZWXlmWeeOWbMmCiKFi1atG7duu3bt6df+eIXvxiSx/b29ieffHLNmjWFhYVz5sw57bTToigqKyv71Kc+dc899wy8hldeeSU9Li4uHjdu3NixY0OWevPNN99+++3Nzc3h7q3f+95xxx23adOmurq6QXzZRCKRl5cXRdGIESMG8fpBOsjiAQAAAGAoy1rEedZZZ4XBSy+99OSTT4ZxdXX16tWrb7755rKysiiKjj322Oeffz7cqqqqCvlmR0fHbbfdtmPHjiiKduzYsWXLls2bN3/605+Ooqi8vHzgBXR3d//yl7/sdXHy5MlXX311QUFBQUHBJZdc8tOf/jRcb29vf/XVVw/F986CWBcPAAAAAPuWnYgzkUiMHj06iqJUKvXUU09l3uru7n7hhRcuvvjiKIpmzZqVGXGGwdKlS0O+mVZdXb1nz57hw4fn5uZOmjTpYNYqbtq06ec///m1114bNr8nk8menp6wdz4/Pz+VSu3Zs6fvWwUFBeXl5YWFhRs3buzVKymZTA4bNiycXBlFUU5OTlFRUfiafbsb5ebmHnHEEWPHju3o6Ni6devWrVv7flZOTk7Yj9/a2hpqKysrmzx5cnd395YtWxoaGvq+0rf4RCIRjtFsb28PnZpGjx5dWVm5a9eucARqr09JJBKTJ0+eMGFCfX39vn/e8H3D32zf3yqskx02bFhjY+P777/f2tq6j6kAAAAAsi4vL6+ioqK8vDyZTDY1NW3YsGH37t3ZLuoQ6+rq6ujoCEFTTGUn4hw+fHh7e3sikairq0ulUr3ubtiwIQwyt3Xn5OR0dHSEQLPvhA0NDdOmTQtR3UFux66pqWlvby8oKEgkEqNGjQqR5TXXXDNlypQoir75zW9mBnOzZ89etGhR5hmgqVTqzTfffPTRR8N/FieddNJ5552XvltUVPQ//sf/COPQlDxIJpMXXnjhvHnz0mFoiBd/9atfLV++PLO8s88+O3RYuv/++7u6ui699NLMnj87d+586KGH1q9fn/lK3+LLy8tDjPvmm2/W1NScd9554UTUzs7Or3/9670+paqq6vjjjw+FrV+/Pr2yta9kMnn99deHz9qzZ8/f//3fpxtAnXzyyWeccUavw1I3btz4i1/8IvMsAgAAAIChIy8v77TTTku3rS4rKxs9evTy5cs/ZClnbm5ubm7unj174ptyZifibGlp+bu/+7u93R03blwYbNu2LX3x0UcfffTRR/f2SmlpaRhs2rTp4MvbvXt3QUFBOKAzRJzpBkeZnY7OO++8k08+ude7iURi3rx5Rx555He/+92urq6+nZH69alPfWrmzJm9Lg4bNuwTn/hEW1vb6tWr+75SVVV1wgkn9LpYUlLyuc997rbbbsv86fotPpgwYcJxxx23jyIXLlw4wO3/yWTyuuuuC/nm7l27brv99nS+uWDBgsycN23KlCk33XTTd7/7Xcs5AQAAgCGooqIinW8GiURi6tSpH8qWzvn5+X33HMdF1s7i3IczzzwzDN59992BPH/UUUeVlJSEVbWHZElgcXFxGPTaEZ+pqKgonW++/PLLS5cuDTvrTz311Ly8vJKSkpNPPvmll15asWJFY2NjTk7O5ZdfHjaG/+IXv4iiKDMUP+OMM0K+2dPTU11dXV1dXVxcPGfOnKlTp0ZRdMUVV/zgBz/YsmVLrwJCvtnY2PjWW2/V1dUdffTRs2fPLiwsTCaTn//857/97W+HRa/7dsQRR0RR1NzcvHbt2vr6+r4rakO+uWnTptD6Kd1/qZdkMnnNNdeEgnfs2HH77ben/0kcc8wx559/fhhOJudaAAAgAElEQVRv2rSpurq6oaHhmGOOmT17dkFBwbBhw2666abvf//7Yb88AAAAwNDR78KvcPrih09u7lDMCQdoyJV+yimnhI7qra2tv/vd7/b7fH5+/mWXXRbGTzzxxMEXMGvWrLBru6enZx8R5/z588Pgtddee/zxx8P4+eefr62tveaaa5LJ5PHHH//SSy+1tLSsWbMmnfe3t7eHwy7TJk2aFDrCR1F0zz33pPeY//73v1+8ePGcOXMSicTll19+66239q1h06ZNd955ZxivWrXq6aef/upXv5qXlzds2LDzzz//kUceGcj3Xbly5b/+67/u44ElS5aEAHdvEonENddcE/7NNzU1/eAHP0inqzk5OaETVBRFy5YtS6/DTVebm5tbWlp6/vnn72OJLgAAAEBW9FrCGQxwzy4fpOQAnvngzJgx45xzzgnjhx9+eL/7/8OKxdDfpqmp6ZVXXjnIAmbOnPnJT34yjFetWtV3VWPaqFGjwqDX8sPa2tq/+Zu/ueWWW26//faBfGJ6Kejzzz/f6wzNX/ziF2EHd3obfqaOjo6f/exnmVdaWlr+6Z/+KYzDyaT71dXVte98s7a2dr/55tVXXx3yzYaGhttvvz1z9eicOXPCIZ5NTU1LlizJfHH37t3pamfPnj2QagEAAACgryG0inPChAlXXnllGL/22mv9HkDZy+WXXz5+/PgQ1e2jDU6/cnJyrrjiivQfR4wYMXr06NDuPOy23vcqyHfffffEE08Mp1WOGDHihRdeeP/99w+ogGD69Olh0PcQh1QqVV9fP3369GQyOWbMmMzjNUP42N7e3uuV2trarq6usDRyIJ++cePGfT+w37+Fz33uc5WVlVEUbd68+c4770yfvxlUVVWFQb95cU1NTXd3d+jePnz48H671QMAAADAvg2ViLO0tPTGG29Mt+3+93//9/2+ctFFFx199NEhCrz77rv3dkzkPhxzzDH9Xt+xY8dtt93WN0DMtGbNmm3btoU99XPnzp07d25XV1d9ff2bb775xhtvDPxkybAENYqiz3/+833vphusV1ZW9oo499ZYqbm5ecyYMclkctSoUfv9TXbs74HQbWlvJk+enB4/8MADvfLN0P4oDDZs2LC3asvKysKqWBEnAAAAAIMwJDaqFxUVfeELXwhnmtbV1d1zzz37feXjH//4Rz7ykZBv3nvvvftdjTgQ3d3dO3bseP7557///e/vO98MD//gBz9YuXJlejd9bm7u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7LMXLlwYRdH9999fVVV1/PHHh14669ev/+lPfxqeKSkpueKKKyZNmpQ5W2tr66OPPlpdXZ2+Ulxc/LWvfS2Kotra2p/85Ce9Pv30008/9dRToyh68MEHV6xYES7eeOON48aNi6Lob//2b6+++upp06YlEolwq66u7uc///muXbtmzpx5ySWXZPb2aWhouPPOO0NwefXVV0+ZMiWKoltvvTW9TDWKotLS0r/8y7+MoqilpeVb3/pWv5U89thjr776arhYUVGxaNGisrKyzCebm5uXLFny7rvv7u0HnzNnzkUXXZSuLZVKbdu27Sc/+UlLS0v6mfLy8muvvTaKojfffPP111//1Kc+VVRUlL67e9euf/75zzPT5BNPPPH888+Pouipp5568cUXe33i9ddfP3HixCiKvv71r4cc+UDnD5LJ5CUXX3zsccelf/AoitasWfPwww9fd9114S/lb/7mb2L9jxAAAAAYmvLy8k477bScnJzwx7KystGjRy9fvvxDlnLm5ubm5ubu2bMnvgFLdjaqt7S0/N3f/d03vvGNu+++u+/dkFtFUbRt27a+dxcuXHjCCSeEfDNTZWXlV7/61V75ZhRFw4YN+/SnPx3i0SAzLOsrfTfzI9IXFy9eXF5enjnDpEmTbrzxxlmzZl1++eW9epePHTv25ptvzsvLC6lcuDhz5szMZ9Kb8YuKikpKSjJvHXXUUWHwzjvvhMHEiROvvvrqXvlmFEWjRo266qqrpk6d2u83mjZ16mWXXZZZWyKRCLX122y9rKzs6quvzswfoygaUVz8Z3/2Z5kfPcCfse9jA5w/WLx48XHHH99rkqqqqj//8z9P/+8LAAAAwOFQUVHRK39IJBJ7S2Dirm9L8BjJWruhfTjzzDPDoN9lieXl5VEUbdq0KTQjSu/RXrRoUQgld+zYsWzZspqamoKCgoULF06fPj2KonPOOeeVV145+Ch65syZLS0tv/vd795///0ZM2acfPLJYdv4pz/96SiKNm7cuGzZst27d8+aNWvevHnh1qxZs5YvX75ixYozzjgjiqIZM2a89NJLmROmx8cee2zmrSOOOCLEwbt27Qo55g033JD+jitXrly/fv20adPmzJkzevToRCJx7bXX3nbbbZlLRIMjjzoqiqJVq1a98847O3bsqKqqWrhwYSKRKCoquuCCCx588MFez4d/qDU1NW+99VZDQ0NFRcVpp50WPveyyy774Q9/eJC/4cDnP/3002fNmhXGtbW11dXVO3bsmDVr1syZM3vFwQAAAACHXIihegmnL3745OYOxZxwgIZc6aecckroqN7a2vq73/2u32eWLFmydOnSzCtjxowpLS0N+51vu+229KGWq1evvuaaayorKxOJREVFxbp16w6yvLa2tu9973vh8Me1a9c2NDSk+8KvWbPmn//5n9Of29nZedJJJ4XlpcuXL29qamprayssLJw8eXJ6tmQyGXZzBzNnzkxHnBMnTgypXzrnveqqq8J/ao2Njd///vdDXLtmzZpnnnnmi1/84rhx43Jycj73uc995zvf6Vv2M888kz7VdN26dRs3bly8eHEURWHvfF/Lli179NFHw7impmbt2rU33nhjqOogf8CBz5+Xl/fxj388jJ9//vlnnnkmjKurq8vKym6++WarOAEAAIDDqt/wYd8bW8mKrHVU79eMGTPOOeecMH744Yf7XXRZW1vbK98MW9r/5//8n7fccsv//vu/79W058033wyDqqqqg6/w6aefzmxu8/rrr6fHjz32WOaTb7zxRhik986HgDU/P3/UqFHhyvTp08O/ivfefTeKosmTJ6f/kRxzzDFh8NZbb4XTS8P+/Z6enrvuuivzl0mlUnfddVfoR1RaWjpy5MheNe/etSudbwYrV67s6OgIz/f9jl1dXen8Mdi0adP27dvDv+Hi4uID+cH6McD506u+6+vr0/lm0NjYeN999x1kGQAAAAB8OAyhiHPChAlXXnllGL/22murV6/u97G9Xe9XIpFI9yI/JAcKpI/UDLq6ukIvna6url5tzTdv3hwG6bw/hJWZ8eXcuXNDh/HfPPtsWNSZXv88Y8aMEF+GVZxhu30Ic/ueaNva2pr+uPBipo2bNvX9ImHzeyKRCF3RMzU0NPR9vqmpKQzS+eygDXD+9FdOH0Waae3atX0bVQEAAADwX9BQ2aheWlp64403ppuk//u///venkxnYX2NHj163rx5M2bMGD16dF5eXk5OziFfObxjx45+r6eD1LS+S1DT8ejRVVV/+MMfoiiacdRRURS99957Gzdu7O7uzsnJOfbYY2tqatIHcb7//vthnnTwl44ye6mvrw9b4Puu4uz3lfRa1L4/0datW/s+v2fPnn4/dxAGOP+0adPCoLa2tu/zqVRqx44dB5+3AgAAABB3QyLiLCoq+sIXvhAOmqyrq7vnnnsGMclHPvKRCy+8cCifhtDZ2blt27YxY8ZMmTo1fOsRxcXp1Z21tbXTp08PazDDwZqZCxjT/cf7dhMK0t3ne3UqD2ngAdWZOuimTId2/r39nQ7lv2sAAADgQyCsSOt10b7SISj7G9ULCgpuvvnmwsLCsL7vxz/+8SD6nh999NEXXXRRyLyam5tXrFjx7LPPPvbYYw888MALL7xwQFOFlaSHSYgsCwoKiouLwy71VCq1atWqdNA5cuTIwsLCdJv1FStWhEHYVx5F0dixY/udOZzUGUVR323sWXHwP2N68WZFRUXfu4lEQlN1AAAA4LDqd2vpPnYYx1pXV1e2Sxi8LEecubm5N910U1h42NjY+MMf/rDvju+BOO6448Kgurr6H/7hHx588MHf/va3r7766ttvv913a3k6ax8+fHjfqUaPHj2IAgYofRznzJkzZ8+eHVLd8JXffvvtcGvOnDmhM1J7e3t6zWb6W0yYMKHfmcPG9pDwHr76M6V/xhEjRvS92+/FAxK6M4UfpO/d2bNnW8UJAAAAHFY1NTW9oqpUKrVhw4bsVXQYhd7UMZXNiDOZTF5//fVlZWUhmLvjjjtC655BqKysDIMnnnii162QJGbavXt3iOf6XQY4ZcqUwdUwEJs3bw7fsaqqKnxQdXV1uNXW1ha6is+ZM2fixImZGV8URaHpUBRFY8aM6dsGvbi4OB1x9mqIdPikj9QcM2ZMr1vDhw/vNz4+IOn/vRg7duyFF16YeeuII4647LLLDnJ+AAAAgH3r7Ox87rnn1q1b193dnUqlGhsbly9fPkR20B5CXV1de/bsGcS+6qEjm2dxfvazn500aVIURTt37rz99tsPJipubm4OS0HHjRsXgsJg3rx56fQzLZVK7dq1q6SkpLCwsKqqKjMTXLhw4eHe/vzH2tojjzpqxowZYRHi8uXL07dWrVq1cOHCysrKcCu95DOs6Kyrq5s0aVIikbj++uu/853vpP8/hGQyecMNN4SN4Q0NDR/YP7ONGzeGwYwZM4YNG5bZv+iyyy47+CWWXV1djz/++DnnnBNF0YknnlhRUbF69eo9e/YcddRR5eXllnACAAAAH4DOzs61a9euXbs224WwL1mLOC+77LLp06eHcUNDwyWXXNLvY0uWLBlIL+/q6uqQll5xxRWrVq16++23i4qKZsyYEbr39LVp06Zw3uWVV175hz/8oba2dsSIEbNnz+6bhx5yK99++8ijjgoJXVtbW2b7oDfffHPhwoXp8G716tWZL957771f+cpXCgoKSkpK/vqv/3rVqlUbN26cNGnSMcccE+Ldzs7On/3sZ4e7/rTOzs49e/YMHz48kUj89//+35977rmGhoYxY8YsWLDgUDU6f/nllydMmDBv3rywljPzHNLm5uaOjo70CaQAAAAA/JeVtYgzNNsJ0llnX7/5zW8GEnG+9tprCxYsKCkpSSaTs2bNmjVrVvpWdXV15h+DRx55ZNq0aUVFRYlEYuHChQsXLkzfqq2tLS8vP/AvNFBvv/32okWLwji9/Tyor6/v7OzMy8sLJ5P22rbf0tLyj//4jzfffHNOTs6wYcPmzZsXsr+gp6fnzjvv3Llz5+GrvK97773385//fCKRyM/PP+uss9LXu7q6du7ceUhONX3kkUfa2tpOOumkdP+yVCq1fPnyX/7yl9ddd93Bzw8AAABA3GUt4kylUgPZa5w+BSDd3KbfcwFaW1tvvfXWK6+8sqKiIt3Lu729/bHHHmtpaQkRZ+aLbW1tP/jBDz73uc+NHTs2/Xxra+u//du/TZw4MUScmafJpj99H19ngLfa2tqam5vDOsd0w/S0mpqasPI09F7vpbGx8Uc/+tFFF10Ulqymvf/++0uWLNmyZUvmxfT37fcX63v3Pwf9fZd+f/9Nmzb98z//80UXXTRy5Mj0xa1btz7wwAOXXnrp3l4c+PzBr3/968cff7y0tLSsrKy5ubmxsTE8k5+f33ceAAAAAP6rSZx66qlRFK1fvz7blRwy48aNKy4ubmxsHGBv8YkTJxYUFDQ2Nn7ASyAPRn5+/tixY4uKilpaWrZt29be3p7denJyciZOnJibm7t58+a2trZDMmcymQw9lDo7O9OtjdISicQ3vvGNnJyc1tbWb37zm4fkEwEAAAD4YITjIjNb0RyMbLYbOky2bt3aNxHbh/r6+sNZzmHR0dFRV1eX7Sr+U3d3d7r70KGSSCRuuOGGsD/90UcfXbZsWebdSy+5JNx67733Du3nAgAAABAvH8KIkw+H7u7upUuXLliwIIqiRYsWnXjiibW1tVu3bi0tLZ03b1668f3rr7+e7UoBAAAAyCYRJ0PXM888U1FRMX78+CiKJk2a1OsE0lQq9cADD/Rq2QQAAADAfzU5obXO9u3bs10J9NbV1fXqq6+2t7cfMWFCXn5+uj9Va2trXV3dz3/+85qammzXCAAAAMABKy0tjaKoV/fsQbOKk6Hu5Zdffvnll6MoGjVq1PDhw7ds2ZLZ7B4AAACA/+JEnMRGc3Nzc3NztqsAAAAAYGhJZrsAAAAAAIDBE3ECAAAAADEm4gQAAAAAYkzECQAAAADEmIgTAAAAAIgxEScAAAAAEGMiTgAAAAAgxkScAAAAAECMiTgBAAAAgBgTcQIAAAAAMSbiBAAAAABiTMQJAAAAAMSYiBMAAAAAiDERJwAAAAAQYyJOAAAAACDGRJwAAAAAQIyJOAEAAACAGBNxAgAAAAAxJuIEAAAAAGJMxAkAAAAAxJiIEwAAAACIMREnAAAAABBjIk4AAAAAIMZEnAAAAABAjIk4AQAAAIAYE3ECAAAAADEm4gQAAAAAYkzECQAAAADEmIgTAAAAAIgxEScAAAAAEGMiTgAAAAAgxkScAAAAAECMiTgBAAAAgBgTcQIAAAAAMSbiBAAAAABiTMQJAAAAAMSYiBMAAAAAiDERJwAAAAAQYyJOAAAAACDGRJwAAAAAQIyJOAEAAACAGMvNdgH/n0QiUVBQEMbd3d2dnZ2ZdwsLC2+55ZYoit5777177703SzUCAAAAAEPI0Io4L7roovnz54fx7l27/vff/33m3WQymUwmoygaPnx4lgoEAAAAAIaWIbRRfcqUKel8M4qiRHII1QYAAAAADE1DJUZMJpNXXnlltqsAAAAAAGJmqESc55xzTlFRURRF69evT6VS2S4HAAAAAIiHIXEW57hx404++eTQYuj+++8PPYUGIi8v78gjj4yiaN26dR0dHft4MpFIjBs3bty4cbm5uQ0NDZs3b+7u7u71TE5OTmFhYRRFra2tPT09iURi8uTJEyZMqK+vr6ury3yysLDwiCOOKCsra21t3bZt25YtWw78SwMAAAAw1OXl5VVUVJSXlyeTyaampg0bNuzevTvbRR1iXV1dHR0dPT092S5k8IZExPmZz3wmDJYsWdLa2jqQV8rKyq655pqRI0emr7S0tDzwwAM1NTV9Hz7ppJPOOuusdK/2kKW++uqrv/71rzMfO/vssxcuXBhF0f33319VVXX88ceH7kbr16//6U9/Gp4pLi5evHhxeXl55osdHR3PPffciy++eIDfGwAAAIChKy8v77TTTsvJyQl/LCsrGz169PLlyz9kKWdubm5ubu6ePXvim3Jmf6P6RwwOJkQAACAASURBVD/60dLS0iiKNm3a9MYbbwzklcLCwj/7sz/LzDejKCoqKrr66qsnTZrU6+H58+dfcMEFmflmWLC5cOHC888/v9/5Fy5ceMIJJyT79DsqKCj48z//8175ZhRF+fn5Z5111kc/+tGBFA8AAABALFRUVKTzzSCRSEydOjV7FR1G+fn52S5h8LK8irO4uPi//bf/FkVRKpW67777BvjWmDFjoijasmXL66+/Xl9ff8QRR5x55pl5eXnJZPKKK674P//n/6SfrKioWLRoURivX7/+7bff7ujoOOaYY2bOnJlIJBYsWLB169ZXX3211/whxNy0adO6deu2b9/e3NwcGiLdeOON4cDQjo6O6urqd955p7S0dPbs2eG/7LPOOmvHjh0rVqw4dD8PAAAAAFnTd6FbFEWjR4/ORi2HXW7ukNjtPThZLn3x4sVhseRvfvObnTt3DvzF2trau+++OzQmqqmpWbly5V/91V8lEomSkpJkMhlW1SaTyc9+9rPh+eeff/6ZZ54J4zfffHPevHmXXHJJFEXnn3/+0qVL+67CXbJkydKlSzOvnH322WPHjg2b3G+77baQe0ZR9PLLL59zzjmnnHJKFEWf+MQnVq1ate9TQQEAAACIhV5LOINEIpGNWtiXbG5Ur6qqCln4jh07nn/++QN69957781svL5r167169eH8ZQpU8LgmGOOCfFzfX19Ot8M3njjjTVr1oT/KPvuba+tre2Vb0ZRdNxxx4XBfffdl843g8cff3zr1q1htuOPP/6AvggAAAAAcDCyFnHm5OR88pOfDON/+Zd/OaB3W1tb+66UbGhoCIOw1jKKopnHHBMGa9eu7TvJe++9FwYVFRW9bq1evbpvtWGLeiqVCtloLytXrgyDGTNmHNB3AQAAAAAORtY2qp999tmFhYVRFK1YsaK+vv6A3m1qaup7cc+ePWGQXi08ctSoMDj11FP79gJKdxMqLy/v1Qy97/yj/mOqXbt29VvSpk2bwqC4uPiAvgsAAAAAcDCyE3GWlpaefPLJURR1dXUtWbLkQF/P3KK+D8OHD0+P+7ZHT0vHl/sQlnBGUbS3A0PTa0hDbgsAAABA3HV3d/c9jnOAwRQfpOxEnGeddVZYa9nV1XXllVf2uhtuDR8+/LrrrouiqLq6+ve///0gPiW9rvOtt95Kn9SZKS8vr7Ozs7Gxcb9TpRdvjho5st8Hxo0bFwatra2DKBUAAACAoaa2tnb69Om9Lva7vfhDoKurK9slDF52Is68vLwwKCwsrKys7PeZRCIRmhF1dXYOLuJMr7hsbGzs2z5ocFMVjRjR7wNTp04Ng73tZAcAAAAgXmpqasrLyzMXcqZSqQ0bNmS1qMOlb+ebGMlOu6HW1taevUs/Fv64Z7DrIletWhUGs2bN6ns3Ly9v/Pjx48ePH8jW8u7u7pByJhKJY489ttfdRCIxd+7cMO7bqggAAACAOOrs7HzuuefWrVvX3d2dSqUaGxuXL1++e/fubNd1iHV1de3ZsyczlIud7KzifPjhhx9++OG93f3mN7+ZSCRaWlq+9a1vHcynvPPOO+HEhHHjxi1atOjRRx9N30omk9ddd92kSZOiKHryySdfeuml/c72+uuvn3baaVEUXXrppXV1ddu2bUvfuvjii0ePHh0y2RUrVhxMzQAAAAAMHZ2dnWvXrl27dm22C2FfstZR/QPQ3d197733Xn311VEUzZ8/f+rUqWvWrKmvrx83btyCBQuGDRsWUuo//OEPA5nt2WefPeqooyZPnpxMJr/4xS++99577777bnFx8cyZM8eOHRue+Zd/+ZfOzs7D/LUAAAAAgP/0YY44oyhat27dI488cskll4SOQOmmQEFPT89dd901wLNUU6nUXXfd9eUvf7m0tDQnJ6eqqqqqqirzgSVLlqxZs+ZQfwMAAAAAYF+ycxbnQHR3d/e6kj4RoN+jAdLP93rxjTfeeOSRR3b//12AUqlUdXX1d77znbq6usyL+5g/zHzHHXe888476SeD3bt2PfroowfZ0QgAAAAAGITEqaeeGkXR+vXrs13JYTdixIixY8cmEont27dv3779YKbKyckZPXp0SUlJT09PQ0PDh++UWQAAAAA4fCorK6Moeuuttw7JbB/yjeqZdu/efaiyyO7u7oaGhoaGhkMyGwAAAAAwaEN3ozoAAAAAwH6JOAEAAACAGBNxAgAAAAAxJuIEAAAAAGJMxAkAAAAAxJiIEwAAAACIMREnAAAAABBjIk4AAAAAIMZEnAAAAABAjIk4AQAAAIAYE3ECAAAAADEm4gQAAAAAYkzECQAAAADEmIgTAAAAAIgxEScAAAAAEGMiTgAAAAAgxkScAAAAAECMiTgBAAAAgBgTcQIAAAAAMSbiBAAAAABiTMQJAAAAAMSYiBMAAAAAiDERJwAAAAAQYyJOAAAAACDGRJwAAAAAQIyJOAEAAACAGBNxAgAAAAAxJuIEAAAAAGJMxAkAAAAAxJiIEwAAAACIMREnAAAAABBjIk4AAAAAIMZEnAAAAABAjIk4AQAAAIAYE3ECAAAAADEm4gQAAAAAYkzECQAAAADEmIgTAAAAAIgxEScAAAAAEGMiTgAAAAAgxkScAAAAAECMiTgBAAAAgBgTcQIAAAAAMSbiBAAAAABiTMQJAAAAAMRYblY+NT8/P5ncf7ra2dnZ3d0dRVFubm5u7v5L7enp6ejo2Nvdg5wkPz+/vLx8/PjxdXV1GzZs6Orq2u9UAAAAAMDhlp2I82tf+1pBQcF+H6uurr7//vujKLr88stnzJix3+dbWlq+9a1v7e3uoCdZuHDh6aefPmzYsF6PPfbYY2+//fZ+JwQAAAAADp94bFQfyJLPwzFJMplcvHjxueee2yvfjKKoqKjoU5/61LnnnnvwhQEAAAAAg5adVZwvvvjiyJEj93a3qqoq3G1vbw9Xli5d2tTUtLfnx44dW1FRETa2py8mEomKioq6urqDmeTSSy+dM2dOGK9evXrlypVbt26dOHHiCSecMHXq1LDAs62t7dlnnz3AHwAAAAAAODSyE3E+//zze7uVk5Nz/PHHh/Fvf/vbMHj77bf3sSX8hhtuCIMXXnghDBKJxF//9V8XFRWlUqkf//jHGzduHMQkyWRy7ty5YfzLX/7ylVdeCeP6+vply5ade+65CxcujKLolFNOEXECAAAAQLYMuY3qH/3oR/Py8sKqye3bt+/3+YkTJ4YFla2trUuXLg0XZ8yYUVRUFLLOP/mTPxncJGVlZYlEIoqijo6OdL6Z9uSTT6ZSqSiKCgoKcnJyBvVdAQAAAICDlZ1VnHuTk5Nz6qmnhvGvfvWrgbxy4YUXhsFTTz0VMscoijZs2JBKpUJAuX79+sFN0tPTEwZtbW19X+nu7u7u7h5Ii3YAAAAAYiovL6+ioqK8vDyZTDY1NW3YsGH37t3ZLuoQ6+rq6ujoSEdhcTS0ErrTTz89hIYDXMI5ZcqUyZMnR1G0Z8+e9OrLsBjz7rvvXrhw4fr16zOvH9AkTU1NPT09yWSypKRk1KhRzc3NmW9NmzYtlNra2trd3T2orwsAAADA0JWXl3faaael9++WlZWNHj16+fLlH7KUMzc3Nzc3d8+ePfFNOYfQRvW8vLw//dM/DeNf/vKXA3klc/Vlr1u1tbX333//K6+8st+/m71NkkqlXnrppTD+8pe/XFlZGcaJRGLOnDnXXnvt3j4aAAAAgA+BioqKXucTJhKJcNrhh09+fn62Sxi8IbSK84wzzgj/0axatarXksl+TZs27YgjjgirL5ctWza4D933JE8//fSuXbvOOeec3Nzca665pqenp729vbCwMGyBT6VSL7744n5XiQIAAAAQR+Xl5X0vjh49Ohu1HHaxPo9xqKzizM/PDw3KB34K50UXXRQGTz755KA/d7+TvPbaa7/73e/COJlMDhs2LOSbYf3m008/PeiPBgAAAGAo67fFdDoaYugYKunsmWeemUwmoyh65513BrKEs7Kycty4cVEUtbS0vP7664P70P1OMnbs2C984QuZGXZXV1f6j2efffZHP/rR22677UN2/gIAAAAAxMiQiDgLCwtPOumkMB46SzgLCws///nPh0CzpaXloYceqqmp6erqKigoOPLIIy+99NL8/Pzhw4ffeOONt956q45DAAAAAJAVQ2Kj+tlnnx2WcFZXV+/YsWO/z8+YMaOsrCwkj2+88cbgPnS/k5xxxhmFhYVRFG3duvXb3/72u+++29XVFUVRe3t7dXX1t7/97ZaWliiKRo0adeKJJw6uBgAAAADgIGU/4hw2bNj8+fPDeIBLOC+44IIweOKJJ/b2zMyZM6+//vqPf/zj/R6aMJBJpk+fHgbPPPNMCDcztba2ps/onDFjxkDKBgAAACBG+t22m0qlslEL+5L9jernnHNOOKX17bff3rlz536fnzlzZmlpaVh9+eabb/b7THFx8eWXXx4apre1tb388suDmCQ8EEXRxo0b+31g06ZNYTB+/Pj9lg0AAABAvNTW1qbXwKU1NTVlqZzDq+8KvxjJ8irOoqKi448/PuTfA1zCef7554fB448/vrdnJkyYkB5PmTJlcJO0traGwXHHHdfvA3Pnzg2DXbt2DaRyAAAAAGKkpqam10LOVCq1YcOG7FV0GHV0dGS7hMHLcsR53nnnpZdwDiQonDNnTklJSVh9uXz58r099u677zY2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3z5y5Mgoir7xjW987nOfmzJlSjL575H08uXLn3/++Uwm0+f+N998c1iq3/V8p69//euJRKKpqemhhx669dZby8vLs/07Ojqefvrp1atXd/tGyWTy6k9/esbMmV0z0A0bNvzyl7+89dZbs1Pq+moAAACAWMjPz6+srKyoqEgmkw0NDdu2bWttbc31pAZYe3t7W1tbrKOb3FdxzpkzJ0Rjb6xenclkamtrw1/PlClT+v/w7C6Thzv0vK6u7u2333777bf379/f/9cdVVVV1Ve/+tVu+WYURYMGDfrc5z43b968rhezieFf//VfT506tWteGQ5lWrRo0YD071memZeXd8cdd3TNN0NF59VXX33BBRd063zdddfNPPfcbg+ZMmXKnXfe2Z9znAAAAAByKz8//9JLLz3jjDNSqVQikSgrK5s5c+aQIUNyPa8BlpeXN3jw4G5RUrzkvoozG5ktX748iqJly5ZNnTo1rF7fsGFDPx++YcOGSZMmhe0+b7/99hdffHHz5s0DMes+uuqqq8KfS1NT06pVq7Zs2VJYWDhv3rywTH7hwoXLly/vGZmfc8456XT69ddfr62tLSws/MhHPhJC0ilTpowfP/69997rZ/+eiouLoyjau3fvqlWr3n333REjRvzFX/xFWNK+cOHCN954o729PfRcsGDB9OnTQ3vr1q01NTVNTU3Tp0+fNm1aSUnJAP1sAAAAADlQWVnZrX4rkUhMnDjxnXfeyd2kTpSCgoKe2zzGRY4jzrKystLS0nAcUNgWc/PmzW1tbQUFBWGTynQ63Z/nL1++fMaMGePHj4+iaPz48TfffHM6nd6+ffumTZtqamoG5ESjrMLCwsNtOhmWgY8YMSJ82daWlgcffPDQoUPh7vr162+++eaqqqpEIlFZWblp06Zuw9vb2//X//pf9fX14ePbb7/9xS9+MaSW1dXVPSPL4+3fq/r6+gcffLCjoyOKoi1btrz55pvf+MY38vLy8vLyxo8fv3Xr1vB/ZWTLY3/3u99lt1KtqakpKyv7L//lv6jiBAAAAOKroqKi58Xhw4fnYi4nXNfDwGMnx1PPHjS0atWq7MWamppzzz03kUjMnj37tdde68/zM5nMI488ctNNN1VWVoYr+fn5VVVVVVVVl112WXNz88qVK5ctW5ZNG/vjoosuuuiii3q9df/99+/Zs2fPnj1f//rXe+3w5ptvVlVVhULLnhHn7373u2xeGbzyyis33HBDFEXd1pL3rX+v/vVf/zXkm0F7e/uaNWtmz54dRdHo0aNDxBk2UQ0n1GfzzaC+vv7xxx8PLwUAAACIo16Lt458IDM5keM19jNnzgyNlStXZi8uW7YsNObOndv/V2QymX/6p3+69957ly9f3i3KLCkp+djHPvbVr3516NCh/X/RERz5Tz+RSGTDxIKCgp4d/vznP3e7smvXrtDodebH27+nTCaze/fuwz0kuwI9ewx9r+XZtbW1nZ2dx/I6AAAAAOizXFZxVlVVFRYWhj0fU6lU2P8x7FOZTqfz8/NHjBhx2mmnNTU19f9de/fuffbZZ5999tnS0tLJkydPnzatsqoqJPGDBg360pe+9J3vfKef2w3s2rXrcBt9hjX4wfDhw2fNmnXmmWcOHz48Pz8/7FZ75CdnD03K2rdvX2j0OvZ4+/fU69Fg2ROZsg85/fTTQyMUdXbT2dnZ1NQ0bEgF/kMAACAASURBVNiwY3kjAAAAAPRNLiPO7LLu0tLSu+++u9c+8+fPX7x48QC+dO/evStXrly5cmUymbz88svDIeaFhYXTpk1bvXp1f5789ttv//a3vz1yn/PPP//KK6883nrm462F/PBrJw/3jVRuAwAAAHCi5WyheiqVmjx58lG7zZo16wRNIJPJPP/882vXrg0fzzzzzBP0oqyzzjrrr/7qr0Lq19jY+Kc//emVV1555plnnnjiid///vcn+u0nQrZ4M7vVaVeJRMKh6gAAAEB8dT2nJMu+fCehnFVxzpo1K5n8/wPWXus0Fy5cGFaRT5w4cdu2bX14xahRo0Kh6Pr162tqanrtU1NTc84554Sz3fvwiuOS3Xi0pqbmZz/7Wddb2UX68bJp06ZLLrkkiqJzzjnnlVde6Xb37LPPVsUJAAAAxNfWrVuzJ5FkNTQ05Gg6J1Z7e3uup9B3OYs4L7zwwtD4+c9/ni2l7KqoqGjBggVhPXu3QPAYdXZ2hiLQ6dOnHy7iPGvKlNBobGzswyuOSzgzPYqiF154oduts88++0S//UTIRs/l5eVXXnnlv/3bv2VvjRkz5tprr83d1AAAAAD6a8uWLRUVFV3PVe/s7OxbKd7Jr62tLddT6LvcRJxDhgwZNWpUWC1+uPBxxYoVIeKcOnVqMpnMZDLh+nnnnXfRRRdt3rz5N7/5TTqdPsJbdu/e3djYOGzYsMLCwquvvvrpp5/uVl08ZcqU6hkzQru2tjZ7feLEiZdffvn+/fufe+65vXv3DsQ3jkKKGqo1R44c2fWxs2bNyqaf8dLe3r548eJQbztnzpzKysr169fv379/8uTJFRUVSjgBAACAWEun06+++mplZWVFRUUymWxoaNi2bVuvpzTHWnt7e1tbWzZ8i6PcRJzhkJ8QLB7u52ttba2rqysvL08mk9XV1WvWrImiaNiwYZ/+9KdDStjS0vK73/3uyC9aunTpX/7lX4YYMRwotHPnzqamprFjx06aNGnSpEmh24EDB954443sqBtuuGHQoEFRFA0ePPiRRx4ZqG9dU1Mzbty4KIoWLVq0bt26t99+u7i4+Mwzz/wQtgE9cZYuXTp69OhQLVteXl5eXp691djY2NbWNnLkyJxOEAAAAKDv0ul0bW1t19o4TkK5iThnz54dGsuXLz9Ct9dffz1UCM6bNy9EnKWlpdm7XdO0w1m2bFlhYeHHPvaxsPI9G612VVdX98gjj2ST1mQyWVRUFNrDhg07zm92JCtXrpw7d25JSUkymZw+ffr06dOzt2pqarp+jJdf/epXBw8evOCCC7Jl252dnWvWrHn22WdvvfXWXM8OAAAAgFNcDiLOsrKysF47nU5v3LjxCD1XrVoVIs5x48alUqmOjo4tW7bs2LFj7NixbW1tRy3hDF599dXNmzd/7rOfHTJ0aLdb7e3ta9eufeqpp7pWkmYymddee23evHmdnZ3/9//+36M+Pzv2qNW8Bw4cuO+++66//vrKysrsUUuHDh165pln9u3bFyLOrg85lvO5ui69P97+R5h5r98lO7bn3eeff37x4sWlpaVlZWWNjY319fWhT0FBwVGnBAAAAAD9kQgnYm/evDnXMzkOgwcPPnDgwLEkel2lUqmxY8dWVFQUFhbu3Llz69at+/btO1zn/Pz8EMIOxHx7MXLkyKFDh9bX138IxxydOMlkcsyYMeGH2r17d7e7iUTiH//xH1Op1IEDB+65554czREAAACAk044meatt94akKfl7ET1/ti/f38fRnV0dGzfvn379u3H0vnEhZvB7t27e2aCsZNIJD7/+c+H9em//vWvV61a1fXuZ66+Otz685//nLs5AgAAAHCKi2XEyUmio6Pj9ddfnzt3bhRFV1111Zw5c7Zu3bp79+7S0tJZs2aVlJSEbl2PcgIAAACAgSXipF9efvnlysrKUaNGhS1Tw5HxWZ2dnU888cSRd1wFAAAAgP5IVVRURFG0d+/eXM+EWGpvb1+xYsWhQ4fGjB6dX1CQSCTC9QMHDrz//vuPPfbYli1bcj1HAAAAAE4upaWlURTt2rVrQJ6mipMBsHTp0qVLl0ZRNGzYsMGDB+/atavr0e0AAAAAcOKIOBlIjY2NsT4jHgAAAIDYSeZ6AgAAAAAAfSfiBAAAAABiTMQJAAAAAMSYiBMAAAAAiDERJwAAAAAQYyJOAAAAACDGRJwAAAAAQIyJOAEAAACAGBNxAgAAAAAxJuIEAAAAAGJMxAkAAAAAxJiIEwAAAACIMREnAAAAABBjIk4AAAAAIMZEnAAAAABAjIk4AQAAAIAYE3ECAAAAADEm4gQAAAAAYkzECQAAAADEmIgTAAAAAIgxEScAAAAAEGMiTgAAAAAgxkScAAAAAECMiTgBAAAAgBgTcQIAAAAAMSbiBAAAAABiTMQJAAAAAMSYiBMAAAAAiDERJwAAAAAQYyJOAAAAACDGRJwAAAAAQIyJOAEAAACAGBNxAgAAAAAxJuIEAAAAAGJMxAkAAAAAxJiIEwAAAACIMREnAAAAABBjIk4AAAAAIMZEnAAAAABAjMU+4kylUgUFBYlEItcTAQAAAAByIC/XE+ivW265ZeLEic8888yKFStyPRcAAAAA4MN2EkWcRUVF+fn56XT64MGDxz4q1G8ebxXnMb6rqKioqKioo6MjnU5nL2Yymba2tuN6XXhUz4udnZ2HDh063kcNiKKioq997WtRFP35z39+9NFHczIHAAAAAOi/kyXiHDt27B133BHa99xzz4EDB47cP5VKTZo0qaKiYsKECVEU/eVf/mV+fv7GjRs/+OCDgXrX6NGj77zzzl5vtbW1vffee+vXr3/ttdcymcxR33iER7W3t+/atWvr1q2///3v9+3bd9RHDZRkMplMJqMoGjx48If2UgAAAAAYcCfLXpwXX3xxtj137twjdy4pKfnyl798ww03fOQjHwlXksnkJz7xiTvvvPOaz3zmqBWdx/iuIzynoKCgqqpq4cKFX/jCF0JQeGRHeFReXt64cePmz5//pS99adiwYUd9FAAAAADQ1UlRxZlIJKZNm5b9OGfOnFdfffVwncePH3/rrbfm5fU+85nnnjt23LiHH374cGvJj+tdWcuXL88OLy0tHTtmzJChQ6MoGjdu3Be+8IUf/OAHx1LLGUXRwYMH16xZk/1YXFw8cuTIUaNGRVE0aNCgv//7v3/ggQcaGxuP5VEAAAAAwMkScU6bNq1rZFlSUlJeXl5XV9dr5+uuuy50bm1p+acf//jqq6+eMGHCs88+e+jQoU9/+tPJZHLkyJGXX375v/3bv/X/XcH27dufffbZbhdnzZp19dVXh5TzwgsvXLp06bF807q6up6PGjdu3G233ZaXl5efnz9nzpyXXnrpWB4FAAAAAJwsEef8+fND4+WXX77sssvCWvKnnnqqZ8+ioqLS0tIoijo6Or57773t7e3ZW2+++WZzc/NNN90URdHMmTMPF3Ee+7uObPXq1aNGjbrooouiKLrggguOMeLs1fvvv/+rX/3q2muvjaLozDPP7DXiHDlyZHl5+aBBg+rr6z/44IOj7lV62mmnjRo1qqSkZMeOHTt37uzs7Dz2+SSTyUGDBoXTkPbv319QUJCfnx9F0YEDB3otVh00aFAymezo6Diuc6IAAAAATn75+fmVlZUVFRXJZLKhoWHbtm2tra25ntQAa29vb2trO8Y1yien3EechYWFEydODFWZS5YsWbBgQSqVqq6u7jV2LC8vD40dO3Z0zTeDTZs27du3r7i4OD8/P5VKdXR09OddR/XHP/4xRJwlJSV9GN5VTU1NaIRF611deOGFH/vYx7odyL59+/b/83/+z969e3s+6vTTT7/66qvLysqyVzo7OxsaGh5//PFdu3YddSbJZPK2224Lhzjt37//W9/61o033lhRURFF0TPPPLNixYpu/YcNG/bVr341rMH/H//jfxzPlwYAAAA4qeXn51966aWpVCp8LCsrGz58+Jo1a06xlDMvLy8vL2///v3xTTlzf9zQnDlzwmk8b6xenclkamtrwx/QlClTenbevXt3aIwaNSqUFnbzP//n//za17729a9/vWe+ebzvOqqWlpbQONzGoMcu+wfU7WCiuXPnfvKTn+yWb0ZRNGHChDvuuCPUWnY1atSoW265pWu+GZ5ZVlZ25513VldXH3kayWTy1ltvDflma0vL/fff39HRsXLlynD3vPPO6znk/PPPD421a9ce23cFAAAAiIfKyspsvhkkEolQP3fqKSgoyPUU+i73EecFF1wQGuFIn2XLloWP2RXlXR06dKi5uTn86H/3d383fvz4E/euo8oegJ5Op/swvKuQKoYvmL04derUT33qU6H93nvvvfjii//6r//6xhtvhD6DBg264447uu0revvtt4cT3ltbWpYuXfrYY48tX748/GKJROLaa68tLi4+3BySyeTNN98c/pU2NTXd/8AD+/fvD9llyIvHjh3b82995syZofHHP/6xnz8CAAAAwEklLGztZvjw4bmYywnX/xq+HMpxxFlWVhb21qyvrw9J3ObNm8Nh6FVVVb3WaT733HNhZ8nhw4fffvvtIRzsdojQQL3ryD760Y+GRn19/fGO7aqoqOizn/1saG/cuDE0UqnU5z73udBetWrVww8/vGTJknXr1j311FP33XdfWKRfWlqazUCjKPrbv/3b8C2am5u/893vLl68eP369c8+++y3v/3tPXv2hD6XXHJJr3NIJBI333xz+Hfb0NDwwAMPZDfWzGQy77zzTuhz7rnndh112mmnhZy3sbEx+woAAACAU0O3Es6g2xpcTgY5jjiz5ZOrVq3KXgwbUyYSidmzZ/ccUlNT8+ijj3Zbh37GGWd885vf/PznP19VVTWA7zqcZDK5YMGCWbNmhY/ZatCjOu200+Z08ZGPfOTaa6+9++67w26enZ2dL7zwQuh5zjnnhHrMhoaGp59+uutDWltbf/KTn4T22WefHRqDBw8O+3h2dnY+8sgj3X6fn/zkJ83Nza0tLSNGjOg5q0QicdNNN4V8s66u7nvf+15IfrOyFZrd1qrPmTMnNF5//fVj/AUAAAAAYGDluAA1u8w5u+FjSAxDteDcuXNfe+21nqM2btz4zW9+c8aMGfPmzRs7dmy4GLZCuPnmmzds2PDYY4/1PEO8b+8Kq8gXLVqUfUtpaenw4cOzVZ81NTWrV68+xu9bUlJy5ZVX9nqrs7Pzsccea2pqCh+z24OuW7eu53fZsmVLR0dHKpUqKioaPHjw/v37zzjjjHBrz549jY2N3frv3bv329/+9uFm9Z/+038K0fDOnTsffvjhntuYvvfee+Ecp7BWPRuAZn/SsPAfAAAAAD58uazirKqqKiwsDAFcKpUq/n+amprC7pYjRow47bTTeh2byWTefPPNhx566P333w9bWGYPWJ8yZUrPGLE/7wrbYgZnnXVW15OOampqfvazn/X/p9ixY8f999+/YcOG7JXsKe3btm3rdUg2xwxLxcMa/BBTHterx48fn41Hn3jiiV6PaYqiKMS4Xdeql5SUhFdv3749u6odAAAAAD5kuazivOiii0KjtLT07rvv7rXP/PnzFy9efISHhLPIX3rppRUrVlx++eVhNfr555//zDPPdD3nfkDeFXR2dra3t+/du3fp0qVd17wfi/r6+l//+tfZj1dcccXIkSOjKDp48GC3DT2zp6UfbqPPpqamcHL6kCFDuvbvz56Yt9xyy7333ttryrl06dKLL744rFVfsWJF11Xqx75OHwAAACBGwiLabhd7Lrcl53IWcaZSqcmTJx+126xZs7rGjqeddlpBQUEmk+kZ/HV2di5evHjy5MkhNBw9evSOHTv6866s7du3/+AHPziG73R0+/fv37JlS/bjL37xi//8n/9zKDKdMGHC9u3bs7f27dsXGiNHjuy1MDNbttnS0hI26Awfw46cx+X9998fPXp0KpUqKSm58cYb//mf/7lnn5aWlt27d48cOTK7Vj2sUu/o6Hj77beP940AAAAAJ7+tW7dmF79mNTQ05Gg6J1Z2hXQc5SzinDVrVjhOJ4qiXoPFhQsXhuLEiRMnZhdrf/aznw1HqD/22GPr16/PBufZ+Ly5uTlEnEVFRf1814dg586df964cdLkyVEUXXPNNffdd1/2VjjzPSwk/9Of/tRzbHZZ/d69e7P/G0XRmDFjjnca3//+9ysrK2+55ZZwcNNHP/rRV155pWe311577corrwxr1detWxcy1nXr1nWtlgUAAAA4ZWzZsqWioqJrIWdnZ+eHmR19mLqdPh0vOYs4L7zwwtD4+c9/vnbt2p4dioqKFixYENaYZ/e7fO+990LEedlll23YsKGzszORSIQ9IkO15sSJE0PPXbt29fNdH45fP/30V77ylUQiUVZWNmPGjGyauW7dulAmefbZZ7/wwgvdYsSzzjorhLb79+8P+2Bu3Lgx/BqlpaWjR4/+4IMPuvYfPnz4Lbfckkomt23f/vjjj3e99d5774V/sS+++OLHP/7xKIoWLFiwffv22trablNdvXr1FVdckUgkzjvvvLA6vuth6wAAAACnmHQ6/eqrr1ZWVlZUVCSTyYaGhm3btmWX0p4y2tvb29raYl3ElpuIc8iQIWE9dSaTqamp6bXPihUrQuw4derUZDIZfuUlS5bMnTs3kUiMHj36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Z8+ePX78+LBhw0pLSy9lIefcuXPjOsc4xOxsyZIloXJz/Pjxe/fujaLo8OHDV15xRRRFY8eO3blzZ5f18U2dnU2bNi0Mli1btmHDhs4vXXfddf33bf5HY2NjGJw4eXLdunWfuz6+inTLli3PP/9855c6F4QCAAAAcOnt2rWrurq6cyFnPp8POdUXT/eCwouktLQ0VPudPXu2v55ZEHrjDBs2rLKycs+ePXGXm4tt4cKFYfDCCy9s3ry5+4Li4uLFixeH8+wh/tuzd++VkydHUXT99dd3jzivv/76LjNFRUUhKGxra+uSb4abQPv1C0VRFH366adhMGrUqOLi4u4XCowcOTKVSrW0tISUOt7DL3/5yy4rZ86c2e/bAwAAAODctbW1rVixYuLEidXV1el0+tixY3v37u3H49WXifb29tbW1lwudwk+K5PJhBLOI0eO9ONjC6IoOnv27P79+8eOHTthwoRLk3KWlpaGL5PL5bZs2dLjmvfffz9EnNOmTUun07lcbvv27bfcckuI/6699trOLdRvvvnm7m3Kz549G25MyGQygwcPPnPmTPzS0qVLs9lsv3+vlpaWgwcPVlVVZTKZ+++//0c/+lHnH/NLX/pSOHu+e/fuJ598MsTVIYQdOXJkXAEaSlwvRgILAAAAwHlpa2urq6urq6sb6I18EWQymZDg7d+/vx9LOP8n4gyXCBQUFIwaNWrChAlHjhxpamq6qPdy1tbWhkFdXV1vCXFTU1N9fX1FRUU6nZ41a9bGjRv37du3fv36efPmRVF01113zZs3b9u2bel0esaMGaNHj+7xIfv3758wYUI6nX744Yc3bdpUV1c3evToq6++euTIkRew7blz53Zphh47c+bMK6+8EkXRM8888/DDDxcWFpaXl//1X//1tm3bduzYMWTIkLlz58Yf+uabb4bBli1bwn2g3/rWt7Zu3frRRx+VlJRMmTJlypQpF7A9AAAAALgM5fP5uOTx8OHD/X6faUE8Onr0aHt7+9ixYysrKysrK48cOXLmzJlcLncxss4QU0ZRtGbNmj6WrVu3LtzIWVtbu3HjxiiKXnnllTFjxoRAc/z48Z3v31y3bt28efO67PaXv/zln/zJn2QymeLi4vnz58+fPz/M53K5vXv3VldXn9e2y8rKemxqFB4YIs6mpqaf/OQnDz74YDqdLikpufbaa6+99trOK1999dV9+/aF8dq1axcsWDBkyJAQ1M6YMSNetmXLls5/AgAAAECy5PP5dDo9ePDgEG6GesSL0a8pNXz48M5/FxUVVVZWDhs2rN8/CQAAAAD4f9Px48ePHDnSv+fTY10jzqCoqGjo0KGlpaXFxcUFBQU9vREAAAAAoFft7e0tLS1NTU0nTpy4SOFm0HPECQAAAACQCOmB3gAAAAAAwIUTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgv0fV9f80Km2LyIAAAAASUVORK5CYII=\&quot;}&quot;
+  "selectedTool": "browser_take_screenshot",
+  "result": "{\"success\":true,\"filename\":\"page-2025-11-14T23-38-52-162Z.png\",\"savedPath\":\"file:///var/folders/v_/b8jyt6dn2n78h0n1ybzmgtmw0000gp/T/cursor/screenshots/page-2025-11-14T23-38-52-162Z.png\",\"dataUrl\":\"data:image/png;base64,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xETReZUhgwcrH8rjJbvqprVB2ZrzUqpKPj4+nT4LukV6erqcJKqmfgtbtmyZP3++/PPjvOXlY4899u677xoMBj8/v5UrV6amph46dCgwMHD8+PFi4KckSe+++277u3Ty5MnRo0dLkhQTE/POO+/s379/3759ItyUA1ZfX99PPvlk49dfV1RWDhgwYPLkyc4Dojuhurr6D3/4w1tvvaXT6fR6fVxcnHI3sK1bt6p2VD8flw8AAAAAANqj20ZxarXa9957z8vLS3nwyJEjYpnLgIAAZUjR1NQ0e/ZsVbh2xRVXdCiqKy8vX7Fixe23337ZZZepdjkfOnToOVxKW6655hrng1qtdsKECcojJSUloqCawN7a8NLE4cOVD8WCmOfjpjlLS0tTPnRzcxs7dqxztVmzZsnT5+Eq5EGakiRt27bNuYLFYpF/VhsbG/Pz81UVSkpK/vjHP4rByCaTacSIEcnJybNmzZIDvuXLl3do5aP169fLS99GRERcd9111113nXhYWlq6evVqUQ4ICLj5llsWLFgwdepUvV5fXFzcJfta5ubmLlq0SF49Q6irq3v55Ze3bNniXL/LLx8AAAAAALRH94RQsbGxmzZtSkpKUh1/+eWXRUG1bbfVapW3FpHdeeedrbW/atWqL3+1evVq1bp4Fovlww8/VB5RDersQpGRkc8//7zq4JIlS/z8/JRH5GUQN2zYoDweHx9/0003qV7+1FNPyYmJsGLFinO/ae20efNmVbNLliwJCAhQHomJiWlxryf0cLt27ZKTQflnUkUeOynW5XR24sSJRYsWqb5FEEtnPvnkk8uXL3d+SRtxZHV19V/+8pfMzMwW63z44Yfr169XLUORmpq6YMECUVb+rMpRaYvbhTm/WYRffvnltttuu+GGGxYtWvT888/feOON//d//7dt2zb56xlVx7rq8sXiFW10DAAAAAAAyDSRkZFd2NzAgQO/+OIL+aHD4XjppZfkh8HBwVFRUfHx8SEhIc6v/eqrrx577DFR9vDwUM3vXrZs2euvvy7+2tfpdJ999llCQoKygs1mG/zr9O2UlBRlapmXlzd16lT5oZub2+eff67c5igjI+Paa6+VJGnUqFHvv/++fPzMmTPOc1HFALdevXrJD2+//fY9e/aIclpamvPoxe+//37VqlU7d+6cPHnynDlzxowZo6owduxYMX7T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bG5ubrarGKRYFw8AAAAA+zAkYq+SkpKqqqopU6Zs3rx5zZo1TU1N+34+mUxOmzZtxowZubm577777vr167u6ugb+cQUFBfn5+Tk5OW1tbZnXe/0x0zXXXFNZWdnT03PHHXds2bJl4J81FBzy4gsLC2+55ZYoit5777177733UNQIAAAAAIOU5Yhzzpw5F198cX5+fvrKeeed19nZ+cADD6xZs6bv83l5eVdfffWUKVMSiUS4snDhwiiKampq7rnnnu7u7oF86C233JKTk9P3ek9Pz+bNm997770//OEPu3btSl8vKCiorKwM0erJJ5+8ZMmSQX3X7DgcxSeTyWQyGUXR8OHDD0WNAAAAADB42dyoftJJJy1evDgz3wzy8vI+85nPzJ8/v9f1wsLCL33pS1OnTk3nm2kVFRU333xzYWHhwdSTTCYnTZr0sY997Etf+tLIkSPT19vb23f/R+L5zjvvDG7mr3/969/4xjduuummg6lwEA6+eAAAAAAYyrK2inP27NkXXHBBGK9cufK1117bvHlzZWXlmWeeOWbMmCiKFi1atG7duu3bt6df+eIXvxiSx/b29ieffHLNmjWFhYVz5sw57bTToigqKyv71Kc+dc899wy8hldeeSU9Li4uHjdu3NixY0OWevPNN99+++3Nzc3h7q3f+95xxx23adOmurq6QXzZRCKRl5cXRdGIESMG8fpBOsjiAQAAAGAoy1rEedZZZ4XBSy+99OSTT4ZxdXX16tWrb7755rKysiiKjj322Oeffz7cqqqqCvlmR0fHbbfdtmPHjiiKduzYsWXLls2bN3/605+Ooqi8vHzgBXR3d//yl7/sdXHy5MlXX311QUFBQUHBJZdc8tOf/jRcb29vf/XVVw/F986CWBcPAAAAAPuWnYgzkUiMHj06iqJUKvXUU09l3uru7n7hhRcuvvjiKIpmzZqVGXGGwdKlS0O+mVZdXb1nz57hw4fn5uZOmjTpYNYqbtq06ec///m1114bNr8nk8menp6wdz4/Pz+VSu3Zs6fvWwUFBeXl5YWFhRs3buzVKymZTA4bNiycXBlFUU5OTlFRUfiafbsb5ebmHnHEEWPHju3o6Ni6devWrVv7flZOTk7Yj9/a2hpqKysrmzx5cnd395YtWxoaGvq+0rf4RCIRjtFsb28PnZpGjx5dWVm5a9eucARqr09JJBKTJ0+eMGFCfX39vn/e8H3D32zf3yqskx02bFhjY+P777/f2tq6j6kAAAAAsi4vL6+ioqK8vDyZTDY1NW3YsGH37t3ZLuoQ6+rq6ujoCEFTTGUn4hw+fHh7e3sikairq0ulUr3ubtiwIQwyt3Xn5OR0dHSEQLPvhA0NDdOmTQtR3UFux66pqWlvby8oKEgkEqNGjQqR5TXXXDNlypQoir75zW9mBnOzZ89etGhR5hmgqVTqzTfffPTRR8N/FieddNJ5552XvltUVPQ//sf/COPQlDxIJpMXXnjhvHnz0mFoiBd/9atfLV++PLO8s88+O3RYuv/++7u6ui699NLMnj87d+586KGH1q9fn/lK3+LLy8tDjPvmm2/W1NScd9554UTUzs7Or3/9670+paqq6vjjjw+FrV+/Pr2yta9kMnn99deHz9qzZ8/f//3fpxtAnXzyyWeccUavw1I3btz4i1/8IvMsAgAAAIChIy8v77TTTku3rS4rKxs9evTy5cs/ZClnbm5ubm7unj174ptyZifibGlp+bu/+7u93R03blwYbNu2LX3x0UcfffTRR/f2SmlpaRhs2rTp4MvbvXt3QUFBOKAzRJzpBkeZnY7OO++8k08+ude7iURi3rx5Rx555He/+92urq6+nZH69alPfWrmzJm9Lg4bNuwTn/hEW1vb6tWr+75SVVV1wgkn9LpYUlLyuc997rbbbsv86fotPpgwYcJxxx23jyIXLlw4wO3/yWTyuuuuC/nm7l27brv99nS+uWDBgsycN23KlCk33XTTd7/7Xcs5AQAAgCGooqIinW8GiURi6tSpH8qWzvn5+X33HMdF1s7i3IczzzwzDN59992BPH/UUUeVlJSEVbWHZElgcXFxGPTaEZ+pqKgonW++/PLLS5cuDTvrTz311Ly8vJKSkpNPPvmll15asWJFY2NjTk7O5ZdfHjaG/+IXv4iiKDMUP+OMM0K+2dPTU11dXV1dXVxcPGfOnKlTp0ZRdMUVV/zgBz/YsmVLrwJCvtnY2PjWW2/V1dUdffTRs2fPLiwsTCaTn//857/97W+HRa/7dsQRR0RR1NzcvHbt2vr6+r4rakO+uWnTptD6Kd1/qZdkMnnNNdeEgnfs2HH77ben/0kcc8wx559/fhhOJudaAAAgAElEQVRv2rSpurq6oaHhmGOOmT17dkFBwbBhw2666abvf//7Yb88AAAAwNDR78KvcPrih09u7lDMCQdoyJV+yimnhI7qra2tv/vd7/b7fH5+/mWXXRbGTzzxxMEXMGvWrLBru6enZx8R5/z588Pgtddee/zxx8P4+eefr62tveaaa5LJ5PHHH//SSy+1tLSsWbMmnfe3t7eHwy7TJk2aFDrCR1F0zz33pPeY//73v1+8ePGcOXMSicTll19+66239q1h06ZNd955ZxivWrXq6aef/upXv5qXlzds2LDzzz//kUceGcj3Xbly5b/+67/u44ElS5aEAHdvEonENddcE/7NNzU1/eAHP0inqzk5OaETVBRFy5YtS6/DTVebm5tbWlp6/vnn72OJLgAAAEBW9FrCGQxwzy4fpOQAnvngzJgx45xzzgnjhx9+eL/7/8OKxdDfpqmp6ZVXXjnIAmbOnPnJT34yjFetWtV3VWPaqFGjwqDX8sPa2tq/+Zu/ueWWW26//faBfGJ6Kejzzz/f6wzNX/ziF2EHd3obfqaOjo6f/exnmVdaWlr+6Z/+KYzDyaT71dXVte98s7a2dr/55tVXXx3yzYaGhttvvz1z9eicOXPCIZ5NTU1LlizJfHH37t3pamfPnj2QagEAAACgryG0inPChAlXXnllGL/22mv9HkDZy+WXXz5+/PgQ1e2jDU6/cnJyrrjiivQfR4wYMXr06NDuPOy23vcqyHfffffEE08Mp1WOGDHihRdeeP/99w+ogGD69Olh0PcQh1QqVV9fP3369GQyOWbMmMzjNUP42N7e3uuV2trarq6usDRyIJ++cePGfT+w37+Fz33uc5WVlVEUbd68+c4770yfvxlUVVWFQb95cU1NTXd3d+jePnz48H671QMAAADAvg2ViLO0tPTGG29Mt+3+93//9/2+ctFFFx199NEhCrz77rv3dkzkPhxzzDH9Xt+xY8dtt93WN0DMtGbNmm3btoU99XPnzp07d25XV1d9ff2bb775xhtvDPxkybAENYqiz3/+833vphusV1ZW9oo499ZYqbm5ecyYMclkctSoUfv9TXbs74HQbWlvJk+enB4/8MADvfLN0P4oDDZs2LC3asvKysKqWBEnAAAAAIMwJDaqFxUVfeELXwhnmtbV1d1zzz37feXjH//4Rz7ykZBv3nvvvftdjTgQ3d3dO3bseP7557///e/vO98MD//gBz9YuXJlejd9bm7u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7LMXLlwYRdH9999fVVV1/PHHh14669ev/+lPfxqeKSkpueKKKyZNmpQ5W2tr66OPPlpdXZ2+Ulxc/LWvfS2Kotra2p/85Ce9Pv30008/9dRToyh68MEHV6xYES7eeOON48aNi6Lob//2b6+++upp06YlEolwq66u7uc///muXbtmzpx5ySWXZPb2aWhouPPOO0NwefXVV0+ZMiWKoltvvTW9TDWKotLS0r/8y7+MoqilpeVb3/pWv5U89thjr776arhYUVGxaNGisrKyzCebm5uXLFny7rvv7u0HnzNnzkUXXZSuLZVKbdu27Sc/+UlLS0v6mfLy8muvvTaKojfffPP111//1Kc+VVRUlL67e9euf/75zzPT5BNPPPH888+Pouipp5568cUXe33i9ddfP3HixCiKvv71r4cc+UDnD5LJ5CUXX3zsccelf/AoitasWfPwww9fd9114S/lb/7mb2L9jxAAAAAYmvLy8k477bScnJzwx7KystGjRy9fvvxDlnLm5ubm5ubu2bMnvgFLdjaqt7S0/N3f/d03vvGNu+++u+/dkFtFUbRt27a+dxcuXHjCCSeEfDNTZWXlV7/61V75ZhRFw4YN+/SnPx3i0SAzLOsrfTfzI9IXFy9eXF5enjnDpEmTbrzxxlmzZl1++eW9epePHTv25ptvzsvLC6lcuDhz5szMZ9Kb8YuKikpKSjJvHXXUUWHwzjvvhMHEiROvvvrqXvlmFEWjRo266qqrpk6d2u83mjZ16mWXXZZZWyKRCLX122y9rKzs6quvzswfoygaUVz8Z3/2Z5kfPcCfse9jA5w/WLx48XHHH99rkqqqqj//8z9P/+8LAAAAwOFQUVHRK39IJBJ7S2Dirm9L8BjJWruhfTjzzDPDoN9lieXl5VEUbdq0KTQjSu/RXrRoUQgld+zYsWzZspqamoKCgoULF06fPj2KonPOOeeVV145+Ch65syZLS0tv/vd795///0ZM2acfPLJYdv4pz/96SiKNm7cuGzZst27d8+aNWvevHnh1qxZs5YvX75ixYozzjgjiqIZM2a89NJLmROmx8cee2zmrSOOOCLEwbt27Qo55g033JD+jitXrly/fv20adPmzJkzevToRCJx7bXX3nbbbZlLRIMjjzoqiqJVq1a98847O3bsqKqqWrhwYSKRKCoquuCCCx588MFez4d/qDU1NW+99VZDQ0NFRcVpp50WPveyyy774Q9/eJC/4cDnP/3002fNmhXGtbW11dXVO3bsmDVr1syZM3vFwQAAAACHXIihegmnL3745OYOxZxwgIZc6aecckroqN7a2vq73/2u32eWLFmydOnSzCtjxowpLS0N+51vu+229KGWq1evvuaaayorKxOJREVFxbp16w6yvLa2tu9973vh8Me1a9c2NDSk+8KvWbPmn//5n9Of29nZedJJJ4XlpcuXL29qamprayssLJw8eXJ6tmQyGXZzBzNnzkxHnBMnTgypXzrnveqqq8J/ao2Njd///vdDXLtmzZpnnnnmi1/84rhx43Jycj73uc995zvf6Vv2M888kz7VdN26dRs3bly8eHEURWHvfF/Lli179NFHw7impmbt2rU33nhjqOogf8CBz5+Xl/fxj388jJ9//vlnnnkmjKurq8vKym6++WarOAEAAIDDqt/wYd8bW8mKrHVU79eMGTPOOeecMH744Yf7XXRZW1vbK98MW9r/5//8n7fccsv//vu/79W058033wyDqqqqg6/w6aefzmxu8/rrr6fHjz32WOaTb7zxRhik986HgDU/P3/UqFHhyvTp08O/ivfefTeKosmTJ6f/kRxzzDFh8NZbb4XTS8P+/Z6enrvuuivzl0mlUnfddVfoR1RaWjpy5MheNe/etSudbwYrV67s6OgIz/f9jl1dXen8Mdi0adP27dvDv+Hi4uID+cH6McD506u+6+vr0/lm0NjYeN999x1kGQAAAAB8OAyhiHPChAlXXnllGL/22murV6/u97G9Xe9XIpFI9yI/JAcKpI/UDLq6ukIvna6url5tzTdv3hwG6bw/hJWZ8eXcuXNDh/HfPPtsWNSZXv88Y8aMEF+GVZxhu30Ic/ueaNva2pr+uPBipo2bNvX9ImHzeyKRCF3RMzU0NPR9vqmpKQzS+eygDXD+9FdOH0Waae3atX0bVQEAAADwX9BQ2aheWlp64403ppuk//u///venkxnYX2NHj163rx5M2bMGD16dF5eXk5OziFfObxjx45+r6eD1LS+S1DT8ejRVVV/+MMfoiiacdRRURS99957Gzdu7O7uzsnJOfbYY2tqatIHcb7//vthnnTwl44ye6mvrw9b4Puu4uz3lfRa1L4/0datW/s+v2fPnn4/dxAGOP+0adPCoLa2tu/zqVRq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4fr16zOvH9AkTU1NPT09yWSypKRk1KhRzc3NmW9NmzYtlNra2trd3T2orwsAAADA0JWXl3faaael9++WlZWNHj16+fLlH7KUMzc3Nzc3d8+ePfFNOYfQRvW8vLw//dM/DeNf/vKXA3klc/Vlr1u1tbX333//K6+8st+/m71NkkqlXnrppTD+8pe/XFlZGcaJRGLOnDnXXnvt3j4aAAAAgA+BioqKXucTJhKJcNrhh09+fn62Sxi8IbSK84wzzgj/0axatarXksl+TZs27YgjjgirL5ctWza4D933JE8//fSuXbvOOeec3Nzca665pqenp729vbCwMGyBT6VSL7744n5XiQIAAAAQR+Xl5X0vjh49Ohu1HHaxPo9xqKzizM/PDw3KB34K50UXXRQGTz755KA/d7+TvPbaa7/73e/COJlMDhs2LOSbYf3m008/PeiPBgAAAGAo67fFdDoaYugYKunsmWeemUwmoyh65513BrKEs7Kycty4cVEUtbS0vP7664P70P1OMnbs2C984QuZGXZXV1f6j2efffZHP/rR22677UN2/gIAAAAAxMiQiDgLCwtPOumkMB46SzgLCws///nPh0CzpaXloYceqqmp6erqKigoOPLIIy+99NL8/Pzhw4ffeOONt956q45DAAAAAJAVQ2Kj+tlnnx2WcFZXV+/YsWO/z8+YMaOsrCwkj2+88cbgPnS/k5xxxhmFhYVRFG3duvXb3/72u+++29XVFUVRe3t7dXX1t7/97ZaWliiKRo0adeKJJw6uBgAAAADgIGU/4hw2bNj8+fPDeIBLOC+44IIweOKJJ/b2zMyZM6+//vqPf/zj/R6aMJBJpk+fHgbPPPNMCDcztba2ps/onDFjxkDKBgAAACBG+t22m0qlslEL+5L9jernnHNOOKX17bff3rlz536fnzlzZmlpaVh9+eabb/b7THFx8eWXXx4apre1tb388suDmCQ8EEXRxo0b+31g06ZNYTB+/Pj9lg0AAABAvNTW1qbXwKU1NTVlqZzDq+8KvxjJ8irOoqKi448/PuTfA1zCef7554fB448/vrdnJkyYkB5PmTJlcJO0traGwXHHHdfvA3Pnzg2DXbt2DaRyAAAAAGKkpqam10LOVCq1YcOG7FV0GHV0dGS7hMHLcsR53nnnpZdwDiQonDNnTklJSVh9uXz58r099u677zY2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3z5y5Mgoir7xjW987nOfmzJlSjL575H08uXLn3/++Uwm0+f+N998c1iq3/V8p69//euJRKKpqemhhx669dZby8vLs/07Ojqefvrp1atXd/tGyWTy6k9/esbMmV0z0A0bNvzyl7+89dZbs1Pq+moAAACAWMjPz6+srKyoqEgmkw0NDdu2bWttbc31pAZYe3t7W1tbrKOb3FdxzpkzJ0Rjb6xenclkamtrw1/PlClT+v/w7C6Thzv0vK6u7u2333777bf379/f/9cdVVVV1Ve/+tVu+WYURYMGDfrc5z43b968rhezieFf//VfT506tWteGQ5lWrRo0YD071memZeXd8cdd3TNN0NF59VXX33BBRd063zdddfNPPfcbg+ZMmXKnXfe2Z9znAAAAAByKz8//9JLLz3jjDNSqVQikSgrK5s5c+aQIUNyPa8BlpeXN3jw4G5RUrzkvoozG5ktX748iqJly5ZNnTo1rF7fsGFDPx++YcOGSZMmhe0+b7/99hdffHHz5s0DMes+uuqqq8KfS1NT06pVq7Zs2VJYWDhv3rywTH7hwoXLly/vGZmfc8456XT69ddfr62tLSws/MhHPhJC0ilTpowfP/69997rZ/+eiouLoyjau3fvqlWr3n333REjRvzFX/xFWNK+cOHCN954o729PfRcsGDB9OnTQ3vr1q01NTVNTU3Tp0+fNm1aSUnJAP1sAAAAADlQWVnZrX4rkUhMnDjxnXfeyd2kTpSCgoKe2zzGRY4jzrKystLS0nAcUNgWc/PmzW1tbQUFBWGTynQ63Z/nL1++fMaMGePHj4+iaPz48TfffHM6nd6+ffumTZtqamoG5ESjrMLCwsNtOhmWgY8YMSJ82daWlgcffPDQoUPh7vr162+++eaqqqpEIlFZWblp06Zuw9vb2//X//pf9fX14ePbb7/9xS9+MaSW1dXVPSPL4+3fq/r6+gcffLCjoyOKoi1btrz55pvf+MY38vLy8vLyxo8fv3Xr1vB/ZWTLY3/3u99lt1KtqakpKyv7L//lv6jiBAAAAOKroqKi58Xhw4fnYi4nXNfDwGMnx1PPHjS0atWq7MWamppzzz03kUjMnj37tdde68/zM5nMI488ctNNN1VWVoYr+fn5VVVVVVVVl112WXNz88qVK5ctW5ZNG/vjoosuuuiii3q9df/99+/Zs2fPnj1f//rXe+3w5ptvVlVVhULLnhHn7373u2xeGbzyyis33HBDFEXd1pL3rX+v/vVf/zXkm0F7e/uaNWtmz54dRdHo0aNDxBk2UQ0n1GfzzaC+vv7xxx8PLwUAAACIo16Lt458IDM5keM19jNnzgyNlStXZi8uW7YsNObOndv/V2QymX/6p3+69957ly9f3i3KLCkp+djHPvbVr3516NCh/X/RERz5Tz+RSGTDxIKCgp4d/vznP3e7smvXrtDodebH27+nTCaze/fuwz0kuwI9ewx9r+XZtbW1nZ2dx/I6AAAAAOizXFZxVlVVFRYWhj0fU6lU2P8x7FOZTqfz8/NHjBhx2mmnNTU19f9de/fuffbZZ5999tnS0tLJkydPnzatsqoqJPGDBg360pe+9J3vfKef2w3s2rXrcBt9hjX4wfDhw2fNmnXmmWcOHz48Pz8/7FZ75CdnD03K2rdvX2j0OvZ4+/fU69Fg2ROZsg85/fTTQyMUdXbT2dnZ1NQ0bEgF/kMAACAASURBVNiwY3kjAAAAAPRNLiPO7LLu0tLSu+++u9c+8+fPX7x48QC+dO/evStXrly5cmUymbz88svDIeaFhYXTpk1bvXp1f5789ttv//a3vz1yn/PPP//KK6883nrm462F/PBrJw/3jVRuAwAAAHCi5WyheiqVmjx58lG7zZo16wRNIJPJPP/882vXrg0fzzzzzBP0oqyzzjrrr/7qr0Lq19jY+Kc//emVV1555plnnnjiid///vcn+u0nQrZ4M7vVaVeJRMKh6gAAAEB8dT2nJMu+fCehnFVxzpo1K5n8/wPWXus0Fy5cGFaRT5w4cdu2bX14xahRo0Kh6Pr162tqanrtU1NTc84554Sz3fvwiuOS3Xi0pqbmZz/7Wddb2UX68bJp06ZLLrkkiqJzzjnnlVde6Xb37LPPVsUJAAAAxNfWrVuzJ5FkNTQ05Gg6J1Z7e3uup9B3OYs4L7zwwtD4+c9/ni2l7KqoqGjBggVhPXu3QPAYdXZ2hiLQ6dOnHy7iPGvKlNBobGzswyuOSzgzPYqiF154oduts88++0S//UTIRs/l5eVXXnnlv/3bv2VvjRkz5tprr83d1AAAAAD6a8uWLRUVFV3PVe/s7OxbKd7Jr62tLddT6LvcRJxDhgwZNWpUWC1+uPBxxYoVIeKcOnVqMpnMZDLh+nnnnXfRRRdt3rz5N7/5TTqdPsJbdu/e3djYOGzYsMLCwquvvvrpp5/uVl08ZcqU6hkzQru2tjZ7feLEiZdffvn+/fufe+65vXv3DsQ3jkKKGqo1R44c2fWxs2bNyqaf8dLe3r548eJQbztnzpzKysr169fv379/8uTJFRUVSjgBAACAWEun06+++mplZWVFRUUymWxoaNi2bVuvpzTHWnt7e1tbWzZ8i6PcRJzhkJ8QLB7u52ttba2rqysvL08mk9XV1WvWrImiaNiwYZ/+9KdDStjS0vK73/3uyC9aunTpX/7lX4YYMRwotHPnzqamprFjx06aNGnSpEmh24EDB954443sqBtuuGHQoEFRFA0ePPiRRx4ZqG9dU1Mzbty4KIoWLVq0bt26t99+u7i4+Mwzz/wQtgE9cZYuXTp69OhQLVteXl5eXp691djY2NbWNnLkyJxOEAAAAKDv0ul0bW1t19o4TkK5iThnz54dGsuXLz9Ct9dffz1UCM6bNy9EnKWlpdm7XdO0w1m2bFlhYeHHPvaxsPI9G612VVdX98gjj2ST1mQyWVRUFNrDhg07zm92JCtXrpw7d25JSUkymZw+ffr06dOzt2pqarp+jJdf/epXBw8evOCCC7Jl252dnWvWrHn22WdvvfXWXM8OAAAAgFNcDiLOsrKysF47nU5v3LjxCD1XrVoVIs5x48alUqmOjo4tW7bs2LFj7NixbW1tRy3hDF599dXNmzd/7rOfHTJ0aLdb7e3ta9eufeqpp7pWkmYymddee23evHmdnZ3/9//+36M+Pzv2qNW8Bw4cuO+++66//vrKysrsUUuHDh165pln9u3bFyLOrg85lvO5ui69P97+R5h5r98lO7bn3eeff37x4sWlpaVlZWWNjY319fWhT0FBwVGnBAAAAAD9kQgnYm/evDnXMzkOgwcPPnDgwLEkel2lUqmxY8dWVFQUFhbu3Llz69at+/btO1zn/Pz8EMIOxHx7MXLkyKFDh9bX138IxxydOMlkcsyYMeGH2r17d7e7iUTiH//xH1Op1IEDB+65554czREAAACAk044meatt94akKfl7ET1/ti/f38fRnV0dGzfvn379u3H0vnEhZvB7t27e2aCsZNIJD7/+c+H9em//vWvV61a1fXuZ66+Otz685//nLs5AgAAAHCKi2XEyUmio6Pj9ddfnzt3bhRFV1111Zw5c7Zu3bp79+7S0tJZs2aVlJSEbl2PcgIAAACAgSXipF9efvnlysrKUaNGhS1Tw5HxWZ2dnU888cSRd1wFAAAAgP5IVVRURFG0d+/eXM+EWGpvb1+xYsWhQ4fGjB6dX1CQSCTC9QMHDrz//vuPPfbYli1bcj1HAAAAAE4upaWlURTt2rVrQJ6mipMBsHTp0qVLl0ZRNGzYsMGDB+/atavr0e0AAAAAcOKIOBlIjY2NsT4jHgAAAIDYSeZ6AgAAAAAAfSfiBAAAAABiTMQJAAAAAMSYiBMAAAAAiDERJwAAAAAQYyJOAAAAACDGRJwAAAAAQIyJOAEAAACAGBNxAgAAAAAxJuIEAAAAAGJMxAkAAAAAxJiIEwAAAACIMREnAAAAABBjIk4AAAAAIMZEnAAAAABAjIk4AQAAAIAYE3ECAAAAADEm4gQAAAAAYkzECQAAAADEmIgTAAAAAIgxEScAAAAAEGMiTgAAAAAgxkScAAAAAECMiTgBAAAAgBgTcQIAAAAAMSbiBAAAAABiTMQJAAAAAMSYiBMAAAAAiDERJwAAAAAQYyJOAAAAACDGRJwAAAAAQIyJOAEAAACAGBNxAgAAAAAxJuIEAAAAAGJMxAkAAAAAxJiIEwAAAACIMREnAAAAABBjIk4AAAAAIMZEnAAAAABAjMU+4kylUgUFBYlEItcTAQAAAAByIC/XE+ivW265ZeLEic8888yKFStyPRcAAAAA4MN2EkWcRUVF+fn56XT64MGDxz4q1G8ebxXnMb6rqKioqKioo6MjnU5nL2Yymba2tuN6XXhUz4udnZ2HDh063kcNiKKioq997WtRFP35z39+9NFHczIHAAAAAOi/kyXiHDt27B133BHa99xzz4EDB47cP5VKTZo0qaKiYsKECVEU/eVf/mV+fv7GjRs/+OCDgXrX6NGj77zzzl5vtbW1vffee+vXr3/ttdcymcxR33iER7W3t+/atWvr1q2///3v9+3bd9RHDZRkMplMJqMoGjx48If2UgAAAAAYcCfLXpwXX3xxtj137twjdy4pKfnyl798ww03fOQjHwlXksnkJz7xiTvvvPOaz3zmqBWdx/iuIzynoKCgqqpq4cKFX/jCF0JQeGRHeFReXt64cePmz5//pS99adiwYUd9FAAAAADQ1UlRxZlIJKZNm5b9OGfOnFdfffVwncePH3/rrbfm5fU+85nnnjt23LiHH374cGvJj+tdWcuXL88OLy0tHTtmzJChQ6MoGjdu3Be+8IUf/OAHx1LLGUXRwYMH16xZk/1YXFw8cuTIUaNGRVE0aNCgv//7v3/ggQcaGxuP5VEAAAAAwMkScU6bNq1rZFlSUlJeXl5XV9dr5+uuuy50bm1p+acf//jqq6+eMGHCs88+e+jQoU9/+tPJZHLkyJGXX375v/3bv/X/XcH27dufffbZbhdnzZp19dVXh5TzwgsvXLp06bF807q6up6PGjdu3G233ZaXl5efnz9nzpyXXnrpWB4FAAAAAJwsEef8+fND4+WXX77sssvCWvKnnnqqZ8+ioqLS0tIoijo6Or57773t7e3ZW2+++WZzc/NNN90URdHMmTMPF3Ee+7uObPXq1aNGjbrooouiKLrggguOMeLs1fvvv/+rX/3q2muvjaLozDPP7DXiHDlyZHl5+aBBg+rr6z/44IOj7lV62mmnjRo1qqSkZMeOHTt37uzs7Dz2+SSTyUGDBoXTkPbv319QUJCfnx9F0YEDB3otVh00aFAymezo6Diuc6IAAAAATn75+fmVlZUVFRXJZLKhoWHbtm2tra25ntQAa29vb2trO8Y1yien3EechYWFEydODFWZS5YsWbBgQSqVqq6u7jV2LC8vD40dO3Z0zTeDTZs27du3r7i4OD8/P5VKdXR09OddR/XHP/4xRJwlJSV9GN5VTU1NaIRF611deOGFH/vYx7odyL59+/b/83/+z969e3s+6vTTT7/66qvLysqyVzo7OxsaGh5//PFdu3YddSbJZPK2224Lhzjt37//W9/61o033lhRURFF0TPPPLNixYpu/YcNG/bVr341rMH/H//jfxzPlwYAAAA4qeXn51966aWpVCp8LCsrGz58+Jo1a06xlDMvLy8vL2///v3xTTlzf9zQnDlzwmk8b6xenclkamtrwx/QlClTenbevXt3aIwaNSqUFnbzP//n//za17729a9/vWe+ebzvOqqWlpbQONzGoMcu+wfU7WCiuXPnfvKTn+yWb0ZRNGHChDvuuCPUWnY1atSoW265pWu+GZ5ZVlZ25513VldXH3kayWTy1ltvDflma0vL/fff39HRsXLlynD3vPPO6znk/PPPD421a9ce23cFAAAAiIfKyspsvhkkEolQP3fqKSgoyPUU+i73EecFF1wQGuFIn2XLloWP2RXlXR06dKi5uTn86H/3d383fvz4E/euo8oegJ5Op/swvKuQKoYvmL04derUT33qU6H93nvvvfjii//6r//6xhtvhD6DBg264447uu0revvtt4cT3ltbWpYuXfrYY48tX748/GKJROLaa68tLi4+3BySyeTNN98c/pU2NTXd/8AD+/fvD9llyIvHjh3b82995syZofHHP/6xnz8CAAAAwEklLGztZvjw4bmYywnX/xq+HMpxxFlWVhb21qyvrw9J3ObNm8Nh6FVVVb3WaT733HNhZ8nhw4fffvvtIRzsdojQQL3ryD760Y+GRn19/fGO7aqoqOizn/1saG/cuDE0UqnU5z73udBetWrVww8/vGTJknXr1j311FP33XdfWKRfWlqazUCjKPrbv/3b8C2am5u/893vLl68eP369c8+++y3v/3tPXv2hD6XXHJJr3NIJBI333xz+Hfb0NDwwAMPZDfWzGQy77zzTuhz7rnndh112mmnhZy3sbEx+woAAACAU0O3Es6g2xpcTgY5jjiz5ZOrVq3KXgwbUyYSidmzZ/ccUlNT8+ijj3Zbh37GGWd885vf/PznP19VVTWA7zqcZDK5YMGCWbNmhY/ZatCjOu200+Z08ZGPfOTaa6+9++67w26enZ2dL7zwQuh5zjnnhHrMhoaGp59+uutDWltbf/KTn4T22WefHRqDBw8O+3h2dnY+8sgj3X6fn/zkJ83Nza0tLSNGjOg5q0QicdNNN4V8s66u7nvf+15IfrOyFZrd1qrPmTMnNF5//fVj/AUAAAAAYGDluAA1u8w5u+FjSAxDteDcuXNfe+21nqM2btz4zW9+c8aMGfPmzRs7dmy4GLZCuPnmmzds2PDYY4/1PEO8b+8Kq8gXLVqUfUtpaenw4cOzVZ81NTWrV68+xu9bUlJy5ZVX9nqrs7Pzsccea2pqCh+z24OuW7eu53fZsmVLR0dHKpUqKioaPHjw/v37zzjjjHBrz549jY2N3frv3bv329/+9uFm9Z/+038K0fDOnTsffvjhntuYvvfee+Ecp7BWPRuAZn/SsPAfAAAAAD58uazirKqqKiwsDAFcKpUq/n+amprC7pYjRow47bTTeh2byWTefPPNhx566P333w9bWGYPWJ8yZUrPGLE/7wrbYgZnnXVW15OOampqfvazn/X/p9ixY8f999+/YcOG7JXsKe3btm3rdUg2xwxLxcMa/BBTHterx48fn41Hn3jiiV6PaYqiKMS4Xdeql5SUhFdv3749u6odAAAAAD5kuazivOiii0KjtLT07rvv7rXP/PnzFy9efISHhLPIX3rppRUrVlx++eVhNfr555//zDPPdD3nfkDeFXR2dra3t+/du3fp0qVd17wfi/r6+l//+tfZj1dcccXIkSOjKDp48GC3DT2zp6UfbqPPpqamcHL6kCFDuvbvz56Yt9xyy7333ttryrl06dKLL744rFVfsWJF11Xqx75OHwAAACBGwiLabhd7Lrcl53IWcaZSqcmTJx+126xZs7rGjqeddlpBQUEmk+kZ/HV2di5evHjy5MkhNBw9evSOHTv6866s7du3/+AHPziG73R0+/fv37JlS/bjL37xi//8n/9zKDKdMGHC9u3bs7f27dsXGiNHjuy1MDNbttnS0hI26Awfw46cx+X9998fPXp0KpUqKSm58cYb//mf/7lnn5aWlt27d48cOTK7Vj2sUu/o6Hj77beP940AAAAAJ7+tW7dmF79mNTQ05Gg6J1Z2hXQc5SzinDVrVjhOJ4qiXoPFhQsXhuLEiRMnZhdrf/aznw1HqD/22GPr16/PBufZ+Ly5uTlEnEVFRf1814dg586df964cdLkyVEUXXPNNffdd1/2VjjzPSwk/9Of/tRzbHZZ/d69e7P/G0XRmDFjjnca3//+9ysrK2+55ZZwcNNHP/rRV155pWe311577corrwxr1detWxcy1nXr1nWtlgUAAAA4ZWzZsqWioqJrIWdnZ+eHmR19mLqdPh0vOYs4L7zwwtD4+c9/vnbt2p4dioqKFixYENaYZ/e7fO+990LEedlll23YsKGzszORSIQ9IkO15sSJE0PPXbt29fNdH45fP/30V77ylUQiUVZWNmPGjGyauW7dulAmefbZZ7/wwgvdYsSzzjorhLb79+8P+2Bu3Lgx/BqlpaWjR4/+4IMPuvYfPnz4Lbfckkomt23f/vjjj3e99d5774V/sS+++OLHP/7xKIoWLFiwffv22trablNdvXr1FVdckUgkzjvvvLA6vuth6wAAAACnmHQ6/eqrr1ZWVlZUVCSTyYaGhm3btmWX0p4y2tvb29raYl3ElpuIc8iQIWE9dSaTqamp6bXPihUrQuw4derUZDIZfuUlS5bMnTs3kUiMHj36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Z8+ePX78+LBhw0pLSy9lIefcuXPjOsc4xOxsyZIloXJz/Pjxe/fujaLo8OHDV15xRRRFY8eO3blzZ5f18U2dnU2bNi0Mli1btmHDhs4vXXfddf33bf5HY2NjGJw4eXLdunWfuz6+inTLli3PP/9855c6F4QCAAAAcOnt2rWrurq6cyFnPp8POdUXT/eCwouktLQ0VPudPXu2v55ZEHrjDBs2rLKycs+ePXGXm4tt4cKFYfDCCy9s3ry5+4Li4uLFixeH8+wh/tuzd++VkydHUXT99dd3jzivv/76LjNFRUUhKGxra+uSb4abQPv1C0VRFH366adhMGrUqOLi4u4XCowcOTKVSrW0tISUOt7DL3/5yy4rZ86c2e/bAwAAAODctbW1rVixYuLEidXV1el0+tixY3v37u3H49WXifb29tbW1lwudwk+K5PJhBLOI0eO9ONjC6IoOnv27P79+8eOHTthwoRLk3KWlpaGL5PL5bZs2dLjmvfffz9EnNOmTUun07lcbvv27bfcckuI/6699trOLdRvvvnm7m3Kz549G25MyGQygwcPPnPmTPzS0qVLs9lsv3+vlpaWgwcPVlVVZTKZ+++//0c/+lHnH/NLX/pSOHu+e/fuJ598MsTVIYQdOXJkXAEaSlwvRgILAAAAwHlpa2urq6urq6sb6I18EWQymZDg7d+/vx9LOP8n4gyXCBQUFIwaNWrChAlHjhxpamq6qPdy1tbWhkFdXV1vCXFTU1N9fX1FRUU6nZ41a9bGjRv37du3fv36efPmRVF01113zZs3b9u2bel0esaMGaNHj+7xIfv3758wYUI6nX744Yc3bdpUV1c3evToq6++euTIkRew7blz53Zphh47c+bMK6+8EkXRM8888/DDDxcWFpaXl//1X//1tm3bduzYMWTIkLlz58Yf+uabb4bBli1bwn2g3/rWt7Zu3frRRx+VlJRMmTJlypQpF7A9AAAAALgM5fP5uOTx8OHD/X6faUE8Onr0aHt7+9ixYysrKysrK48cOXLmzJlcLncxss4QU0ZRtGbNmj6WrVu3LtzIWVtbu3HjxiiKXnnllTFjxoRAc/z48Z3v31y3bt28efO67PaXv/zln/zJn2QymeLi4vnz58+fPz/M53K5vXv3VldXn9e2y8rKemxqFB4YIs6mpqaf/OQnDz74YDqdLikpufbaa6+99trOK1999dV9+/aF8dq1axcsWDBkyJAQ1M6YMSNetmXLls5/AgAAAECy5PP5dDo9ePDgEG6GesSL0a8pNXz48M5/FxUVVVZWDhs2rN8/CQAAAAD4f9Px48ePHDnSv+fTY10jzqCoqGjo0KGlpaXFxcUFBQU9vREAAAAAoFft7e0tLS1NTU0nTpy4SOFm0HPECQAAAACQCOmB3gAAAAAAwIUTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgok4AQAAAIAEE3ECAAAAAAkm4gQAAAAAEkzECQAAAAAkmIgTAAAAAEgwEScAAAAAkGAiTgAAAAAgwUScAAAAAECCiTgBAAAAgAQTcQIAAAAACSbiBAAAAAASTMQJAAAAACSYiBMAAAAASDARJwAAAACQYCJOAAAAACDBRJwAAAAAQIKJOAEAAACABBNxAgAAAAAJJuIEAAAAABJMxAkAAAAAJJiIEwAAAABIMBEnAAAAAJBgIk4AAAAAIMFEnAAAAABAgv0fV9f80Km2LyIAAAAASUVORK5CYII=\"}"
 }
 ```
 Status: **completed**
@@ -706,7 +706,7 @@ Analysiere die aktuelle Code-Struktur, um Refactoring-Möglichkeiten zu identifi
 
 <tool-use data-tool-type="generic" data-tool-name="list_dir">
 <details>
-            <summary>Tool use: **list_directory** • Listed directory undefined • **0** results</summary>
+            <summary>Tool use: **list_dir** • Listed directory undefined • **0** results</summary>
         
 No results found
 </details>
@@ -737,7 +737,7 @@ Refactoring des Codes nach Best Practices: Modularisierung, Trennung der Verantw
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: mkdir -p /Users/rstockm/Documents/GitHub/testabend/public/js</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: mkdir -p /Users/rstockm/Documents/GitHub/testabend/public/js</summary>
 
 ```bash
 mkdir -p /Users/rstockm/Documents/GitHub/testabend/public/js
@@ -759,7 +759,7 @@ Erstellen der Module, beginnend mit den Konfigurationen und Utilities:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/config.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/config.js</summary>
 
 **Chunk 1**
 Lines added: 103, lines removed: 1
@@ -816,9 +816,9 @@ Lines added: 103, lines removed: 1
 +   
 +   // Farben
 +   COLORS: {
-+     POINT: &#39;#4a9dd4&#39;,
-+     MAX_LINE: &#39;#90EE90&#39;,
-+     MIN_LINE: &#39;#FF6B6B&#39;
++     POINT: '#4a9dd4',
++     MAX_LINE: '#90EE90',
++     MIN_LINE: '#FF6B6B'
 +   }
 + };
 + 
@@ -827,33 +827,33 @@ Lines added: 103, lines removed: 1
 +  */
 + export function getDarkThemeConfig() {
 +   return {
-+     background: &quot;transparent&quot;,
-+     title: { color: &quot;#f5f5f5&quot;, font: &quot;system-ui, sans-serif&quot; },
++     background: "transparent",
++     title: { color: "#f5f5f5", font: "system-ui, sans-serif" },
 +     axis: {
-+       domainColor: &quot;#525252&quot;,
-+       gridColor: &quot;#404040&quot;,
-+       tickColor: &quot;#525252&quot;,
-+       labelColor: &quot;#d4d4d4&quot;,
-+       titleColor: &quot;#e5e5e5&quot;
++       domainColor: "#525252",
++       gridColor: "#404040",
++       tickColor: "#525252",
++       labelColor: "#d4d4d4",
++       titleColor: "#e5e5e5"
 +     },
 +     legend: {
-+       labelColor: &quot;#d4d4d4&quot;,
-+       titleColor: &quot;#e5e5e5&quot;
++       labelColor: "#d4d4d4",
++       titleColor: "#e5e5e5"
 +     },
 +     view: {
-+       stroke: &quot;transparent&quot;
++       stroke: "transparent"
 +     },
 +     tooltip: {
-+       color: &quot;#f5f5f5&quot;,
-+       fill: &quot;#1e1e1e&quot;,
-+       stroke: &quot;#404040&quot;,
++       color: "#f5f5f5",
++       fill: "#1e1e1e",
++       stroke: "#404040",
 +       strokeWidth: 1,
 +       cornerRadius: 12,
 +       padding: 16,
-+       font: &quot;system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif&quot;,
++       font: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
 +       fontSize: 17,
-+       fontStyle: &quot;normal&quot;,
-+       fontWeight: &quot;normal&quot;
++       fontStyle: "normal",
++       fontWeight: "normal"
 +     }
 +   };
 + }
@@ -863,10 +863,10 @@ Lines added: 103, lines removed: 1
 +  */
 + export function getBandPalette() {
 +   const basePalette = (window.vega &amp;&amp; vega.scheme) 
-+     ? vega.scheme(&#39;category10&#39;) 
-+     : [&#39;#1f77b4&#39;,&#39;#ff7f0e&#39;,&#39;#2ca02c&#39;,&#39;#d62728&#39;,&#39;#9467bd&#39;,&#39;#8c564b&#39;,&#39;#e377c2&#39;,&#39;#7f7f7f&#39;,&#39;#bcbd22&#39;,&#39;#17becf&#39;];
++     ? vega.scheme('category10') 
++     : ['#1f77b4','#ff7f0e','#2ca02c','#d62728','#9467bd','#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf'];
 +   // Erste Farbe heller machen: #1f77b4 -&gt; ~20% heller
-+   const lighterBlue = &#39;#4a9dd4&#39;;
++   const lighterBlue = '#4a9dd4';
 +   return [lighterBlue, ...basePalette.slice(1)];
 + }
 + 
@@ -880,7 +880,7 @@ Lines added: 103, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
 
 **Chunk 1**
 Lines added: 138, lines removed: 1
@@ -896,7 +896,7 @@ Lines added: 138, lines removed: 1
 +  * Logging-Hilfsfunktion
 +  */
 + export function log(msg) {
-+   console.log(typeof msg === &#39;string&#39; ? msg : JSON.stringify(msg));
++   console.log(typeof msg === 'string' ? msg : JSON.stringify(msg));
 + }
 + 
 + /**
@@ -913,9 +913,9 @@ Lines added: 138, lines removed: 1
 +   return data.map(d =&gt; ({
 +     Platz: d.Platz != null ? parseInt(d.Platz, 10) : null,
 +     Jahr: d.Jahr != null ? parseInt(d.Jahr, 10) : null,
-+     Band: d.Band != null ? String(d.Band) : &#39;&#39;,
-+     Album: d.Album != null ? String(d.Album) : &#39;&#39;,
-+     Note: d.Note != null ? parseFloat(String(d.Note).replace(&#39;,&#39;, &#39;.&#39;)) : null
++     Band: d.Band != null ? String(d.Band) : '',
++     Album: d.Album != null ? String(d.Album) : '',
++     Note: d.Note != null ? parseFloat(String(d.Note).replace(',', '.')) : null
 +   })).filter(d =&gt; d.Jahr != null &amp;&amp; d.Band &amp;&amp; d.Album);
 + }
 + 
@@ -958,18 +958,18 @@ Lines added: 138, lines removed: 1
 +  * Hash-Parameter parsen
 +  */
 + export function parseHash() {
-+   const hash = (location.hash || &#39;#overview&#39;).slice(1);
-+   const [route, query] = hash.split(&#39;?&#39;);
++   const hash = (location.hash || '#overview').slice(1);
++   const [route, query] = hash.split('?');
 +   const params = {};
 +   
 +   if (query) {
-+     for (const part of query.split(&#39;&amp;&#39;)) {
-+       const [k, v] = part.split(&#39;=&#39;);
-+       params[decodeURIComponent(k)] = decodeURIComponent(v || &#39;&#39;);
++     for (const part of query.split('&amp;')) {
++       const [k, v] = part.split('=');
++       params[decodeURIComponent(k)] = decodeURIComponent(v || '');
 +     }
 +   }
 +   
-+   return { route: route || &#39;overview&#39;, params };
++   return { route: route || 'overview', params };
 + }
 + 
 + /**
@@ -977,20 +977,20 @@ Lines added: 138, lines removed: 1
 +  */
 + export function updateHash(route, params) {
 +   const q = params &amp;&amp; Object.keys(params).length &gt; 0
-+     ? &#39;?&#39; + Object.entries(params)
-+         .map(([k, v]) =&gt; encodeURIComponent(k) + &#39;=&#39; + encodeURIComponent(v))
-+         .join(&#39;&amp;&#39;)
-+     : &#39;&#39;;
-+   location.hash = &#39;#&#39; + route + q;
++     ? '?' + Object.entries(params)
++         .map(([k, v]) =&gt; encodeURIComponent(k) + '=' + encodeURIComponent(v))
++         .join('&amp;')
++     : '';
++   location.hash = '#' + route + q;
 + }
 + 
 + /**
 +  * Aktive Navigation setzen
 +  */
 + export function setActiveNav(route) {
-+   [&#39;overview&#39;, &#39;band&#39;, &#39;scatter&#39;].forEach(r =&gt; {
-+     const el = document.getElementById(&#39;nav-&#39; + r);
-+     if (el) el.classList.toggle(&#39;active&#39;, r === route);
++   ['overview', 'band', 'scatter'].forEach(r =&gt; {
++     const el = document.getElementById('nav-' + r);
++     if (el) el.classList.toggle('active', r === route);
 +   });
 + }
 + 
@@ -1036,7 +1036,7 @@ Lines added: 138, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/regression.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/regression.js</summary>
 
 **Chunk 1**
 Lines added: 113, lines removed: 1
@@ -1047,7 +1047,7 @@ Lines added: 113, lines removed: 1
 + /**
 +  * Polynomische Regression (2. Grades)
 +  */
-+ import { CONFIG } from &#39;./config.js&#39;;
++ import { CONFIG } from './config.js';
 + 
 + /**
 +  * Berechnet die Koeffizienten für eine polynomische Regression 2. Grades
@@ -1177,7 +1177,7 @@ Erstellen der Renderer- und Controls-Module:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 450, lines removed: 1
@@ -1188,28 +1188,28 @@ Lines added: 450, lines removed: 1
 + /**
 +  * Chart-Rendering-Funktionen
 +  */
-+ import { CONFIG, getDarkThemeConfig, getBandPalette } from &#39;./config.js&#39;;
-+ import { generateYearRange, calculateYDomain, calculateMinMaxPerYear } from &#39;./utils.js&#39;;
-+ import { polynomialRegression, generateRegressionPoints } from &#39;./regression.js&#39;;
++ import { CONFIG, getDarkThemeConfig, getBandPalette } from './config.js';
++ import { generateYearRange, calculateYDomain, calculateMinMaxPerYear } from './utils.js';
++ import { polynomialRegression, generateRegressionPoints } from './regression.js';
 + 
 + /**
 +  * Overview-Chart rendern
 +  */
 + export async function renderOverview(data, chartEl) {
 +   const spec = {
-+     $schema: &quot;https://vega.github.io/schema/vega-lite/v5.json&quot;,
-+     description: &quot;Anzahl Alben pro Jahr&quot;,
++     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
++     description: "Anzahl Alben pro Jahr",
 +     data: { values: data },
 +     config: getDarkThemeConfig(),
-+     mark: &quot;bar&quot;,
-+     width: &quot;container&quot;,
++     mark: "bar",
++     width: "container",
 +     height: CONFIG.CHART.OVERVIEW_HEIGHT,
 +     encoding: {
-+       x: { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, sort: &quot;ascending&quot;, axis: { labelAngle: 0 } },
-+       y: { aggregate: &quot;count&quot;, type: &quot;quantitative&quot;, title: &quot;Anzahl Alben&quot; },
++       x: { field: "Jahr", type: "ordinal", sort: "ascending", axis: { labelAngle: 0 } },
++       y: { aggregate: "count", type: "quantitative", title: "Anzahl Alben" },
 +       tooltip: [
-+         { aggregate: &quot;count&quot;, type: &quot;quantitative&quot;, title: &quot;Anzahl&quot; },
-+         { field: &quot;Jahr&quot;, type: &quot;ordinal&quot; }
++         { aggregate: "count", type: "quantitative", title: "Anzahl" },
++         { field: "Jahr", type: "ordinal" }
 +       ]
 +     }
 +   };
@@ -1226,7 +1226,7 @@ Lines added: 450, lines removed: 1
 +   );
 +   
 +   if (filtered.length === 0) {
-+     chartEl.innerHTML = &#39;&lt;p style=&quot;padding: 40px; text-align: center; color: #a3a3a3;&quot;&gt;Keine Daten verfügbar.&lt;/p&gt;&#39;;
++     chartEl.innerHTML = '&lt;p style="padding: 40px; text-align: center; color: #a3a3a3;"&gt;Keine Daten verfügbar.&lt;/p&gt;';
 +     return;
 +   }
 +   
@@ -1253,19 +1253,19 @@ Lines added: 450, lines removed: 1
 +   
 +   // X-Achse Konfiguration
 +   const xAxisConfig = zoomY ? {
-+     format: &quot;d&quot;,
-+     labelBaseline: &quot;top&quot;,
++     format: "d",
++     labelBaseline: "top",
 +     labelOffset: 8,
-+     orient: &quot;top&quot;,
++     orient: "top",
 +     labelAngle: 0
 +   } : {
-+     format: &quot;d&quot;,
++     format: "d",
 +     labelAngle: 0
 +   };
 +   
 +   const spec = {
-+     $schema: &quot;https://vega.github.io/schema/vega-lite/v5.json&quot;,
-+     description: &quot;Alle Wertungen aller Jahre&quot;,
++     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
++     description: "Alle Wertungen aller Jahre",
 +     config: getDarkThemeConfig(),
 +     width: CONFIG.CHART.SCATTER_WIDTH,
 +     height: CONFIG.CHART.SCATTER_HEIGHT,
@@ -1274,7 +1274,7 @@ Lines added: 450, lines removed: 1
 +       {
 +         data: { values: filtered },
 +         mark: { 
-+           type: &quot;point&quot;, 
++           type: "point", 
 +           size: 80, 
 +           filled: true, 
 +           opacity: CONFIG.OPACITY.POINT, 
@@ -1282,76 +1282,76 @@ Lines added: 450, lines removed: 1
 +         },
 +         encoding: {
 +           x: { 
-+             field: &quot;Jahr&quot;, 
-+             type: &quot;quantitative&quot;, 
-+             title: &quot;Jahr&quot;, 
++             field: "Jahr", 
++             type: "quantitative", 
++             title: "Jahr", 
 +             scale: { domain: [fullMinJahr, fullMaxJahr], zero: false }, 
 +             axis: xAxisConfig 
 +           },
 +           y: { 
-+             field: &quot;Note&quot;, 
-+             type: &quot;quantitative&quot;, 
-+             title: &quot;Note&quot;, 
++             field: "Note", 
++             type: "quantitative", 
++             title: "Note", 
 +             scale: { domain: [domainMinY, domainMaxY] } 
 +           },
 +           tooltip: [
-+             { field: &quot;Band&quot;, type: &quot;nominal&quot;, title: &quot;Band&quot; },
-+             { field: &quot;Album&quot;, type: &quot;nominal&quot;, title: &quot;Album&quot; },
-+             { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, title: &quot;Jahr&quot; },
-+             { field: &quot;Note&quot;, type: &quot;quantitative&quot;, title: &quot;Note&quot; }
++             { field: "Band", type: "nominal", title: "Band" },
++             { field: "Album", type: "nominal", title: "Album" },
++             { field: "Jahr", type: "quantitative", title: "Jahr" },
++             { field: "Note", type: "quantitative", title: "Note" }
 +           ]
 +         }
 +       },
 +       {
 +         data: { values: minMaxData },
-+         mark: { type: &quot;line&quot;, color: CONFIG.COLORS.MAX_LINE, strokeWidth: 2 },
++         mark: { type: "line", color: CONFIG.COLORS.MAX_LINE, strokeWidth: 2 },
 +         encoding: {
 +           x: { 
-+             field: &quot;Jahr&quot;, 
-+             type: &quot;quantitative&quot;, 
++             field: "Jahr", 
++             type: "quantitative", 
 +             scale: { domain: [fullMinJahr, fullMaxJahr], zero: false }, 
 +             axis: xAxisConfig 
 +           },
 +           y: { 
-+             field: &quot;MaxNote&quot;, 
-+             type: &quot;quantitative&quot;, 
++             field: "MaxNote", 
++             type: "quantitative", 
 +             scale: { domain: [domainMinY, domainMaxY] } 
 +           },
 +           tooltip: [
-+             { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, title: &quot;Jahr&quot; },
-+             { field: &quot;MaxNote&quot;, type: &quot;quantitative&quot;, title: &quot;Höchste Note&quot; }
++             { field: "Jahr", type: "quantitative", title: "Jahr" },
++             { field: "MaxNote", type: "quantitative", title: "Höchste Note" }
 +           ]
 +         }
 +       },
 +       {
 +         data: { values: minMaxData },
-+         mark: { type: &quot;line&quot;, color: CONFIG.COLORS.MIN_LINE, strokeWidth: 2 },
++         mark: { type: "line", color: CONFIG.COLORS.MIN_LINE, strokeWidth: 2 },
 +         encoding: {
 +           x: { 
-+             field: &quot;Jahr&quot;, 
-+             type: &quot;quantitative&quot;, 
++             field: "Jahr", 
++             type: "quantitative", 
 +             scale: { domain: [fullMinJahr, fullMaxJahr], zero: false }, 
 +             axis: xAxisConfig 
 +           },
 +           y: { 
-+             field: &quot;MinNote&quot;, 
-+             type: &quot;quantitative&quot;, 
++             field: "MinNote", 
++             type: "quantitative", 
 +             scale: { domain: [domainMinY, domainMaxY] } 
 +           },
 +           tooltip: [
-+             { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, title: &quot;Jahr&quot; },
-+             { field: &quot;MinNote&quot;, type: &quot;quantitative&quot;, title: &quot;Niedrigste Note&quot; }
++             { field: "Jahr", type: "quantitative", title: "Jahr" },
++             { field: "MinNote", type: "quantitative", title: "Niedrigste Note" }
 +           ]
 +         }
 +       }
 +     ]
 +   };
 +   
-+   chartEl.innerHTML = &#39;&#39;;
++   chartEl.innerHTML = '';
 +   try {
 +     await vegaEmbed(chartEl, spec, { actions: false });
 +   } catch (e) {
-+     chartEl.innerHTML = &#39;&lt;p style=&quot;padding: 40px; text-align: center; color: #ff6b6b;&quot;&gt;Fehler beim Rendering: &#39; + e.message + &#39;&lt;/p&gt;&#39;;
++     chartEl.innerHTML = '&lt;p style="padding: 40px; text-align: center; color: #ff6b6b;"&gt;Fehler beim Rendering: ' + e.message + '&lt;/p&gt;';
 +     throw e;
 +   }
 + }
@@ -1412,10 +1412,10 @@ Lines added: 450, lines removed: 1
 +   }
 +   
 +   const spec = {
-+     $schema: &quot;https://vega.github.io/schema/vega-lite/v5.json&quot;,
-+     description: &quot;Zeitreihe für Band/Bands&quot;,
++     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
++     description: "Zeitreihe für Band/Bands",
 +     config: getDarkThemeConfig(),
-+     width: &quot;container&quot;,
++     width: "container",
 +     height: CONFIG.CHART.BANDS_HEIGHT,
 +     layer: layers
 +   };
@@ -1434,15 +1434,15 @@ Lines added: 450, lines removed: 1
 +     if (!selectedBands.includes(d.Band)) continue;
 +     if (d.Jahr == null || d.Note == null) continue;
 +     
-+     const key = d.Band + &#39;|&#39; + d.Jahr;
++     const key = d.Band + '|' + d.Jahr;
 +     if (!allAlbumsByBandYear.has(key)) {
 +       allAlbumsByBandYear.set(key, []);
 +     }
-+     allAlbumsByBandYear.get(key).push({ note: d.Note, album: d.Album || &#39;&#39; });
++     allAlbumsByBandYear.get(key).push({ note: d.Note, album: d.Album || '' });
 +     
 +     const prev = bestByBandYear.get(key);
 +     if (prev == null || d.Note &gt; prev.note) {
-+       bestByBandYear.set(key, { note: d.Note, album: d.Album || &#39;&#39; });
++       bestByBandYear.set(key, { note: d.Note, album: d.Album || '' });
 +     }
 +   }
 +   
@@ -1451,12 +1451,12 @@ Lines added: 450, lines removed: 1
 +   
 +   for (const band of selectedBands) {
 +     for (const y of rangeYears) {
-+       const v = bestByBandYear.get(band + &#39;|&#39; + y);
++       const v = bestByBandYear.get(band + '|' + y);
 +       if (v) {
 +         bestPoints.push({ Jahr: y, Band: band, Note: v.note, Album: v.album });
 +       }
 +       
-+       const albums = allAlbumsByBandYear.get(band + &#39;|&#39; + y) || [];
++       const albums = allAlbumsByBandYear.get(band + '|' + y) || [];
 +       for (const album of albums) {
 +         allPoints.push({ Jahr: y, Band: band, Note: album.note, Album: album.album });
 +       }
@@ -1472,31 +1472,31 @@ Lines added: 450, lines removed: 1
 + function createLineLayer(bestPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette, opacity) {
 +   return {
 +     data: { values: bestPoints },
-+     mark: { type: &quot;line&quot;, opacity },
++     mark: { type: "line", opacity },
 +     encoding: {
 +       x: { 
-+         field: &quot;Jahr&quot;, 
-+         type: &quot;ordinal&quot;, 
-+         sort: &quot;ascending&quot;, 
-+         axis: { labelAngle: 0, grid: true, gridColor: &quot;#252525&quot; }, 
++         field: "Jahr", 
++         type: "ordinal", 
++         sort: "ascending", 
++         axis: { labelAngle: 0, grid: true, gridColor: "#252525" }, 
 +         scale: { domain: rangeYears } 
 +       },
 +       y: { 
-+         field: &quot;Note&quot;, 
-+         type: &quot;quantitative&quot;, 
-+         title: &quot;Note&quot;, 
++         field: "Note", 
++         type: "quantitative", 
++         title: "Note", 
 +         scale: { domainMin: domainMinY, domainMax: domainMaxY }, 
-+         axis: { gridColor: &quot;#252525&quot; } 
++         axis: { gridColor: "#252525" } 
 +       },
 +       tooltip: [
-+         { field: &quot;Band&quot;, type: &quot;nominal&quot; },
-+         { field: &quot;Jahr&quot;, type: &quot;ordinal&quot; },
-+         { field: &quot;Album&quot;, type: &quot;nominal&quot; },
-+         { field: &quot;Note&quot;, type: &quot;quantitative&quot; }
++         { field: "Band", type: "nominal" },
++         { field: "Jahr", type: "ordinal" },
++         { field: "Album", type: "nominal" },
++         { field: "Note", type: "quantitative" }
 +       ],
 +       color: { 
-+         field: &quot;Band&quot;, 
-+         type: &quot;nominal&quot;, 
++         field: "Band", 
++         type: "nominal", 
 +         legend: null, 
 +         scale: { range: palette, domain: selectedBands } 
 +       }
@@ -1510,30 +1510,30 @@ Lines added: 450, lines removed: 1
 + function createPointLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
 +   return {
 +     data: { values: allPoints },
-+     mark: { type: &quot;point&quot;, size: CONFIG.UI.POINT_SIZE, filled: true, cursor: &quot;pointer&quot; },
++     mark: { type: "point", size: CONFIG.UI.POINT_SIZE, filled: true, cursor: "pointer" },
 +     encoding: {
 +       x: { 
-+         field: &quot;Jahr&quot;, 
-+         type: &quot;ordinal&quot;, 
-+         sort: &quot;ascending&quot;, 
++         field: "Jahr", 
++         type: "ordinal", 
++         sort: "ascending", 
 +         scale: { domain: rangeYears } 
 +       },
 +       y: { 
-+         field: &quot;Note&quot;, 
-+         type: &quot;quantitative&quot;, 
++         field: "Note", 
++         type: "quantitative", 
 +         scale: { domainMin: domainMinY, domainMax: domainMaxY } 
 +       },
 +       color: { 
-+         field: &quot;Band&quot;, 
-+         type: &quot;nominal&quot;, 
++         field: "Band", 
++         type: "nominal", 
 +         legend: null, 
 +         scale: { range: palette, domain: selectedBands } 
 +       },
 +       tooltip: [
-+         { field: &quot;Band&quot;, type: &quot;nominal&quot;, title: &quot;Band&quot; },
-+         { field: &quot;Album&quot;, type: &quot;nominal&quot;, title: &quot;Album&quot; },
-+         { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, title: &quot;Jahr&quot; },
-+         { field: &quot;Note&quot;, type: &quot;quantitative&quot;, title: &quot;Note&quot; }
++         { field: "Band", type: "nominal", title: "Band" },
++         { field: "Album", type: "nominal", title: "Album" },
++         { field: "Jahr", type: "ordinal", title: "Jahr" },
++         { field: "Note", type: "quantitative", title: "Note" }
 +       ]
 +     }
 +   };
@@ -1573,21 +1573,21 @@ Lines added: 450, lines removed: 1
 +       regressionLayers.push({
 +         data: { values: regressionPoints },
 +         mark: { 
-+           type: &quot;line&quot;, 
++           type: "line", 
 +           strokeWidth: CONFIG.UI.REGRESSION_STROKE_WIDTH, 
 +           opacity: CONFIG.OPACITY.REGRESSION_LINE, 
 +           strokeDash: CONFIG.UI.REGRESSION_STROKE_DASH 
 +         },
 +         encoding: {
 +           x: { 
-+             field: &quot;Jahr&quot;, 
-+             type: &quot;ordinal&quot;, 
-+             sort: &quot;ascending&quot;, 
++             field: "Jahr", 
++             type: "ordinal", 
++             sort: "ascending", 
 +             scale: { domain: rangeYears } 
 +           },
 +           y: { 
-+             field: &quot;Note&quot;, 
-+             type: &quot;quantitative&quot;, 
++             field: "Note", 
++             type: "quantitative", 
 +             scale: { domainMin: domainMinY, domainMax: domainMaxY } 
 +           },
 +           color: { value: bandColor }
@@ -1606,28 +1606,28 @@ Lines added: 450, lines removed: 1
 +   return {
 +     data: { values: allPoints },
 +     mark: { 
-+       type: &quot;text&quot;, 
++       type: "text", 
 +       dy: CONFIG.UI.TITLE_OFFSET, 
 +       fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
-+       fontWeight: &quot;bold&quot; 
++       fontWeight: "bold" 
 +     },
 +     zindex: 1,
 +     encoding: {
 +       x: { 
-+         field: &quot;Jahr&quot;, 
-+         type: &quot;ordinal&quot;, 
-+         sort: &quot;ascending&quot;, 
++         field: "Jahr", 
++         type: "ordinal", 
++         sort: "ascending", 
 +         scale: { domain: rangeYears } 
 +       },
 +       y: { 
-+         field: &quot;Note&quot;, 
-+         type: &quot;quantitative&quot;, 
++         field: "Note", 
++         type: "quantitative", 
 +         scale: { domainMin: domainMinY, domainMax: domainMaxY } 
 +       },
-+       text: { field: &quot;Album&quot;, type: &quot;nominal&quot; },
++       text: { field: "Album", type: "nominal" },
 +       color: { 
-+         field: &quot;Band&quot;, 
-+         type: &quot;nominal&quot;, 
++         field: "Band", 
++         type: "nominal", 
 +         legend: null, 
 +         scale: { range: palette, domain: selectedBands } 
 +       }
@@ -1645,7 +1645,7 @@ Lines added: 450, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
 
 **Chunk 1**
 Lines added: 237, lines removed: 1
@@ -1656,36 +1656,36 @@ Lines added: 237, lines removed: 1
 + /**
 +  * UI-Control-Builder
 +  */
-+ import { getBandPalette } from &#39;./config.js&#39;;
++ import { getBandPalette } from './config.js';
 + 
 + /**
 +  * Tag-Bar für ausgewählte Bands erstellen
 +  */
 + export function buildTagBar(selectedBands, onRemove) {
-+   const bar = document.createElement(&#39;div&#39;);
-+   bar.className = &#39;tags&#39;;
++   const bar = document.createElement('div');
++   bar.className = 'tags';
 +   const palette = getBandPalette();
 +   
 +   for (const b of selectedBands) {
-+     const t = document.createElement(&#39;span&#39;);
-+     t.className = &#39;tag&#39;;
++     const t = document.createElement('span');
++     t.className = 'tag';
 +     
-+     const dot = document.createElement(&#39;span&#39;);
++     const dot = document.createElement('span');
 +     const idx = selectedBands.indexOf(b);
 +     const color = palette[idx % palette.length];
-+     dot.style.width = &#39;10px&#39;;
-+     dot.style.height = &#39;10px&#39;;
-+     dot.style.borderRadius = &#39;50%&#39;;
++     dot.style.width = '10px';
++     dot.style.height = '10px';
++     dot.style.borderRadius = '50%';
 +     dot.style.background = color;
-+     dot.style.display = &#39;inline-block&#39;;
++     dot.style.display = 'inline-block';
 +     
-+     const txt = document.createElement(&#39;span&#39;);
++     const txt = document.createElement('span');
 +     txt.textContent = b;
 +     
-+     const btn = document.createElement(&#39;button&#39;);
-+     btn.setAttribute(&#39;aria-label&#39;, &#39;Entfernen&#39;);
-+     btn.textContent = &#39;×&#39;;
-+     btn.addEventListener(&#39;click&#39;, () =&gt; onRemove(b));
++     const btn = document.createElement('button');
++     btn.setAttribute('aria-label', 'Entfernen');
++     btn.textContent = '×';
++     btn.addEventListener('click', () =&gt; onRemove(b));
 +     
 +     t.appendChild(dot);
 +     t.appendChild(txt);
@@ -1699,19 +1699,19 @@ Lines added: 237, lines removed: 1
 + /**
 +  * Band-Panel erstellen
 +  */
-+ export function buildBandPanel(allBands, selectedBands, onSelectChange, data, sortBy = &#39;alphabetical&#39;) {
-+   const panel = document.createElement(&#39;div&#39;);
-+   panel.className = &#39;band-panel&#39;;
++ export function buildBandPanel(allBands, selectedBands, onSelectChange, data, sortBy = 'alphabetical') {
++   const panel = document.createElement('div');
++   panel.className = 'band-panel';
 +   
-+   const searchWrap = document.createElement(&#39;div&#39;);
-+   searchWrap.className = &#39;search&#39;;
-+   const input = document.createElement(&#39;input&#39;);
-+   input.type = &#39;text&#39;;
-+   input.placeholder = &#39;Band suchen...&#39;;
++   const searchWrap = document.createElement('div');
++   searchWrap.className = 'search';
++   const input = document.createElement('input');
++   input.type = 'text';
++   input.placeholder = 'Band suchen...';
 +   searchWrap.appendChild(input);
 +   
-+   const list = document.createElement(&#39;ul&#39;);
-+   list.className = &#39;band-list&#39;;
++   const list = document.createElement('ul');
++   list.className = 'band-list';
 +   panel.appendChild(searchWrap);
 +   panel.appendChild(list);
 +   
@@ -1730,12 +1730,12 @@ Lines added: 237, lines removed: 1
 +     : 1;
 +   
 +   function renderList(filterText) {
-+     list.innerHTML = &#39;&#39;;
-+     const norm = (filterText || &#39;&#39;).toLowerCase();
++     list.innerHTML = '';
++     const norm = (filterText || '').toLowerCase();
 +     let filteredBands = allBands.filter(b =&gt; !norm || b.toLowerCase().includes(norm));
 +     
 +     // Sortiere Bands
-+     if (sortBy === &#39;count&#39;) {
++     if (sortBy === 'count') {
 +       filteredBands = filteredBands.sort((a, b) =&gt; {
 +         const countA = albumCounts.get(a) || 0;
 +         const countB = albumCounts.get(b) || 0;
@@ -1747,21 +1747,21 @@ Lines added: 237, lines removed: 1
 +     }
 +     
 +     const items = filteredBands.map(b =&gt; {
-+       const li = document.createElement(&#39;li&#39;);
-+       li.className = &#39;band-item&#39; + (selectedBands.includes(b) ? &#39; selected&#39; : &#39;&#39;);
++       const li = document.createElement('li');
++       li.className = 'band-item' + (selectedBands.includes(b) ? ' selected' : '');
 +       
-+       const nameSpan = document.createElement(&#39;span&#39;);
-+       nameSpan.className = &#39;band-name&#39;;
++       const nameSpan = document.createElement('span');
++       nameSpan.className = 'band-name';
 +       nameSpan.textContent = b;
 +       
 +       const count = albumCounts.get(b) || 0;
-+       const visualWrapper = document.createElement(&#39;div&#39;);
-+       visualWrapper.className = &#39;band-visual&#39;;
++       const visualWrapper = document.createElement('div');
++       visualWrapper.className = 'band-visual';
 +       
-+       const bar = document.createElement(&#39;div&#39;);
-+       bar.className = &#39;band-count-bar&#39;;
++       const bar = document.createElement('div');
++       bar.className = 'band-count-bar';
 +       const width = maxCount &gt; 0 ? (count / maxCount) * 100 : 0;
-+       bar.style.width = width + &#39;%&#39;;
++       bar.style.width = width + '%';
 +       
 +       visualWrapper.appendChild(bar);
 +       li.appendChild(nameSpan);
@@ -1774,11 +1774,11 @@ Lines added: 237, lines removed: 1
 +     for (const li of items) list.appendChild(li);
 +   }
 +   
-+   renderList(&#39;&#39;);
-+   input.addEventListener(&#39;input&#39;, () =&gt; renderList(input.value));
++   renderList('');
++   input.addEventListener('input', () =&gt; renderList(input.value));
 +   
-+   list.addEventListener(&#39;click&#39;, (e) =&gt; {
-+     const li = e.target.closest(&#39;.band-item&#39;);
++   list.addEventListener('click', (e) =&gt; {
++     const li = e.target.closest('.band-item');
 +     if (!li) return;
 +     
 +     const b = li.dataset.band;
@@ -1799,30 +1799,30 @@ Lines added: 237, lines removed: 1
 +  * Toggle-Switch erstellen
 +  */
 + export function createToggle(label, checked, onChange) {
-+   const container = document.createElement(&#39;div&#39;);
-+   container.className = &#39;title-toggle-container&#39;;
++   const container = document.createElement('div');
++   container.className = 'title-toggle-container';
 +   
-+   const labelEl = document.createElement(&#39;span&#39;);
-+   labelEl.className = &#39;title-toggle-label&#39;;
++   const labelEl = document.createElement('span');
++   labelEl.className = 'title-toggle-label';
 +   labelEl.textContent = label;
 +   
-+   const toggleWrapper = document.createElement(&#39;label&#39;);
-+   toggleWrapper.className = &#39;toggle-switch&#39;;
++   const toggleWrapper = document.createElement('label');
++   toggleWrapper.className = 'toggle-switch';
 +   
-+   const checkbox = document.createElement(&#39;input&#39;);
-+   checkbox.type = &#39;checkbox&#39;;
++   const checkbox = document.createElement('input');
++   checkbox.type = 'checkbox';
 +   checkbox.checked = checked;
-+   checkbox.addEventListener(&#39;change&#39;, onChange);
++   checkbox.addEventListener('change', onChange);
 +   
-+   const slider = document.createElement(&#39;span&#39;);
-+   slider.className = &#39;toggle-slider&#39;;
++   const slider = document.createElement('span');
++   slider.className = 'toggle-slider';
 +   
 +   toggleWrapper.appendChild(checkbox);
 +   toggleWrapper.appendChild(slider);
 +   
-+   labelEl.addEventListener(&#39;click&#39;, () =&gt; {
++   labelEl.addEventListener('click', () =&gt; {
 +     checkbox.checked = !checkbox.checked;
-+     checkbox.dispatchEvent(new Event(&#39;change&#39;));
++     checkbox.dispatchEvent(new Event('change'));
 +   });
 +   
 +   container.appendChild(labelEl);
@@ -1845,29 +1845,29 @@ Lines added: 237, lines removed: 1
 +   const fullMinNote = notes.length ? Math.min(...notes) : 0;
 +   const fullMaxNote = notes.length ? Math.max(...notes) : 5;
 +   
-+   const container = document.createElement(&#39;div&#39;);
-+   container.className = &#39;scatter-zoom-controls&#39;;
-+   container.style.cssText = &#39;display: flex; flex-direction: column; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; align-items: center; min-width: 50px; justify-content: center; height: 100%;&#39;;
++   const container = document.createElement('div');
++   container.className = 'scatter-zoom-controls';
++   container.style.cssText = 'display: flex; flex-direction: column; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; align-items: center; min-width: 50px; justify-content: center; height: 100%;';
 +   
-+   const yLabel = document.createElement(&#39;label&#39;);
-+   yLabel.textContent = &#39;Note&#39;;
-+   yLabel.style.cssText = &#39;color: var(--text-primary); font-weight: 500; font-size: 11px; white-space: nowrap; transform: rotate(-90deg); margin-bottom: 0;&#39;;
++   const yLabel = document.createElement('label');
++   yLabel.textContent = 'Note';
++   yLabel.style.cssText = 'color: var(--text-primary); font-weight: 500; font-size: 11px; white-space: nowrap; transform: rotate(-90deg); margin-bottom: 0;';
 +   
-+   const sliderWrapper = document.createElement(&#39;div&#39;);
-+   sliderWrapper.style.cssText = &#39;display: flex; align-items: center; justify-content: center; height: 400px; width: 30px; position: relative;&#39;;
++   const sliderWrapper = document.createElement('div');
++   sliderWrapper.style.cssText = 'display: flex; align-items: center; justify-content: center; height: 400px; width: 30px; position: relative;';
 +   
-+   const yMinSlider = document.createElement(&#39;input&#39;);
-+   yMinSlider.type = &#39;range&#39;;
++   const yMinSlider = document.createElement('input');
++   yMinSlider.type = 'range';
 +   yMinSlider.min = Math.floor(fullMinNote * 100);
 +   yMinSlider.max = Math.ceil(fullMaxNote * 100);
 +   yMinSlider.value = Math.floor(fullMinNote * 100);
 +   yMinSlider.step = 1;
-+   yMinSlider.className = &#39;vertical-slider&#39;;
-+   yMinSlider.style.cssText = &#39;position: absolute; transform: rotate(-90deg); width: 400px; height: 6px; margin: 0; left: -197px; top: 197px;&#39;;
++   yMinSlider.className = 'vertical-slider';
++   yMinSlider.style.cssText = 'position: absolute; transform: rotate(-90deg); width: 400px; height: 6px; margin: 0; left: -197px; top: 197px;';
 +   
-+   const yValueDisplay = document.createElement(&#39;span&#39;);
++   const yValueDisplay = document.createElement('span');
 +   yValueDisplay.textContent = &#96;${fullMinNote.toFixed(2)} - ${fullMaxNote.toFixed(2)}&#96;;
-+   yValueDisplay.style.cssText = &#39;color: var(--text-primary); font-size: 10px; text-align: center; margin-top: 8px;&#39;;
++   yValueDisplay.style.cssText = 'color: var(--text-primary); font-size: 10px; text-align: center; margin-top: 8px;';
 +   
 +   const getYValues = () =&gt; {
 +     const sliderValue = Number(yMinSlider.value) / 100;
@@ -1880,7 +1880,7 @@ Lines added: 237, lines removed: 1
 +     onZoomChange({ y: { min, max } });
 +   };
 +   
-+   yMinSlider.addEventListener(&#39;input&#39;, updateY);
++   yMinSlider.addEventListener('input', updateY);
 +   
 +   sliderWrapper.appendChild(yMinSlider);
 +   container.appendChild(yLabel);
@@ -1910,7 +1910,7 @@ Erstellen des Router-Moduls und der Hauptanwendungslogik:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 242, lines removed: 1
@@ -1921,9 +1921,9 @@ Lines added: 242, lines removed: 1
 + /**
 +  * Routing-Logik
 +  */
-+ import { parseHash, updateHash, setActiveNav } from &#39;./utils.js&#39;;
-+ import { renderOverview, renderBandsSeries, renderScatterAll } from &#39;./renderers.js&#39;;
-+ import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls } from &#39;./controls.js&#39;;
++ import { parseHash, updateHash, setActiveNav } from './utils.js';
++ import { renderOverview, renderBandsSeries, renderScatterAll } from './renderers.js';
++ import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls } from './controls.js';
 + 
 + /**
 +  * Router-Klasse
@@ -1943,26 +1943,26 @@ Lines added: 242, lines removed: 1
 +     const { route, params } = parseHash();
 +     setActiveNav(route);
 +     
-+     this.controlsEl.innerHTML = &#39;&#39;;
-+     this.chartEl.innerHTML = &#39;&#39;;
++     this.controlsEl.innerHTML = '';
++     this.chartEl.innerHTML = '';
 +     this.resetBandLayout();
 +     
-+     const scatterContainer = document.getElementById(&#39;scatter-container&#39;);
++     const scatterContainer = document.getElementById('scatter-container');
 +     if (scatterContainer) {
 +       scatterContainer.remove();
 +     }
 +     
-+     const headerControls = document.getElementById(&#39;header-controls&#39;);
-+     headerControls.innerHTML = &#39;&#39;;
++     const headerControls = document.getElementById('header-controls');
++     headerControls.innerHTML = '';
 +     
 +     switch (route) {
-+       case &#39;overview&#39;:
++       case 'overview':
 +         await this.handleOverview();
 +         break;
-+       case &#39;band&#39;:
++       case 'band':
 +         await this.handleBand(params, headerControls);
 +         break;
-+       case &#39;scatter&#39;:
++       case 'scatter':
 +         await this.handleScatter();
 +         break;
 +       default:
@@ -1981,9 +1981,9 @@ Lines added: 242, lines removed: 1
 +    * Band-Route
 +    */
 +   async handleBand(params, headerControls) {
-+     const showTitles = params.titles !== &#39;false&#39;;
-+     const sortBy = params.sort === &#39;count&#39; ? &#39;count&#39; : &#39;alphabetical&#39;;
-+     const showRegression = params.regression === &#39;true&#39;;
++     const showTitles = params.titles !== 'false';
++     const sortBy = params.sort === 'count' ? 'count' : 'alphabetical';
++     const showRegression = params.regression === 'true';
 +     
 +     // Header-Controls erstellen
 +     this.createBandHeaderControls(params, showTitles, sortBy, showRegression, headerControls);
@@ -1992,10 +1992,10 @@ Lines added: 242, lines removed: 1
 +     const selected = this.parseSelectedBands(params.b);
 +     
 +     // Layout erstellen
-+     const mainEl = document.querySelector(&#39;main&#39;);
-+     const layout = document.createElement(&#39;div&#39;);
-+     layout.className = &#39;layout-band&#39;;
-+     layout.id = &#39;band-layout&#39;;
++     const mainEl = document.querySelector('main');
++     const layout = document.createElement('div');
++     layout.className = 'layout-band';
++     layout.id = 'band-layout';
 +     
 +     const panel = buildBandPanel(
 +       this.bands, 
@@ -2005,7 +2005,7 @@ Lines added: 242, lines removed: 1
 +       sortBy
 +     );
 +     
-+     const right = document.createElement(&#39;div&#39;);
++     const right = document.createElement('div');
 +     const tags = buildTagBar(
 +       selected, 
 +       (bandToRemove) =&gt; {
@@ -2014,19 +2014,19 @@ Lines added: 242, lines removed: 1
 +       }
 +     );
 +     
-+     const controlsRow = document.createElement(&#39;div&#39;);
-+     controlsRow.className = &#39;band-controls-row&#39;;
++     const controlsRow = document.createElement('div');
++     controlsRow.className = 'band-controls-row';
 +     controlsRow.appendChild(tags);
 +     right.appendChild(controlsRow);
 +     right.appendChild(this.chartEl);
 +     
 +     layout.appendChild(panel);
 +     layout.appendChild(right);
-+     this.controlsEl.style.display = &#39;none&#39;;
++     this.controlsEl.style.display = 'none';
 +     mainEl.appendChild(layout);
 +     
 +     if (selected.length === 0) {
-+       this.chartEl.innerHTML = &#39;&lt;p style=&quot;padding: 40px; text-align: center; color: #a3a3a3;&quot;&gt;Bitte wähle eine oder mehrere Bands aus der Liste links aus.&lt;/p&gt;&#39;;
++       this.chartEl.innerHTML = '&lt;p style="padding: 40px; text-align: center; color: #a3a3a3;"&gt;Bitte wähle eine oder mehrere Bands aus der Liste links aus.&lt;/p&gt;';
 +     } else {
 +       await renderBandsSeries(this.data, selected, this.chartEl, showTitles, showRegression);
 +     }
@@ -2036,25 +2036,25 @@ Lines added: 242, lines removed: 1
 +    * Scatter-Route
 +    */
 +   async handleScatter() {
-+     this.controlsEl.innerHTML = &#39;&#39;;
-+     this.chartEl.innerHTML = &#39;&#39;;
-+     this.controlsEl.style.display = &#39;none&#39;;
++     this.controlsEl.innerHTML = '';
++     this.chartEl.innerHTML = '';
++     this.controlsEl.style.display = 'none';
 +     
-+     const mainEl = document.querySelector(&#39;main&#39;);
++     const mainEl = document.querySelector('main');
 +     if (!mainEl.contains(this.chartEl)) {
 +       mainEl.appendChild(this.chartEl);
 +     }
 +     
-+     const scatterContainer = document.createElement(&#39;div&#39;);
-+     scatterContainer.style.cssText = &#39;display: flex; gap: 16px; align-items: flex-start; width: 100%;&#39;;
-+     scatterContainer.id = &#39;scatter-container&#39;;
++     const scatterContainer = document.createElement('div');
++     scatterContainer.style.cssText = 'display: flex; gap: 16px; align-items: flex-start; width: 100%;';
++     scatterContainer.id = 'scatter-container';
 +     
 +     if (mainEl.contains(this.chartEl)) {
 +       mainEl.removeChild(this.chartEl);
 +     }
 +     
-+     const chartWrapper = document.createElement(&#39;div&#39;);
-+     chartWrapper.style.cssText = &#39;flex: 1;&#39;;
++     const chartWrapper = document.createElement('div');
++     chartWrapper.style.cssText = 'flex: 1;';
 +     chartWrapper.appendChild(this.chartEl);
 +     scatterContainer.appendChild(chartWrapper);
 +     
@@ -2077,27 +2077,27 @@ Lines added: 242, lines removed: 1
 +    */
 +   createBandHeaderControls(params, showTitles, sortBy, showRegression, headerControls) {
 +     // Albentitel Toggle
-+     const titleToggle = createToggle(&#39;Albentitel&#39;, showTitles, () =&gt; {
++     const titleToggle = createToggle('Albentitel', showTitles, () =&gt; {
 +       const selected = this.parseSelectedBands(params.b);
 +       const q = this.buildBandQuery(selected, !showTitles, sortBy, showRegression);
-+       updateHash(&#39;band&#39;, q);
++       updateHash('band', q);
 +     });
 +     headerControls.appendChild(titleToggle);
 +     
 +     // Sortierung Toggle
-+     const sortToggle = createToggle(&#39;Nach Anzahl&#39;, sortBy === &#39;count&#39;, () =&gt; {
++     const sortToggle = createToggle('Nach Anzahl', sortBy === 'count', () =&gt; {
 +       const selected = this.parseSelectedBands(params.b);
-+       const newSortBy = sortBy === &#39;count&#39; ? &#39;alphabetical&#39; : &#39;count&#39;;
++       const newSortBy = sortBy === 'count' ? 'alphabetical' : 'count';
 +       const q = this.buildBandQuery(selected, showTitles, newSortBy, showRegression);
-+       updateHash(&#39;band&#39;, q);
++       updateHash('band', q);
 +     });
 +     headerControls.appendChild(sortToggle);
 +     
 +     // Regression Toggle
-+     const regressionToggle = createToggle(&#39;Regression&#39;, showRegression, () =&gt; {
++     const regressionToggle = createToggle('Regression', showRegression, () =&gt; {
 +       const selected = this.parseSelectedBands(params.b);
 +       const q = this.buildBandQuery(selected, showTitles, sortBy, !showRegression);
-+       updateHash(&#39;band&#39;, q);
++       updateHash('band', q);
 +     });
 +     headerControls.appendChild(regressionToggle);
 +   }
@@ -2108,7 +2108,7 @@ Lines added: 242, lines removed: 1
 +   parseSelectedBands(bandParam) {
 +     const selected = [];
 +     if (bandParam) {
-+       const parts = bandParam.split(&#39;,&#39;).map(s =&gt; s.trim()).filter(Boolean);
++       const parts = bandParam.split(',').map(s =&gt; s.trim()).filter(Boolean);
 +       for (const p of parts) {
 +         if (this.bands.includes(p)) {
 +           selected.push(p);
@@ -2124,16 +2124,16 @@ Lines added: 242, lines removed: 1
 +   buildBandQuery(selected, showTitles, sortBy, showRegression) {
 +     const q = {};
 +     if (selected.length &gt; 0) {
-+       q.b = selected.join(&#39;,&#39;);
++       q.b = selected.join(',');
 +     }
 +     if (!showTitles) {
-+       q.titles = &#39;false&#39;;
++       q.titles = 'false';
 +     }
-+     if (sortBy === &#39;count&#39;) {
-+       q.sort = &#39;count&#39;;
++     if (sortBy === 'count') {
++       q.sort = 'count';
 +     }
 +     if (showRegression) {
-+       q.regression = &#39;true&#39;;
++       q.regression = 'true';
 +     }
 +     return q;
 +   }
@@ -2143,20 +2143,20 @@ Lines added: 242, lines removed: 1
 +    */
 +   updateBandHash(selected, showTitles, sortBy, showRegression) {
 +     const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression);
-+     updateHash(&#39;band&#39;, q);
++     updateHash('band', q);
 +   }
 +   
 +   /**
 +    * Band-Layout zurücksetzen
 +    */
 +   resetBandLayout() {
-+     const layout = document.getElementById(&#39;band-layout&#39;);
-+     const mainEl = document.querySelector(&#39;main&#39;);
++     const layout = document.getElementById('band-layout');
++     const mainEl = document.querySelector('main');
 +     if (layout) {
 +       mainEl.appendChild(this.chartEl);
 +       layout.remove();
 +     }
-+     this.controlsEl.style.display = &#39;&#39;;
++     this.controlsEl.style.display = '';
 +   }
 + }
 + 
@@ -2170,7 +2170,7 @@ Lines added: 242, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/main.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/main.js</summary>
 
 **Chunk 1**
 Lines added: 60, lines removed: 1
@@ -2181,8 +2181,8 @@ Lines added: 60, lines removed: 1
 + /**
 +  * Hauptanwendungslogik
 +  */
-+ import { log, normalizeData, uniqueSorted } from &#39;./utils.js&#39;;
-+ import { Router } from &#39;./router.js&#39;;
++ import { log, normalizeData, uniqueSorted } from './utils.js';
++ import { Router } from './router.js';
 + 
 + /**
 +  * Hauptfunktion
@@ -2190,22 +2190,22 @@ Lines added: 60, lines removed: 1
 + export async function main() {
 +   try {
 +     // DOM-Elemente
-+     const controlsEl = document.getElementById(&#39;controls&#39;);
-+     const chartEl = document.getElementById(&#39;chart&#39;);
++     const controlsEl = document.getElementById('controls');
++     const chartEl = document.getElementById('chart');
 +     
 +     if (!controlsEl || !chartEl) {
-+       log(&#39;Fehler: DOM-Elemente nicht gefunden&#39;);
++       log('Fehler: DOM-Elemente nicht gefunden');
 +       return;
 +     }
 +     
 +     // Daten laden
-+     const resp = await fetch(&#39;data/alben.json&#39;, { cache: &#39;no-store&#39; });
++     const resp = await fetch('data/alben.json', { cache: 'no-store' });
 +     const data = await resp.json();
 +     
-+     log(&#39;Daten geladen: &#39; + (Array.isArray(data) ? data.length : &#39;keine Array-Struktur&#39;));
++     log('Daten geladen: ' + (Array.isArray(data) ? data.length : 'keine Array-Struktur'));
 +     
 +     if (!Array.isArray(data) || data.length === 0) {
-+       log(&#39;Keine Daten – Diagramm wird nicht gerendert.&#39;);
++       log('Keine Daten – Diagramm wird nicht gerendert.');
 +       return;
 +     }
 +     
@@ -2217,23 +2217,23 @@ Lines added: 60, lines removed: 1
 +     const router = new Router(normalized, bands, chartEl, controlsEl);
 +     
 +     // Hash-Change Event Listener
-+     window.addEventListener(&#39;hashchange&#39;, () =&gt; router.route());
++     window.addEventListener('hashchange', () =&gt; router.route());
 +     
 +     // Initiale Route
 +     if (!location.hash) {
-+       location.hash = &#39;#overview&#39;;
++       location.hash = '#overview';
 +     }
 +     
 +     await router.route();
 +   } catch (e) {
 +     console.error(e);
-+     log(&#39;Fehler: &#39; + (e &amp;&amp; e.message ? e.message : String(e)));
++     log('Fehler: ' + (e &amp;&amp; e.message ? e.message : String(e)));
 +   }
 + }
 + 
 + // Starte Anwendung wenn DOM bereit ist
-+ if (document.readyState === &#39;loading&#39;) {
-+   document.addEventListener(&#39;DOMContentLoaded&#39;, main);
++ if (document.readyState === 'loading') {
++   document.addEventListener('DOMContentLoaded', main);
 + } else {
 +   main();
 + }
@@ -2266,21 +2266,21 @@ Refactoring der HTML-Datei, um die Module einzubinden:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/index.html</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/index.html</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 1
 
 ```diff
 @@ -24,5 +24,7 @@
-        &lt;div id=&quot;chart&quot; class=&quot;chart&quot;&gt;&lt;/div&gt;
+        &lt;div id="chart" class="chart"&gt;&lt;/div&gt;
       &lt;/main&gt;
 -     &lt;script&gt;
-+     &lt;script type=&quot;module&quot; src=&quot;js/main.js&quot;&gt;&lt;/script&gt;
++     &lt;script type="module" src="js/main.js"&gt;&lt;/script&gt;
 +   &lt;/body&gt;
 + &lt;/html&gt;
         // State &amp; helpers
-        const controlsEl = document.getElementById(&#39;controls&#39;);
+        const controlsEl = document.getElementById('controls');
 ```
 
 </details>
@@ -2319,7 +2319,7 @@ Entfernen des alten Codes und Ersetzen durch die modulare Version:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/index.html</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/index.html</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 877
@@ -2329,32 +2329,32 @@ Lines added: undefined, lines removed: 877
     &lt;/body&gt;
   &lt;/html&gt;
 -       // State &amp; helpers
--       const controlsEl = document.getElementById(&#39;controls&#39;);
--       const chartEl = document.getElementById(&#39;chart&#39;);
+-       const controlsEl = document.getElementById('controls');
+-       const chartEl = document.getElementById('chart');
 -       function log(msg) {
--         console.log(typeof msg === &#39;string&#39; ? msg : JSON.stringify(msg));
+-         console.log(typeof msg === 'string' ? msg : JSON.stringify(msg));
 -       }
 -       function setActive(route) {
--         [&#39;overview&#39;,&#39;band&#39;,&#39;scatter&#39;].forEach(r =&gt; {
--           const el = document.getElementById(&#39;nav-&#39; + r);
--           if (el) el.classList.toggle(&#39;active&#39;, r === route);
+-         ['overview','band','scatter'].forEach(r =&gt; {
+-           const el = document.getElementById('nav-' + r);
+-           if (el) el.classList.toggle('active', r === route);
 -         });
 -       }
 -       function parseHash() {
--         const hash = (location.hash || &#39;#overview&#39;).slice(1);
--         const [route, query] = hash.split(&#39;?&#39;);
+-         const hash = (location.hash || '#overview').slice(1);
+-         const [route, query] = hash.split('?');
 -         const params = {};
 -         if (query) {
--           for (const part of query.split(&#39;&amp;&#39;)) {
--             const [k, v] = part.split(&#39;=&#39;);
--             params[decodeURIComponent(k)] = decodeURIComponent(v || &#39;&#39;);
+-           for (const part of query.split('&amp;')) {
+-             const [k, v] = part.split('=');
+-             params[decodeURIComponent(k)] = decodeURIComponent(v || '');
 -           }
 -         }
--         return { route: route || &#39;overview&#39;, params };
+-         return { route: route || 'overview', params };
 -       }
 -       function updateHash(route, params) {
--         const q = params ? &#39;?&#39; + Object.entries(params).map(([k,v]) =&gt; encodeURIComponent(k)+&#39;=&#39;+encodeURIComponent(v)).join(&#39;&amp;&#39;) : &#39;&#39;;
--         location.hash = &#39;#&#39; + route + q;
+-         const q = params ? '?' + Object.entries(params).map(([k,v]) =&gt; encodeURIComponent(k)+'='+encodeURIComponent(v)).join('&amp;') : '';
+-         location.hash = '#' + route + q;
 -       }
 -       function uniqueSorted(arr) {
 -         return Array.from(new Set(arr)).sort((a,b) =&gt; (a &lt; b ? -1 : a &gt; b ? 1 : 0));
@@ -2363,62 +2363,62 @@ Lines added: undefined, lines removed: 877
 -       // Dark Theme Config für Vega-Lite
 -       function getDarkThemeConfig() {
 -         return {
--           background: &quot;transparent&quot;,
--           title: { color: &quot;#f5f5f5&quot;, font: &quot;system-ui, sans-serif&quot; },
+-           background: "transparent",
+-           title: { color: "#f5f5f5", font: "system-ui, sans-serif" },
 -           axis: {
--             domainColor: &quot;#525252&quot;,
--             gridColor: &quot;#404040&quot;,
--             tickColor: &quot;#525252&quot;,
--             labelColor: &quot;#d4d4d4&quot;,
--             titleColor: &quot;#e5e5e5&quot;
+-             domainColor: "#525252",
+-             gridColor: "#404040",
+-             tickColor: "#525252",
+-             labelColor: "#d4d4d4",
+-             titleColor: "#e5e5e5"
 -           },
 -           legend: {
--             labelColor: &quot;#d4d4d4&quot;,
--             titleColor: &quot;#e5e5e5&quot;
+-             labelColor: "#d4d4d4",
+-             titleColor: "#e5e5e5"
 -           },
 -           view: {
--             stroke: &quot;transparent&quot;
+-             stroke: "transparent"
 -           },
 -           tooltip: {
--             color: &quot;#f5f5f5&quot;,
--             fill: &quot;#1e1e1e&quot;,
--             stroke: &quot;#404040&quot;,
+-             color: "#f5f5f5",
+-             fill: "#1e1e1e",
+-             stroke: "#404040",
 -             strokeWidth: 1,
 -             cornerRadius: 12,
 -             padding: 16,
--             font: &quot;system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif&quot;,
+-             font: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
 -             fontSize: 17,
--             fontStyle: &quot;normal&quot;,
--             fontWeight: &quot;normal&quot;
+-             fontStyle: "normal",
+-             fontWeight: "normal"
 -           }
 -         };
 -       }
 - 
 -       // Funktion: Mache erste Farbe der Palette 20% heller
 -       function getBandPalette() {
--         const basePalette = (window.vega &amp;&amp; vega.scheme) ? vega.scheme(&#39;category10&#39;) : [&#39;#1f77b4&#39;,&#39;#ff7f0e&#39;,&#39;#2ca02c&#39;,&#39;#d62728&#39;,&#39;#9467bd&#39;,&#39;#8c564b&#39;,&#39;#e377c2&#39;,&#39;#7f7f7f&#39;,&#39;#bcbd22&#39;,&#39;#17becf&#39;];
+-         const basePalette = (window.vega &amp;&amp; vega.scheme) ? vega.scheme('category10') : ['#1f77b4','#ff7f0e','#2ca02c','#d62728','#9467bd','#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf'];
 -         // Erste Farbe heller machen: #1f77b4 -&gt; ~20% heller
 -         // RGB(31, 119, 180) -&gt; RGB(74, 157, 212) (ca. 20% heller)
--         const lighterBlue = &#39;#4a9dd4&#39;;
+-         const lighterBlue = '#4a9dd4';
 -         return [lighterBlue, ...basePalette.slice(1)];
 -       }
 - 
 -       // Renderers
 -       async function renderOverview(data) {
 -         const spec = {
--           $schema: &quot;https://vega.github.io/schema/vega-lite/v5.json&quot;,
--           description: &quot;Anzahl Alben pro Jahr&quot;,
+-           $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+-           description: "Anzahl Alben pro Jahr",
 -           data: { values: data },
 -           config: getDarkThemeConfig(),
--           mark: &quot;bar&quot;,
--           width: &quot;container&quot;,
+-           mark: "bar",
+-           width: "container",
 -           height: 420,
 -           encoding: {
--             x: { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, sort: &quot;ascending&quot;, axis: { labelAngle: 0 } },
--             y: { aggregate: &quot;count&quot;, type: &quot;quantitative&quot;, title: &quot;Anzahl Alben&quot; },
+-             x: { field: "Jahr", type: "ordinal", sort: "ascending", axis: { labelAngle: 0 } },
+-             y: { aggregate: "count", type: "quantitative", title: "Anzahl Alben" },
 -             tooltip: [
--               { aggregate: &quot;count&quot;, type: &quot;quantitative&quot;, title: &quot;Anzahl&quot; },
--               { field: &quot;Jahr&quot;, type: &quot;ordinal&quot; }
+-               { aggregate: "count", type: "quantitative", title: "Anzahl" },
+-               { field: "Jahr", type: "ordinal" }
 -             ]
 -           }
 -         };
@@ -2428,13 +2428,13 @@ Lines added: undefined, lines removed: 877
 -       async function renderScatterAll(data, zoomY = null) {
 -         // Filtere Daten: nur Einträge mit gültigem Jahr und Note
 -         const filtered = data.filter(d =&gt; d.Jahr != null &amp;&amp; d.Note != null &amp;&amp; !isNaN(d.Jahr) &amp;&amp; !isNaN(d.Note));
--         log(&#39;Scatter: gefilterte Datensätze: &#39; + filtered.length);
+-         log('Scatter: gefilterte Datensätze: ' + filtered.length);
 -         if (filtered.length &gt; 0) {
 -           const sample = filtered.slice(0, 5).map(d =&gt; ({ Jahr: d.Jahr, Note: d.Note }));
--           log(&#39;Scatter: Beispieldaten: &#39; + JSON.stringify(sample));
+-           log('Scatter: Beispieldaten: ' + JSON.stringify(sample));
 -         }
 -         if (filtered.length === 0) {
--           chartEl.innerHTML = &#39;&lt;p style=&quot;padding: 40px; text-align: center; color: #a3a3a3;&quot;&gt;Keine Daten verfügbar.&lt;/p&gt;&#39;;
+-           chartEl.innerHTML = '&lt;p style="padding: 40px; text-align: center; color: #a3a3a3;"&gt;Keine Daten verfügbar.&lt;/p&gt;';
 -           return;
 -         }
 -         // Berechne vollständige Bereiche für die Slider
@@ -2460,7 +2460,7 @@ Lines added: undefined, lines removed: 877
 -         }
 -         const minJahr = fullMinJahr;
 -         const maxJahr = fullMaxJahr;
--         log(&#39;Scatter: domainMinX=&#39; + minJahr + &#39; domainMaxX=&#39; + maxJahr + &#39; domainMinY=&#39; + domainMinY + &#39; domainMaxY=&#39; + domainMaxY);
+-         log('Scatter: domainMinX=' + minJahr + ' domainMaxX=' + maxJahr + ' domainMinY=' + domainMinY + ' domainMaxY=' + domainMaxY);
 -         // Berechne Min/Max pro Jahr für die Linien
 -         const jahrGroups = {};
 -         filtered.forEach(d =&gt; {
@@ -2478,22 +2478,22 @@ Lines added: undefined, lines removed: 877
 -           MinNote: Math.min(...jahrGroups[j]),
 -           MaxNote: Math.max(...jahrGroups[j])
 -         })).sort((a, b) =&gt; a.Jahr - b.Jahr);
--         log(&#39;Scatter: Min/Max-Daten: &#39; + JSON.stringify(minMaxData.slice(0, 5)));
+-         log('Scatter: Min/Max-Daten: ' + JSON.stringify(minMaxData.slice(0, 5)));
 -         // X-Achse: Labels oben anzeigen wenn Zoom aktiv ist
 -         const xAxisConfig = zoomY ? {
--           format: &quot;d&quot;,
--           labelBaseline: &quot;top&quot;,
+-           format: "d",
+-           labelBaseline: "top",
 -           labelOffset: 8,
--           orient: &quot;top&quot;,
+-           orient: "top",
 -           labelAngle: 0
 -         } : {
--           format: &quot;d&quot;,
+-           format: "d",
 -           labelAngle: 0
 -         };
 -         
 -         const spec = {
--           $schema: &quot;https://vega.github.io/schema/vega-lite/v5.json&quot;,
--           description: &quot;Alle Wertungen aller Jahre&quot;,
+-           $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+-           description: "Alle Wertungen aller Jahre",
 -           config: getDarkThemeConfig(),
 -           width: 800,
 -           height: 520,
@@ -2501,49 +2501,49 @@ Lines added: undefined, lines removed: 877
 -           layer: [
 -             {
 -               data: { values: filtered },
--               mark: { type: &quot;point&quot;, size: 80, filled: true, opacity: 0.4, color: &quot;#4a9dd4&quot; },
+-               mark: { type: "point", size: 80, filled: true, opacity: 0.4, color: "#4a9dd4" },
 -               encoding: {
--                 x: { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, title: &quot;Jahr&quot;, scale: { domain: [minJahr, maxJahr], zero: false }, axis: xAxisConfig },
--                 y: { field: &quot;Note&quot;, type: &quot;quantitative&quot;, title: &quot;Note&quot;, scale: { domain: [domainMinY, domainMaxY] } },
+-                 x: { field: "Jahr", type: "quantitative", title: "Jahr", scale: { domain: [minJahr, maxJahr], zero: false }, axis: xAxisConfig },
+-                 y: { field: "Note", type: "quantitative", title: "Note", scale: { domain: [domainMinY, domainMaxY] } },
 -                 tooltip: [
--                   { field: &quot;Band&quot;, type: &quot;nominal&quot;, title: &quot;Band&quot; },
--                   { field: &quot;Album&quot;, type: &quot;nominal&quot;, title: &quot;Album&quot; },
--                   { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, title: &quot;Jahr&quot; },
--                   { field: &quot;Note&quot;, type: &quot;quantitative&quot;, title: &quot;Note&quot; }
+-                   { field: "Band", type: "nominal", title: "Band" },
+-                   { field: "Album", type: "nominal", title: "Album" },
+-                   { field: "Jahr", type: "quantitative", title: "Jahr" },
+-                   { field: "Note", type: "quantitative", title: "Note" }
 -                 ]
 -               }
 -             },
 -             {
 -               data: { values: minMaxData },
--               mark: { type: &quot;line&quot;, color: &quot;#90EE90&quot;, strokeWidth: 2 },
+-               mark: { type: "line", color: "#90EE90", strokeWidth: 2 },
 -               encoding: {
--                 x: { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, scale: { domain: [minJahr, maxJahr], zero: false }, axis: xAxisConfig },
--                 y: { field: &quot;MaxNote&quot;, type: &quot;quantitative&quot;, scale: { domain: [domainMinY, domainMaxY] } },
+-                 x: { field: "Jahr", type: "quantitative", scale: { domain: [minJahr, maxJahr], zero: false }, axis: xAxisConfig },
+-                 y: { field: "MaxNote", type: "quantitative", scale: { domain: [domainMinY, domainMaxY] } },
 -                 tooltip: [
--                   { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, title: &quot;Jahr&quot; },
--                   { field: &quot;MaxNote&quot;, type: &quot;quantitative&quot;, title: &quot;Höchste Note&quot; }
+-                   { field: "Jahr", type: "quantitative", title: "Jahr" },
+-                   { field: "MaxNote", type: "quantitative", title: "Höchste Note" }
 -                 ]
 -               }
 -             },
 -             {
 -               data: { values: minMaxData },
--               mark: { type: &quot;line&quot;, color: &quot;#FF6B6B&quot;, strokeWidth: 2 },
+-               mark: { type: "line", color: "#FF6B6B", strokeWidth: 2 },
 -               encoding: {
--                 x: { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, scale: { domain: [minJahr, maxJahr], zero: false }, axis: xAxisConfig },
--                 y: { field: &quot;MinNote&quot;, type: &quot;quantitative&quot;, scale: { domain: [domainMinY, domainMaxY] } },
+-                 x: { field: "Jahr", type: "quantitative", scale: { domain: [minJahr, maxJahr], zero: false }, axis: xAxisConfig },
+-                 y: { field: "MinNote", type: "quantitative", scale: { domain: [domainMinY, domainMaxY] } },
 -                 tooltip: [
--                   { field: &quot;Jahr&quot;, type: &quot;quantitative&quot;, title: &quot;Jahr&quot; },
--                   { field: &quot;MinNote&quot;, type: &quot;quantitative&quot;, title: &quot;Niedrigste Note&quot; }
+-                   { field: "Jahr", type: "quantitative", title: "Jahr" },
+-                   { field: "MinNote", type: "quantitative", title: "Niedrigste Note" }
 -                 ]
 -               }
 -             }
 -           ]
 -         };
--         chartEl.innerHTML = &#39;&#39;;
+-         chartEl.innerHTML = '';
 -         try {
 -           await vegaEmbed(chartEl, spec, { actions: false });
 -         } catch (e) {
--           chartEl.innerHTML = &#39;&lt;p style=&quot;padding: 40px; text-align: center; color: #ff6b6b;&quot;&gt;Fehler beim Rendering: &#39; + e.message + &#39;&lt;/p&gt;&#39;;
+-           chartEl.innerHTML = '&lt;p style="padding: 40px; text-align: center; color: #ff6b6b;"&gt;Fehler beim Rendering: ' + e.message + '&lt;/p&gt;';
 -           throw e;
 -         }
 -       }
@@ -2565,22 +2565,22 @@ Lines added: undefined, lines removed: 877
 -         for (const d of data) {
 -           if (!selectedBands.includes(d.Band)) continue;
 -           if (d.Jahr == null || d.Note == null) continue;
--           const key = d.Band + &#39;|&#39; + d.Jahr;
+-           const key = d.Band + '|' + d.Jahr;
 -           if (!allAlbumsByBandYear.has(key)) {
 -             allAlbumsByBandYear.set(key, []);
 -           }
--           allAlbumsByBandYear.get(key).push({ note: d.Note, album: d.Album || &#39;&#39; });
+-           allAlbumsByBandYear.get(key).push({ note: d.Note, album: d.Album || '' });
 -           // Bestes Album für Linie
 -           const prev = bestByBandYear.get(key);
 -           if (prev == null || d.Note &gt; prev.note) {
--             bestByBandYear.set(key, { note: d.Note, album: d.Album || &#39;&#39; });
+-             bestByBandYear.set(key, { note: d.Note, album: d.Album || '' });
 -           }
 -         }
 -         // Beste Punkte für Linie
 -         const bestPoints = [];
 -         for (const band of selectedBands) {
 -           for (const y of rangeYears) {
--             const v = bestByBandYear.get(band + &#39;|&#39; + y);
+-             const v = bestByBandYear.get(band + '|' + y);
 -             if (v) bestPoints.push({ Jahr: y, Band: band, Note: v.note, Album: v.album });
 -           }
 -         }
@@ -2588,7 +2588,7 @@ Lines added: undefined, lines removed: 877
 -         const allPoints = [];
 -         for (const band of selectedBands) {
 -           for (const y of rangeYears) {
--             const albums = allAlbumsByBandYear.get(band + &#39;|&#39; + y) || [];
+-             const albums = allAlbumsByBandYear.get(band + '|' + y) || [];
 -             for (const album of albums) {
 -               allPoints.push({ Jahr: y, Band: band, Note: album.note, Album: album.album });
 -             }
@@ -2609,31 +2609,31 @@ Lines added: undefined, lines removed: 877
 -         const layers = [
 -           {
 -             data: { values: bestPoints },
--             mark: { type: &quot;line&quot;, opacity: lineOpacity },
+-             mark: { type: "line", opacity: lineOpacity },
 -             encoding: {
--               x: { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, sort: &quot;ascending&quot;, axis: { labelAngle: 0, grid: true, gridColor: &quot;#252525&quot; }, scale: { domain: rangeYears } },
--               y: { field: &quot;Note&quot;, type: &quot;quantitative&quot;, title: &quot;Note&quot;, scale: { domainMin: domainMinY, domainMax: domainMaxY }, axis: { gridColor: &quot;#252525&quot; } },
+-               x: { field: "Jahr", type: "ordinal", sort: "ascending", axis: { labelAngle: 0, grid: true, gridColor: "#252525" }, scale: { domain: rangeYears } },
+-               y: { field: "Note", type: "quantitative", title: "Note", scale: { domainMin: domainMinY, domainMax: domainMaxY }, axis: { gridColor: "#252525" } },
 -               tooltip: [
--                 { field: &quot;Band&quot;, type: &quot;nominal&quot; },
--                 { field: &quot;Jahr&quot;, type: &quot;ordinal&quot; },
--                 { field: &quot;Album&quot;, type: &quot;nominal&quot; },
--                 { field: &quot;Note&quot;, type: &quot;quantitative&quot; }
+-                 { field: "Band", type: "nominal" },
+-                 { field: "Jahr", type: "ordinal" },
+-                 { field: "Album", type: "nominal" },
+-                 { field: "Note", type: "quantitative" }
 -               ],
--               color: { field: &quot;Band&quot;, type: &quot;nominal&quot;, legend: null, scale: { range: palette, domain: selectedBands } }
+-               color: { field: "Band", type: "nominal", legend: null, scale: { range: palette, domain: selectedBands } }
 -             }
 -           },
 -           {
 -             data: { values: allPoints },
--             mark: { type: &quot;point&quot;, size: 120, filled: true, cursor: &quot;pointer&quot; },
+-             mark: { type: "point", size: 120, filled: true, cursor: "pointer" },
 -             encoding: {
--               x: { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, sort: &quot;ascending&quot;, scale: { domain: rangeYears } },
--               y: { field: &quot;Note&quot;, type: &quot;quantitative&quot;, scale: { domainMin: domainMinY, domainMax: domainMaxY } },
--               color: { field: &quot;Band&quot;, type: &quot;nominal&quot;, legend: null, scale: { range: palette, domain: selectedBands } },
+-               x: { field: "Jahr", type: "ordinal", sort: "ascending", scale: { domain: rangeYears } },
+-               y: { field: "Note", type: "quantitative", scale: { domainMin: domainMinY, domainMax: domainMaxY } },
+-               color: { field: "Band", type: "nominal", legend: null, scale: { range: palette, domain: selectedBands } },
 -               tooltip: [
--                 { field: &quot;Band&quot;, type: &quot;nominal&quot;, title: &quot;Band&quot; },
--                 { field: &quot;Album&quot;, type: &quot;nominal&quot;, title: &quot;Album&quot; },
--                 { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, title: &quot;Jahr&quot; },
--                 { field: &quot;Note&quot;, type: &quot;quantitative&quot;, title: &quot;Note&quot; }
+-                 { field: "Band", type: "nominal", title: "Band" },
+-                 { field: "Album", type: "nominal", title: "Album" },
+-                 { field: "Jahr", type: "ordinal", title: "Jahr" },
+-                 { field: "Note", type: "quantitative", title: "Note" }
 -               ]
 -             }
 -           }
@@ -2687,8 +2687,8 @@ Lines added: undefined, lines removed: 877
 -             
 -             // Back substitution
 -             // Matrix ist jetzt: [n, sumX, sumX2, sumY]
--             //                  [0, sumX2&#39;, sumX3&#39;, sumXY&#39;]
--             //                  [0, 0, sumX4&#39;, sumX2Y&#39;]
+-             //                  [0, sumX2', sumX3', sumXY']
+-             //                  [0, 0, sumX4', sumX2Y']
 -             // Lösung: ax² + bx + c = y
 -             // a ist der Koeffizient für x² (letzte Zeile)
 -             // b ist der Koeffizient für x (mittlere Zeile)
@@ -2738,10 +2738,10 @@ Lines added: undefined, lines removed: 877
 -                 if (regressionPoints.length &gt; 0) {
 -                   regressionLayers.push({
 -                     data: { values: regressionPoints },
--                     mark: { type: &quot;line&quot;, strokeWidth: 2, opacity: 0.8, strokeDash: [4, 4] },
+-                     mark: { type: "line", strokeWidth: 2, opacity: 0.8, strokeDash: [4, 4] },
 -                     encoding: {
--                       x: { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, sort: &quot;ascending&quot;, scale: { domain: rangeYears } },
--                       y: { field: &quot;Note&quot;, type: &quot;quantitative&quot;, scale: { domainMin: domainMinY, domainMax: domainMaxY } },
+-                       x: { field: "Jahr", type: "ordinal", sort: "ascending", scale: { domain: rangeYears } },
+-                       y: { field: "Note", type: "quantitative", scale: { domainMin: domainMinY, domainMax: domainMaxY } },
 -                       color: { value: bandColor }
 -                     }
 -                   });
@@ -2757,21 +2757,21 @@ Lines added: undefined, lines removed: 877
 -         if (showTitles) {
 -           layers.push({
 -             data: { values: allPoints },
--             mark: { type: &quot;text&quot;, dy: -14, fontSize: 11, fontWeight: &quot;bold&quot; },
+-             mark: { type: "text", dy: -14, fontSize: 11, fontWeight: "bold" },
 -             zindex: 1,
 -             encoding: {
--               x: { field: &quot;Jahr&quot;, type: &quot;ordinal&quot;, sort: &quot;ascending&quot;, scale: { domain: rangeYears } },
--               y: { field: &quot;Note&quot;, type: &quot;quantitative&quot;, scale: { domainMin: domainMinY, domainMax: domainMaxY } },
--               text: { field: &quot;Album&quot;, type: &quot;nominal&quot; },
--               color: { field: &quot;Band&quot;, type: &quot;nominal&quot;, legend: null, scale: { range: palette, domain: selectedBands } }
+-               x: { field: "Jahr", type: "ordinal", sort: "ascending", scale: { domain: rangeYears } },
+-               y: { field: "Note", type: "quantitative", scale: { domainMin: domainMinY, domainMax: domainMaxY } },
+-               text: { field: "Album", type: "nominal" },
+-               color: { field: "Band", type: "nominal", legend: null, scale: { range: palette, domain: selectedBands } }
 -             }
 -           });
 -         }
 -         const spec = {
--           $schema: &quot;https://vega.github.io/schema/vega-lite/v5.json&quot;,
--           description: &quot;Zeitreihe für Band/Bands&quot;,
+-           $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+-           description: "Zeitreihe für Band/Bands",
 -           config: getDarkThemeConfig(),
--           width: &quot;container&quot;,
+-           width: "container",
 -           height: 580,
 -           layer: layers
 -         };
@@ -2780,26 +2780,26 @@ Lines added: undefined, lines removed: 877
 - 
 -       // Controls builders
 -       function buildTagBar(selectedBands, onRemove) {
--         const bar = document.createElement(&#39;div&#39;);
--         bar.className = &#39;tags&#39;;
+-         const bar = document.createElement('div');
+-         bar.className = 'tags';
 -         const palette = getBandPalette();
 -         for (const b of selectedBands) {
--           const t = document.createElement(&#39;span&#39;);
--           t.className = &#39;tag&#39;;
--           const dot = document.createElement(&#39;span&#39;);
+-           const t = document.createElement('span');
+-           t.className = 'tag';
+-           const dot = document.createElement('span');
 -           const idx = selectedBands.indexOf(b);
 -           const color = palette[idx % palette.length];
--           dot.style.width = &#39;10px&#39;;
--           dot.style.height = &#39;10px&#39;;
--           dot.style.borderRadius = &#39;50%&#39;;
+-           dot.style.width = '10px';
+-           dot.style.height = '10px';
+-           dot.style.borderRadius = '50%';
 -           dot.style.background = color;
--           dot.style.display = &#39;inline-block&#39;;
--           const txt = document.createElement(&#39;span&#39;);
+-           dot.style.display = 'inline-block';
+-           const txt = document.createElement('span');
 -           txt.textContent = b;
--           const btn = document.createElement(&#39;button&#39;);
--           btn.setAttribute(&#39;aria-label&#39;, &#39;Entfernen&#39;);
--           btn.textContent = &#39;×&#39;;
--           btn.addEventListener(&#39;click&#39;, () =&gt; onRemove(b));
+-           const btn = document.createElement('button');
+-           btn.setAttribute('aria-label', 'Entfernen');
+-           btn.textContent = '×';
+-           btn.addEventListener('click', () =&gt; onRemove(b));
 -           t.appendChild(dot);
 -           t.appendChild(txt);
 -           t.appendChild(btn);
@@ -2808,17 +2808,17 @@ Lines added: undefined, lines removed: 877
 -         return bar;
 -       }
 - 
--       function buildBandPanel(allBands, selectedBands, onSelectChange, data, sortBy = &#39;alphabetical&#39;) {
--         const panel = document.createElement(&#39;div&#39;);
--         panel.className = &#39;band-panel&#39;;
--         const searchWrap = document.createElement(&#39;div&#39;);
--         searchWrap.className = &#39;search&#39;;
--         const input = document.createElement(&#39;input&#39;);
--         input.type = &#39;text&#39;;
--         input.placeholder = &#39;Band suchen...&#39;;
+-       function buildBandPanel(allBands, selectedBands, onSelectChange, data, sortBy = 'alphabetical') {
+-         const panel = document.createElement('div');
+-         panel.className = 'band-panel';
+-         const searchWrap = document.createElement('div');
+-         searchWrap.className = 'search';
+-         const input = document.createElement('input');
+-         input.type = 'text';
+-         input.placeholder = 'Band suchen...';
 -         searchWrap.appendChild(input);
--         const list = document.createElement(&#39;ul&#39;);
--         list.className = &#39;band-list&#39;;
+-         const list = document.createElement('ul');
+-         list.className = 'band-list';
 -         panel.appendChild(searchWrap);
 -         panel.appendChild(list);
 -         // Berechne Anzahl Alben pro Band
@@ -2833,12 +2833,12 @@ Lines added: undefined, lines removed: 877
 -         // Finde Maximum für Normalisierung
 -         const maxCount = albumCounts.size &gt; 0 ? Math.max(...Array.from(albumCounts.values())) : 1;
 -         function renderList(filterText) {
--           list.innerHTML = &#39;&#39;;
--           const norm = (filterText || &#39;&#39;).toLowerCase();
+-           list.innerHTML = '';
+-           const norm = (filterText || '').toLowerCase();
 -           let filteredBands = allBands.filter(b =&gt; !norm || b.toLowerCase().includes(norm));
 -           
 -           // Sortiere Bands
--           if (sortBy === &#39;count&#39;) {
+-           if (sortBy === 'count') {
 -             filteredBands = filteredBands.sort((a, b) =&gt; {
 -               const countA = albumCounts.get(a) || 0;
 -               const countB = albumCounts.get(b) || 0;
@@ -2850,18 +2850,18 @@ Lines added: undefined, lines removed: 877
 -           }
 -           
 -           const items = filteredBands.map(b =&gt; {
--             const li = document.createElement(&#39;li&#39;);
--             li.className = &#39;band-item&#39; + (selectedBands.includes(b) ? &#39; selected&#39; : &#39;&#39;);
--             const nameSpan = document.createElement(&#39;span&#39;);
--             nameSpan.className = &#39;band-name&#39;;
+-             const li = document.createElement('li');
+-             li.className = 'band-item' + (selectedBands.includes(b) ? ' selected' : '');
+-             const nameSpan = document.createElement('span');
+-             nameSpan.className = 'band-name';
 -             nameSpan.textContent = b;
 -             const count = albumCounts.get(b) || 0;
--             const visualWrapper = document.createElement(&#39;div&#39;);
--             visualWrapper.className = &#39;band-visual&#39;;
--             const bar = document.createElement(&#39;div&#39;);
--             bar.className = &#39;band-count-bar&#39;;
+-             const visualWrapper = document.createElement('div');
+-             visualWrapper.className = 'band-visual';
+-             const bar = document.createElement('div');
+-             bar.className = 'band-count-bar';
 -             const width = maxCount &gt; 0 ? (count / maxCount) * 100 : 0;
--             bar.style.width = width + &#39;%&#39;;
+-             bar.style.width = width + '%';
 -             visualWrapper.appendChild(bar);
 -             li.appendChild(nameSpan);
 -             li.appendChild(visualWrapper);
@@ -2870,10 +2870,10 @@ Lines added: undefined, lines removed: 877
 -           });
 -           for (const li of items) list.appendChild(li);
 -         }
--         renderList(&#39;&#39;);
--         input.addEventListener(&#39;input&#39;, () =&gt; renderList(input.value));
--         list.addEventListener(&#39;click&#39;, (e) =&gt; {
--           const li = e.target.closest(&#39;.band-item&#39;);
+-         renderList('');
+-         input.addEventListener('input', () =&gt; renderList(input.value));
+-         list.addEventListener('click', (e) =&gt; {
+-           const li = e.target.closest('.band-item');
 -           if (!li) return;
 -           const b = li.dataset.band;
 -           const idx = selectedBands.indexOf(b);
@@ -2886,33 +2886,33 @@ Lines added: undefined, lines removed: 877
 -       }
 - 
 -       function resetBandLayout() {
--         const layout = document.getElementById(&#39;band-layout&#39;);
--         const mainEl = document.querySelector(&#39;main&#39;);
+-         const layout = document.getElementById('band-layout');
+-         const mainEl = document.querySelector('main');
 -         if (layout) {
 -           // Move chart back to main and remove layout
 -           mainEl.appendChild(chartEl);
 -           layout.remove();
 -         }
--         controlsEl.style.display = &#39;&#39;;
+-         controlsEl.style.display = '';
 -       }
 - 
 -       // Boot
 -       async function main() {
 -         try {
--           const resp = await fetch(&#39;data/alben.json&#39;, { cache: &#39;no-store&#39; });
+-           const resp = await fetch('data/alben.json', { cache: 'no-store' });
 -           const data = await resp.json();
--           log(&#39;Daten geladen: &#39; + (Array.isArray(data) ? data.length : &#39;keine Array-Struktur&#39;));
+-           log('Daten geladen: ' + (Array.isArray(data) ? data.length : 'keine Array-Struktur'));
 -           if (!Array.isArray(data) || data.length === 0) {
--             log(&#39;Keine Daten – Diagramm wird nicht gerendert.&#39;);
+-             log('Keine Daten – Diagramm wird nicht gerendert.');
 -             return;
 -           }
 -           // Normalize
 -           const normalized = data.map(d =&gt; ({
 -             Platz: d.Platz != null ? parseInt(d.Platz, 10) : null,
 -             Jahr: d.Jahr != null ? parseInt(d.Jahr, 10) : null,
--             Band: d.Band != null ? String(d.Band) : &#39;&#39;,
--             Album: d.Album != null ? String(d.Album) : &#39;&#39;,
--             Note: d.Note != null ? parseFloat(String(d.Note).replace(&#39;,&#39;, &#39;.&#39;)) : null
+-             Band: d.Band != null ? String(d.Band) : '',
+-             Album: d.Album != null ? String(d.Album) : '',
+-             Note: d.Note != null ? parseFloat(String(d.Note).replace(',', '.')) : null
 -           })).filter(d =&gt; d.Jahr != null &amp;&amp; d.Band &amp;&amp; d.Album);
 -           const bands = uniqueSorted(normalized.map(d =&gt; d.Band));
 - 
@@ -2927,27 +2927,27 @@ Lines added: undefined, lines removed: 877
 -             const fullMinJahr = jahre.length ? Math.min(...jahre) : 1998;
 -             const fullMaxJahr = 2024;
 -             
--             const container = document.createElement(&#39;div&#39;);
--             container.className = &#39;scatter-zoom-controls&#39;;
--             container.style.cssText = &#39;display: flex; flex-direction: column; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; align-items: center; min-width: 50px; justify-content: center; height: 100%;&#39;;
+-             const container = document.createElement('div');
+-             container.className = 'scatter-zoom-controls';
+-             container.style.cssText = 'display: flex; flex-direction: column; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; align-items: center; min-width: 50px; justify-content: center; height: 100%;';
 -             
 -             // Y-Achse Slider (Note) - vertikal
--             const yLabel = document.createElement(&#39;label&#39;);
--             yLabel.textContent = &#39;Note&#39;;
--             yLabel.style.cssText = &#39;color: var(--text-primary); font-weight: 500; font-size: 11px; white-space: nowrap; transform: rotate(-90deg); margin-bottom: 0;&#39;;
--             const sliderWrapper = document.createElement(&#39;div&#39;);
--             sliderWrapper.style.cssText = &#39;display: flex; align-items: center; justify-content: center; height: 400px; width: 30px; position: relative;&#39;;
--             const yMinSlider = document.createElement(&#39;input&#39;);
--             yMinSlider.type = &#39;range&#39;;
+-             const yLabel = document.createElement('label');
+-             yLabel.textContent = 'Note';
+-             yLabel.style.cssText = 'color: var(--text-primary); font-weight: 500; font-size: 11px; white-space: nowrap; transform: rotate(-90deg); margin-bottom: 0;';
+-             const sliderWrapper = document.createElement('div');
+-             sliderWrapper.style.cssText = 'display: flex; align-items: center; justify-content: center; height: 400px; width: 30px; position: relative;';
+-             const yMinSlider = document.createElement('input');
+-             yMinSlider.type = 'range';
 -             yMinSlider.min = Math.floor(fullMinNote * 100);
 -             yMinSlider.max = Math.ceil(fullMaxNote * 100);
 -             yMinSlider.value = Math.floor(fullMinNote * 100);
 -             yMinSlider.step = 1;
--             yMinSlider.className = &#39;vertical-slider&#39;;
--             yMinSlider.style.cssText = &#39;position: absolute; transform: rotate(-90deg); width: 400px; height: 6px; margin: 0; left: -197px; top: 197px;&#39;;
--             const yValueDisplay = document.createElement(&#39;span&#39;);
+-             yMinSlider.className = 'vertical-slider';
+-             yMinSlider.style.cssText = 'position: absolute; transform: rotate(-90deg); width: 400px; height: 6px; margin: 0; left: -197px; top: 197px;';
+-             const yValueDisplay = document.createElement('span');
 -             yValueDisplay.textContent = &#96;${fullMinNote.toFixed(2)} - ${fullMaxNote.toFixed(2)}&#96;;
--             yValueDisplay.style.cssText = &#39;color: var(--text-primary); font-size: 10px; text-align: center; margin-top: 8px;&#39;;
+-             yValueDisplay.style.cssText = 'color: var(--text-primary); font-size: 10px; text-align: center; margin-top: 8px;';
 -             
 -             sliderWrapper.appendChild(yMinSlider);
 -             container.appendChild(yLabel);
@@ -2969,7 +2969,7 @@ Lines added: undefined, lines removed: 877
 -               onZoomChange({ y: { min, max } });
 -             };
 -             
--             yMinSlider.addEventListener(&#39;input&#39;, updateY);
+-             yMinSlider.addEventListener('input', updateY);
 -             
 -             return container;
 -           }
@@ -2977,194 +2977,194 @@ Lines added: undefined, lines removed: 877
 -           async function route() {
 -             const { route, params } = parseHash();
 -             setActive(route);
--             controlsEl.innerHTML = &#39;&#39;;
--             chartEl.innerHTML = &#39;&#39;;
+-             controlsEl.innerHTML = '';
+-             chartEl.innerHTML = '';
 -             resetBandLayout();
 -             // Entferne scatter-container falls vorhanden
--             const scatterContainer = document.getElementById(&#39;scatter-container&#39;);
+-             const scatterContainer = document.getElementById('scatter-container');
 -             if (scatterContainer) {
 -               scatterContainer.remove();
 -             }
 -             // Header-Controls aktualisieren
--             const headerControls = document.getElementById(&#39;header-controls&#39;);
--             headerControls.innerHTML = &#39;&#39;;
--             if (route === &#39;band&#39;) {
--               const showTitles = params.titles !== &#39;false&#39;;
--               const sortBy = params.sort === &#39;count&#39; ? &#39;count&#39; : &#39;alphabetical&#39;;
--               const showRegression = params.regression === &#39;true&#39;;
+-             const headerControls = document.getElementById('header-controls');
+-             headerControls.innerHTML = '';
+-             if (route === 'band') {
+-               const showTitles = params.titles !== 'false';
+-               const sortBy = params.sort === 'count' ? 'count' : 'alphabetical';
+-               const showRegression = params.regression === 'true';
 -               
 -               // Albentitel Toggle
--               const titleToggleContainer = document.createElement(&#39;div&#39;);
--               titleToggleContainer.className = &#39;title-toggle-container&#39;;
--               const titleLabel = document.createElement(&#39;span&#39;);
--               titleLabel.className = &#39;title-toggle-label&#39;;
--               titleLabel.textContent = &#39;Albentitel&#39;;
--               const titleToggleWrapper = document.createElement(&#39;label&#39;);
--               titleToggleWrapper.className = &#39;toggle-switch&#39;;
--               const titleCheckbox = document.createElement(&#39;input&#39;);
--               titleCheckbox.type = &#39;checkbox&#39;;
--               titleCheckbox.id = &#39;title-toggle-checkbox&#39;;
+-               const titleToggleContainer = document.createElement('div');
+-               titleToggleContainer.className = 'title-toggle-container';
+-               const titleLabel = document.createElement('span');
+-               titleLabel.className = 'title-toggle-label';
+-               titleLabel.textContent = 'Albentitel';
+-               const titleToggleWrapper = document.createElement('label');
+-               titleToggleWrapper.className = 'toggle-switch';
+-               const titleCheckbox = document.createElement('input');
+-               titleCheckbox.type = 'checkbox';
+-               titleCheckbox.id = 'title-toggle-checkbox';
 -               titleCheckbox.checked = showTitles;
--               titleCheckbox.addEventListener(&#39;change&#39;, () =&gt; {
+-               titleCheckbox.addEventListener('change', () =&gt; {
 -                 const selected = [];
 -                 if (params.b) {
--                   const parts = params.b.split(&#39;,&#39;).map(s =&gt; s.trim()).filter(Boolean);
+-                   const parts = params.b.split(',').map(s =&gt; s.trim()).filter(Boolean);
 -                   for (const p of parts) if (bands.includes(p)) selected.push(p);
 -                 }
--                 const q = selected.length ? { b: selected.join(&#39;,&#39;) } : {};
--                 if (!titleCheckbox.checked) q.titles = &#39;false&#39;;
--                 if (sortBy === &#39;count&#39;) q.sort = &#39;count&#39;;
--                 if (showRegression) q.regression = &#39;true&#39;;
--                 updateHash(&#39;band&#39;, q);
+-                 const q = selected.length ? { b: selected.join(',') } : {};
+-                 if (!titleCheckbox.checked) q.titles = 'false';
+-                 if (sortBy === 'count') q.sort = 'count';
+-                 if (showRegression) q.regression = 'true';
+-                 updateHash('band', q);
 -               });
--               const titleSlider = document.createElement(&#39;span&#39;);
--               titleSlider.className = &#39;toggle-slider&#39;;
+-               const titleSlider = document.createElement('span');
+-               titleSlider.className = 'toggle-slider';
 -               titleToggleWrapper.appendChild(titleCheckbox);
 -               titleToggleWrapper.appendChild(titleSlider);
--               titleLabel.addEventListener(&#39;click&#39;, () =&gt; {
+-               titleLabel.addEventListener('click', () =&gt; {
 -                 titleCheckbox.checked = !titleCheckbox.checked;
--                 titleCheckbox.dispatchEvent(new Event(&#39;change&#39;));
+-                 titleCheckbox.dispatchEvent(new Event('change'));
 -               });
 -               titleToggleContainer.appendChild(titleLabel);
 -               titleToggleContainer.appendChild(titleToggleWrapper);
 -               headerControls.appendChild(titleToggleContainer);
 -               
 -               // Sortierung Toggle
--               const sortToggleContainer = document.createElement(&#39;div&#39;);
--               sortToggleContainer.className = &#39;title-toggle-container&#39;;
--               const sortLabel = document.createElement(&#39;span&#39;);
--               sortLabel.className = &#39;title-toggle-label&#39;;
--               sortLabel.textContent = &#39;Nach Anzahl&#39;;
--               const sortToggleWrapper = document.createElement(&#39;label&#39;);
--               sortToggleWrapper.className = &#39;toggle-switch&#39;;
--               const sortCheckbox = document.createElement(&#39;input&#39;);
--               sortCheckbox.type = &#39;checkbox&#39;;
--               sortCheckbox.id = &#39;sort-toggle-checkbox&#39;;
--               sortCheckbox.checked = sortBy === &#39;count&#39;;
--               sortCheckbox.addEventListener(&#39;change&#39;, () =&gt; {
+-               const sortToggleContainer = document.createElement('div');
+-               sortToggleContainer.className = 'title-toggle-container';
+-               const sortLabel = document.createElement('span');
+-               sortLabel.className = 'title-toggle-label';
+-               sortLabel.textContent = 'Nach Anzahl';
+-               const sortToggleWrapper = document.createElement('label');
+-               sortToggleWrapper.className = 'toggle-switch';
+-               const sortCheckbox = document.createElement('input');
+-               sortCheckbox.type = 'checkbox';
+-               sortCheckbox.id = 'sort-toggle-checkbox';
+-               sortCheckbox.checked = sortBy === 'count';
+-               sortCheckbox.addEventListener('change', () =&gt; {
 -                 const selected = [];
 -                 if (params.b) {
--                   const parts = params.b.split(&#39;,&#39;).map(s =&gt; s.trim()).filter(Boolean);
+-                   const parts = params.b.split(',').map(s =&gt; s.trim()).filter(Boolean);
 -                   for (const p of parts) if (bands.includes(p)) selected.push(p);
 -                 }
--                 const q = selected.length ? { b: selected.join(&#39;,&#39;) } : {};
--                 if (!showTitles) q.titles = &#39;false&#39;;
--                 if (sortCheckbox.checked) q.sort = &#39;count&#39;;
--                 if (showRegression) q.regression = &#39;true&#39;;
--                 updateHash(&#39;band&#39;, q);
+-                 const q = selected.length ? { b: selected.join(',') } : {};
+-                 if (!showTitles) q.titles = 'false';
+-                 if (sortCheckbox.checked) q.sort = 'count';
+-                 if (showRegression) q.regression = 'true';
+-                 updateHash('band', q);
 -               });
--               const sortSlider = document.createElement(&#39;span&#39;);
--               sortSlider.className = &#39;toggle-slider&#39;;
+-               const sortSlider = document.createElement('span');
+-               sortSlider.className = 'toggle-slider';
 -               sortToggleWrapper.appendChild(sortCheckbox);
 -               sortToggleWrapper.appendChild(sortSlider);
--               sortLabel.addEventListener(&#39;click&#39;, () =&gt; {
+-               sortLabel.addEventListener('click', () =&gt; {
 -                 sortCheckbox.checked = !sortCheckbox.checked;
--                 sortCheckbox.dispatchEvent(new Event(&#39;change&#39;));
+-                 sortCheckbox.dispatchEvent(new Event('change'));
 -               });
 -               sortToggleContainer.appendChild(sortLabel);
 -               sortToggleContainer.appendChild(sortToggleWrapper);
 -               headerControls.appendChild(sortToggleContainer);
 -               
 -               // Regression Toggle
--               const regressionToggleContainer = document.createElement(&#39;div&#39;);
--               regressionToggleContainer.className = &#39;title-toggle-container&#39;;
--               const regressionLabel = document.createElement(&#39;span&#39;);
--               regressionLabel.className = &#39;title-toggle-label&#39;;
--               regressionLabel.textContent = &#39;Regression&#39;;
--               const regressionToggleWrapper = document.createElement(&#39;label&#39;);
--               regressionToggleWrapper.className = &#39;toggle-switch&#39;;
--               const regressionCheckbox = document.createElement(&#39;input&#39;);
--               regressionCheckbox.type = &#39;checkbox&#39;;
--               regressionCheckbox.id = &#39;regression-toggle-checkbox&#39;;
+-               const regressionToggleContainer = document.createElement('div');
+-               regressionToggleContainer.className = 'title-toggle-container';
+-               const regressionLabel = document.createElement('span');
+-               regressionLabel.className = 'title-toggle-label';
+-               regressionLabel.textContent = 'Regression';
+-               const regressionToggleWrapper = document.createElement('label');
+-               regressionToggleWrapper.className = 'toggle-switch';
+-               const regressionCheckbox = document.createElement('input');
+-               regressionCheckbox.type = 'checkbox';
+-               regressionCheckbox.id = 'regression-toggle-checkbox';
 -               regressionCheckbox.checked = showRegression;
--               regressionCheckbox.addEventListener(&#39;change&#39;, () =&gt; {
+-               regressionCheckbox.addEventListener('change', () =&gt; {
 -                 const selected = [];
 -                 if (params.b) {
--                   const parts = params.b.split(&#39;,&#39;).map(s =&gt; s.trim()).filter(Boolean);
+-                   const parts = params.b.split(',').map(s =&gt; s.trim()).filter(Boolean);
 -                   for (const p of parts) if (bands.includes(p)) selected.push(p);
 -                 }
--                 const q = selected.length ? { b: selected.join(&#39;,&#39;) } : {};
--                 if (!showTitles) q.titles = &#39;false&#39;;
--                 if (sortBy === &#39;count&#39;) q.sort = &#39;count&#39;;
--                 if (regressionCheckbox.checked) q.regression = &#39;true&#39;;
--                 updateHash(&#39;band&#39;, q);
+-                 const q = selected.length ? { b: selected.join(',') } : {};
+-                 if (!showTitles) q.titles = 'false';
+-                 if (sortBy === 'count') q.sort = 'count';
+-                 if (regressionCheckbox.checked) q.regression = 'true';
+-                 updateHash('band', q);
 -               });
--               const regressionSlider = document.createElement(&#39;span&#39;);
--               regressionSlider.className = &#39;toggle-slider&#39;;
+-               const regressionSlider = document.createElement('span');
+-               regressionSlider.className = 'toggle-slider';
 -               regressionToggleWrapper.appendChild(regressionCheckbox);
 -               regressionToggleWrapper.appendChild(regressionSlider);
--               regressionLabel.addEventListener(&#39;click&#39;, () =&gt; {
+-               regressionLabel.addEventListener('click', () =&gt; {
 -                 regressionCheckbox.checked = !regressionCheckbox.checked;
--                 regressionCheckbox.dispatchEvent(new Event(&#39;change&#39;));
+-                 regressionCheckbox.dispatchEvent(new Event('change'));
 -               });
 -               regressionToggleContainer.appendChild(regressionLabel);
 -               regressionToggleContainer.appendChild(regressionToggleWrapper);
 -               headerControls.appendChild(regressionToggleContainer);
 -             }
--             if (route === &#39;overview&#39;) {
+-             if (route === 'overview') {
 -               await renderOverview(normalized);
--             } else if (route === &#39;band&#39;) {
+-             } else if (route === 'band') {
 -               // Hash b kann mehrere Bands enthalten: Komma-separiert
 -               const selected = [];
 -               if (params.b) {
--                 const parts = params.b.split(&#39;,&#39;).map(s =&gt; s.trim()).filter(Boolean);
+-                 const parts = params.b.split(',').map(s =&gt; s.trim()).filter(Boolean);
 -                 for (const p of parts) if (bands.includes(p)) selected.push(p);
 -               }
 -               // Titel-Anzeige aus Hash-Parameter (Standard: true)
--               const showTitles = params.titles !== &#39;false&#39;;
+-               const showTitles = params.titles !== 'false';
 -               // Sortierung aus Hash-Parameter (Standard: alphabetical)
--               const sortBy = params.sort === &#39;count&#39; ? &#39;count&#39; : &#39;alphabetical&#39;;
+-               const sortBy = params.sort === 'count' ? 'count' : 'alphabetical';
 -               // Regression aus Hash-Parameter (Standard: false)
--               const showRegression = params.regression === &#39;true&#39;;
+-               const showRegression = params.regression === 'true';
 -               // Layout erstellen
--               const mainEl = document.querySelector(&#39;main&#39;);
--               const layout = document.createElement(&#39;div&#39;);
--               layout.className = &#39;layout-band&#39;;
--               layout.id = &#39;band-layout&#39;;
+-               const mainEl = document.querySelector('main');
+-               const layout = document.createElement('div');
+-               layout.className = 'layout-band';
+-               layout.id = 'band-layout';
 -               const panel = buildBandPanel(bands, [...selected], (sel) =&gt; {
--                 const q = sel.length ? { b: sel.join(&#39;,&#39;) } : {};
--                 if (!showTitles) q.titles = &#39;false&#39;;
--                 if (sortBy === &#39;count&#39;) q.sort = &#39;count&#39;;
--                 if (showRegression) q.regression = &#39;true&#39;;
--                 updateHash(&#39;band&#39;, q);
+-                 const q = sel.length ? { b: sel.join(',') } : {};
+-                 if (!showTitles) q.titles = 'false';
+-                 if (sortBy === 'count') q.sort = 'count';
+-                 if (showRegression) q.regression = 'true';
+-                 updateHash('band', q);
 -               }, normalized, sortBy);
--               const right = document.createElement(&#39;div&#39;);
+-               const right = document.createElement('div');
 -               // Tags oben im rechten Bereich
 -               const tags = buildTagBar(selected, (bandToRemove) =&gt; {
 -                 const next = selected.filter(b =&gt; b !== bandToRemove);
--                 const q = next.length ? { b: next.join(&#39;,&#39;) } : {};
--                 if (!showTitles) q.titles = &#39;false&#39;;
--                 if (sortBy === &#39;count&#39;) q.sort = &#39;count&#39;;
--                 if (showRegression) q.regression = &#39;true&#39;;
--                 updateHash(&#39;band&#39;, q);
+-                 const q = next.length ? { b: next.join(',') } : {};
+-                 if (!showTitles) q.titles = 'false';
+-                 if (sortBy === 'count') q.sort = 'count';
+-                 if (showRegression) q.regression = 'true';
+-                 updateHash('band', q);
 -               });
--               const controlsRow = document.createElement(&#39;div&#39;);
--               controlsRow.className = &#39;band-controls-row&#39;;
+-               const controlsRow = document.createElement('div');
+-               controlsRow.className = 'band-controls-row';
 -               controlsRow.appendChild(tags);
 -               right.appendChild(controlsRow);
 -               right.appendChild(chartEl);
 -               layout.appendChild(panel);
 -               layout.appendChild(right);
--               controlsEl.style.display = &#39;none&#39;;
+-               controlsEl.style.display = 'none';
 -               mainEl.appendChild(layout);
 -               if (selected.length === 0) {
--                 chartEl.innerHTML = &#39;&lt;p style=&quot;padding: 40px; text-align: center; color: #a3a3a3;&quot;&gt;Bitte wähle eine oder mehrere Bands aus der Liste links aus.&lt;/p&gt;&#39;;
+-                 chartEl.innerHTML = '&lt;p style="padding: 40px; text-align: center; color: #a3a3a3;"&gt;Bitte wähle eine oder mehrere Bands aus der Liste links aus.&lt;/p&gt;';
 -               } else {
 -                 await renderBandsSeries(normalized, selected, showTitles, showRegression);
 -               }
--             } else if (route === &#39;scatter&#39;) {
--               log(&#39;Scatter-Route erkannt, starte Rendering...&#39;);
--               controlsEl.innerHTML = &#39;&#39;;
--               chartEl.innerHTML = &#39;&#39;;
--               controlsEl.style.display = &#39;none&#39;;
--               const mainEl = document.querySelector(&#39;main&#39;);
+-             } else if (route === 'scatter') {
+-               log('Scatter-Route erkannt, starte Rendering...');
+-               controlsEl.innerHTML = '';
+-               chartEl.innerHTML = '';
+-               controlsEl.style.display = 'none';
+-               const mainEl = document.querySelector('main');
 -               if (!mainEl.contains(chartEl)) {
 -                 mainEl.appendChild(chartEl);
 -               }
 -               // Erstelle Container für Chart und Slider nebeneinander
--               const scatterContainer = document.createElement(&#39;div&#39;);
--               scatterContainer.style.cssText = &#39;display: flex; gap: 16px; align-items: flex-start; width: 100%;&#39;;
--               scatterContainer.id = &#39;scatter-container&#39;;
+-               const scatterContainer = document.createElement('div');
+-               scatterContainer.style.cssText = 'display: flex; gap: 16px; align-items: flex-start; width: 100%;';
+-               scatterContainer.id = 'scatter-container';
 -               
 -               // Entferne chartEl aus mainEl falls vorhanden
 -               if (mainEl.contains(chartEl)) {
@@ -3172,8 +3172,8 @@ Lines added: undefined, lines removed: 877
 -               }
 -               
 -               // Füge chartEl zum Container hinzu
--               const chartWrapper = document.createElement(&#39;div&#39;);
--               chartWrapper.style.cssText = &#39;flex: 1;&#39;;
+-               const chartWrapper = document.createElement('div');
+-               chartWrapper.style.cssText = 'flex: 1;';
 -               chartWrapper.appendChild(chartEl);
 -               scatterContainer.appendChild(chartWrapper);
 -               
@@ -3187,18 +3187,18 @@ Lines added: undefined, lines removed: 877
 -               }
 -               
 -               mainEl.appendChild(scatterContainer);
--               log(&#39;Chart-Element vorbereitet, rufe renderScatterAll auf mit &#39; + normalized.length + &#39; Datensätzen&#39;);
+-               log('Chart-Element vorbereitet, rufe renderScatterAll auf mit ' + normalized.length + ' Datensätzen');
 -               await renderScatterAll(normalized, currentZoomY);
 -             } else {
 -               await renderOverview(normalized);
 -             }
 -           }
--           window.addEventListener(&#39;hashchange&#39;, route);
--           if (!location.hash) location.hash = &#39;#overview&#39;;
+-           window.addEventListener('hashchange', route);
+-           if (!location.hash) location.hash = '#overview';
 -           await route();
 -         } catch (e) {
 -           console.error(e);
--           log(&#39;Fehler: &#39; + (e &amp;&amp; e.message ? e.message : String(e)));
+-           log('Fehler: ' + (e &amp;&amp; e.message ? e.message : String(e)));
 -         }
 -       }
 -       main();
@@ -3267,7 +3267,7 @@ Model supplied an ambiguous edit
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 3
@@ -3278,18 +3278,18 @@ Lines added: 3, lines removed: 3
       const q = {};
 -     if (selected.length &gt; 0) {
 +     if (selected &amp;&amp; selected.length &gt; 0) {
-        q.b = selected.join(&#39;,&#39;);
+        q.b = selected.join(',');
       }
 -     if (!showTitles) {
 +     if (showTitles === false) {
-        q.titles = &#39;false&#39;;
+        q.titles = 'false';
       }
-      if (sortBy === &#39;count&#39;) {
-        q.sort = &#39;count&#39;;
+      if (sortBy === 'count') {
+        q.sort = 'count';
       }
 -     if (showRegression) {
 +     if (showRegression === true) {
-        q.regression = &#39;true&#39;;
+        q.regression = 'true';
       }
 ```
 
@@ -3399,18 +3399,18 @@ Erstellen der Chat-Komponente und Erweitern des Routers:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/index.html</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/index.html</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
 
 ```diff
 @@ -17,4 +17,5 @@
-          &lt;a href=&quot;#band&quot; id=&quot;nav-band&quot;&gt;Zeitreihe Band&lt;/a&gt;
-          &lt;a href=&quot;#scatter&quot; id=&quot;nav-scatter&quot;&gt;Alle Wertungen&lt;/a&gt;
-+         &lt;a href=&quot;#testteam&quot; id=&quot;nav-testteam&quot;&gt;Testteam&lt;/a&gt;
+          &lt;a href="#band" id="nav-band"&gt;Zeitreihe Band&lt;/a&gt;
+          &lt;a href="#scatter" id="nav-scatter"&gt;Alle Wertungen&lt;/a&gt;
++         &lt;a href="#testteam" id="nav-testteam"&gt;Testteam&lt;/a&gt;
         &lt;/nav&gt;
-        &lt;div id=&quot;header-controls&quot; style=&quot;margin-left:auto&quot;&gt;&lt;/div&gt;
+        &lt;div id="header-controls" style="margin-left:auto"&gt;&lt;/div&gt;
 ```
 
 </details>
@@ -3421,7 +3421,7 @@ Lines added: 1, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 177, lines removed: 1
@@ -3443,48 +3443,48 @@ Lines added: 177, lines removed: 1
 +    * Chat-UI rendern
 +    */
 +   render() {
-+     this.containerEl.innerHTML = &#39;&#39;;
-+     this.containerEl.className = &#39;chat-container&#39;;
++     this.containerEl.innerHTML = '';
++     this.containerEl.className = 'chat-container';
 +     
 +     // Chat-Messages-Bereich
-+     const messagesArea = document.createElement(&#39;div&#39;);
-+     messagesArea.className = &#39;chat-messages&#39;;
-+     messagesArea.id = &#39;chat-messages&#39;;
++     const messagesArea = document.createElement('div');
++     messagesArea.className = 'chat-messages';
++     messagesArea.id = 'chat-messages';
 +     
 +     // Input-Bereich
-+     const inputArea = document.createElement(&#39;div&#39;);
-+     inputArea.className = &#39;chat-input-area&#39;;
++     const inputArea = document.createElement('div');
++     inputArea.className = 'chat-input-area';
 +     
-+     const inputWrapper = document.createElement(&#39;div&#39;);
-+     inputWrapper.className = &#39;chat-input-wrapper&#39;;
++     const inputWrapper = document.createElement('div');
++     inputWrapper.className = 'chat-input-wrapper';
 +     
-+     const textarea = document.createElement(&#39;textarea&#39;);
-+     textarea.id = &#39;chat-input&#39;;
-+     textarea.className = &#39;chat-input&#39;;
-+     textarea.placeholder = &#39;Nachricht eingeben...&#39;;
++     const textarea = document.createElement('textarea');
++     textarea.id = 'chat-input';
++     textarea.className = 'chat-input';
++     textarea.placeholder = 'Nachricht eingeben...';
 +     textarea.rows = 1;
-+     textarea.setAttribute(&#39;maxlength&#39;, &#39;4000&#39;);
++     textarea.setAttribute('maxlength', '4000');
 +     
 +     // Auto-Resize für Textarea
-+     textarea.addEventListener(&#39;input&#39;, () =&gt; {
-+       textarea.style.height = &#39;auto&#39;;
-+       textarea.style.height = Math.min(textarea.scrollHeight, 200) + &#39;px&#39;;
++     textarea.addEventListener('input', () =&gt; {
++       textarea.style.height = 'auto';
++       textarea.style.height = Math.min(textarea.scrollHeight, 200) + 'px';
 +     });
 +     
 +     // Enter zum Senden (Shift+Enter für neue Zeile)
-+     textarea.addEventListener(&#39;keydown&#39;, (e) =&gt; {
-+       if (e.key === &#39;Enter&#39; &amp;&amp; !e.shiftKey) {
++     textarea.addEventListener('keydown', (e) =&gt; {
++       if (e.key === 'Enter' &amp;&amp; !e.shiftKey) {
 +         e.preventDefault();
 +         this.sendMessage();
 +       }
 +     });
 +     
-+     const sendButton = document.createElement(&#39;button&#39;);
-+     sendButton.id = &#39;chat-send-button&#39;;
-+     sendButton.className = &#39;chat-send-button&#39;;
-+     sendButton.innerHTML = &#39;&lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;line x1=&quot;22&quot; y1=&quot;2&quot; x2=&quot;11&quot; y2=&quot;13&quot;&gt;&lt;/line&gt;&lt;polygon points=&quot;22 2 15 22 11 13 2 9 22 2&quot;&gt;&lt;/polygon&gt;&lt;/svg&gt;&#39;;
-+     sendButton.setAttribute(&#39;aria-label&#39;, &#39;Nachricht senden&#39;);
-+     sendButton.addEventListener(&#39;click&#39;, () =&gt; this.sendMessage());
++     const sendButton = document.createElement('button');
++     sendButton.id = 'chat-send-button';
++     sendButton.className = 'chat-send-button';
++     sendButton.innerHTML = '&lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;line x1="22" y1="2" x2="11" y2="13"&gt;&lt;/line&gt;&lt;polygon points="22 2 15 22 11 13 2 9 22 2"&gt;&lt;/polygon&gt;&lt;/svg&gt;';
++     sendButton.setAttribute('aria-label', 'Nachricht senden');
++     sendButton.addEventListener('click', () =&gt; this.sendMessage());
 +     
 +     inputWrapper.appendChild(textarea);
 +     inputWrapper.appendChild(sendButton);
@@ -3494,7 +3494,7 @@ Lines added: 177, lines removed: 1
 +     this.containerEl.appendChild(inputArea);
 +     
 +     // Willkommensnachricht
-+     this.addMessage(&#39;assistant&#39;, &#39;Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?&#39;);
++     this.addMessage('assistant', 'Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?');
 +     
 +     // Focus auf Input
 +     textarea.focus();
@@ -3512,17 +3512,17 @@ Lines added: 177, lines removed: 1
 +    * Nachrichten rendern
 +    */
 +   renderMessages() {
-+     const messagesArea = document.getElementById(&#39;chat-messages&#39;);
++     const messagesArea = document.getElementById('chat-messages');
 +     if (!messagesArea) return;
 +     
-+     messagesArea.innerHTML = &#39;&#39;;
++     messagesArea.innerHTML = '';
 +     
 +     this.messages.forEach((msg) =&gt; {
-+       const messageEl = document.createElement(&#39;div&#39;);
++       const messageEl = document.createElement('div');
 +       messageEl.className = &#96;chat-message chat-message-${msg.role}&#96;;
 +       
-+       const contentEl = document.createElement(&#39;div&#39;);
-+       contentEl.className = &#39;chat-message-content&#39;;
++       const contentEl = document.createElement('div');
++       contentEl.className = 'chat-message-content';
 +       contentEl.textContent = msg.content;
 +       
 +       messageEl.appendChild(contentEl);
@@ -3537,18 +3537,18 @@ Lines added: 177, lines removed: 1
 +    * Nachricht senden
 +    */
 +   async sendMessage() {
-+     const input = document.getElementById(&#39;chat-input&#39;);
++     const input = document.getElementById('chat-input');
 +     if (!input) return;
 +     
 +     const message = input.value.trim();
 +     if (!message || this.isLoading) return;
 +     
 +     // User-Nachricht hinzufügen
-+     this.addMessage(&#39;user&#39;, message);
++     this.addMessage('user', message);
 +     
 +     // Input leeren und zurücksetzen
-+     input.value = &#39;&#39;;
-+     input.style.height = &#39;auto&#39;;
++     input.value = '';
++     input.style.height = 'auto';
 +     
 +     // Loading-Indikator
 +     this.setLoading(true);
@@ -3556,7 +3556,7 @@ Lines added: 177, lines removed: 1
 +     // TODO: Hier wird später die OpenRouter API aufgerufen
 +     // Für jetzt simulieren wir eine Antwort
 +     setTimeout(() =&gt; {
-+       this.addMessage(&#39;assistant&#39;, &#39;Das ist eine Platzhalter-Antwort. Die OpenRouter-Integration folgt im nächsten Schritt.&#39;);
++       this.addMessage('assistant', 'Das ist eine Platzhalter-Antwort. Die OpenRouter-Integration folgt im nächsten Schritt.');
 +       this.setLoading(false);
 +     }, 1000);
 +   }
@@ -3566,12 +3566,12 @@ Lines added: 177, lines removed: 1
 +    */
 +   setLoading(loading) {
 +     this.isLoading = loading;
-+     const sendButton = document.getElementById(&#39;chat-send-button&#39;);
-+     const input = document.getElementById(&#39;chat-input&#39;);
++     const sendButton = document.getElementById('chat-send-button');
++     const input = document.getElementById('chat-input');
 +     
 +     if (sendButton) {
 +       sendButton.disabled = loading;
-+       sendButton.classList.toggle(&#39;loading&#39;, loading);
++       sendButton.classList.toggle('loading', loading);
 +     }
 +     
 +     if (input) {
@@ -3579,17 +3579,17 @@ Lines added: 177, lines removed: 1
 +     }
 +     
 +     if (loading) {
-+       const messagesArea = document.getElementById(&#39;chat-messages&#39;);
++       const messagesArea = document.getElementById('chat-messages');
 +       if (messagesArea) {
-+         const loadingEl = document.createElement(&#39;div&#39;);
-+         loadingEl.className = &#39;chat-message chat-message-assistant chat-loading&#39;;
-+         loadingEl.id = &#39;chat-loading-indicator&#39;;
-+         loadingEl.innerHTML = &#39;&lt;div class=&quot;chat-message-content&quot;&gt;&lt;span class=&quot;chat-typing-indicator&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&#39;;
++         const loadingEl = document.createElement('div');
++         loadingEl.className = 'chat-message chat-message-assistant chat-loading';
++         loadingEl.id = 'chat-loading-indicator';
++         loadingEl.innerHTML = '&lt;div class="chat-message-content"&gt;&lt;span class="chat-typing-indicator"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;';
 +         messagesArea.appendChild(loadingEl);
 +         messagesArea.scrollTop = messagesArea.scrollHeight;
 +       }
 +     } else {
-+       const loadingEl = document.getElementById(&#39;chat-loading-indicator&#39;);
++       const loadingEl = document.getElementById('chat-loading-indicator');
 +       if (loadingEl) {
 +         loadingEl.remove();
 +       }
@@ -3602,7 +3602,7 @@ Lines added: 177, lines removed: 1
 +   clear() {
 +     this.messages = [];
 +     this.renderMessages();
-+     this.addMessage(&#39;assistant&#39;, &#39;Chat zurückgesetzt. Wie kann ich dir helfen?&#39;);
++     this.addMessage('assistant', 'Chat zurückgesetzt. Wie kann ich dir helfen?');
 +   }
 + }
 + 
@@ -3616,7 +3616,7 @@ Lines added: 177, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -3625,10 +3625,10 @@ Lines added: 1, lines removed: 1
 @@ -99,5 +99,5 @@
    */
   export function setActiveNav(route) {
--   [&#39;overview&#39;, &#39;band&#39;, &#39;scatter&#39;].forEach(r =&gt; {
-+   [&#39;overview&#39;, &#39;band&#39;, &#39;scatter&#39;, &#39;testteam&#39;].forEach(r =&gt; {
-      const el = document.getElementById(&#39;nav-&#39; + r);
-      if (el) el.classList.toggle(&#39;active&#39;, r === route);
+-   ['overview', 'band', 'scatter'].forEach(r =&gt; {
++   ['overview', 'band', 'scatter', 'testteam'].forEach(r =&gt; {
+      const el = document.getElementById('nav-' + r);
+      if (el) el.classList.toggle('active', r === route);
 ```
 
 </details>
@@ -3639,16 +3639,16 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
 
 ```diff
 @@ -5,4 +5,5 @@
-  import { renderOverview, renderBandsSeries, renderScatterAll } from &#39;./renderers.js&#39;;
-  import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls } from &#39;./controls.js&#39;;
-+ import { Chat } from &#39;./chat.js&#39;;
+  import { renderOverview, renderBandsSeries, renderScatterAll } from './renderers.js';
+  import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls } from './controls.js';
++ import { Chat } from './chat.js';
   
   /**
 ```
@@ -3661,7 +3661,7 @@ Lines added: 1, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: undefined
@@ -3670,7 +3670,7 @@ Lines added: 3, lines removed: undefined
 @@ -47,4 +47,7 @@
           await this.handleScatter();
           break;
-+       case &#39;testteam&#39;:
++       case 'testteam':
 +         await this.handleTestteam();
 +         break;
         default:
@@ -3685,34 +3685,34 @@ Lines added: 3, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 26, lines removed: undefined
 
 ```diff
 @@ -230,4 +230,30 @@
-      updateHash(&#39;band&#39;, q);
+      updateHash('band', q);
     }
 +   
 +   /**
 +    * Testteam-Route
 +    */
 +   async handleTestteam() {
-+     this.controlsEl.innerHTML = &#39;&#39;;
-+     this.chartEl.innerHTML = &#39;&#39;;
++     this.controlsEl.innerHTML = '';
++     this.chartEl.innerHTML = '';
 +     this.resetBandLayout();
 +     
-+     const scatterContainer = document.getElementById(&#39;scatter-container&#39;);
++     const scatterContainer = document.getElementById('scatter-container');
 +     if (scatterContainer) {
 +       scatterContainer.remove();
 +     }
 +     
 +     // Chat-Container erstellen
-+     const mainEl = document.querySelector(&#39;main&#39;);
-+     const chatContainer = document.createElement(&#39;div&#39;);
-+     chatContainer.id = &#39;chat-container&#39;;
-+     chatContainer.className = &#39;chat-page&#39;;
++     const mainEl = document.querySelector('main');
++     const chatContainer = document.createElement('div');
++     chatContainer.id = 'chat-container';
++     chatContainer.className = 'chat-page';
 +     
 +     mainEl.appendChild(chatContainer);
 +     
@@ -3730,10 +3730,10 @@ Lines added: 6, lines removed: undefined
 ```diff
 @@ -242,4 +268,10 @@
       }
-      this.controlsEl.style.display = &#39;&#39;;
+      this.controlsEl.style.display = '';
 +     
 +     // Chat-Container entfernen falls vorhanden
-+     const chatContainer = document.getElementById(&#39;chat-container&#39;);
++     const chatContainer = document.getElementById('chat-container');
 +     if (chatContainer) {
 +       chatContainer.remove();
 +     }
@@ -3785,7 +3785,7 @@ Hinzufügen der Chat-Styles:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
 
 **Chunk 1**
 Lines added: 223, lines removed: undefined
@@ -4183,7 +4183,7 @@ Erstellen einer Konfigurationsdatei mit Modell-Empfehlungen und Vorbereiten der 
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 97, lines removed: 1
@@ -4203,37 +4203,37 @@ Lines added: 97, lines removed: 1
 +   // Claude 3.5 Sonnet bietet ausgezeichnete Qualität für anspruchsvolle Gespräche
 +   // und versteht Popkultur sehr gut. Etwas teurer, aber beste Qualität.
 +   PREMIUM: {
-+     id: &#39;anthropic/claude-3.5-sonnet&#39;,
-+     name: &#39;Claude 3.5 Sonnet&#39;,
-+     description: &#39;Beste Qualität für anspruchsvolle Unterhaltung, ausgezeichnetes Popkultur-Verständnis&#39;,
-+     provider: &#39;Anthropic&#39;,
++     id: 'anthropic/claude-3.5-sonnet',
++     name: 'Claude 3.5 Sonnet',
++     description: 'Beste Qualität für anspruchsvolle Unterhaltung, ausgezeichnetes Popkultur-Verständnis',
++     provider: 'Anthropic',
 +     contextWindow: 200000,
 +     // Geschätzte Kosten: ~$3/M input, ~$15/M output tokens
-+     costLevel: &#39;premium&#39;
++     costLevel: 'premium'
 +   },
 +   
 +   // Gute Balance: Sehr gute Qualität zu moderaten Preisen
 +   // Mixtral 8x22B bietet hervorragende Leistung für den Preis
 +   BALANCED: {
-+     id: &#39;mistralai/mixtral-8x22b-instruct&#39;,
-+     name: &#39;Mixtral 8x22B&#39;,
-+     description: &#39;Ausgezeichnete Balance zwischen Preis und Leistung, sehr gut für Unterhaltung&#39;,
-+     provider: &#39;Mistral AI&#39;,
++     id: 'mistralai/mixtral-8x22b-instruct',
++     name: 'Mixtral 8x22B',
++     description: 'Ausgezeichnete Balance zwischen Preis und Leistung, sehr gut für Unterhaltung',
++     provider: 'Mistral AI',
 +     contextWindow: 65536,
 +     // Geschätzte Kosten: ~$0.5-1/M tokens (günstiger als Claude)
-+     costLevel: &#39;balanced&#39;
++     costLevel: 'balanced'
 +   },
 +   
 +   // Budget-Option: Gute Qualität zu niedrigem Preis
 +   // Llama 3.1 70B ist kostenlos oder sehr günstig und bietet solide Leistung
 +   BUDGET: {
-+     id: &#39;meta-llama/llama-3.1-70b-instruct&#39;,
-+     name: &#39;Llama 3.1 70B&#39;,
-+     description: &#39;Sehr günstig, gute Qualität für Unterhaltung und Popkultur&#39;,
-+     provider: &#39;Meta&#39;,
++     id: 'meta-llama/llama-3.1-70b-instruct',
++     name: 'Llama 3.1 70B',
++     description: 'Sehr günstig, gute Qualität für Unterhaltung und Popkultur',
++     provider: 'Meta',
 +     contextWindow: 128000,
 +     // Geschätzte Kosten: ~$0.1-0.5/M tokens oder kostenlos
-+     costLevel: &#39;budget&#39;
++     costLevel: 'budget'
 +   }
 + };
 + 
@@ -4266,16 +4266,16 @@ Lines added: 97, lines removed: 1
 +  */
 + export const OPENROUTER_CONFIG = {
 +   // Base URL für OpenRouter API
-+   baseURL: &#39;https://openrouter.ai/api/v1&#39;,
++   baseURL: 'https://openrouter.ai/api/v1',
 +   
 +   // Endpoint für Chat Completions
-+   chatEndpoint: &#39;/chat/completions&#39;,
++   chatEndpoint: '/chat/completions',
 +   
 +   // Standard-Headers
 +   headers: {
-+     &#39;Content-Type&#39;: &#39;application/json&#39;,
-+     &#39;HTTP-Referer&#39;: window.location.origin, // Optional: für Tracking
-+     &#39;X-Title&#39;: &#39;Alben-Dashboard Testteam&#39; // Optional: für Tracking
++     'Content-Type': 'application/json',
++     'HTTP-Referer': window.location.origin, // Optional: für Tracking
++     'X-Title': 'Alben-Dashboard Testteam' // Optional: für Tracking
 +   },
 +   
 +   // Request-Konfiguration
@@ -4306,7 +4306,7 @@ Lines added: 97, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: undefined
@@ -4315,7 +4315,7 @@ Lines added: 4, lines removed: undefined
 @@ -2,9 +2,13 @@
    * Chat-Komponente
    */
-+ import { DEFAULT_MODEL, SYSTEM_PROMPT, OPENROUTER_CONFIG } from &#39;./chatConfig.js&#39;;
++ import { DEFAULT_MODEL, SYSTEM_PROMPT, OPENROUTER_CONFIG } from './chatConfig.js';
 + 
   export class Chat {
     constructor(containerEl) {
@@ -4336,7 +4336,7 @@ Lines added: 4, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 69, lines removed: 5
@@ -4348,14 +4348,14 @@ Lines added: 69, lines removed: 5
 -     // TODO: Hier wird später die OpenRouter API aufgerufen
 -     // Für jetzt simulieren wir eine Antwort
 -     setTimeout(() =&gt; {
--       this.addMessage(&#39;assistant&#39;, &#39;Das ist eine Platzhalter-Antwort. Die OpenRouter-Integration folgt im nächsten Schritt.&#39;);
+-       this.addMessage('assistant', 'Das ist eine Platzhalter-Antwort. Die OpenRouter-Integration folgt im nächsten Schritt.');
 +     try {
 +       // OpenRouter API aufrufen
 +       const response = await this.callOpenRouterAPI(message);
-+       this.addMessage(&#39;assistant&#39;, response);
++       this.addMessage('assistant', response);
 +     } catch (error) {
-+       console.error(&#39;Fehler beim Senden der Nachricht:&#39;, error);
-+       this.addMessage(&#39;assistant&#39;, &#39;Entschuldigung, es ist ein Fehler aufgetreten. Bitte versuche es erneut.&#39;);
++       console.error('Fehler beim Senden der Nachricht:', error);
++       this.addMessage('assistant', 'Entschuldigung, es ist ein Fehler aufgetreten. Bitte versuche es erneut.');
 +     } finally {
         this.setLoading(false);
 -     }, 1000);
@@ -4367,14 +4367,14 @@ Lines added: 69, lines removed: 5
 +    */
 +   async callOpenRouterAPI(userMessage) {
 +     if (!this.apiKey) {
-+       throw new Error(&#39;OpenRouter API Key nicht konfiguriert&#39;);
++       throw new Error('OpenRouter API Key nicht konfiguriert');
 +     }
 +     
 +     // Nachrichten für API vorbereiten
 +     const apiMessages = [
-+       { role: &#39;system&#39;, content: SYSTEM_PROMPT },
++       { role: 'system', content: SYSTEM_PROMPT },
 +       ...this.messages.map(msg =&gt; ({
-+         role: msg.role === &#39;user&#39; ? &#39;user&#39; : &#39;assistant&#39;,
++         role: msg.role === 'user' ? 'user' : 'assistant',
 +         content: msg.content
 +       }))
 +     ];
@@ -4386,10 +4386,10 @@ Lines added: 69, lines removed: 5
 +     };
 +     
 +     const response = await fetch(OPENROUTER_CONFIG.baseURL + OPENROUTER_CONFIG.chatEndpoint, {
-+       method: &#39;POST&#39;,
++       method: 'POST',
 +       headers: {
 +         ...OPENROUTER_CONFIG.headers,
-+         &#39;Authorization&#39;: &#96;Bearer ${this.apiKey}&#96;
++         'Authorization': &#96;Bearer ${this.apiKey}&#96;
 +       },
 +       body: JSON.stringify(requestBody)
 +     });
@@ -4402,7 +4402,7 @@ Lines added: 69, lines removed: 5
 +     const data = await response.json();
 +     
 +     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-+       throw new Error(&#39;Ungültige API-Antwort&#39;);
++       throw new Error('Ungültige API-Antwort');
 +     }
 +     
 +     return data.choices[0].message.content.trim();
@@ -4440,7 +4440,7 @@ Lines added: 69, lines removed: 5
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: undefined
@@ -4451,7 +4451,7 @@ Lines added: 3, lines removed: undefined
       this.chat.render();
 +     
 +     // TODO: API-Key aus Konfiguration oder Eingabe setzen
-+     // this.chat.setApiKey(&#39;dein-openrouter-api-key&#39;);
++     // this.chat.setApiKey('dein-openrouter-api-key');
     }
     
 ```
@@ -4464,7 +4464,7 @@ Lines added: 3, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.md</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.md</summary>
 
 **Chunk 1**
 Lines added: 52, lines removed: 1
@@ -4648,7 +4648,7 @@ Verschiebe den System-Prompt in eine separate Markdown-Datei und passe die Konfi
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 20, lines removed: 1
@@ -4694,7 +4694,7 @@ Lines added: 20, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 38, lines removed: 11
@@ -4727,31 +4727,31 @@ Lines added: 38, lines removed: 11
 +   }
 +   
 +   try {
-+     const response = await fetch(&#39;prompts/system-prompt.md&#39;);
++     const response = await fetch('prompts/system-prompt.md');
 +     if (!response.ok) {
-+       throw new Error(&#39;System-Prompt konnte nicht geladen werden&#39;);
++       throw new Error('System-Prompt konnte nicht geladen werden');
 +     }
 +     const markdown = await response.text();
 +     // Entferne Markdown-Formatierung für den Prompt
 +     SYSTEM_PROMPT_CACHE = markdown
-+       .replace(/^#.*$/gm, &#39;&#39;) // Überschriften entfernen
-+       .replace(/^##.*$/gm, &#39;&#39;) // Unterüberschriften entfernen
-+       .replace(/^\*\*.*?\*\*:/gm, &#39;&#39;) // Fett-Formatierung entfernen
-+       .replace(/^- /gm, &#39;&#39;) // Listen-Markierungen entfernen
-+       .replace(/\n{3,}/g, &#39;\n\n&#39;) // Mehrfache Leerzeilen reduzieren
++       .replace(/^#.*$/gm, '') // Überschriften entfernen
++       .replace(/^##.*$/gm, '') // Unterüberschriften entfernen
++       .replace(/^\*\*.*?\*\*:/gm, '') // Fett-Formatierung entfernen
++       .replace(/^- /gm, '') // Listen-Markierungen entfernen
++       .replace(/\n{3,}/g, '\n\n') // Mehrfache Leerzeilen reduzieren
 +       .trim();
 +     return SYSTEM_PROMPT_CACHE;
 +   } catch (error) {
-+     console.error(&#39;Fehler beim Laden des System-Prompts:&#39;, error);
++     console.error('Fehler beim Laden des System-Prompts:', error);
 +     // Fallback-Prompt
-+     return &#39;Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.&#39;;
++     return 'Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.';
 +   }
 + }
 + 
 + /**
 +  * System-Prompt (für synchrone Verwendung - lädt Fallback)
 +  */
-+ export const SYSTEM_PROMPT = &#39;Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent im Testteam-Bereich. Antworte immer auf Deutsch, sei hilfreich und respektvoll.&#39;;
++ export const SYSTEM_PROMPT = 'Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent im Testteam-Bereich. Antworte immer auf Deutsch, sei hilfreich und respektvoll.';
   
   /**
 ```
@@ -4764,7 +4764,7 @@ Lines added: 38, lines removed: 11
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 2
@@ -4790,8 +4790,8 @@ Lines added: 5, lines removed: undefined
   export const DEFAULT_MODEL = RECOMMENDED_MODELS.PREMIUM;
 + 
 + // Stelle sicher, dass Claude 3.5 Sonnet verwendet wird
-+ if (DEFAULT_MODEL.id !== &#39;anthropic/claude-3.5-sonnet&#39;) {
-+   console.warn(&#39;Standard-Modell ist nicht Claude 3.5 Sonnet&#39;);
++ if (DEFAULT_MODEL.id !== 'anthropic/claude-3.5-sonnet') {
++   console.warn('Standard-Modell ist nicht Claude 3.5 Sonnet');
 + }
   
   /**
@@ -4805,7 +4805,7 @@ Lines added: 5, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -4814,8 +4814,8 @@ Lines added: 1, lines removed: 1
 @@ -2,5 +2,5 @@
    * Chat-Komponente
    */
-- import { DEFAULT_MODEL, SYSTEM_PROMPT, OPENROUTER_CONFIG } from &#39;./chatConfig.js&#39;;
-+ import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG } from &#39;./chatConfig.js&#39;;
+- import { DEFAULT_MODEL, SYSTEM_PROMPT, OPENROUTER_CONFIG } from './chatConfig.js';
++ import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG } from './chatConfig.js';
   
   export class Chat {
 ```
@@ -4828,14 +4828,14 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: 1
 
 ```diff
 @@ -146,8 +146,11 @@
-        throw new Error(&#39;OpenRouter API Key nicht konfiguriert&#39;);
+        throw new Error('OpenRouter API Key nicht konfiguriert');
       }
 +     
 +     // System-Prompt laden
@@ -4843,10 +4843,10 @@ Lines added: 4, lines removed: 1
       
       // Nachrichten für API vorbereiten
       const apiMessages = [
--       { role: &#39;system&#39;, content: SYSTEM_PROMPT },
-+       { role: &#39;system&#39;, content: systemPrompt },
+-       { role: 'system', content: SYSTEM_PROMPT },
++       { role: 'system', content: systemPrompt },
         ...this.messages.map(msg =&gt; ({
-          role: msg.role === &#39;user&#39; ? &#39;user&#39; : &#39;assistant&#39;,
+          role: msg.role === 'user' ? 'user' : 'assistant',
 ```
 
 </details>
@@ -4893,7 +4893,7 @@ Verbessern der Markdown-Verarbeitung für einen saubereren Prompt:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 12, lines removed: 4
@@ -4902,23 +4902,23 @@ Lines added: 12, lines removed: 4
 @@ -82,8 +82,16 @@
       // Entferne Markdown-Formatierung für den Prompt
       SYSTEM_PROMPT_CACHE = markdown
--       .replace(/^#.*$/gm, &#39;&#39;) // Überschriften entfernen
--       .replace(/^##.*$/gm, &#39;&#39;) // Unterüberschriften entfernen
--       .replace(/^\*\*.*?\*\*:/gm, &#39;&#39;) // Fett-Formatierung entfernen
--       .replace(/^- /gm, &#39;&#39;) // Listen-Markierungen entfernen
-+       .split(&#39;\n&#39;)
+-       .replace(/^#.*$/gm, '') // Überschriften entfernen
+-       .replace(/^##.*$/gm, '') // Unterüberschriften entfernen
+-       .replace(/^\*\*.*?\*\*:/gm, '') // Fett-Formatierung entfernen
+-       .replace(/^- /gm, '') // Listen-Markierungen entfernen
++       .split('\n')
 +       .map(line =&gt; {
 +         // Überschriften entfernen
-+         if (line.match(/^#+\s/)) return &#39;&#39;;
++         if (line.match(/^#+\s/)) return '';
 +         // Fett-Formatierung entfernen, aber Text behalten
-+         line = line.replace(/\*\*(.*?)\*\*/g, &#39;$1&#39;);
++         line = line.replace(/\*\*(.*?)\*\*/g, '$1');
 +         // Listen-Markierungen entfernen, aber Text behalten
-+         line = line.replace(/^-\s+/, &#39;&#39;);
++         line = line.replace(/^-\s+/, '');
 +         return line.trim();
 +       })
 +       .filter(line =&gt; line.length &gt; 0) // Leere Zeilen entfernen
-+       .join(&#39;\n&#39;)
-        .replace(/\n{3,}/g, &#39;\n\n&#39;) // Mehrfache Leerzeilen reduzieren
++       .join('\n')
+        .replace(/\n{3,}/g, '\n\n') // Mehrfache Leerzeilen reduzieren
         .trim();
 ```
 
@@ -4964,7 +4964,7 @@ Lint results
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 5
@@ -5116,7 +5116,7 @@ Erstellen eines Moduls zur Datenaufbereitung und Einbinden der Albendaten in den
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/albumData.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/albumData.js</summary>
 
 **Chunk 1**
 Lines added: 202, lines removed: 1
@@ -5133,7 +5133,7 @@ Lines added: 202, lines removed: 1
 +  */
 + export function prepareAlbumDataForLLM(data) {
 +   if (!data || data.length === 0) {
-+     return &#39;Keine Albendaten verfügbar.&#39;;
++     return 'Keine Albendaten verfügbar.';
 +   }
 +   
 +   // Statistiken berechnen
@@ -5173,9 +5173,9 @@ Lines added: 202, lines removed: 1
 +   // Statistiken berechnen
 +   const avgNote = notes.length &gt; 0 
 +     ? (notes.reduce((a, b) =&gt; a + b, 0) / notes.length).toFixed(2)
-+     : &#39;0&#39;;
-+   const minNote = notes.length &gt; 0 ? Math.min(...notes).toFixed(2) : &#39;0&#39;;
-+   const maxNote = notes.length &gt; 0 ? Math.max(...notes).toFixed(2) : &#39;0&#39;;
++     : '0';
++   const minNote = notes.length &gt; 0 ? Math.min(...notes).toFixed(2) : '0';
++   const maxNote = notes.length &gt; 0 ? Math.max(...notes).toFixed(2) : '0';
 +   
 +   const yearRange = Array.from(albumsByYear.keys()).sort((a, b) =&gt; a - b);
 +   const minYear = yearRange.length &gt; 0 ? yearRange[0] : null;
@@ -5187,13 +5187,13 @@ Lines added: 202, lines removed: 1
 +     const bandNotes = bandAlbums.map(a =&gt; a.Note).filter(n =&gt; n != null);
 +     const avgBandNote = bandNotes.length &gt; 0
 +       ? (bandNotes.reduce((a, b) =&gt; a + b, 0) / bandNotes.length).toFixed(2)
-+       : &#39;0&#39;;
++       : '0';
 +     return {
 +       Band: band,
 +       AnzahlAlben: bandAlbums.length,
 +       Durchschnittsnote: parseFloat(avgBandNote),
-+       BesteNote: bandNotes.length &gt; 0 ? Math.max(...bandNotes).toFixed(2) : &#39;0&#39;,
-+       SchlechtesteNote: bandNotes.length &gt; 0 ? Math.min(...bandNotes).toFixed(2) : &#39;0&#39;,
++       BesteNote: bandNotes.length &gt; 0 ? Math.max(...bandNotes).toFixed(2) : '0',
++       SchlechtesteNote: bandNotes.length &gt; 0 ? Math.min(...bandNotes).toFixed(2) : '0',
 +       Alben: bandAlbums.sort((a, b) =&gt; (b.Jahr || 0) - (a.Jahr || 0))
 +     };
 +   }).sort((a, b) =&gt; b.Durchschnittsnote - a.Durchschnittsnote);
@@ -5214,7 +5214,7 @@ Lines added: 202, lines removed: 1
 +   dataSummary += &#96;Gesamtstatistik:\n&#96;;
 +   dataSummary += &#96;- Anzahl Alben: ${data.length}\n&#96;;
 +   dataSummary += &#96;- Anzahl Bands: ${bands.size}\n&#96;;
-+   dataSummary += &#96;- Jahr-Spanne: ${minYear || &#39;N/A&#39;} - ${maxYear || &#39;N/A&#39;}\n&#96;;
++   dataSummary += &#96;- Jahr-Spanne: ${minYear || 'N/A'} - ${maxYear || 'N/A'}\n&#96;;
 +   dataSummary += &#96;- Durchschnittsnote: ${avgNote}\n&#96;;
 +   dataSummary += &#96;- Niedrigste Note: ${minNote}\n&#96;;
 +   dataSummary += &#96;- Höchste Note: ${maxNote}\n\n&#96;;
@@ -5227,7 +5227,7 @@ Lines added: 202, lines removed: 1
 +   
 +   dataSummary += &#96;TOP 20 ALBEN (nach Note):\n&#96;;
 +   topAlbums.forEach((album, idx) =&gt; {
-+     dataSummary += &#96;${idx + 1}. ${album.Band} - &quot;${album.Album}&quot; (${album.Jahr || &#39;N/A&#39;}): ${album.Note.toFixed(2)}\n&#96;;
++     dataSummary += &#96;${idx + 1}. ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): ${album.Note.toFixed(2)}\n&#96;;
 +   });
 +   dataSummary += &#96;\n&#96;;
 +   
@@ -5235,7 +5235,7 @@ Lines added: 202, lines removed: 1
 +   bandStats.forEach(stat =&gt; {
 +     dataSummary += &#96;\n${stat.Band} (${stat.AnzahlAlben} Alben, Ø ${stat.Durchschnittsnote}):\n&#96;;
 +     stat.Alben.forEach(album =&gt; {
-+       dataSummary += &#96;  - &quot;${album.Album}&quot; (${album.Jahr || &#39;N/A&#39;}): ${album.Note.toFixed(2)}\n&#96;;
++       dataSummary += &#96;  - "${album.Album}" (${album.Jahr || 'N/A'}): ${album.Note.toFixed(2)}\n&#96;;
 +     });
 +   });
 +   
@@ -5247,7 +5247,7 @@ Lines added: 202, lines removed: 1
 +  */
 + export function createCompactAlbumSummary(data) {
 +   if (!data || data.length === 0) {
-+     return &#39;&#39;;
++     return '';
 +   }
 +   
 +   const bands = new Set();
@@ -5271,14 +5271,14 @@ Lines added: 202, lines removed: 1
 +   
 +   const avgNote = notes.length &gt; 0 
 +     ? (notes.reduce((a, b) =&gt; a + b, 0) / notes.length).toFixed(2)
-+     : &#39;0&#39;;
++     : '0';
 +   
 +   const bandStats = Array.from(bands).map(band =&gt; {
 +     const bandAlbums = albumsByBand.get(band) || [];
 +     const bandNotes = bandAlbums.map(a =&gt; a.Note).filter(n =&gt; n != null);
 +     const avgBandNote = bandNotes.length &gt; 0
 +       ? (bandNotes.reduce((a, b) =&gt; a + b, 0) / bandNotes.length).toFixed(2)
-+       : &#39;0&#39;;
++       : '0';
 +     return {
 +       Band: band,
 +       AnzahlAlben: bandAlbums.length,
@@ -5292,7 +5292,7 @@ Lines added: 202, lines removed: 1
 +   // Top 15 Bands mit ihren Alben
 +   bandStats.slice(0, 15).forEach(stat =&gt; {
 +     summary += &#96;\n${stat.Band} (${stat.AnzahlAlben} Alben, Ø ${stat.Durchschnittsnote}): &#96;;
-+     const albumList = stat.Alben.map(a =&gt; &#96;&quot;${a.Album}&quot; (${a.Jahr || &#39;?&#39;}, ${a.Note.toFixed(2)})&#96;).join(&#39;, &#39;);
++     const albumList = stat.Alben.map(a =&gt; &#96;"${a.Album}" (${a.Jahr || '?'}, ${a.Note.toFixed(2)})&#96;).join(', ');
 +     summary += albumList;
 +   });
 +   
@@ -5336,7 +5336,7 @@ Lines added: 202, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 12, lines removed: 2
@@ -5363,7 +5363,7 @@ Lines added: 12, lines removed: 2
 -   if (SYSTEM_PROMPT_CACHE) {
 -     return SYSTEM_PROMPT_CACHE;
 +   if (SYSTEM_PROMPT_CACHE &amp;&amp; ALBUM_DATA_SUMMARY) {
-+     return SYSTEM_PROMPT_CACHE + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY;
++     return SYSTEM_PROMPT_CACHE + '\n\n' + ALBUM_DATA_SUMMARY;
     }
     
 ```
@@ -5373,21 +5373,21 @@ Lines added: 8, lines removed: 1
 
 ```diff
 @@ -96,9 +106,16 @@
-        .replace(/\n{3,}/g, &#39;\n\n&#39;) // Mehrfache Leerzeilen reduzieren
+        .replace(/\n{3,}/g, '\n\n') // Mehrfache Leerzeilen reduzieren
         .trim();
 +     
 +     // Füge Album-Daten hinzu, falls verfügbar
 +     if (ALBUM_DATA_SUMMARY) {
-+       return SYSTEM_PROMPT_CACHE + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY;
++       return SYSTEM_PROMPT_CACHE + '\n\n' + ALBUM_DATA_SUMMARY;
 +     }
 +     
       return SYSTEM_PROMPT_CACHE;
     } catch (error) {
-      console.error(&#39;Fehler beim Laden des System-Prompts:&#39;, error);
+      console.error('Fehler beim Laden des System-Prompts:', error);
       // Fallback-Prompt
--     return &#39;Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.&#39;;
-+     const fallback = &#39;Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.&#39;;
-+     return ALBUM_DATA_SUMMARY ? fallback + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY : fallback;
+-     return 'Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.';
++     const fallback = 'Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.';
++     return ALBUM_DATA_SUMMARY ? fallback + '\n\n' + ALBUM_DATA_SUMMARY : fallback;
     }
   }
 ```
@@ -5400,7 +5400,7 @@ Lines added: 8, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 10, lines removed: 2
@@ -5409,9 +5409,9 @@ Lines added: 10, lines removed: 2
 @@ -2,13 +2,21 @@
    * Chat-Komponente
    */
-- import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG } from &#39;./chatConfig.js&#39;;
-+ import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG, setAlbumDataSummary } from &#39;./chatConfig.js&#39;;
-+ import { createCompactAlbumSummary, findRelevantAlbums } from &#39;./albumData.js&#39;;
+- import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG } from './chatConfig.js';
++ import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG, setAlbumDataSummary } from './chatConfig.js';
++ import { createCompactAlbumSummary, findRelevantAlbums } from './albumData.js';
   
   export class Chat {
 -   constructor(containerEl) {
@@ -5440,7 +5440,7 @@ Lines added: 10, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 13, lines removed: 1
@@ -5451,23 +5451,23 @@ Lines added: 13, lines removed: 1
       const systemPrompt = await loadSystemPrompt();
 +     
 +     // Prüfe, ob relevante Alben für die Nachricht gefunden werden können
-+     let contextData = &#39;&#39;;
++     let contextData = '';
 +     if (this.albumData &amp;&amp; this.albumData.length &gt; 0) {
 +       const relevantAlbums = findRelevantAlbums(this.albumData, userMessage);
 +       if (relevantAlbums.length &gt; 0) {
-+         contextData = &#39;\n\nRELEVANTE ALBENDATEN FÜR DIESE FRAGE:\n&#39;;
++         contextData = '\n\nRELEVANTE ALBENDATEN FÜR DIESE FRAGE:\n';
 +         relevantAlbums.forEach(album =&gt; {
-+           contextData += &#96;- ${album.Band} - &quot;${album.Album}&quot; (${album.Jahr || &#39;N/A&#39;}): Note ${album.Note.toFixed(2)}\n&#96;;
++           contextData += &#96;- ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): Note ${album.Note.toFixed(2)}\n&#96;;
 +         });
 +       }
 +     }
       
       // Nachrichten für API vorbereiten
       const apiMessages = [
--       { role: &#39;system&#39;, content: systemPrompt },
-+       { role: &#39;system&#39;, content: systemPrompt + contextData },
+-       { role: 'system', content: systemPrompt },
++       { role: 'system', content: systemPrompt + contextData },
         ...this.messages.map(msg =&gt; ({
-          role: msg.role === &#39;user&#39; ? &#39;user&#39; : &#39;assistant&#39;,
+          role: msg.role === 'user' ? 'user' : 'assistant',
 ```
 
 </details>
@@ -5478,7 +5478,7 @@ Lines added: 13, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 3
@@ -5495,7 +5495,7 @@ Lines added: 3, lines removed: 3
       
 -     // TODO: API-Key aus Konfiguration oder Eingabe setzen
 +     // API-Key setzen
-      this.chat.setApiKey(&#39;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&#39;);
+      this.chat.setApiKey('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');
     }
 ```
 
@@ -5538,7 +5538,7 @@ Korrigieren eines kleinen Problems beim Caching:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 37, lines removed: 39
@@ -5548,78 +5548,78 @@ Lines added: 37, lines removed: 39
    */
   export async function loadSystemPrompt() {
 -   if (SYSTEM_PROMPT_CACHE &amp;&amp; ALBUM_DATA_SUMMARY) {
--     return SYSTEM_PROMPT_CACHE + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY;
+-     return SYSTEM_PROMPT_CACHE + '\n\n' + ALBUM_DATA_SUMMARY;
 -   }
 -   
 -   try {
--     const response = await fetch(&#39;prompts/system-prompt.md&#39;);
+-     const response = await fetch('prompts/system-prompt.md');
 -     if (!response.ok) {
--       throw new Error(&#39;System-Prompt konnte nicht geladen werden&#39;);
+-       throw new Error('System-Prompt konnte nicht geladen werden');
 -     }
 -     const markdown = await response.text();
 -     // Entferne Markdown-Formatierung für den Prompt
 -     SYSTEM_PROMPT_CACHE = markdown
--       .split(&#39;\n&#39;)
+-       .split('\n')
 -       .map(line =&gt; {
 -         // Überschriften entfernen
--         if (line.match(/^#+\s/)) return &#39;&#39;;
+-         if (line.match(/^#+\s/)) return '';
 -         // Fett-Formatierung entfernen, aber Text behalten
--         line = line.replace(/\*\*(.*?)\*\*/g, &#39;$1&#39;);
+-         line = line.replace(/\*\*(.*?)\*\*/g, '$1');
 -         // Listen-Markierungen entfernen, aber Text behalten
--         line = line.replace(/^-\s+/, &#39;&#39;);
+-         line = line.replace(/^-\s+/, '');
 -         return line.trim();
 -       })
 -       .filter(line =&gt; line.length &gt; 0) // Leere Zeilen entfernen
--       .join(&#39;\n&#39;)
--       .replace(/\n{3,}/g, &#39;\n\n&#39;) // Mehrfache Leerzeilen reduzieren
+-       .join('\n')
+-       .replace(/\n{3,}/g, '\n\n') // Mehrfache Leerzeilen reduzieren
 -       .trim();
 -     
 -     // Füge Album-Daten hinzu, falls verfügbar
 -     if (ALBUM_DATA_SUMMARY) {
--       return SYSTEM_PROMPT_CACHE + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY;
+-       return SYSTEM_PROMPT_CACHE + '\n\n' + ALBUM_DATA_SUMMARY;
 -     }
 -     
 -     return SYSTEM_PROMPT_CACHE;
 -   } catch (error) {
--     console.error(&#39;Fehler beim Laden des System-Prompts:&#39;, error);
+-     console.error('Fehler beim Laden des System-Prompts:', error);
 -     // Fallback-Prompt
--     const fallback = &#39;Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.&#39;;
--     return ALBUM_DATA_SUMMARY ? fallback + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY : fallback;
+-     const fallback = 'Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.';
+-     return ALBUM_DATA_SUMMARY ? fallback + '\n\n' + ALBUM_DATA_SUMMARY : fallback;
 -   }
 +   // Lade Markdown-Prompt nur einmal
 +   if (!SYSTEM_PROMPT_CACHE) {
 +     try {
-+       const response = await fetch(&#39;prompts/system-prompt.md&#39;);
++       const response = await fetch('prompts/system-prompt.md');
 +       if (!response.ok) {
-+         throw new Error(&#39;System-Prompt konnte nicht geladen werden&#39;);
++         throw new Error('System-Prompt konnte nicht geladen werden');
 +       }
 +       const markdown = await response.text();
 +       // Entferne Markdown-Formatierung für den Prompt
 +       SYSTEM_PROMPT_CACHE = markdown
-+         .split(&#39;\n&#39;)
++         .split('\n')
 +         .map(line =&gt; {
 +           // Überschriften entfernen
-+           if (line.match(/^#+\s/)) return &#39;&#39;;
++           if (line.match(/^#+\s/)) return '';
 +           // Fett-Formatierung entfernen, aber Text behalten
-+           line = line.replace(/\*\*(.*?)\*\*/g, &#39;$1&#39;);
++           line = line.replace(/\*\*(.*?)\*\*/g, '$1');
 +           // Listen-Markierungen entfernen, aber Text behalten
-+           line = line.replace(/^-\s+/, &#39;&#39;);
++           line = line.replace(/^-\s+/, '');
 +           return line.trim();
 +         })
 +         .filter(line =&gt; line.length &gt; 0) // Leere Zeilen entfernen
-+         .join(&#39;\n&#39;)
-+         .replace(/\n{3,}/g, &#39;\n\n&#39;) // Mehrfache Leerzeilen reduzieren
++         .join('\n')
++         .replace(/\n{3,}/g, '\n\n') // Mehrfache Leerzeilen reduzieren
 +         .trim();
 +     } catch (error) {
-+       console.error(&#39;Fehler beim Laden des System-Prompts:&#39;, error);
++       console.error('Fehler beim Laden des System-Prompts:', error);
 +       // Fallback-Prompt
-+       SYSTEM_PROMPT_CACHE = &#39;Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.&#39;;
++       SYSTEM_PROMPT_CACHE = 'Du bist ein hilfreicher, freundlicher und intellektuell anspruchsvoller Assistent. Antworte immer auf Deutsch, sei hilfreich und respektvoll.';
 +     }
 +   }
 +   
 +   // Füge Album-Daten hinzu, falls verfügbar
 +   if (ALBUM_DATA_SUMMARY) {
-+     return SYSTEM_PROMPT_CACHE + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY;
++     return SYSTEM_PROMPT_CACHE + '\n\n' + ALBUM_DATA_SUMMARY;
 +   }
 +   
 +   return SYSTEM_PROMPT_CACHE;
@@ -5635,7 +5635,7 @@ Lines added: 37, lines removed: 39
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 2
@@ -5728,7 +5728,7 @@ Die aktuelle Lösung ist unzureichend. Diskutiere sinnvolle technische Ansätze:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: wc -l /Users/rstockm/Documents/GitHub/testabend/public/data/alben.json</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: wc -l /Users/rstockm/Documents/GitHub/testabend/public/data/alben.json</summary>
 
 ```bash
 wc -l /Users/rstockm/Documents/GitHub/testabend/public/data/alben.json
@@ -5781,7 +5781,7 @@ Diskutiere technische Ansätze für den Zugriff auf alle Albendaten:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); print(f'Alben: {len(data)}'); print(f'Größe JSON (MB): {len(json.dumps(data)) / 1024 / 1024:.2f}'); print(f'Geschätzte Tokens (~4 chars/token): {len(json.dumps(data)) / 4:.0f}')"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); print(f'Alben: {len(data)}'); print(f'Größe JSON (MB): {len(json.dumps(data)) / 1024 / 1024:.2f}'); print(f'Geschätzte Tokens (~4 chars/token): {len(json.dumps(data)) / 4:.0f}')"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); print(f'Alben: {len(data)}'); print(f'Größe JSON (MB): {len(json.dumps(data)) / 1024 / 1024:.2f}'); print(f'Geschätzte Tokens (~4 chars/token): {len(json.dumps(data)) / 4:.0f}')"
@@ -5800,7 +5800,7 @@ Geschätzte Tokens (~4 chars/token): 88102
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/TECHNISCHE_ANSAETZE.md</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/TECHNISCHE_ANSAETZE.md</summary>
 
 **Chunk 1**
 Lines added: 262, lines removed: 1
@@ -5864,14 +5864,14 @@ Lines added: 262, lines removed: 1
 + &#96;&#96;&#96;javascript
 + // LLM kann diese Funktionen aufrufen:
 + {
-+   &quot;name&quot;: &quot;searchAlbums&quot;,
-+   &quot;description&quot;: &quot;Suche Alben nach Band, Album, Jahr oder Notenbereich&quot;,
-+   &quot;parameters&quot;: {
-+     &quot;band&quot;: &quot;string (optional)&quot;,
-+     &quot;album&quot;: &quot;string (optional)&quot;, 
-+     &quot;year&quot;: &quot;number (optional)&quot;,
-+     &quot;minNote&quot;: &quot;number (optional)&quot;,
-+     &quot;maxNote&quot;: &quot;number (optional)&quot;
++   "name": "searchAlbums",
++   "description": "Suche Alben nach Band, Album, Jahr oder Notenbereich",
++   "parameters": {
++     "band": "string (optional)",
++     "album": "string (optional)", 
++     "year": "number (optional)",
++     "minNote": "number (optional)",
++     "maxNote": "number (optional)"
 +   }
 + }
 + &#96;&#96;&#96;
@@ -5954,38 +5954,38 @@ Lines added: 262, lines removed: 1
 +    &#96;&#96;&#96;javascript
 +    const functions = [
 +      {
-+        name: &quot;searchAlbums&quot;,
-+        description: &quot;Suche Alben nach verschiedenen Kriterien&quot;,
++        name: "searchAlbums",
++        description: "Suche Alben nach verschiedenen Kriterien",
 +        parameters: {
-+          type: &quot;object&quot;,
++          type: "object",
 +          properties: {
-+            band: { type: &quot;string&quot;, description: &quot;Band-Name (teilweise oder vollständig)&quot; },
-+            album: { type: &quot;string&quot;, description: &quot;Album-Name (teilweise oder vollständig)&quot; },
-+            year: { type: &quot;number&quot;, description: &quot;Erscheinungsjahr&quot; },
-+            minNote: { type: &quot;number&quot;, description: &quot;Mindestnote&quot; },
-+            maxNote: { type: &quot;number&quot;, description: &quot;Maximalnote&quot; },
-+            limit: { type: &quot;number&quot;, description: &quot;Maximale Anzahl Ergebnisse&quot;, default: 50 }
++            band: { type: "string", description: "Band-Name (teilweise oder vollständig)" },
++            album: { type: "string", description: "Album-Name (teilweise oder vollständig)" },
++            year: { type: "number", description: "Erscheinungsjahr" },
++            minNote: { type: "number", description: "Mindestnote" },
++            maxNote: { type: "number", description: "Maximalnote" },
++            limit: { type: "number", description: "Maximale Anzahl Ergebnisse", default: 50 }
 +          }
 +        }
 +      },
 +      {
-+        name: &quot;getBandStats&quot;,
-+        description: &quot;Hole Statistiken für eine bestimmte Band&quot;,
++        name: "getBandStats",
++        description: "Hole Statistiken für eine bestimmte Band",
 +        parameters: {
-+          type: &quot;object&quot;,
++          type: "object",
 +          properties: {
-+            band: { type: &quot;string&quot;, required: true }
++            band: { type: "string", required: true }
 +          }
 +        }
 +      },
 +      {
-+        name: &quot;getTopAlbums&quot;,
-+        description: &quot;Hole die besten Alben nach Note&quot;,
++        name: "getTopAlbums",
++        description: "Hole die besten Alben nach Note",
 +        parameters: {
-+          type: &quot;object&quot;,
++          type: "object",
 +          properties: {
-+            limit: { type: &quot;number&quot;, default: 20 },
-+            year: { type: &quot;number&quot;, description: &quot;Optional: Filter nach Jahr&quot; }
++            limit: { type: "number", default: 20 },
++            year: { type: "number", description: "Optional: Filter nach Jahr" }
 +          }
 +        }
 +      }
@@ -5996,11 +5996,11 @@ Lines added: 262, lines removed: 1
 +    &#96;&#96;&#96;javascript
 +    async function executeFunction(name, args) {
 +      switch(name) {
-+        case &quot;searchAlbums&quot;:
++        case "searchAlbums":
 +          return searchAlbumsInData(data, args);
-+        case &quot;getBandStats&quot;:
++        case "getBandStats":
 +          return getBandStatistics(data, args.band);
-+        case &quot;getTopAlbums&quot;:
++        case "getTopAlbums":
 +          return getTopAlbumsByNote(data, args.limit, args.year);
 +      }
 +    }
@@ -6009,12 +6009,12 @@ Lines added: 262, lines removed: 1
 + 3. **API-Request mit Function Calling**:
 +    &#96;&#96;&#96;javascript
 +    const response = await fetch(OPENROUTER_API, {
-+      method: &#39;POST&#39;,
++      method: 'POST',
 +      body: JSON.stringify({
-+        model: &#39;anthropic/claude-3.5-sonnet&#39;,
++        model: 'anthropic/claude-3.5-sonnet',
 +        messages: [...],
 +        tools: functions, // Function definitions
-+        tool_choice: &quot;auto&quot; // LLM entscheidet selbst
++        tool_choice: "auto" // LLM entscheidet selbst
 +      })
 +    });
 +    &#96;&#96;&#96;
@@ -6044,15 +6044,15 @@ Lines added: 262, lines removed: 1
 + ### Beispiel für komprimierte Daten:
 + &#96;&#96;&#96;
 + TAYLOR SWIFT: 
-+ - &quot;1989&quot; (2014): 3.85
-+ - &quot;Reputation&quot; (2017): 3.72
-+ - &quot;Lover&quot; (2019): 3.68
++ - "1989" (2014): 3.85
++ - "Reputation" (2017): 3.72
++ - "Lover" (2019): 3.68
 + ...
 + &#96;&#96;&#96;
 + 
 + Statt:
 + &#96;&#96;&#96;json
-+ {&quot;Band&quot;: &quot;Taylor Swift&quot;, &quot;Album&quot;: &quot;1989&quot;, &quot;Jahr&quot;: 2014, &quot;Note&quot;: 3.85}
++ {"Band": "Taylor Swift", "Album": "1989", "Jahr": 2014, "Note": 3.85}
 + &#96;&#96;&#96;
 + 
 + ---
@@ -6144,7 +6144,7 @@ Skizziere den RAG-Ansatz mit Embeddings für die Albendaten:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/RAG_ANSATZ.md</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/RAG_ANSATZ.md</summary>
 
 **Chunk 1**
 Lines added: 507, lines removed: 1
@@ -6167,7 +6167,7 @@ Lines added: 507, lines removed: 1
 + &#96;&#96;&#96;
 + ┌─────────────────┐
 + │  User Query     │
-+ │  &quot;Taylor Swift&quot; │
++ │  "Taylor Swift" │
 + └────────┬────────┘
 +          │
 +          ▼
@@ -6210,7 +6210,7 @@ Lines added: 507, lines removed: 1
 +  * Erstellt einen Text-String für ein Album (für Embedding)
 +  */
 + function createAlbumText(album) {
-+   return &#96;${album.Band} - ${album.Album} (${album.Jahr || &#39;Unbekannt&#39;}) - Note: ${album.Note}&#96;;
++   return &#96;${album.Band} - ${album.Album} (${album.Jahr || 'Unbekannt'}) - Note: ${album.Note}&#96;;
 + }
 + 
 + /**
@@ -6224,14 +6224,14 @@ Lines added: 507, lines removed: 1
 +     const batch = albums.slice(i, i + batchSize);
 +     const texts = batch.map(createAlbumText);
 +     
-+     const response = await fetch(&#39;https://openrouter.ai/api/v1/embeddings&#39;, {
-+       method: &#39;POST&#39;,
++     const response = await fetch('https://openrouter.ai/api/v1/embeddings', {
++       method: 'POST',
 +       headers: {
-+         &#39;Authorization&#39;: &#96;Bearer ${apiKey}&#96;,
-+         &#39;Content-Type&#39;: &#39;application/json&#39;
++         'Authorization': &#96;Bearer ${apiKey}&#96;,
++         'Content-Type': 'application/json'
 +       },
 +       body: JSON.stringify({
-+         model: &#39;text-embedding-ada-002&#39;, // oder &#39;text-embedding-3-small&#39;
++         model: 'text-embedding-ada-002', // oder 'text-embedding-3-small'
 +         input: texts
 +       })
 +     });
@@ -6259,8 +6259,8 @@ Lines added: 507, lines removed: 1
 + &#96;&#96;&#96;javascript
 + // vectorStore.js
 + 
-+ const DB_NAME = &#39;albumEmbeddings&#39;;
-+ const STORE_NAME = &#39;embeddings&#39;;
++ const DB_NAME = 'albumEmbeddings';
++ const STORE_NAME = 'embeddings';
 + 
 + async function initDB() {
 +   return new Promise((resolve, reject) =&gt; {
@@ -6272,9 +6272,9 @@ Lines added: 507, lines removed: 1
 +     request.onupgradeneeded = (event) =&gt; {
 +       const db = event.target.result;
 +       if (!db.objectStoreNames.contains(STORE_NAME)) {
-+         const store = db.createObjectStore(STORE_NAME, { keyPath: &#39;index&#39; });
-+         store.createIndex(&#39;band&#39;, &#39;album.Band&#39;, { unique: false });
-+         store.createIndex(&#39;year&#39;, &#39;album.Jahr&#39;, { unique: false });
++         const store = db.createObjectStore(STORE_NAME, { keyPath: 'index' });
++         store.createIndex('band', 'album.Band', { unique: false });
++         store.createIndex('year', 'album.Jahr', { unique: false });
 +       }
 +     };
 +   });
@@ -6282,7 +6282,7 @@ Lines added: 507, lines removed: 1
 + 
 + async function saveEmbeddings(embeddings) {
 +   const db = await initDB();
-+   const transaction = db.transaction([STORE_NAME], &#39;readwrite&#39;);
++   const transaction = db.transaction([STORE_NAME], 'readwrite');
 +   const store = transaction.objectStore(STORE_NAME);
 +   
 +   for (const item of embeddings) {
@@ -6297,7 +6297,7 @@ Lines added: 507, lines removed: 1
 + 
 + async function loadEmbeddings() {
 +   const db = await initDB();
-+   const transaction = db.transaction([STORE_NAME], &#39;readonly&#39;);
++   const transaction = db.transaction([STORE_NAME], 'readonly');
 +   const store = transaction.objectStore(STORE_NAME);
 +   
 +   return new Promise((resolve, reject) =&gt; {
@@ -6352,7 +6352,7 @@ Lines added: 507, lines removed: 1
 +  */
 + function cosineSimilarity(vecA, vecB) {
 +   if (vecA.length !== vecB.length) {
-+     throw new Error(&#39;Vektoren müssen gleiche Länge haben&#39;);
++     throw new Error('Vektoren müssen gleiche Länge haben');
 +   }
 +   
 +   let dotProduct = 0;
@@ -6397,18 +6397,18 @@ Lines added: 507, lines removed: 1
 +   constructor(apiKey, vectorStore) {
 +     this.apiKey = apiKey;
 +     this.vectorStore = vectorStore;
-+     this.embeddingModel = &#39;text-embedding-ada-002&#39;; // oder &#39;text-embedding-3-small&#39;
++     this.embeddingModel = 'text-embedding-ada-002'; // oder 'text-embedding-3-small'
 +   }
 +   
 +   /**
 +    * Erstellt Embedding für eine User-Query
 +    */
 +   async embedQuery(query) {
-+     const response = await fetch(&#39;https://openrouter.ai/api/v1/embeddings&#39;, {
-+       method: &#39;POST&#39;,
++     const response = await fetch('https://openrouter.ai/api/v1/embeddings', {
++       method: 'POST',
 +       headers: {
-+         &#39;Authorization&#39;: &#96;Bearer ${this.apiKey}&#96;,
-+         &#39;Content-Type&#39;: &#39;application/json&#39;
++         'Authorization': &#96;Bearer ${this.apiKey}&#96;,
++         'Content-Type': 'application/json'
 +       },
 +       body: JSON.stringify({
 +         model: this.embeddingModel,
@@ -6450,13 +6450,13 @@ Lines added: 507, lines removed: 1
 +     }
 +     
 +     // Formatiere relevante Alben als Kontext
-+     let context = &#39;\n\nRELEVANTE ALBENDATEN:\n&#39;;
++     let context = '\n\nRELEVANTE ALBENDATEN:\n';
 +     relevantAlbums.forEach((album, idx) =&gt; {
-+       context += &#96;${idx + 1}. ${album.Band} - &quot;${album.Album}&quot; (${album.Jahr || &#39;N/A&#39;}): Note ${album.Note.toFixed(2)}&#96;;
++       context += &#96;${idx + 1}. ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): Note ${album.Note.toFixed(2)}&#96;;
 +       if (album.similarity) {
 +         context += &#96; [Relevanz: ${(album.similarity * 100).toFixed(1)}%]&#96;;
 +       }
-+       context += &#39;\n&#39;;
++       context += '\n';
 +     });
 +     
 +     return userQuery + context;
@@ -6469,8 +6469,8 @@ Lines added: 507, lines removed: 1
 + &#96;&#96;&#96;javascript
 + // chat.js (angepasst)
 + 
-+ import { RAGService } from &#39;./ragService.js&#39;;
-+ import { InMemoryVectorStore } from &#39;./vectorStore.js&#39;;
++ import { RAGService } from './ragService.js';
++ import { InMemoryVectorStore } from './vectorStore.js';
 + 
 + export class Chat {
 +   constructor(containerEl, albumData = null, apiKey = null) {
@@ -6501,16 +6501,16 @@ Lines added: 507, lines removed: 1
 +     if (cachedEmbeddings &amp;&amp; cachedEmbeddings.length === this.albumData.length) {
 +       // Embeddings bereits vorhanden
 +       this.vectorStore.embeddings = cachedEmbeddings;
-+       console.log(&#39;Embeddings aus Cache geladen&#39;);
++       console.log('Embeddings aus Cache geladen');
 +     } else {
 +       // Embeddings generieren (einmalig)
-+       console.log(&#39;Generiere Embeddings für alle Alben...&#39;);
++       console.log('Generiere Embeddings für alle Alben...');
 +       const embeddings = await generateAlbumEmbeddings(this.albumData, this.apiKey);
 +       this.vectorStore.embeddings = embeddings;
 +       
 +       // Cache speichern
 +       await this.saveCachedEmbeddings(embeddings);
-+       console.log(&#39;Embeddings generiert und gespeichert&#39;);
++       console.log('Embeddings generiert und gespeichert');
 +     }
 +   }
 +   
@@ -6518,17 +6518,17 @@ Lines added: 507, lines removed: 1
 +    * Sendet Nachricht mit RAG-Enrichment
 +    */
 +   async sendMessage() {
-+     const input = document.getElementById(&#39;chat-input&#39;);
++     const input = document.getElementById('chat-input');
 +     if (!input) return;
 +     
 +     const userMessage = input.value.trim();
 +     if (!userMessage || this.isLoading) return;
 +     
 +     // User-Nachricht hinzufügen
-+     this.addMessage(&#39;user&#39;, userMessage);
++     this.addMessage('user', userMessage);
 +     
-+     input.value = &#39;&#39;;
-+     input.style.height = &#39;auto&#39;;
++     input.value = '';
++     input.style.height = 'auto';
 +     this.setLoading(true);
 +     
 +     try {
@@ -6540,10 +6540,10 @@ Lines added: 507, lines removed: 1
 +       
 +       // API-Aufruf mit erweitertem Kontext
 +       const response = await this.callOpenRouterAPI(enrichedQuery);
-+       this.addMessage(&#39;assistant&#39;, response);
++       this.addMessage('assistant', response);
 +     } catch (error) {
-+       console.error(&#39;Fehler:&#39;, error);
-+       this.addMessage(&#39;assistant&#39;, &#39;Entschuldigung, es ist ein Fehler aufgetreten.&#39;);
++       console.error('Fehler:', error);
++       this.addMessage('assistant', 'Entschuldigung, es ist ein Fehler aufgetreten.');
 +     } finally {
 +       this.setLoading(false);
 +     }
@@ -6578,7 +6578,7 @@ Lines added: 507, lines removed: 1
 + ⚠️ **Initiale Kosten**: Embedding-Generation einmalig nötig
 + ⚠️ **Komplexität**: Erfordert Embedding-API
 + ⚠️ **Latenz**: Query-Embedding benötigt API-Call (~100-200ms)
-+ ⚠️ **Exakte Matches**: Kann exakte Matches verpassen (z.B. &quot;Taylor Swift&quot; findet auch ähnliche Pop-Artists)
++ ⚠️ **Exakte Matches**: Kann exakte Matches verpassen (z.B. "Taylor Swift" findet auch ähnliche Pop-Artists)
 + 
 + ## Optimierungen
 + 
@@ -6617,8 +6617,8 @@ Lines added: 507, lines removed: 1
 + &#96;&#96;&#96;javascript
 + // Mehrere Queries gleichzeitig embedden
 + async function embedMultipleQueries(queries) {
-+   const response = await fetch(&#39;https://openrouter.ai/api/v1/embeddings&#39;, {
-+     method: &#39;POST&#39;,
++   const response = await fetch('https://openrouter.ai/api/v1/embeddings', {
++     method: 'POST',
 +     body: JSON.stringify({
 +       model: this.embeddingModel,
 +       input: queries // Array von Queries
@@ -6645,15 +6645,15 @@ Lines added: 507, lines removed: 1
 + // embeddings.json (vorgefertigt)
 + [
 +   {
-+     &quot;album&quot;: { &quot;Band&quot;: &quot;Taylor Swift&quot;, &quot;Album&quot;: &quot;1989&quot;, &quot;Jahr&quot;: 2014, &quot;Note&quot;: 3.85 },
-+     &quot;embedding&quot;: [0.123, 0.456, ...], // 1536-dim Vektor
-+     &quot;index&quot;: 0
++     "album": { "Band": "Taylor Swift", "Album": "1989", "Jahr": 2014, "Note": 3.85 },
++     "embedding": [0.123, 0.456, ...], // 1536-dim Vektor
++     "index": 0
 +   },
 +   ...
 + ]
 + 
 + // Beim Laden der App:
-+ await vectorStore.loadFromJSON(&#39;data/embeddings.json&#39;);
++ await vectorStore.loadFromJSON('data/embeddings.json');
 + &#96;&#96;&#96;
 + 
 + **Vorteil**: Keine API-Calls beim Setup, sofort verfügbar
@@ -6901,7 +6901,7 @@ Implementiere den RAG-Ansatz mit vorab generierten Embeddings:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
 
 **Chunk 1**
 Lines added: 167, lines removed: 1
@@ -6920,25 +6920,25 @@ Lines added: 167, lines removed: 1
 +  *   OPENROUTER_API_KEY=your_key node scripts/generate_embeddings.js
 +  */
 + 
-+ import fs from &#39;fs&#39;;
-+ import path from &#39;path&#39;;
-+ import { fileURLToPath } from &#39;url&#39;;
++ import fs from 'fs';
++ import path from 'path';
++ import { fileURLToPath } from 'url';
 + 
 + const __filename = fileURLToPath(import.meta.url);
 + const __dirname = path.dirname(__filename);
 + 
 + // Konfiguration
-+ const DEFAULT_API_KEY = process.env.OPENROUTER_API_KEY || &#39;&#39;;
-+ const DEFAULT_OUTPUT = path.join(__dirname, &#39;../public/data/embeddings.json&#39;);
-+ const DEFAULT_INPUT = path.join(__dirname, &#39;../public/data/alben.json&#39;);
-+ const EMBEDDING_MODEL = &#39;text-embedding-3-small&#39;; // Günstiger als ada-002
++ const DEFAULT_API_KEY = process.env.OPENROUTER_API_KEY || '';
++ const DEFAULT_OUTPUT = path.join(__dirname, '../public/data/embeddings.json');
++ const DEFAULT_INPUT = path.join(__dirname, '../public/data/alben.json');
++ const EMBEDDING_MODEL = 'text-embedding-3-small'; // Günstiger als ada-002
 + const BATCH_SIZE = 100; // OpenRouter erlaubt Batches
 + 
 + /**
 +  * Erstellt einen Text-String für ein Album (für Embedding)
 +  */
 + function createAlbumText(album) {
-+   return &#96;${album.Band} - ${album.Album} (${album.Jahr || &#39;Unbekannt&#39;}) - Note: ${album.Note}&#96;;
++   return &#96;${album.Band} - ${album.Album} (${album.Jahr || 'Unbekannt'}) - Note: ${album.Note}&#96;;
 + }
 + 
 + /**
@@ -6947,13 +6947,13 @@ Lines added: 167, lines removed: 1
 + async function generateBatchEmbeddings(batch, apiKey) {
 +   const texts = batch.map(createAlbumText);
 +   
-+   const response = await fetch(&#39;https://openrouter.ai/api/v1/embeddings&#39;, {
-+     method: &#39;POST&#39;,
++   const response = await fetch('https://openrouter.ai/api/v1/embeddings', {
++     method: 'POST',
 +     headers: {
-+       &#39;Authorization&#39;: &#96;Bearer ${apiKey}&#96;,
-+       &#39;Content-Type&#39;: &#39;application/json&#39;,
-+       &#39;HTTP-Referer&#39;: &#39;https://github.com/testabend&#39;,
-+       &#39;X-Title&#39;: &#39;Album Embeddings Generator&#39;
++       'Authorization': &#96;Bearer ${apiKey}&#96;,
++       'Content-Type': 'application/json',
++       'HTTP-Referer': 'https://github.com/testabend',
++       'X-Title': 'Album Embeddings Generator'
 +     },
 +     body: JSON.stringify({
 +       model: EMBEDDING_MODEL,
@@ -7033,10 +7033,10 @@ Lines added: 167, lines removed: 1
 +   let outputPath = DEFAULT_OUTPUT;
 +   
 +   for (let i = 0; i &lt; args.length; i++) {
-+     if (args[i] === &#39;--api-key&#39; &amp;&amp; args[i + 1]) {
++     if (args[i] === '--api-key' &amp;&amp; args[i + 1]) {
 +       apiKey = args[i + 1];
 +       i++;
-+     } else if (args[i] === &#39;--output&#39; &amp;&amp; args[i + 1]) {
++     } else if (args[i] === '--output' &amp;&amp; args[i + 1]) {
 +       outputPath = path.resolve(args[i + 1]);
 +       i++;
 +     }
@@ -7044,9 +7044,9 @@ Lines added: 167, lines removed: 1
 +   
 +   // Validierung
 +   if (!apiKey) {
-+     console.error(&#39;❌ Fehler: OpenRouter API Key fehlt!&#39;);
-+     console.error(&#39;   Nutze: --api-key YOUR_KEY&#39;);
-+     console.error(&#39;   Oder: OPENROUTER_API_KEY=your_key node scripts/generate_embeddings.js&#39;);
++     console.error('❌ Fehler: OpenRouter API Key fehlt!');
++     console.error('   Nutze: --api-key YOUR_KEY');
++     console.error('   Oder: OPENROUTER_API_KEY=your_key node scripts/generate_embeddings.js');
 +     process.exit(1);
 +   }
 +   
@@ -7057,22 +7057,22 @@ Lines added: 167, lines removed: 1
 +   
 +   // Lade Alben-Daten
 +   console.log(&#96;📂 Lade Alben-Daten aus ${DEFAULT_INPUT}...&#96;);
-+   const albumsData = JSON.parse(fs.readFileSync(DEFAULT_INPUT, &#39;utf-8&#39;));
++   const albumsData = JSON.parse(fs.readFileSync(DEFAULT_INPUT, 'utf-8'));
 +   console.log(&#96;✅ ${albumsData.length} Alben geladen\n&#96;);
 +   
 +   // Generiere Embeddings
 +   try {
 +     await generateAllEmbeddings(albumsData, apiKey, outputPath);
-+     console.log(&#39;🎉 Embedding-Generierung erfolgreich abgeschlossen!&#39;);
++     console.log('🎉 Embedding-Generierung erfolgreich abgeschlossen!');
 +   } catch (error) {
-+     console.error(&#39;\n❌ Fehler bei der Embedding-Generierung:&#39;, error.message);
++     console.error('\n❌ Fehler bei der Embedding-Generierung:', error.message);
 +     process.exit(1);
 +   }
 + }
 + 
 + // Starte Script
 + main().catch(error =&gt; {
-+   console.error(&#39;Unerwarteter Fehler:&#39;, error);
++   console.error('Unerwarteter Fehler:', error);
 +   process.exit(1);
 + });
 + 
@@ -7086,7 +7086,7 @@ Lines added: 167, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/vectorStore.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/vectorStore.js</summary>
 
 **Chunk 1**
 Lines added: 166, lines removed: 1
@@ -7140,7 +7140,7 @@ Lines added: 166, lines removed: 1
 +       this.initialized = true;
 +       return this.embeddings.length;
 +     } catch (error) {
-+       console.error(&#39;Fehler beim Laden der Embeddings:&#39;, error);
++       console.error('Fehler beim Laden der Embeddings:', error);
 +       throw error;
 +     }
 +   }
@@ -7164,7 +7164,7 @@ Lines added: 166, lines removed: 1
 +  * IndexedDB Vector Store (für persistente Speicherung)
 +  */
 + export class IndexedDBVectorStore {
-+   constructor(dbName = &#39;albumEmbeddings&#39;, storeName = &#39;embeddings&#39;) {
++   constructor(dbName = 'albumEmbeddings', storeName = 'embeddings') {
 +     this.dbName = dbName;
 +     this.storeName = storeName;
 +     this.db = null;
@@ -7187,9 +7187,9 @@ Lines added: 166, lines removed: 1
 +       request.onupgradeneeded = (event) =&gt; {
 +         const db = event.target.result;
 +         if (!db.objectStoreNames.contains(this.storeName)) {
-+           const store = db.createObjectStore(this.storeName, { keyPath: &#39;index&#39; });
-+           store.createIndex(&#39;band&#39;, &#39;album.Band&#39;, { unique: false });
-+           store.createIndex(&#39;year&#39;, &#39;album.Jahr&#39;, { unique: false });
++           const store = db.createObjectStore(this.storeName, { keyPath: 'index' });
++           store.createIndex('band', 'album.Band', { unique: false });
++           store.createIndex('year', 'album.Jahr', { unique: false });
 +         }
 +       };
 +     });
@@ -7203,7 +7203,7 @@ Lines added: 166, lines removed: 1
 +       await this.init();
 +     }
 +     
-+     const transaction = this.db.transaction([this.storeName], &#39;readwrite&#39;);
++     const transaction = this.db.transaction([this.storeName], 'readwrite');
 +     const store = transaction.objectStore(this.storeName);
 +     
 +     // Lösche alte Daten
@@ -7231,7 +7231,7 @@ Lines added: 166, lines removed: 1
 +       await this.init();
 +     }
 +     
-+     const transaction = this.db.transaction([this.storeName], &#39;readonly&#39;);
++     const transaction = this.db.transaction([this.storeName], 'readonly');
 +     const store = transaction.objectStore(this.storeName);
 +     
 +     return new Promise((resolve, reject) =&gt; {
@@ -7270,7 +7270,7 @@ Lines added: 166, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/vectorSearch.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/vectorSearch.js</summary>
 
 **Chunk 1**
 Lines added: 118, lines removed: 1
@@ -7313,12 +7313,12 @@ Lines added: 118, lines removed: 1
 +  */
 + export function findSimilarAlbums(queryEmbedding, albumEmbeddings, topK = 10, minSimilarity = 0.3) {
 +   if (!queryEmbedding || !Array.isArray(queryEmbedding) || queryEmbedding.length === 0) {
-+     console.warn(&#39;Ungültiges Query-Embedding&#39;);
++     console.warn('Ungültiges Query-Embedding');
 +     return [];
 +   }
 +   
 +   if (!albumEmbeddings || albumEmbeddings.length === 0) {
-+     console.warn(&#39;Keine Album-Embeddings verfügbar&#39;);
++     console.warn('Keine Album-Embeddings verfügbar');
 +     return [];
 +   }
 +   
@@ -7332,7 +7332,7 @@ Lines added: 118, lines removed: 1
 +         index: item.index
 +       };
 +     } catch (error) {
-+       console.warn(&#39;Fehler bei Similarity-Berechnung:&#39;, error);
++       console.warn('Fehler bei Similarity-Berechnung:', error);
 +       return null;
 +     }
 +   }).filter(item =&gt; item !== null);
@@ -7365,7 +7365,7 @@ Lines added: 118, lines removed: 1
 +         album: album,
 +         similarity: 1.0, // Exakte Matches bekommen höchste Similarity
 +         index: idx,
-+         matchType: &#39;exact&#39;
++         matchType: 'exact'
 +       });
 +       seenIndices.add(idx);
 +     }
@@ -7379,7 +7379,7 @@ Lines added: 118, lines removed: 1
 +       if (!seenIndices.has(item.index)) {
 +         results.push({
 +           ...item,
-+           matchType: &#39;semantic&#39;
++           matchType: 'semantic'
 +         });
 +         seenIndices.add(item.index);
 +       }
@@ -7388,8 +7388,8 @@ Lines added: 118, lines removed: 1
 +   
 +   // Sortiere: Exakte Matches zuerst, dann nach Similarity
 +   results.sort((a, b) =&gt; {
-+     if (a.matchType === &#39;exact&#39; &amp;&amp; b.matchType !== &#39;exact&#39;) return -1;
-+     if (a.matchType !== &#39;exact&#39; &amp;&amp; b.matchType === &#39;exact&#39;) return 1;
++     if (a.matchType === 'exact' &amp;&amp; b.matchType !== 'exact') return -1;
++     if (a.matchType !== 'exact' &amp;&amp; b.matchType === 'exact') return 1;
 +     return b.similarity - a.similarity;
 +   });
 +   
@@ -7406,7 +7406,7 @@ Lines added: 118, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 184, lines removed: 1
@@ -7417,14 +7417,14 @@ Lines added: 184, lines removed: 1
 + /**
 +  * RAG Service - Retrieval-Augmented Generation für Albendaten
 +  */
-+ import { findSimilarAlbums, hybridSearch } from &#39;./vectorSearch.js&#39;;
++ import { findSimilarAlbums, hybridSearch } from './vectorSearch.js';
 + 
 + export class RAGService {
 +   constructor(apiKey, vectorStore, albumData) {
 +     this.apiKey = apiKey;
 +     this.vectorStore = vectorStore;
 +     this.albumData = albumData;
-+     this.embeddingModel = &#39;text-embedding-3-small&#39;;
++     this.embeddingModel = 'text-embedding-3-small';
 +     this.queryCache = new Map(); // Cache für Query-Embeddings
 +   }
 +   
@@ -7438,13 +7438,13 @@ Lines added: 184, lines removed: 1
 +     }
 +     
 +     try {
-+       const response = await fetch(&#39;https://openrouter.ai/api/v1/embeddings&#39;, {
-+         method: &#39;POST&#39;,
++       const response = await fetch('https://openrouter.ai/api/v1/embeddings', {
++         method: 'POST',
 +         headers: {
-+           &#39;Authorization&#39;: &#96;Bearer ${this.apiKey}&#96;,
-+           &#39;Content-Type&#39;: &#39;application/json&#39;,
-+           &#39;HTTP-Referer&#39;: window.location.origin,
-+           &#39;X-Title&#39;: &#39;Alben-Dashboard RAG&#39;
++           'Authorization': &#96;Bearer ${this.apiKey}&#96;,
++           'Content-Type': 'application/json',
++           'HTTP-Referer': window.location.origin,
++           'X-Title': 'Alben-Dashboard RAG'
 +         },
 +         body: JSON.stringify({
 +           model: this.embeddingModel,
@@ -7465,7 +7465,7 @@ Lines added: 184, lines removed: 1
 +       
 +       return embedding;
 +     } catch (error) {
-+       console.error(&#39;Fehler beim Erstellen des Query-Embeddings:&#39;, error);
++       console.error('Fehler beim Erstellen des Query-Embeddings:', error);
 +       throw error;
 +     }
 +   }
@@ -7475,7 +7475,7 @@ Lines added: 184, lines removed: 1
 +    */
 +   async retrieveRelevantAlbums(userQuery, topK = 15) {
 +     if (!this.vectorStore.isInitialized()) {
-+       console.warn(&#39;Vector Store nicht initialisiert&#39;);
++       console.warn('Vector Store nicht initialisiert');
 +       return [];
 +     }
 +     
@@ -7492,10 +7492,10 @@ Lines added: 184, lines removed: 1
 +       return similarAlbums.map(item =&gt; ({
 +         ...item.album,
 +         similarity: item.similarity,
-+         matchType: &#39;semantic&#39;
++         matchType: 'semantic'
 +       }));
 +     } catch (error) {
-+       console.error(&#39;Fehler bei der Album-Retrieval:&#39;, error);
++       console.error('Fehler bei der Album-Retrieval:', error);
 +       return [];
 +     }
 +   }
@@ -7505,7 +7505,7 @@ Lines added: 184, lines removed: 1
 +    */
 +   async hybridRetrieve(userQuery, topK = 15) {
 +     if (!this.vectorStore.isInitialized()) {
-+       console.warn(&#39;Vector Store nicht initialisiert&#39;);
++       console.warn('Vector Store nicht initialisiert');
 +       // Fallback: Nur exakte Suche
 +       return this.fallbackExactSearch(userQuery, topK);
 +     }
@@ -7526,7 +7526,7 @@ Lines added: 184, lines removed: 1
 +         matchType: item.matchType
 +       }));
 +     } catch (error) {
-+       console.error(&#39;Fehler bei der Hybrid-Retrieval:&#39;, error);
++       console.error('Fehler bei der Hybrid-Retrieval:', error);
 +       // Fallback: Nur exakte Suche
 +       return this.fallbackExactSearch(userQuery, topK);
 +     }
@@ -7547,7 +7547,7 @@ Lines added: 184, lines removed: 1
 +         results.push({
 +           ...album,
 +           similarity: 1.0,
-+           matchType: &#39;exact&#39;
++           matchType: 'exact'
 +         });
 +       }
 +     });
@@ -7572,15 +7572,15 @@ Lines added: 184, lines removed: 1
 +     }
 +     
 +     // Formatiere relevante Alben als Kontext
-+     let context = &#39;\n\nRELEVANTE ALBENDATEN:\n&#39;;
++     let context = '\n\nRELEVANTE ALBENDATEN:\n';
 +     relevantAlbums.forEach((album, idx) =&gt; {
-+       context += &#96;${idx + 1}. ${album.Band} - &quot;${album.Album}&quot; (${album.Jahr || &#39;N/A&#39;}): Note ${album.Note.toFixed(2)}&#96;;
-+       if (album.similarity &amp;&amp; album.matchType === &#39;semantic&#39;) {
++       context += &#96;${idx + 1}. ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): Note ${album.Note.toFixed(2)}&#96;;
++       if (album.similarity &amp;&amp; album.matchType === 'semantic') {
 +         context += &#96; [Relevanz: ${(album.similarity * 100).toFixed(1)}%]&#96;;
-+       } else if (album.matchType === &#39;exact&#39;) {
++       } else if (album.matchType === 'exact') {
 +         context += &#96; [Exakter Match]&#96;;
 +       }
-+       context += &#39;\n&#39;;
++       context += '\n';
 +     });
 +     
 +     return userQuery + context;
@@ -7626,7 +7626,7 @@ Anpassen der Chat-Komponente für RAG:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 39, lines removed: 9
@@ -7635,11 +7635,11 @@ Lines added: 39, lines removed: 9
 @@ -2,20 +2,50 @@
    * Chat-Komponente
    */
-- import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG, setAlbumDataSummary } from &#39;./chatConfig.js&#39;;
-- import { createCompactAlbumSummary, findRelevantAlbums } from &#39;./albumData.js&#39;;
-+ import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG } from &#39;./chatConfig.js&#39;;
-+ import { InMemoryVectorStore } from &#39;./vectorStore.js&#39;;
-+ import { RAGService } from &#39;./ragService.js&#39;;
+- import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG, setAlbumDataSummary } from './chatConfig.js';
+- import { createCompactAlbumSummary, findRelevantAlbums } from './albumData.js';
++ import { DEFAULT_MODEL, loadSystemPrompt, OPENROUTER_CONFIG } from './chatConfig.js';
++ import { InMemoryVectorStore } from './vectorStore.js';
++ import { RAGService } from './ragService.js';
   
   export class Chat {
 -   constructor(containerEl, albumData = null) {
@@ -7680,14 +7680,14 @@ Lines added: 39, lines removed: 9
 +       this.ragService = new RAGService(apiKey, this.vectorStore, this.albumData);
 +       
 +       // Embeddings aus JSON-Datei laden
-+       console.log(&#39;Lade Album-Embeddings...&#39;);
-+       const count = await this.vectorStore.loadFromJSON(&#39;data/embeddings.json&#39;);
++       console.log('Lade Album-Embeddings...');
++       const count = await this.vectorStore.loadFromJSON('data/embeddings.json');
 +       console.log(&#96;✅ ${count} Embeddings geladen&#96;);
 +       
 +       this.embeddingsLoaded = true;
 +     } catch (error) {
-+       console.error(&#39;Fehler beim Initialisieren von RAG:&#39;, error);
-+       console.warn(&#39;RAG wird deaktiviert, Chat funktioniert ohne semantische Suche&#39;);
++       console.error('Fehler beim Initialisieren von RAG:', error);
++       console.warn('RAG wird deaktiviert, Chat funktioniert ohne semantische Suche');
 +       this.ragService = null;
 +       this.embeddingsLoaded = false;
       }
@@ -7702,7 +7702,7 @@ Lines added: 39, lines removed: 9
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 13, lines removed: 1
@@ -7716,9 +7716,9 @@ Lines added: 13, lines removed: 1
 +       if (this.ragService &amp;&amp; this.embeddingsLoaded) {
 +         try {
 +           enrichedQuery = await this.ragService.enrichQueryWithContext(message, 15, true);
-+           console.log(&#39;RAG: Query mit Kontext erweitert&#39;);
++           console.log('RAG: Query mit Kontext erweitert');
 +         } catch (ragError) {
-+           console.warn(&#39;RAG-Fehler, verwende originale Query:&#39;, ragError);
++           console.warn('RAG-Fehler, verwende originale Query:', ragError);
 +           // Fallback: Verwende originale Query
 +         }
 +       }
@@ -7726,7 +7726,7 @@ Lines added: 13, lines removed: 1
         // OpenRouter API aufrufen
 -       const response = await this.callOpenRouterAPI(message);
 +       const response = await this.callOpenRouterAPI(enrichedQuery);
-        this.addMessage(&#39;assistant&#39;, response);
+        this.addMessage('assistant', response);
       } catch (error) {
 ```
 
@@ -7738,7 +7738,7 @@ Lines added: 13, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 14
@@ -7752,13 +7752,13 @@ Lines added: 3, lines removed: 14
       const systemPrompt = await loadSystemPrompt();
 -     
 -     // Prüfe, ob relevante Alben für die Nachricht gefunden werden können
--     let contextData = &#39;&#39;;
+-     let contextData = '';
 -     if (this.albumData &amp;&amp; this.albumData.length &gt; 0) {
 -       const relevantAlbums = findRelevantAlbums(this.albumData, userMessage);
 -       if (relevantAlbums.length &gt; 0) {
--         contextData = &#39;\n\nRELEVANTE ALBENDATEN FÜR DIESE FRAGE:\n&#39;;
+-         contextData = '\n\nRELEVANTE ALBENDATEN FÜR DIESE FRAGE:\n';
 -         relevantAlbums.forEach(album =&gt; {
--           contextData += &#96;- ${album.Band} - &quot;${album.Album}&quot; (${album.Jahr || &#39;N/A&#39;}): Note ${album.Note.toFixed(2)}\n&#96;;
+-           contextData += &#96;- ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): Note ${album.Note.toFixed(2)}\n&#96;;
 -         });
 -       }
 -     }
@@ -7766,10 +7766,10 @@ Lines added: 3, lines removed: 14
       // Nachrichten für API vorbereiten
 +     // Die userMessage enthält bereits RAG-Kontext, falls verfügbar
       const apiMessages = [
--       { role: &#39;system&#39;, content: systemPrompt + contextData },
-+       { role: &#39;system&#39;, content: systemPrompt },
+-       { role: 'system', content: systemPrompt + contextData },
++       { role: 'system', content: systemPrompt },
         ...this.messages.map(msg =&gt; ({
-          role: msg.role === &#39;user&#39; ? &#39;user&#39; : &#39;assistant&#39;,
+          role: msg.role === 'user' ? 'user' : 'assistant',
 ```
 
 </details>
@@ -7780,7 +7780,7 @@ Lines added: 3, lines removed: 14
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 1
@@ -7809,7 +7809,7 @@ Lines added: 6, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 5, lines removed: 5
@@ -7821,14 +7821,14 @@ Lines added: 5, lines removed: 5
 -     // Chat initialisieren mit Albendaten
 -     this.chat = new Chat(chatContainer, this.data);
 +     // API-Key
-+     const apiKey = &#39;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&#39;;
++     const apiKey = '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';
 +     
 +     // Chat initialisieren mit Albendaten und API-Key (für RAG)
 +     this.chat = new Chat(chatContainer, this.data, apiKey);
       this.chat.render();
 -     
 -     // API-Key setzen
--     this.chat.setApiKey(&#39;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&#39;);
+-     this.chat.setApiKey('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');
     }
     
 ```
@@ -7841,7 +7841,7 @@ Lines added: 5, lines removed: 5
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/README_EMBEDDINGS.md</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/README_EMBEDDINGS.md</summary>
 
 **Chunk 1**
 Lines added: 83, lines removed: 1
@@ -7908,11 +7908,11 @@ Lines added: 83, lines removed: 1
 + 
 + ## Troubleshooting
 + 
-+ ### Fehler: &quot;Embeddings-Datei nicht gefunden&quot;
++ ### Fehler: "Embeddings-Datei nicht gefunden"
 + - Stelle sicher, dass &#96;public/data/embeddings.json&#96; existiert
 + - Führe das Generierungs-Script aus
 + 
-+ ### Fehler: &quot;API Key fehlt&quot;
++ ### Fehler: "API Key fehlt"
 + - Setze &#96;OPENROUTER_API_KEY&#96; Umgebungsvariable
 + - Oder nutze &#96;--api-key&#96; Parameter
 + 
@@ -7982,7 +7982,7 @@ Ausführbarkeit des Scripts sicherstellen und eine kleine Anpassung vornehmen:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
 
 ```bash
 chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js
@@ -8002,7 +8002,7 @@ chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.j
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 8
@@ -8031,7 +8031,7 @@ Lines added: undefined, lines removed: 8
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
@@ -8055,7 +8055,7 @@ Lines added: undefined, lines removed: 5
 -   
 -   // Füge Album-Daten hinzu, falls verfügbar
 -   if (ALBUM_DATA_SUMMARY) {
--     return SYSTEM_PROMPT_CACHE + &#39;\n\n&#39; + ALBUM_DATA_SUMMARY;
+-     return SYSTEM_PROMPT_CACHE + '\n\n' + ALBUM_DATA_SUMMARY;
 -   }
     
     return SYSTEM_PROMPT_CACHE;
@@ -8069,7 +8069,7 @@ Lines added: undefined, lines removed: 5
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/package.json</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/package.json</summary>
 
 **Chunk 1**
 Lines added: 13, lines removed: 1
@@ -8078,16 +8078,16 @@ Lines added: 13, lines removed: 1
 @@ -1,1 +1,13 @@
 - 
 + {
-+   &quot;name&quot;: &quot;testabend&quot;,
-+   &quot;version&quot;: &quot;1.0.0&quot;,
-+   &quot;type&quot;: &quot;module&quot;,
-+   &quot;description&quot;: &quot;Alben-Dashboard mit RAG-Chatbot&quot;,
-+   &quot;scripts&quot;: {
-+     &quot;generate-embeddings&quot;: &quot;node scripts/generate_embeddings.js&quot;
++   "name": "testabend",
++   "version": "1.0.0",
++   "type": "module",
++   "description": "Alben-Dashboard mit RAG-Chatbot",
++   "scripts": {
++     "generate-embeddings": "node scripts/generate_embeddings.js"
 +   },
-+   &quot;keywords&quot;: [],
-+   &quot;author&quot;: &quot;&quot;,
-+   &quot;license&quot;: &quot;ISC&quot;
++   "keywords": [],
++   "author": "",
++   "license": "ISC"
 + }
 + 
 ```
@@ -8190,7 +8190,7 @@ Erstelle ein interaktives Script, das nach dem API-Key fragt:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
 
 **Chunk 1**
 Lines added: 91, lines removed: 1
@@ -8204,19 +8204,19 @@ Lines added: 91, lines removed: 1
 +  * Fragt nach API-Key, falls nicht als Parameter übergeben
 +  */
 + 
-+ import { createInterface } from &#39;readline&#39;;
-+ import fs from &#39;fs&#39;;
-+ import path from &#39;path&#39;;
-+ import { fileURLToPath } from &#39;url&#39;;
++ import { createInterface } from 'readline';
++ import fs from 'fs';
++ import path from 'path';
++ import { fileURLToPath } from 'url';
 + 
 + const __filename = fileURLToPath(import.meta.url);
 + const __dirname = path.dirname(__filename);
 + 
 + // Importiere die Hauptfunktion aus dem anderen Script
-+ import { generateAllEmbeddings, createAlbumText } from &#39;./generate_embeddings.js&#39;;
++ import { generateAllEmbeddings, createAlbumText } from './generate_embeddings.js';
 + 
-+ const DEFAULT_OUTPUT = path.join(__dirname, &#39;../public/data/embeddings.json&#39;);
-+ const DEFAULT_INPUT = path.join(__dirname, &#39;../public/data/alben.json&#39;);
++ const DEFAULT_OUTPUT = path.join(__dirname, '../public/data/embeddings.json');
++ const DEFAULT_INPUT = path.join(__dirname, '../public/data/alben.json');
 + 
 + /**
 +  * Fragt nach API-Key
@@ -8228,7 +8228,7 @@ Lines added: 91, lines removed: 1
 +   });
 +   
 +   return new Promise((resolve) =&gt; {
-+     rl.question(&#39;Bitte gib deinen OpenRouter API Key ein: &#39;, (answer) =&gt; {
++     rl.question('Bitte gib deinen OpenRouter API Key ein: ', (answer) =&gt; {
 +       rl.close();
 +       resolve(answer.trim());
 +     });
@@ -8239,14 +8239,14 @@ Lines added: 91, lines removed: 1
 +  * Hauptfunktion
 +  */
 + async function main() {
-+   console.log(&#39;🎵 Album Embeddings Generator\n&#39;);
++   console.log('🎵 Album Embeddings Generator\n');
 +   
 +   // Prüfe ob Key als Parameter übergeben wurde
-+   let apiKey = process.env.OPENROUTER_API_KEY || &#39;&#39;;
++   let apiKey = process.env.OPENROUTER_API_KEY || '';
 +   
 +   const args = process.argv.slice(2);
 +   for (let i = 0; i &lt; args.length; i++) {
-+     if (args[i] === &#39;--api-key&#39; &amp;&amp; args[i + 1]) {
++     if (args[i] === '--api-key' &amp;&amp; args[i + 1]) {
 +       apiKey = args[i + 1];
 +       i++;
 +     }
@@ -8258,7 +8258,7 @@ Lines added: 91, lines removed: 1
 +   }
 +   
 +   if (!apiKey) {
-+     console.error(&#39;❌ Kein API Key angegeben. Abgebrochen.&#39;);
++     console.error('❌ Kein API Key angegeben. Abgebrochen.');
 +     process.exit(1);
 +   }
 +   
@@ -8270,22 +8270,22 @@ Lines added: 91, lines removed: 1
 +   
 +   // Lade Alben-Daten
 +   console.log(&#96;📂 Lade Alben-Daten aus ${DEFAULT_INPUT}...&#96;);
-+   const albumsData = JSON.parse(fs.readFileSync(DEFAULT_INPUT, &#39;utf-8&#39;));
++   const albumsData = JSON.parse(fs.readFileSync(DEFAULT_INPUT, 'utf-8'));
 +   console.log(&#96;✅ ${albumsData.length} Alben geladen\n&#96;);
 +   
 +   // Generiere Embeddings
 +   try {
 +     await generateAllEmbeddings(albumsData, apiKey, DEFAULT_OUTPUT);
-+     console.log(&#39;🎉 Embedding-Generierung erfolgreich abgeschlossen!&#39;);
++     console.log('🎉 Embedding-Generierung erfolgreich abgeschlossen!');
 +     console.log(&#96;\n📁 Embeddings gespeichert in: ${DEFAULT_OUTPUT}&#96;);
 +   } catch (error) {
-+     console.error(&#39;\n❌ Fehler bei der Embedding-Generierung:&#39;, error.message);
++     console.error('\n❌ Fehler bei der Embedding-Generierung:', error.message);
 +     process.exit(1);
 +   }
 + }
 + 
 + main().catch(error =&gt; {
-+   console.error(&#39;Unerwarteter Fehler:&#39;, error);
++   console.error('Unerwarteter Fehler:', error);
 +   process.exit(1);
 + });
 + 
@@ -8307,7 +8307,7 @@ Lines added: 91, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -8330,7 +8330,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -8341,7 +8341,7 @@ Lines added: 1, lines removed: 1
    */
 - function createAlbumText(album) {
 + export function createAlbumText(album) {
-    return &#96;${album.Band} - ${album.Album} (${album.Jahr || &#39;Unbekannt&#39;}) - Note: ${album.Note}&#96;;
+    return &#96;${album.Band} - ${album.Album} (${album.Jahr || 'Unbekannt'}) - Note: ${album.Note}&#96;;
   }
 ```
 
@@ -8352,7 +8352,7 @@ Lines added: 1, lines removed: 1
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
 
 ```bash
 chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js
@@ -8364,20 +8364,20 @@ chmod +x /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_i
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/package.json</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/package.json</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 1
 
 ```diff
 @@ -5,5 +5,6 @@
-    &quot;description&quot;: &quot;Alben-Dashboard mit RAG-Chatbot&quot;,
-    &quot;scripts&quot;: {
--     &quot;generate-embeddings&quot;: &quot;node scripts/generate_embeddings.js&quot;
-+     &quot;generate-embeddings&quot;: &quot;node scripts/generate_embeddings_interactive.js&quot;,
-+     &quot;generate-embeddings:direct&quot;: &quot;node scripts/generate_embeddings.js&quot;
+    "description": "Alben-Dashboard mit RAG-Chatbot",
+    "scripts": {
+-     "generate-embeddings": "node scripts/generate_embeddings.js"
++     "generate-embeddings": "node scripts/generate_embeddings_interactive.js",
++     "generate-embeddings:direct": "node scripts/generate_embeddings.js"
     },
-    &quot;keywords&quot;: [],
+    "keywords": [],
 ```
 
 </details>
@@ -8406,7 +8406,7 @@ Korrigiere das interaktive Script, damit es eigenständig funktioniert:
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
 
 **Chunk 1**
 Lines added: 91, lines removed: 3
@@ -8417,18 +8417,18 @@ Lines added: 91, lines removed: 3
   const __dirname = path.dirname(__filename);
 - 
 - // Importiere die Hauptfunktion aus dem anderen Script
-- import { generateAllEmbeddings, createAlbumText } from &#39;./generate_embeddings.js&#39;;
+- import { generateAllEmbeddings, createAlbumText } from './generate_embeddings.js';
   
-  const DEFAULT_OUTPUT = path.join(__dirname, &#39;../public/data/embeddings.json&#39;);
-  const DEFAULT_INPUT = path.join(__dirname, &#39;../public/data/alben.json&#39;);
-+ const EMBEDDING_MODEL = &#39;text-embedding-3-small&#39;;
+  const DEFAULT_OUTPUT = path.join(__dirname, '../public/data/embeddings.json');
+  const DEFAULT_INPUT = path.join(__dirname, '../public/data/alben.json');
++ const EMBEDDING_MODEL = 'text-embedding-3-small';
 + const BATCH_SIZE = 100;
 + 
 + /**
 +  * Erstellt einen Text-String für ein Album (für Embedding)
 +  */
 + function createAlbumText(album) {
-+   return &#96;${album.Band} - ${album.Album} (${album.Jahr || &#39;Unbekannt&#39;}) - Note: ${album.Note}&#96;;
++   return &#96;${album.Band} - ${album.Album} (${album.Jahr || 'Unbekannt'}) - Note: ${album.Note}&#96;;
 + }
 + 
 + /**
@@ -8437,13 +8437,13 @@ Lines added: 91, lines removed: 3
 + async function generateBatchEmbeddings(batch, apiKey) {
 +   const texts = batch.map(createAlbumText);
 +   
-+   const response = await fetch(&#39;https://openrouter.ai/api/v1/embeddings&#39;, {
-+     method: &#39;POST&#39;,
++   const response = await fetch('https://openrouter.ai/api/v1/embeddings', {
++     method: 'POST',
 +     headers: {
-+       &#39;Authorization&#39;: &#96;Bearer ${apiKey}&#96;,
-+       &#39;Content-Type&#39;: &#39;application/json&#39;,
-+       &#39;HTTP-Referer&#39;: &#39;https://github.com/testabend&#39;,
-+       &#39;X-Title&#39;: &#39;Album Embeddings Generator&#39;
++       'Authorization': &#96;Bearer ${apiKey}&#96;,
++       'Content-Type': 'application/json',
++       'HTTP-Referer': 'https://github.com/testabend',
++       'X-Title': 'Album Embeddings Generator'
 +     },
 +     body: JSON.stringify({
 +       model: EMBEDDING_MODEL,
@@ -8523,8 +8523,8 @@ Lines added: 1, lines removed: 1
 @@ -29,5 +117,5 @@
     
     return new Promise((resolve) =&gt; {
--     rl.question(&#39;Bitte gib deinen OpenRouter API Key ein: &#39;, (answer) =&gt; {
-+     rl.question(&#39;🔑 Bitte gib deinen OpenRouter API Key ein: &#39;, (answer) =&gt; {
+-     rl.question('Bitte gib deinen OpenRouter API Key ein: ', (answer) =&gt; {
++     rl.question('🔑 Bitte gib deinen OpenRouter API Key ein: ', (answer) =&gt; {
         rl.close();
         resolve(answer.trim());
 ```
@@ -8602,7 +8602,7 @@ Starte das interaktive Script. Es fragt nach dem API-Key; bitte gib ihn dann ein
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js
@@ -8672,7 +8672,7 @@ Starte die Embedding-Generierung mit dem API-Key:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js --api-key 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</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js --api-key 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</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js --api-key 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
@@ -8719,7 +8719,7 @@ cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node --version</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node --version</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && node --version
@@ -8736,16 +8736,16 @@ v15.2.0
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
 
 ```diff
 @@ -9,4 +9,5 @@
-  import path from &#39;path&#39;;
-  import { fileURLToPath } from &#39;url&#39;;
-+ import https from &#39;https&#39;;
+  import path from 'path';
+  import { fileURLToPath } from 'url';
++ import https from 'https';
   
   const __filename = fileURLToPath(import.meta.url);
 ```
@@ -8758,7 +8758,7 @@ Lines added: 1, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/scripts/generate_embeddings_interactive.js</summary>
 
 **Chunk 1**
 Lines added: 59, lines removed: 25
@@ -8767,13 +8767,13 @@ Lines added: 59, lines removed: 25
 @@ -32,29 +32,63 @@
     const texts = batch.map(createAlbumText);
     
--   const response = await fetch(&#39;https://openrouter.ai/api/v1/embeddings&#39;, {
--     method: &#39;POST&#39;,
+-   const response = await fetch('https://openrouter.ai/api/v1/embeddings', {
+-     method: 'POST',
 -     headers: {
--       &#39;Authorization&#39;: &#96;Bearer ${apiKey}&#96;,
--       &#39;Content-Type&#39;: &#39;application/json&#39;,
--       &#39;HTTP-Referer&#39;: &#39;https://github.com/testabend&#39;,
--       &#39;X-Title&#39;: &#39;Album Embeddings Generator&#39;
+-       'Authorization': &#96;Bearer ${apiKey}&#96;,
+-       'Content-Type': 'application/json',
+-       'HTTP-Referer': 'https://github.com/testabend',
+-       'X-Title': 'Album Embeddings Generator'
 -     },
 -     body: JSON.stringify({
 -       model: EMBEDDING_MODEL,
@@ -8799,27 +8799,27 @@ Lines added: 59, lines removed: 25
 +   
 +   return new Promise((resolve, reject) =&gt; {
 +     const options = {
-+       hostname: &#39;openrouter.ai&#39;,
++       hostname: 'openrouter.ai',
 +       port: 443,
-+       path: &#39;/api/v1/embeddings&#39;,
-+       method: &#39;POST&#39;,
++       path: '/api/v1/embeddings',
++       method: 'POST',
 +       headers: {
-+         &#39;Authorization&#39;: &#96;Bearer ${apiKey}&#96;,
-+         &#39;Content-Type&#39;: &#39;application/json&#39;,
-+         &#39;Content-Length&#39;: Buffer.byteLength(postData),
-+         &#39;HTTP-Referer&#39;: &#39;https://github.com/testabend&#39;,
-+         &#39;X-Title&#39;: &#39;Album Embeddings Generator&#39;
++         'Authorization': &#96;Bearer ${apiKey}&#96;,
++         'Content-Type': 'application/json',
++         'Content-Length': Buffer.byteLength(postData),
++         'HTTP-Referer': 'https://github.com/testabend',
++         'X-Title': 'Album Embeddings Generator'
 +       }
 +     };
 +     
 +     const req = https.request(options, (res) =&gt; {
-+       let data = &#39;&#39;;
++       let data = '';
 +       
-+       res.on(&#39;data&#39;, (chunk) =&gt; {
++       res.on('data', (chunk) =&gt; {
 +         data += chunk;
 +       });
 +       
-+       res.on(&#39;end&#39;, () =&gt; {
++       res.on('end', () =&gt; {
 +         if (res.statusCode !== 200) {
 +           try {
 +             const error = JSON.parse(data);
@@ -8844,7 +8844,7 @@ Lines added: 59, lines removed: 25
 +       });
 +     });
 +     
-+     req.on(&#39;error&#39;, (error) =&gt; {
++     req.on('error', (error) =&gt; {
 +       reject(new Error(&#96;Request Fehler: ${error.message}&#96;));
 +     });
 +     
@@ -8862,7 +8862,7 @@ Lines added: 59, lines removed: 25
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js --api-key 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</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js --api-key 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</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && node scripts/generate_embeddings_interactive.js --api-key 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
@@ -9014,7 +9014,7 @@ Embeddings erfolgreich generiert.
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: ls -lh /Users/rstockm/Documents/GitHub/testabend/public/data/embeddings.json</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: ls -lh /Users/rstockm/Documents/GitHub/testabend/public/data/embeddings.json</summary>
 
 ```bash
 ls -lh /Users/rstockm/Documents/GitHub/testabend/public/data/embeddings.json
@@ -9084,7 +9084,7 @@ Prüfe den Webserver und teste die RAG-Integration im Browser:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: lsof -ti:8020 || echo "Server nicht aktiv"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: lsof -ti:8020 || echo "Server nicht aktiv"</summary>
 
 ```bash
 lsof -ti:8020 || echo "Server nicht aktiv"
@@ -9100,7 +9100,7 @@ lsof -ti:8020 || echo "Server nicht aktiv"
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020 > /dev/null 2>&1 &</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020 > /dev/null 2>&1 &</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend/public && python3 -m http.server 8020 > /dev/null 2>&1 &
@@ -9187,29 +9187,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 3}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 3}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9217,8 +9217,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:3}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":3}"
 }
 ```
 Status: **completed**
@@ -9316,29 +9316,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_console_messages&quot;,
-      &quot;description&quot;: &quot;Returns all console messages&quot;,
-      &quot;parameters&quot;: &quot;{}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_console_messages",
+      "description": "Returns all console messages",
+      "parameters": "{}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_console_messages&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_console_messages",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9346,8 +9346,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_console_messages&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;console_messages\&quot;,\&quot;success\&quot;:true,\&quot;messages\&quot;:[{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\&quot;,\&quot;timestamp\&quot;:1763166162917},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\&quot;,\&quot;timestamp\&quot;:1763166162919},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\&quot;,\&quot;timestamp\&quot;:1763166163337}]}&quot;
+  "selectedTool": "browser_console_messages",
+  "result": "{\"action\":\"console_messages\",\"success\":true,\"messages\":[{\"type\":\"warning\",\"message\":\"Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\",\"timestamp\":1763166162917},{\"type\":\"warning\",\"message\":\"Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\",\"timestamp\":1763166162919},{\"type\":\"warning\",\"message\":\"✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\",\"timestamp\":1763166163337}]}"
 }
 ```
 Status: **completed**
@@ -9393,29 +9393,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_type&quot;,
-      &quot;description&quot;: &quot;Type text into editable element&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;element\&quot;: \&quot;Chat-Eingabefeld\&quot;, \&quot;ref\&quot;: \&quot;ref-zc377r4bhfq\&quot;, \&quot;text\&quot;: \&quot;Was sind die besten Taylor Swift Alben?\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_type",
+      "description": "Type text into editable element",
+      "parameters": "{\"element\": \"Chat-Eingabefeld\", \"ref\": \"ref-zc377r4bhfq\", \"text\": \"Was sind die besten Taylor Swift Alben?\"}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_type&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_type",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9423,8 +9423,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_type&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;type\&quot;,\&quot;success\&quot;:true,\&quot;details\&quot;:{\&quot;slowly\&quot;:false,\&quot;submitted\&quot;:false},\&quot;pageState\&quot;:{\&quot;url\&quot;:\&quot;http://localhost:8020/#testteam\&quot;,\&quot;title\&quot;:\&quot;Alben-Dashboard (Lokal)\&quot;,\&quot;snapshot\&quot;:{\&quot;ref\&quot;:\&quot;ref-3pvwvimf594\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;body\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-i61wii05h9r\&quot;,\&quot;role\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;header\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-teql1nurwec\&quot;,\&quot;role\&quot;:\&quot;heading\&quot;,\&quot;name\&quot;:\&quot;Alben-Da hboard\&quot;,\&quot;tag\&quot;:\&quot;h1\&quot;,\&quot;children\&quot;:[],\&quot;level\&quot;:1,\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-8n1kch3wnfr\&quot;,\&quot;role\&quot;:\&quot;navigation\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;nav\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-qhzwqx6o838\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Über icht\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#overview\&quot;},{\&quot;ref\&quot;:\&quot;ref-5oa5c4p2ot3\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Zeitreihe Band\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#band\&quot;},{\&quot;ref\&quot;:\&quot;ref-tsfb912iql\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Alle Wertungen\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#scatter\&quot;},{\&quot;ref\&quot;:\&quot;ref-n0twzt6gzf9\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Te tteam\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#testteam\&quot;}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-hu8y7d25oqv\&quot;,\&quot;role\&quot;:\&quot;main\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;main\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-6dkdjtw9zx7\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-jham2lepl0i\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-n47hv5gdfdb\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-zc377r4bhfq\&quot;,\&quot;role\&quot;:\&quot;textbox\&quot;,\&quot;name\&quot;:\&quot;Nachricht eingeben...\&quot;,\&quot;tag\&quot;:\&quot;textarea\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;focused\&quot;],\&quot;value\&quot;:\&quot;Was sind die besten Taylor Swift Alben?\&quot;,\&quot;placeholder\&quot;:\&quot;Nachricht eingeben...\&quot;},{\&quot;ref\&quot;:\&quot;ref-wvvcn28kwq8\&quot;,\&quot;role\&quot;:\&quot;button\&quot;,\&quot;name\&quot;:\&quot;Nachricht senden\&quot;,\&quot;tag\&quot;:\&quot;button\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-dk2qivmdk8k\&quot;,\&quot;role\&quot;:\&quot;img\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;svg\&quot;,\&quot;children\&quot;:[]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}}}&quot;
+  "selectedTool": "browser_type",
+  "result": "{\"action\":\"type\",\"success\":true,\"details\":{\"slowly\":false,\"submitted\":false},\"pageState\":{\"url\":\"http://localhost:8020/#testteam\",\"title\":\"Alben-Dashboard (Lokal)\",\"snapshot\":{\"ref\":\"ref-3pvwvimf594\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"body\",\"children\":[{\"ref\":\"ref-i61wii05h9r\",\"role\":\"banner\",\"name\":\"\",\"tag\":\"header\",\"children\":[{\"ref\":\"ref-teql1nurwec\",\"role\":\"heading\",\"name\":\"Alben-Da hboard\",\"tag\":\"h1\",\"children\":[],\"level\":1,\"states\":[\"readonly\"]},{\"ref\":\"ref-8n1kch3wnfr\",\"role\":\"navigation\",\"name\":\"\",\"tag\":\"nav\",\"children\":[{\"ref\":\"ref-qhzwqx6o838\",\"role\":\"link\",\"name\":\"Über icht\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#overview\"},{\"ref\":\"ref-5oa5c4p2ot3\",\"role\":\"link\",\"name\":\"Zeitreihe Band\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#band\"},{\"ref\":\"ref-tsfb912iql\",\"role\":\"link\",\"name\":\"Alle Wertungen\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#scatter\"},{\"ref\":\"ref-n0twzt6gzf9\",\"role\":\"link\",\"name\":\"Te tteam\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#testteam\"}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]},{\"ref\":\"ref-hu8y7d25oqv\",\"role\":\"main\",\"name\":\"\",\"tag\":\"main\",\"children\":[{\"ref\":\"ref-6dkdjtw9zx7\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-jham2lepl0i\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-n47hv5gdfdb\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-zc377r4bhfq\",\"role\":\"textbox\",\"name\":\"Nachricht eingeben...\",\"tag\":\"textarea\",\"children\":[],\"states\":[\"focused\"],\"value\":\"Was sind die besten Taylor Swift Alben?\",\"placeholder\":\"Nachricht eingeben...\"},{\"ref\":\"ref-wvvcn28kwq8\",\"role\":\"button\",\"name\":\"Nachricht senden\",\"tag\":\"button\",\"children\":[{\"ref\":\"ref-dk2qivmdk8k\",\"role\":\"img\",\"name\":\"\",\"tag\":\"svg\",\"children\":[]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}}}"
 }
 ```
 Status: **completed**
@@ -9444,29 +9444,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_click&quot;,
-      &quot;description&quot;: &quot;Perform click on a web page&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;element\&quot;: \&quot;Senden-Button\&quot;, \&quot;ref\&quot;: \&quot;ref-wvvcn28kwq8\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_click",
+      "description": "Perform click on a web page",
+      "parameters": "{\"element\": \"Senden-Button\", \"ref\": \"ref-wvvcn28kwq8\"}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_click&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_click",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9474,8 +9474,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_click&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;click\&quot;,\&quot;success\&quot;:true,\&quot;details\&quot;:{\&quot;doubleClick\&quot;:false,\&quot;button\&quot;:\&quot;left\&quot;},\&quot;pageState\&quot;:{\&quot;url\&quot;:\&quot;http://localhost:8020/#testteam\&quot;,\&quot;title\&quot;:\&quot;Alben-Dashboard (Lokal)\&quot;,\&quot;snapshot\&quot;:{\&quot;ref\&quot;:\&quot;ref-3pvwvimf594\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;body\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-i61wii05h9r\&quot;,\&quot;role\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;header\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-teql1nurwec\&quot;,\&quot;role\&quot;:\&quot;heading\&quot;,\&quot;name\&quot;:\&quot;Alben-Da hboard\&quot;,\&quot;tag\&quot;:\&quot;h1\&quot;,\&quot;children\&quot;:[],\&quot;level\&quot;:1,\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-8n1kch3wnfr\&quot;,\&quot;role\&quot;:\&quot;navigation\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;nav\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-qhzwqx6o838\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Über icht\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#overview\&quot;},{\&quot;ref\&quot;:\&quot;ref-5oa5c4p2ot3\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Zeitreihe Band\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#band\&quot;},{\&quot;ref\&quot;:\&quot;ref-tsfb912iql\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Alle Wertungen\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#scatter\&quot;},{\&quot;ref\&quot;:\&quot;ref-n0twzt6gzf9\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Te tteam\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#testteam\&quot;}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-hu8y7d25oqv\&quot;,\&quot;role\&quot;:\&quot;main\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;main\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-6dkdjtw9zx7\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-jham2lepl0i\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-n47hv5gdfdb\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-zc377r4bhfq\&quot;,\&quot;role\&quot;:\&quot;textbox\&quot;,\&quot;name\&quot;:\&quot;Nachricht eingeben...\&quot;,\&quot;tag\&quot;:\&quot;textarea\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;disabled\&quot;,\&quot;readonly\&quot;],\&quot;placeholder\&quot;:\&quot;Nachricht eingeben...\&quot;},{\&quot;ref\&quot;:\&quot;ref-wvvcn28kwq8\&quot;,\&quot;role\&quot;:\&quot;button\&quot;,\&quot;name\&quot;:\&quot;Nachricht senden\&quot;,\&quot;tag\&quot;:\&quot;button\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-dk2qivmdk8k\&quot;,\&quot;role\&quot;:\&quot;img\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;svg\&quot;,\&quot;children\&quot;:[]}],\&quot;states\&quot;:[\&quot;disabled\&quot;,\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;focused\&quot;,\&quot;readonly\&quot;]}}}&quot;
+  "selectedTool": "browser_click",
+  "result": "{\"action\":\"click\",\"success\":true,\"details\":{\"doubleClick\":false,\"button\":\"left\"},\"pageState\":{\"url\":\"http://localhost:8020/#testteam\",\"title\":\"Alben-Dashboard (Lokal)\",\"snapshot\":{\"ref\":\"ref-3pvwvimf594\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"body\",\"children\":[{\"ref\":\"ref-i61wii05h9r\",\"role\":\"banner\",\"name\":\"\",\"tag\":\"header\",\"children\":[{\"ref\":\"ref-teql1nurwec\",\"role\":\"heading\",\"name\":\"Alben-Da hboard\",\"tag\":\"h1\",\"children\":[],\"level\":1,\"states\":[\"readonly\"]},{\"ref\":\"ref-8n1kch3wnfr\",\"role\":\"navigation\",\"name\":\"\",\"tag\":\"nav\",\"children\":[{\"ref\":\"ref-qhzwqx6o838\",\"role\":\"link\",\"name\":\"Über icht\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#overview\"},{\"ref\":\"ref-5oa5c4p2ot3\",\"role\":\"link\",\"name\":\"Zeitreihe Band\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#band\"},{\"ref\":\"ref-tsfb912iql\",\"role\":\"link\",\"name\":\"Alle Wertungen\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#scatter\"},{\"ref\":\"ref-n0twzt6gzf9\",\"role\":\"link\",\"name\":\"Te tteam\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#testteam\"}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]},{\"ref\":\"ref-hu8y7d25oqv\",\"role\":\"main\",\"name\":\"\",\"tag\":\"main\",\"children\":[{\"ref\":\"ref-6dkdjtw9zx7\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-jham2lepl0i\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-n47hv5gdfdb\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-zc377r4bhfq\",\"role\":\"textbox\",\"name\":\"Nachricht eingeben...\",\"tag\":\"textarea\",\"children\":[],\"states\":[\"disabled\",\"readonly\"],\"placeholder\":\"Nachricht eingeben...\"},{\"ref\":\"ref-wvvcn28kwq8\",\"role\":\"button\",\"name\":\"Nachricht senden\",\"tag\":\"button\",\"children\":[{\"ref\":\"ref-dk2qivmdk8k\",\"role\":\"img\",\"name\":\"\",\"tag\":\"svg\",\"children\":[]}],\"states\":[\"disabled\",\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"focused\",\"readonly\"]}}}"
 }
 ```
 Status: **completed**
@@ -9495,29 +9495,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 5}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 5}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9525,8 +9525,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:5}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":5}"
 }
 ```
 Status: **completed**
@@ -9546,29 +9546,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_console_messages&quot;,
-      &quot;description&quot;: &quot;Returns all console messages&quot;,
-      &quot;parameters&quot;: &quot;{}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_console_messages",
+      "description": "Returns all console messages",
+      "parameters": "{}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_console_messages&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_console_messages",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9576,8 +9576,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_console_messages&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;console_messages\&quot;,\&quot;success\&quot;:true,\&quot;messages\&quot;:[{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\&quot;,\&quot;timestamp\&quot;:1763166162917},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\&quot;,\&quot;timestamp\&quot;:1763166162919},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\&quot;,\&quot;timestamp\&quot;:1763166163337},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166222757}]}&quot;
+  "selectedTool": "browser_console_messages",
+  "result": "{\"action\":\"console_messages\",\"success\":true,\"messages\":[{\"type\":\"warning\",\"message\":\"Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\",\"timestamp\":1763166162917},{\"type\":\"warning\",\"message\":\"Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\",\"timestamp\":1763166162919},{\"type\":\"warning\",\"message\":\"✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\",\"timestamp\":1763166163337},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166222757}]}"
 }
 ```
 Status: **completed**
@@ -9675,29 +9675,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 10}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 10}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9705,8 +9705,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:10}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":10}"
 }
 ```
 Status: **completed**
@@ -9794,29 +9794,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_console_messages&quot;,
-      &quot;description&quot;: &quot;Returns all console messages&quot;,
-      &quot;parameters&quot;: &quot;{}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_console_messages",
+      "description": "Returns all console messages",
+      "parameters": "{}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_console_messages&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_console_messages",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -9824,8 +9824,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_console_messages&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;console_messages\&quot;,\&quot;success\&quot;:true,\&quot;messages\&quot;:[{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\&quot;,\&quot;timestamp\&quot;:1763166162917},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\&quot;,\&quot;timestamp\&quot;:1763166162919},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\&quot;,\&quot;timestamp\&quot;:1763166163337},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166222757}]}&quot;
+  "selectedTool": "browser_console_messages",
+  "result": "{\"action\":\"console_messages\",\"success\":true,\"messages\":[{\"type\":\"warning\",\"message\":\"Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\",\"timestamp\":1763166162917},{\"type\":\"warning\",\"message\":\"Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\",\"timestamp\":1763166162919},{\"type\":\"warning\",\"message\":\"✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\",\"timestamp\":1763166163337},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166222757}]}"
 }
 ```
 Status: **completed**
@@ -9864,7 +9864,7 @@ RAG läuft, aber es gibt keine Antwort. Prüfe die Logs und füge Debug-Ausgaben
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: undefined
@@ -9872,14 +9872,14 @@ Lines added: 6, lines removed: undefined
 ```diff
 @@ -172,8 +172,14 @@
             enrichedQuery = await this.ragService.enrichQueryWithContext(message, 15, true);
-            console.log(&#39;RAG: Query mit Kontext erweitert&#39;);
-+           console.log(&#39;RAG: Erweiterte Query (erste 500 Zeichen):&#39;, enrichedQuery.substring(0, 500));
+            console.log('RAG: Query mit Kontext erweitert');
++           console.log('RAG: Erweiterte Query (erste 500 Zeichen):', enrichedQuery.substring(0, 500));
           } catch (ragError) {
-            console.warn(&#39;RAG-Fehler, verwende originale Query:&#39;, ragError);
+            console.warn('RAG-Fehler, verwende originale Query:', ragError);
             // Fallback: Verwende originale Query
           }
 +       } else {
-+         console.warn(&#39;RAG nicht verfügbar:&#39;, {
++         console.warn('RAG nicht verfügbar:', {
 +           ragService: !!this.ragService,
 +           embeddingsLoaded: this.embeddingsLoaded
 +         });
@@ -9895,7 +9895,7 @@ Lines added: 6, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: undefined
@@ -9905,7 +9905,7 @@ Lines added: 2, lines removed: undefined
     async enrichQueryWithContext(userQuery, topK = 15, useHybrid = true) {
       let relevantAlbums;
 +     
-+     console.log(&#39;RAG: Starte Suche für Query:&#39;, userQuery);
++     console.log('RAG: Starte Suche für Query:', userQuery);
       
       if (useHybrid) {
 ```
@@ -9918,10 +9918,10 @@ Lines added: 3, lines removed: undefined
         relevantAlbums = await this.retrieveRelevantAlbums(userQuery, topK);
       }
 +     
-+     console.log(&#39;RAG: Gefundene relevante Alben:&#39;, relevantAlbums.length);
++     console.log('RAG: Gefundene relevante Alben:', relevantAlbums.length);
       
       if (relevantAlbums.length === 0) {
-+       console.warn(&#39;RAG: Keine relevanten Alben gefunden&#39;);
++       console.warn('RAG: Keine relevanten Alben gefunden');
         return userQuery; // Keine relevanten Alben gefunden
       }
 ```
@@ -9935,7 +9935,7 @@ Lines added: 4, lines removed: 1
       
 -     return userQuery + context;
 +     const enriched = userQuery + context;
-+     console.log(&#39;RAG: Kontext hinzugefügt, Gesamtlänge:&#39;, enriched.length);
++     console.log('RAG: Kontext hinzugefügt, Gesamtlänge:', enriched.length);
 +     
 +     return enriched;
     }
@@ -10025,29 +10025,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 3}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 3}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10055,8 +10055,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:3}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":3}"
 }
 ```
 Status: **completed**
@@ -10076,29 +10076,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_type&quot;,
-      &quot;description&quot;: &quot;Type text into editable element&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;element\&quot;: \&quot;Chat-Eingabefeld\&quot;, \&quot;ref\&quot;: \&quot;ref-zc377r4bhfq\&quot;, \&quot;text\&quot;: \&quot;Taylor Swift\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_type",
+      "description": "Type text into editable element",
+      "parameters": "{\"element\": \"Chat-Eingabefeld\", \"ref\": \"ref-zc377r4bhfq\", \"text\": \"Taylor Swift\"}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_type&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_type",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10106,8 +10106,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_type&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;type\&quot;,\&quot;success\&quot;:true,\&quot;details\&quot;:{\&quot;slowly\&quot;:false,\&quot;submitted\&quot;:false},\&quot;pageState\&quot;:{\&quot;url\&quot;:\&quot;http://localhost:8020/#testteam\&quot;,\&quot;title\&quot;:\&quot;Alben-Dashboard (Lokal)\&quot;,\&quot;snapshot\&quot;:{\&quot;ref\&quot;:\&quot;ref-3pvwvimf594\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;body\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-i61wii05h9r\&quot;,\&quot;role\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;header\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-teql1nurwec\&quot;,\&quot;role\&quot;:\&quot;heading\&quot;,\&quot;name\&quot;:\&quot;Alben-Da hboard\&quot;,\&quot;tag\&quot;:\&quot;h1\&quot;,\&quot;children\&quot;:[],\&quot;level\&quot;:1,\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-8n1kch3wnfr\&quot;,\&quot;role\&quot;:\&quot;navigation\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;nav\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-qhzwqx6o838\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Über icht\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#overview\&quot;},{\&quot;ref\&quot;:\&quot;ref-5oa5c4p2ot3\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Zeitreihe Band\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#band\&quot;},{\&quot;ref\&quot;:\&quot;ref-tsfb912iql\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Alle Wertungen\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#scatter\&quot;},{\&quot;ref\&quot;:\&quot;ref-n0twzt6gzf9\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Te tteam\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#testteam\&quot;}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-hu8y7d25oqv\&quot;,\&quot;role\&quot;:\&quot;main\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;main\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-6dkdjtw9zx7\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-jham2lepl0i\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-n47hv5gdfdb\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-zc377r4bhfq\&quot;,\&quot;role\&quot;:\&quot;textbox\&quot;,\&quot;name\&quot;:\&quot;Nachricht eingeben...\&quot;,\&quot;tag\&quot;:\&quot;textarea\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;focused\&quot;],\&quot;value\&quot;:\&quot;Taylor Swift\&quot;,\&quot;placeholder\&quot;:\&quot;Nachricht eingeben...\&quot;},{\&quot;ref\&quot;:\&quot;ref-wvvcn28kwq8\&quot;,\&quot;role\&quot;:\&quot;button\&quot;,\&quot;name\&quot;:\&quot;Nachricht senden\&quot;,\&quot;tag\&quot;:\&quot;button\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-dk2qivmdk8k\&quot;,\&quot;role\&quot;:\&quot;img\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;svg\&quot;,\&quot;children\&quot;:[]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}}}&quot;
+  "selectedTool": "browser_type",
+  "result": "{\"action\":\"type\",\"success\":true,\"details\":{\"slowly\":false,\"submitted\":false},\"pageState\":{\"url\":\"http://localhost:8020/#testteam\",\"title\":\"Alben-Dashboard (Lokal)\",\"snapshot\":{\"ref\":\"ref-3pvwvimf594\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"body\",\"children\":[{\"ref\":\"ref-i61wii05h9r\",\"role\":\"banner\",\"name\":\"\",\"tag\":\"header\",\"children\":[{\"ref\":\"ref-teql1nurwec\",\"role\":\"heading\",\"name\":\"Alben-Da hboard\",\"tag\":\"h1\",\"children\":[],\"level\":1,\"states\":[\"readonly\"]},{\"ref\":\"ref-8n1kch3wnfr\",\"role\":\"navigation\",\"name\":\"\",\"tag\":\"nav\",\"children\":[{\"ref\":\"ref-qhzwqx6o838\",\"role\":\"link\",\"name\":\"Über icht\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#overview\"},{\"ref\":\"ref-5oa5c4p2ot3\",\"role\":\"link\",\"name\":\"Zeitreihe Band\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#band\"},{\"ref\":\"ref-tsfb912iql\",\"role\":\"link\",\"name\":\"Alle Wertungen\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#scatter\"},{\"ref\":\"ref-n0twzt6gzf9\",\"role\":\"link\",\"name\":\"Te tteam\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#testteam\"}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]},{\"ref\":\"ref-hu8y7d25oqv\",\"role\":\"main\",\"name\":\"\",\"tag\":\"main\",\"children\":[{\"ref\":\"ref-6dkdjtw9zx7\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-jham2lepl0i\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-n47hv5gdfdb\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-zc377r4bhfq\",\"role\":\"textbox\",\"name\":\"Nachricht eingeben...\",\"tag\":\"textarea\",\"children\":[],\"states\":[\"focused\"],\"value\":\"Taylor Swift\",\"placeholder\":\"Nachricht eingeben...\"},{\"ref\":\"ref-wvvcn28kwq8\",\"role\":\"button\",\"name\":\"Nachricht senden\",\"tag\":\"button\",\"children\":[{\"ref\":\"ref-dk2qivmdk8k\",\"role\":\"img\",\"name\":\"\",\"tag\":\"svg\",\"children\":[]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}}}"
 }
 ```
 Status: **completed**
@@ -10127,29 +10127,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_click&quot;,
-      &quot;description&quot;: &quot;Perform click on a web page&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;element\&quot;: \&quot;Senden-Button\&quot;, \&quot;ref\&quot;: \&quot;ref-wvvcn28kwq8\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_click",
+      "description": "Perform click on a web page",
+      "parameters": "{\"element\": \"Senden-Button\", \"ref\": \"ref-wvvcn28kwq8\"}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_click&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_click",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10157,8 +10157,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_click&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;click\&quot;,\&quot;success\&quot;:true,\&quot;details\&quot;:{\&quot;doubleClick\&quot;:false,\&quot;button\&quot;:\&quot;left\&quot;},\&quot;pageState\&quot;:{\&quot;url\&quot;:\&quot;http://localhost:8020/#testteam\&quot;,\&quot;title\&quot;:\&quot;Alben-Dashboard (Lokal)\&quot;,\&quot;snapshot\&quot;:{\&quot;ref\&quot;:\&quot;ref-3pvwvimf594\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;body\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-i61wii05h9r\&quot;,\&quot;role\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;header\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-teql1nurwec\&quot;,\&quot;role\&quot;:\&quot;heading\&quot;,\&quot;name\&quot;:\&quot;Alben-Da hboard\&quot;,\&quot;tag\&quot;:\&quot;h1\&quot;,\&quot;children\&quot;:[],\&quot;level\&quot;:1,\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-8n1kch3wnfr\&quot;,\&quot;role\&quot;:\&quot;navigation\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;nav\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-qhzwqx6o838\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Über icht\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#overview\&quot;},{\&quot;ref\&quot;:\&quot;ref-5oa5c4p2ot3\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Zeitreihe Band\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#band\&quot;},{\&quot;ref\&quot;:\&quot;ref-tsfb912iql\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Alle Wertungen\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#scatter\&quot;},{\&quot;ref\&quot;:\&quot;ref-n0twzt6gzf9\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Te tteam\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#testteam\&quot;}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-hu8y7d25oqv\&quot;,\&quot;role\&quot;:\&quot;main\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;main\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-6dkdjtw9zx7\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-jham2lepl0i\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-n47hv5gdfdb\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-zc377r4bhfq\&quot;,\&quot;role\&quot;:\&quot;textbox\&quot;,\&quot;name\&quot;:\&quot;Nachricht eingeben...\&quot;,\&quot;tag\&quot;:\&quot;textarea\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;disabled\&quot;,\&quot;readonly\&quot;],\&quot;placeholder\&quot;:\&quot;Nachricht eingeben...\&quot;},{\&quot;ref\&quot;:\&quot;ref-wvvcn28kwq8\&quot;,\&quot;role\&quot;:\&quot;button\&quot;,\&quot;name\&quot;:\&quot;Nachricht senden\&quot;,\&quot;tag\&quot;:\&quot;button\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-dk2qivmdk8k\&quot;,\&quot;role\&quot;:\&quot;img\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;svg\&quot;,\&quot;children\&quot;:[]}],\&quot;states\&quot;:[\&quot;disabled\&quot;,\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;focused\&quot;,\&quot;readonly\&quot;]}}}&quot;
+  "selectedTool": "browser_click",
+  "result": "{\"action\":\"click\",\"success\":true,\"details\":{\"doubleClick\":false,\"button\":\"left\"},\"pageState\":{\"url\":\"http://localhost:8020/#testteam\",\"title\":\"Alben-Dashboard (Lokal)\",\"snapshot\":{\"ref\":\"ref-3pvwvimf594\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"body\",\"children\":[{\"ref\":\"ref-i61wii05h9r\",\"role\":\"banner\",\"name\":\"\",\"tag\":\"header\",\"children\":[{\"ref\":\"ref-teql1nurwec\",\"role\":\"heading\",\"name\":\"Alben-Da hboard\",\"tag\":\"h1\",\"children\":[],\"level\":1,\"states\":[\"readonly\"]},{\"ref\":\"ref-8n1kch3wnfr\",\"role\":\"navigation\",\"name\":\"\",\"tag\":\"nav\",\"children\":[{\"ref\":\"ref-qhzwqx6o838\",\"role\":\"link\",\"name\":\"Über icht\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#overview\"},{\"ref\":\"ref-5oa5c4p2ot3\",\"role\":\"link\",\"name\":\"Zeitreihe Band\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#band\"},{\"ref\":\"ref-tsfb912iql\",\"role\":\"link\",\"name\":\"Alle Wertungen\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#scatter\"},{\"ref\":\"ref-n0twzt6gzf9\",\"role\":\"link\",\"name\":\"Te tteam\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#testteam\"}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]},{\"ref\":\"ref-hu8y7d25oqv\",\"role\":\"main\",\"name\":\"\",\"tag\":\"main\",\"children\":[{\"ref\":\"ref-6dkdjtw9zx7\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-jham2lepl0i\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-n47hv5gdfdb\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-zc377r4bhfq\",\"role\":\"textbox\",\"name\":\"Nachricht eingeben...\",\"tag\":\"textarea\",\"children\":[],\"states\":[\"disabled\",\"readonly\"],\"placeholder\":\"Nachricht eingeben...\"},{\"ref\":\"ref-wvvcn28kwq8\",\"role\":\"button\",\"name\":\"Nachricht senden\",\"tag\":\"button\",\"children\":[{\"ref\":\"ref-dk2qivmdk8k\",\"role\":\"img\",\"name\":\"\",\"tag\":\"svg\",\"children\":[]}],\"states\":[\"disabled\",\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"focused\",\"readonly\"]}}}"
 }
 ```
 Status: **completed**
@@ -10178,29 +10178,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 8}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 8}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10208,8 +10208,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:8}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":8}"
 }
 ```
 Status: **completed**
@@ -10229,29 +10229,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_console_messages&quot;,
-      &quot;description&quot;: &quot;Returns all console messages&quot;,
-      &quot;parameters&quot;: &quot;{}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_console_messages",
+      "description": "Returns all console messages",
+      "parameters": "{}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_console_messages&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_console_messages",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10259,8 +10259,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_console_messages&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;console_messages\&quot;,\&quot;success\&quot;:true,\&quot;messages\&quot;:[{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\&quot;,\&quot;timestamp\&quot;:1763166162917},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\&quot;,\&quot;timestamp\&quot;:1763166162919},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\&quot;,\&quot;timestamp\&quot;:1763166163337},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166222757},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166252045}]}&quot;
+  "selectedTool": "browser_console_messages",
+  "result": "{\"action\":\"console_messages\",\"success\":true,\"messages\":[{\"type\":\"warning\",\"message\":\"Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\",\"timestamp\":1763166162917},{\"type\":\"warning\",\"message\":\"Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\",\"timestamp\":1763166162919},{\"type\":\"warning\",\"message\":\"✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\",\"timestamp\":1763166163337},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166222757},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166252045}]}"
 }
 ```
 Status: **completed**
@@ -10291,7 +10291,7 @@ Die neuen Debug-Logs erscheinen noch nicht. Prüfe, ob die erweiterte Query korr
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 5, lines removed: undefined
@@ -10302,9 +10302,9 @@ Lines added: 5, lines removed: undefined
       ];
 +     
 +     // Debug: Zeige was an API gesendet wird
-+     console.log(&#39;API: Sende Nachricht an OpenRouter&#39;);
-+     console.log(&#39;API: User-Message Länge:&#39;, userMessage.length);
-+     console.log(&#39;API: User-Message (erste 300 Zeichen):&#39;, userMessage.substring(0, 300));
++     console.log('API: Sende Nachricht an OpenRouter');
++     console.log('API: User-Message Länge:', userMessage.length);
++     console.log('API: User-Message (erste 300 Zeichen):', userMessage.substring(0, 300));
       
       const requestBody = {
 ```
@@ -10317,7 +10317,7 @@ Lines added: 5, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 12, lines removed: 1
@@ -10327,21 +10327,21 @@ Lines added: 12, lines removed: 1
       
       const data = await response.json();
 +     
-+     console.log(&#39;API: Antwort erhalten:&#39;, {
++     console.log('API: Antwort erhalten:', {
 +       hasChoices: !!data.choices,
 +       choicesLength: data.choices?.length,
 +       hasMessage: !!data.choices?.[0]?.message
 +     });
       
       if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-+       console.error(&#39;API: Ungültige Antwort-Struktur:&#39;, data);
-        throw new Error(&#39;Ungültige API-Antwort&#39;);
++       console.error('API: Ungültige Antwort-Struktur:', data);
+        throw new Error('Ungültige API-Antwort');
       }
       
 -     return data.choices[0].message.content.trim();
 +     const content = data.choices[0].message.content.trim();
-+     console.log(&#39;API: Antwort-Content Länge:&#39;, content.length);
-+     console.log(&#39;API: Antwort-Content (erste 200 Zeichen):&#39;, content.substring(0, 200));
++     console.log('API: Antwort-Content Länge:', content.length);
++     console.log('API: Antwort-Content (erste 200 Zeichen):', content.substring(0, 200));
 +     
 +     return content;
     }
@@ -10431,29 +10431,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 3}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 3}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10461,8 +10461,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:3}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":3}"
 }
 ```
 Status: **completed**
@@ -10482,29 +10482,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_type&quot;,
-      &quot;description&quot;: &quot;Type text into editable element&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;element\&quot;: \&quot;Chat-Eingabefeld\&quot;, \&quot;ref\&quot;: \&quot;ref-zc377r4bhfq\&quot;, \&quot;text\&quot;: \&quot;Taylor Swift beste Alben\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_type",
+      "description": "Type text into editable element",
+      "parameters": "{\"element\": \"Chat-Eingabefeld\", \"ref\": \"ref-zc377r4bhfq\", \"text\": \"Taylor Swift beste Alben\"}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_type&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_type",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10512,8 +10512,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_type&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;type\&quot;,\&quot;success\&quot;:true,\&quot;details\&quot;:{\&quot;slowly\&quot;:false,\&quot;submitted\&quot;:false},\&quot;pageState\&quot;:{\&quot;url\&quot;:\&quot;http://localhost:8020/#testteam\&quot;,\&quot;title\&quot;:\&quot;Alben-Dashboard (Lokal)\&quot;,\&quot;snapshot\&quot;:{\&quot;ref\&quot;:\&quot;ref-3pvwvimf594\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;body\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-i61wii05h9r\&quot;,\&quot;role\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;header\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-teql1nurwec\&quot;,\&quot;role\&quot;:\&quot;heading\&quot;,\&quot;name\&quot;:\&quot;Alben-Da hboard\&quot;,\&quot;tag\&quot;:\&quot;h1\&quot;,\&quot;children\&quot;:[],\&quot;level\&quot;:1,\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-8n1kch3wnfr\&quot;,\&quot;role\&quot;:\&quot;navigation\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;nav\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-qhzwqx6o838\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Über icht\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#overview\&quot;},{\&quot;ref\&quot;:\&quot;ref-5oa5c4p2ot3\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Zeitreihe Band\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#band\&quot;},{\&quot;ref\&quot;:\&quot;ref-tsfb912iql\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Alle Wertungen\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#scatter\&quot;},{\&quot;ref\&quot;:\&quot;ref-n0twzt6gzf9\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Te tteam\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#testteam\&quot;}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-hu8y7d25oqv\&quot;,\&quot;role\&quot;:\&quot;main\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;main\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-6dkdjtw9zx7\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-jham2lepl0i\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-n47hv5gdfdb\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-zc377r4bhfq\&quot;,\&quot;role\&quot;:\&quot;textbox\&quot;,\&quot;name\&quot;:\&quot;Nachricht eingeben...\&quot;,\&quot;tag\&quot;:\&quot;textarea\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;focused\&quot;],\&quot;value\&quot;:\&quot;Taylor Swift beste Alben\&quot;,\&quot;placeholder\&quot;:\&quot;Nachricht eingeben...\&quot;},{\&quot;ref\&quot;:\&quot;ref-wvvcn28kwq8\&quot;,\&quot;role\&quot;:\&quot;button\&quot;,\&quot;name\&quot;:\&quot;Nachricht senden\&quot;,\&quot;tag\&quot;:\&quot;button\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-dk2qivmdk8k\&quot;,\&quot;role\&quot;:\&quot;img\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;svg\&quot;,\&quot;children\&quot;:[]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}}}&quot;
+  "selectedTool": "browser_type",
+  "result": "{\"action\":\"type\",\"success\":true,\"details\":{\"slowly\":false,\"submitted\":false},\"pageState\":{\"url\":\"http://localhost:8020/#testteam\",\"title\":\"Alben-Dashboard (Lokal)\",\"snapshot\":{\"ref\":\"ref-3pvwvimf594\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"body\",\"children\":[{\"ref\":\"ref-i61wii05h9r\",\"role\":\"banner\",\"name\":\"\",\"tag\":\"header\",\"children\":[{\"ref\":\"ref-teql1nurwec\",\"role\":\"heading\",\"name\":\"Alben-Da hboard\",\"tag\":\"h1\",\"children\":[],\"level\":1,\"states\":[\"readonly\"]},{\"ref\":\"ref-8n1kch3wnfr\",\"role\":\"navigation\",\"name\":\"\",\"tag\":\"nav\",\"children\":[{\"ref\":\"ref-qhzwqx6o838\",\"role\":\"link\",\"name\":\"Über icht\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#overview\"},{\"ref\":\"ref-5oa5c4p2ot3\",\"role\":\"link\",\"name\":\"Zeitreihe Band\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#band\"},{\"ref\":\"ref-tsfb912iql\",\"role\":\"link\",\"name\":\"Alle Wertungen\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#scatter\"},{\"ref\":\"ref-n0twzt6gzf9\",\"role\":\"link\",\"name\":\"Te tteam\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#testteam\"}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]},{\"ref\":\"ref-hu8y7d25oqv\",\"role\":\"main\",\"name\":\"\",\"tag\":\"main\",\"children\":[{\"ref\":\"ref-6dkdjtw9zx7\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-jham2lepl0i\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-n47hv5gdfdb\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-zc377r4bhfq\",\"role\":\"textbox\",\"name\":\"Nachricht eingeben...\",\"tag\":\"textarea\",\"children\":[],\"states\":[\"focused\"],\"value\":\"Taylor Swift beste Alben\",\"placeholder\":\"Nachricht eingeben...\"},{\"ref\":\"ref-wvvcn28kwq8\",\"role\":\"button\",\"name\":\"Nachricht senden\",\"tag\":\"button\",\"children\":[{\"ref\":\"ref-dk2qivmdk8k\",\"role\":\"img\",\"name\":\"\",\"tag\":\"svg\",\"children\":[]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}}}"
 }
 ```
 Status: **completed**
@@ -10533,29 +10533,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_click&quot;,
-      &quot;description&quot;: &quot;Perform click on a web page&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;element\&quot;: \&quot;Senden-Button\&quot;, \&quot;ref\&quot;: \&quot;ref-wvvcn28kwq8\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_click",
+      "description": "Perform click on a web page",
+      "parameters": "{\"element\": \"Senden-Button\", \"ref\": \"ref-wvvcn28kwq8\"}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_click&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_click",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10563,8 +10563,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_click&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;click\&quot;,\&quot;success\&quot;:true,\&quot;details\&quot;:{\&quot;doubleClick\&quot;:false,\&quot;button\&quot;:\&quot;left\&quot;},\&quot;pageState\&quot;:{\&quot;url\&quot;:\&quot;http://localhost:8020/#testteam\&quot;,\&quot;title\&quot;:\&quot;Alben-Dashboard (Lokal)\&quot;,\&quot;snapshot\&quot;:{\&quot;ref\&quot;:\&quot;ref-3pvwvimf594\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;body\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-i61wii05h9r\&quot;,\&quot;role\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;header\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-teql1nurwec\&quot;,\&quot;role\&quot;:\&quot;heading\&quot;,\&quot;name\&quot;:\&quot;Alben-Da hboard\&quot;,\&quot;tag\&quot;:\&quot;h1\&quot;,\&quot;children\&quot;:[],\&quot;level\&quot;:1,\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-8n1kch3wnfr\&quot;,\&quot;role\&quot;:\&quot;navigation\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;nav\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-qhzwqx6o838\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Über icht\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#overview\&quot;},{\&quot;ref\&quot;:\&quot;ref-5oa5c4p2ot3\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Zeitreihe Band\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#band\&quot;},{\&quot;ref\&quot;:\&quot;ref-tsfb912iql\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Alle Wertungen\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#scatter\&quot;},{\&quot;ref\&quot;:\&quot;ref-n0twzt6gzf9\&quot;,\&quot;role\&quot;:\&quot;link\&quot;,\&quot;name\&quot;:\&quot;Te tteam\&quot;,\&quot;tag\&quot;:\&quot;a\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;readonly\&quot;],\&quot;url\&quot;:\&quot;#testteam\&quot;}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]},{\&quot;ref\&quot;:\&quot;ref-hu8y7d25oqv\&quot;,\&quot;role\&quot;:\&quot;main\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;main\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-6dkdjtw9zx7\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-jham2lepl0i\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-n47hv5gdfdb\&quot;,\&quot;role\&quot;:\&quot;generic\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;div\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-zc377r4bhfq\&quot;,\&quot;role\&quot;:\&quot;textbox\&quot;,\&quot;name\&quot;:\&quot;Nachricht eingeben...\&quot;,\&quot;tag\&quot;:\&quot;textarea\&quot;,\&quot;children\&quot;:[],\&quot;states\&quot;:[\&quot;disabled\&quot;,\&quot;readonly\&quot;],\&quot;placeholder\&quot;:\&quot;Nachricht eingeben...\&quot;},{\&quot;ref\&quot;:\&quot;ref-wvvcn28kwq8\&quot;,\&quot;role\&quot;:\&quot;button\&quot;,\&quot;name\&quot;:\&quot;Nachricht senden\&quot;,\&quot;tag\&quot;:\&quot;button\&quot;,\&quot;children\&quot;:[{\&quot;ref\&quot;:\&quot;ref-dk2qivmdk8k\&quot;,\&quot;role\&quot;:\&quot;img\&quot;,\&quot;name\&quot;:\&quot;\&quot;,\&quot;tag\&quot;:\&quot;svg\&quot;,\&quot;children\&quot;:[]}],\&quot;states\&quot;:[\&quot;disabled\&quot;,\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;readonly\&quot;]}],\&quot;states\&quot;:[\&quot;focused\&quot;,\&quot;readonly\&quot;]}}}&quot;
+  "selectedTool": "browser_click",
+  "result": "{\"action\":\"click\",\"success\":true,\"details\":{\"doubleClick\":false,\"button\":\"left\"},\"pageState\":{\"url\":\"http://localhost:8020/#testteam\",\"title\":\"Alben-Dashboard (Lokal)\",\"snapshot\":{\"ref\":\"ref-3pvwvimf594\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"body\",\"children\":[{\"ref\":\"ref-i61wii05h9r\",\"role\":\"banner\",\"name\":\"\",\"tag\":\"header\",\"children\":[{\"ref\":\"ref-teql1nurwec\",\"role\":\"heading\",\"name\":\"Alben-Da hboard\",\"tag\":\"h1\",\"children\":[],\"level\":1,\"states\":[\"readonly\"]},{\"ref\":\"ref-8n1kch3wnfr\",\"role\":\"navigation\",\"name\":\"\",\"tag\":\"nav\",\"children\":[{\"ref\":\"ref-qhzwqx6o838\",\"role\":\"link\",\"name\":\"Über icht\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#overview\"},{\"ref\":\"ref-5oa5c4p2ot3\",\"role\":\"link\",\"name\":\"Zeitreihe Band\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#band\"},{\"ref\":\"ref-tsfb912iql\",\"role\":\"link\",\"name\":\"Alle Wertungen\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#scatter\"},{\"ref\":\"ref-n0twzt6gzf9\",\"role\":\"link\",\"name\":\"Te tteam\",\"tag\":\"a\",\"children\":[],\"states\":[\"readonly\"],\"url\":\"#testteam\"}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]},{\"ref\":\"ref-hu8y7d25oqv\",\"role\":\"main\",\"name\":\"\",\"tag\":\"main\",\"children\":[{\"ref\":\"ref-6dkdjtw9zx7\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-jham2lepl0i\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-n47hv5gdfdb\",\"role\":\"generic\",\"name\":\"\",\"tag\":\"div\",\"children\":[{\"ref\":\"ref-zc377r4bhfq\",\"role\":\"textbox\",\"name\":\"Nachricht eingeben...\",\"tag\":\"textarea\",\"children\":[],\"states\":[\"disabled\",\"readonly\"],\"placeholder\":\"Nachricht eingeben...\"},{\"ref\":\"ref-wvvcn28kwq8\",\"role\":\"button\",\"name\":\"Nachricht senden\",\"tag\":\"button\",\"children\":[{\"ref\":\"ref-dk2qivmdk8k\",\"role\":\"img\",\"name\":\"\",\"tag\":\"svg\",\"children\":[]}],\"states\":[\"disabled\",\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"readonly\"]}],\"states\":[\"focused\",\"readonly\"]}}}"
 }
 ```
 Status: **completed**
@@ -10584,29 +10584,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 10}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 10}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10614,8 +10614,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:10}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":10}"
 }
 ```
 Status: **completed**
@@ -10635,29 +10635,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_console_messages&quot;,
-      &quot;description&quot;: &quot;Returns all console messages&quot;,
-      &quot;parameters&quot;: &quot;{}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_console_messages",
+      "description": "Returns all console messages",
+      "parameters": "{}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_console_messages&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_console_messages",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10665,8 +10665,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_console_messages&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;console_messages\&quot;,\&quot;success\&quot;:true,\&quot;messages\&quot;:[{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\&quot;,\&quot;timestamp\&quot;:1763166162917},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\&quot;,\&quot;timestamp\&quot;:1763166162919},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\&quot;,\&quot;timestamp\&quot;:1763166163337},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166222757},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166252045},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166270697}]}&quot;
+  "selectedTool": "browser_console_messages",
+  "result": "{\"action\":\"console_messages\",\"success\":true,\"messages\":[{\"type\":\"warning\",\"message\":\"Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\",\"timestamp\":1763166162917},{\"type\":\"warning\",\"message\":\"Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\",\"timestamp\":1763166162919},{\"type\":\"warning\",\"message\":\"✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\",\"timestamp\":1763166163337},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166222757},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166252045},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166270697}]}"
 }
 ```
 Status: **completed**
@@ -10697,7 +10697,7 @@ Die neuen Debug-Logs erscheinen nicht, vermutlich wegen Browser-Caching. Prüfe 
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 16, lines removed: 4
@@ -10708,16 +10708,16 @@ Lines added: 16, lines removed: 4
       // Die userMessage enthält bereits RAG-Kontext, falls verfügbar
 +     // WICHTIG: Die letzte User-Nachricht muss die enrichedQuery sein!
       const apiMessages = [
--       { role: &#39;system&#39;, content: systemPrompt },
+-       { role: 'system', content: systemPrompt },
 -       ...this.messages.map(msg =&gt; ({
-+       { role: &#39;system&#39;, content: systemPrompt }
++       { role: 'system', content: systemPrompt }
 +     ];
 +     
 +     // Füge alle bisherigen Messages hinzu (außer der letzten User-Message)
 +     for (let i = 0; i &lt; this.messages.length - 1; i++) {
 +       const msg = this.messages[i];
 +       apiMessages.push({
-          role: msg.role === &#39;user&#39; ? &#39;user&#39; : &#39;assistant&#39;,
+          role: msg.role === 'user' ? 'user' : 'assistant',
           content: msg.content
 -       }))
 -     ];
@@ -10726,7 +10726,7 @@ Lines added: 16, lines removed: 4
 +     
 +     // Füge die enrichedQuery als letzte User-Message hinzu
 +     apiMessages.push({
-+       role: &#39;user&#39;,
++       role: 'user',
 +       content: userMessage
 +     });
       
@@ -10816,29 +10816,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 3}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 3}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10846,8 +10846,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:3}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":3}"
 }
 ```
 Status: **completed**
@@ -10875,29 +10875,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_wait_for&quot;,
-      &quot;description&quot;: &quot;Wait for text to appear or disappear or a specified time to pass&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;time\&quot;: 15}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_wait_for",
+      "description": "Wait for text to appear or disappear or a specified time to pass",
+      "parameters": "{\"time\": 15}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_wait_for&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_wait_for",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10905,8 +10905,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_wait_for&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;wait_for\&quot;,\&quot;success\&quot;:true,\&quot;type\&quot;:\&quot;time\&quot;,\&quot;duration\&quot;:15}&quot;
+  "selectedTool": "browser_wait_for",
+  "result": "{\"action\":\"wait_for\",\"success\":true,\"type\":\"time\",\"duration\":15}"
 }
 ```
 Status: **completed**
@@ -10926,29 +10926,29 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;browser_console_messages&quot;,
-      &quot;description&quot;: &quot;Returns all console messages&quot;,
-      &quot;parameters&quot;: &quot;{}&quot;,
-      &quot;serverName&quot;: &quot;cursor-ide-browser&quot;
+      "name": "browser_console_messages",
+      "description": "Returns all console messages",
+      "parameters": "{}",
+      "serverName": "cursor-ide-browser"
     }
   ],
-  &quot;fileOutputThresholdBytes&quot;: &quot;40000&quot;
+  "fileOutputThresholdBytes": "40000"
 }
 ```
 Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;None&quot;,
-    &quot;selectedOption&quot;: &quot;rejectAndTellWhatToDoDifferently&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;browser_console_messages&quot;,
-    &quot;serverId&quot;: &quot;cursor-ide-browser&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "browser_console_messages",
+    "serverId": "cursor-ide-browser"
   }
 }
 ```
@@ -10956,8 +10956,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;browser_console_messages&quot;,
-  &quot;result&quot;: &quot;{\&quot;action\&quot;:\&quot;console_messages\&quot;,\&quot;success\&quot;:true,\&quot;messages\&quot;:[{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\&quot;,\&quot;timestamp\&quot;:1763166162917},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\&quot;,\&quot;timestamp\&quot;:1763166162919},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\&quot;,\&quot;timestamp\&quot;:1763166163337},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166222757},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166252045},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\&quot;,\&quot;timestamp\&quot;:1763166270697},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\&quot;,\&quot;timestamp\&quot;:1763166285059},{\&quot;type\&quot;:\&quot;warning\&quot;,\&quot;message\&quot;:\&quot;✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\&quot;,\&quot;timestamp\&quot;:1763166285528},{\&quot;type\&quot;:\&quot;debug\&quot;,\&quot;message\&quot;:\&quot;Uncaught Error: Element not found (http://localhost:8020/#testteam?cache-bust=123:412)\&quot;,\&quot;timestamp\&quot;:1763166289625},{\&quot;type\&quot;:\&quot;debug\&quot;,\&quot;message\&quot;:\&quot;Uncaught Error: Element not found (http://localhost:8020/#testteam?cache-bust=123:412)\&quot;,\&quot;timestamp\&quot;:1763166289916}]}&quot;
+  "selectedTool": "browser_console_messages",
+  "result": "{\"action\":\"console_messages\",\"success\":true,\"messages\":[{\"type\":\"warning\",\"message\":\"Daten geladen: 3634 (http://localhost:8020/js/utils.js:9)\",\"timestamp\":1763166162917},{\"type\":\"warning\",\"message\":\"Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\",\"timestamp\":1763166162919},{\"type\":\"warning\",\"message\":\"✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\",\"timestamp\":1763166163337},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166222757},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166252045},{\"type\":\"warning\",\"message\":\"RAG: Query mit Kontext erweitert (http://localhost:8020/js/chat.js:173)\",\"timestamp\":1763166270697},{\"type\":\"warning\",\"message\":\"Lade Album-Embeddings... (http://localhost:8020/js/chat.js:40)\",\"timestamp\":1763166285059},{\"type\":\"warning\",\"message\":\"✅ 3634 Embeddings geladen (http://localhost:8020/js/chat.js:42)\",\"timestamp\":1763166285528},{\"type\":\"debug\",\"message\":\"Uncaught Error: Element not found (http://localhost:8020/#testteam?cache-bust=123:412)\",\"timestamp\":1763166289625},{\"type\":\"debug\",\"message\":\"Uncaught Error: Element not found (http://localhost:8020/#testteam?cache-bust=123:412)\",\"timestamp\":1763166289916}]}"
 }
 ```
 Status: **completed**
@@ -11138,7 +11138,7 @@ Der System-Prompt ist sehr lang (~274 Zeilen), was die RAG-Daten überdecken kan
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 23, lines removed: 4
@@ -11151,8 +11151,8 @@ Lines added: 23, lines removed: 4
 +     // System-Prompt laden
       const systemPrompt = await loadSystemPrompt();
 +     
-+     // Prüfe ob userMessage RAG-Kontext enthält (enthält &quot;RELEVANTE ALBENDATEN&quot;)
-+     const hasRAGContext = userMessage.includes(&#39;RELEVANTE ALBENDATEN&#39;);
++     // Prüfe ob userMessage RAG-Kontext enthält (enthält "RELEVANTE ALBENDATEN")
++     const hasRAGContext = userMessage.includes('RELEVANTE ALBENDATEN');
 +     let finalSystemPrompt = systemPrompt;
 +     let finalUserMessage = userMessage;
 +     
@@ -11162,13 +11162,13 @@ Lines added: 23, lines removed: 4
 +       if (ragContextMatch) {
 +         const ragContext = ragContextMatch[0];
 +         // Entferne RAG-Kontext aus User-Message
-+         finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, &#39;&#39;).trim();
++         finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, '').trim();
 +         
 +         // Füge RAG-Kontext prominent am Anfang des System-Prompts hinzu
 +         finalSystemPrompt = &#96;WICHTIG: Du hast Zugriff auf folgende konkrete Albendaten mit Noten:\n\n${ragContext}\n\n---\n\n${systemPrompt}\n\n---\n\nWICHTIG: Nutze die oben genannten konkreten Noten und Alben-Daten in deinen Antworten. Beziehe dich präzise auf die Noten, wenn du über Alben sprichst.&#96;;
 +         
-+         console.log(&#39;RAG: Kontext in System-Prompt integriert&#39;);
-+         console.log(&#39;RAG: User-Message ohne Kontext:&#39;, finalUserMessage);
++         console.log('RAG: Kontext in System-Prompt integriert');
++         console.log('RAG: User-Message ohne Kontext:', finalUserMessage);
 +       }
 +     }
       
@@ -11176,8 +11176,8 @@ Lines added: 23, lines removed: 4
 -     // Die userMessage enthält bereits RAG-Kontext, falls verfügbar
 -     // WICHTIG: Die letzte User-Nachricht muss die enrichedQuery sein!
       const apiMessages = [
--       { role: &#39;system&#39;, content: systemPrompt }
-+       { role: &#39;system&#39;, content: finalSystemPrompt }
+-       { role: 'system', content: systemPrompt }
++       { role: 'system', content: finalSystemPrompt }
       ];
       
 ```
@@ -11192,7 +11192,7 @@ Lines added: 2, lines removed: 2
 -     // Füge die enrichedQuery als letzte User-Message hinzu
 +     // Füge die finale User-Message hinzu (ohne RAG-Kontext, da dieser jetzt im System-Prompt ist)
       apiMessages.push({
-        role: &#39;user&#39;,
+        role: 'user',
 -       content: userMessage
 +       content: finalUserMessage
       });
@@ -11207,7 +11207,7 @@ Lines added: 2, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: 2
@@ -11215,13 +11215,13 @@ Lines added: 4, lines removed: 2
 ```diff
 @@ -249,6 +249,8 @@
       // Debug: Zeige was an API gesendet wird
-      console.log(&#39;API: Sende Nachricht an OpenRouter&#39;);
--     console.log(&#39;API: User-Message Länge:&#39;, userMessage.length);
--     console.log(&#39;API: User-Message (erste 300 Zeichen):&#39;, userMessage.substring(0, 300));
-+     console.log(&#39;API: System-Prompt Länge:&#39;, finalSystemPrompt.length);
-+     console.log(&#39;API: System-Prompt (erste 500 Zeichen):&#39;, finalSystemPrompt.substring(0, 500));
-+     console.log(&#39;API: User-Message Länge:&#39;, finalUserMessage.length);
-+     console.log(&#39;API: User-Message:&#39;, finalUserMessage);
+      console.log('API: Sende Nachricht an OpenRouter');
+-     console.log('API: User-Message Länge:', userMessage.length);
+-     console.log('API: User-Message (erste 300 Zeichen):', userMessage.substring(0, 300));
++     console.log('API: System-Prompt Länge:', finalSystemPrompt.length);
++     console.log('API: System-Prompt (erste 500 Zeichen):', finalSystemPrompt.substring(0, 500));
++     console.log('API: User-Message Länge:', finalUserMessage.length);
++     console.log('API: User-Message:', finalUserMessage);
       
       const requestBody = {
 ```
@@ -11320,17 +11320,17 @@ Das LLM erkennt die Daten nicht. Prüfe, ob Taylor Swift in den Daten vorhanden 
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && grep -i "taylor swift" public/data/alben.json | head -5</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && grep -i "taylor swift" public/data/alben.json | head -5</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && grep -i "taylor swift" public/data/alben.json | head -5
 ```
 
 ```
-    &quot;Band&quot;: &quot;Taylor Swift&quot;,
-    &quot;Band&quot;: &quot;Taylor Swift&quot;,
-    &quot;Band&quot;: &quot;Taylor Swift&quot;,
-    &quot;Band&quot;: &quot;Taylor Swift&quot;,
+    "Band": "Taylor Swift",
+    "Band": "Taylor Swift",
+    "Band": "Taylor Swift",
+    "Band": "Taylor Swift",
 
 ```
 </details>
@@ -11348,7 +11348,7 @@ cd /Users/rstockm/Documents/GitHub/testabend && grep -i "taylor swift" public/da
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 16, lines removed: 5
@@ -11358,35 +11358,35 @@ Lines added: 16, lines removed: 5
       }
       
 -     // Formatiere relevante Alben als Kontext
--     let context = &#39;\n\nRELEVANTE ALBENDATEN:\n&#39;;
+-     let context = '\n\nRELEVANTE ALBENDATEN:\n';
 +     // Formatiere relevante Alben als Kontext - sehr explizit und strukturiert
-+     let context = &#39;\n\n=== KONKRETE ALBENDATEN MIT NOTEN ===\n&#39;;
-+     context += &#39;Die folgenden Alben sind in der Datenbank vorhanden mit folgenden Bewertungen:\n\n&#39;;
++     let context = '\n\n=== KONKRETE ALBENDATEN MIT NOTEN ===\n';
++     context += 'Die folgenden Alben sind in der Datenbank vorhanden mit folgenden Bewertungen:\n\n';
 +     
       relevantAlbums.forEach((album, idx) =&gt; {
--       context += &#96;${idx + 1}. ${album.Band} - &quot;${album.Album}&quot; (${album.Jahr || &#39;N/A&#39;}): Note ${album.Note.toFixed(2)}&#96;;
+-       context += &#96;${idx + 1}. ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): Note ${album.Note.toFixed(2)}&#96;;
 +       context += &#96;ALBUM ${idx + 1}:\n&#96;;
 +       context += &#96;  Band: ${album.Band}\n&#96;;
-+       context += &#96;  Album: &quot;${album.Album}&quot;\n&#96;;
-+       context += &#96;  Jahr: ${album.Jahr || &#39;N/A&#39;}\n&#96;;
++       context += &#96;  Album: "${album.Album}"\n&#96;;
++       context += &#96;  Jahr: ${album.Jahr || 'N/A'}\n&#96;;
 +       context += &#96;  Note: ${album.Note.toFixed(2)}\n&#96;;
-        if (album.similarity &amp;&amp; album.matchType === &#39;semantic&#39;) {
+        if (album.similarity &amp;&amp; album.matchType === 'semantic') {
 -         context += &#96; [Relevanz: ${(album.similarity * 100).toFixed(1)}%]&#96;;
 +         context += &#96;  Relevanz: ${(album.similarity * 100).toFixed(1)}%\n&#96;;
-        } else if (album.matchType === &#39;exact&#39;) {
+        } else if (album.matchType === 'exact') {
 -         context += &#96; [Exakter Match]&#96;;
 +         context += &#96;  Match-Typ: Exakt\n&#96;;
         }
-        context += &#39;\n&#39;;
+        context += '\n';
       });
 +     
-+     context += &#39;=== ENDE DER ALBENDATEN ===\n&#39;;
-+     context += &#39;\nWICHTIG: Diese Daten sind FAKTISCH und müssen in der Antwort verwendet werden.&#39;;
++     context += '=== ENDE DER ALBENDATEN ===\n';
++     context += '\nWICHTIG: Diese Daten sind FAKTISCH und müssen in der Antwort verwendet werden.';
       
       const enriched = userQuery + context;
-      console.log(&#39;RAG: Kontext hinzugefügt, Gesamtlänge:&#39;, enriched.length);
-+     console.log(&#39;RAG: Anzahl Alben:&#39;, relevantAlbums.length);
-+     console.log(&#39;RAG: Erste 3 Alben:&#39;, relevantAlbums.slice(0, 3).map(a =&gt; &#96;${a.Band} - ${a.Album}: ${a.Note}&#96;));
+      console.log('RAG: Kontext hinzugefügt, Gesamtlänge:', enriched.length);
++     console.log('RAG: Anzahl Alben:', relevantAlbums.length);
++     console.log('RAG: Erste 3 Alben:', relevantAlbums.slice(0, 3).map(a =&gt; &#96;${a.Band} - ${a.Album}: ${a.Note}&#96;));
       
       return enriched;
 ```
@@ -11399,7 +11399,7 @@ Lines added: 16, lines removed: 5
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 14, lines removed: 4
@@ -11409,28 +11409,28 @@ Lines added: 14, lines removed: 4
       // Wenn RAG-Kontext vorhanden, extrahiere ihn und füge ihn prominent zum System-Prompt hinzu
       if (hasRAGContext) {
 -       const ragContextMatch = userMessage.match(/RELEVANTE ALBENDATEN:[\s\S]*/);
-+       // Suche nach dem RAG-Kontext-Block (kann &quot;RELEVANTE ALBENDATEN&quot; oder &quot;KONKRETE ALBENDATEN&quot; sein)
++       // Suche nach dem RAG-Kontext-Block (kann "RELEVANTE ALBENDATEN" oder "KONKRETE ALBENDATEN" sein)
 +       const ragContextMatch = userMessage.match(/(?:RELEVANTE|KONKRETE) ALBENDATEN[\s\S]*?=== ENDE DER ALBENDATEN ===[\s\S]*?WICHTIG:[\s\S]*/);
         if (ragContextMatch) {
           const ragContext = ragContextMatch[0];
           // Entferne RAG-Kontext aus User-Message
--         finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, &#39;&#39;).trim();
-+         finalUserMessage = userMessage.replace(/(?:RELEVANTE|KONKRETE) ALBENDATEN[\s\S]*/, &#39;&#39;).trim();
+-         finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, '').trim();
++         finalUserMessage = userMessage.replace(/(?:RELEVANTE|KONKRETE) ALBENDATEN[\s\S]*/, '').trim();
           
 -         // Füge RAG-Kontext prominent am Anfang des System-Prompts hinzu
 -         finalSystemPrompt = &#96;WICHTIG: Du hast Zugriff auf folgende konkrete Albendaten mit Noten:\n\n${ragContext}\n\n---\n\n${systemPrompt}\n\n---\n\nWICHTIG: Nutze die oben genannten konkreten Noten und Alben-Daten in deinen Antworten. Beziehe dich präzise auf die Noten, wenn du über Alben sprichst.&#96;;
 +         // Füge RAG-Kontext SEHR prominent am Anfang des System-Prompts hinzu
 +         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.&#96;;
           
-          console.log(&#39;RAG: Kontext in System-Prompt integriert&#39;);
-          console.log(&#39;RAG: User-Message ohne Kontext:&#39;, finalUserMessage);
-+         console.log(&#39;RAG: System-Prompt Länge:&#39;, finalSystemPrompt.length);
+          console.log('RAG: Kontext in System-Prompt integriert');
+          console.log('RAG: User-Message ohne Kontext:', finalUserMessage);
++         console.log('RAG: System-Prompt Länge:', finalSystemPrompt.length);
 +       } else {
 +         // Fallback: Versuche einfachere Suche
 +         const simpleMatch = userMessage.match(/RELEVANTE ALBENDATEN:[\s\S]*/);
 +         if (simpleMatch) {
 +           const ragContext = simpleMatch[0];
-+           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, &#39;&#39;).trim();
++           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, '').trim();
 +           finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden.&#96;;
 +         }
         }
@@ -11444,7 +11444,7 @@ Lines added: 14, lines removed: 4
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); taylor = [d for d in data if 'taylor' in d.get('Band', '').lower()]; print(f'Taylor Swift Alben gefunden: {len(taylor)}'); [print(f\"  {d['Band']} - {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in taylor[:10]]"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); taylor = [d for d in data if 'taylor' in d.get('Band', '').lower()]; print(f'Taylor Swift Alben gefunden: {len(taylor)}'); [print(f\"  {d['Band']} - {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in taylor[:10]]"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); taylor = [d for d in data if 'taylor' in d.get('Band', '').lower()]; print(f'Taylor Swift Alben gefunden: {len(taylor)}'); [print(f\"  {d['Band']} - {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in taylor[:10]]"
@@ -11481,7 +11481,7 @@ Korrigiere noch die Regex-Erkennung:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 20, lines removed: 9
@@ -11490,36 +11490,36 @@ Lines added: 20, lines removed: 9
 @@ -206,18 +206,29 @@
       const systemPrompt = await loadSystemPrompt();
       
--     // Prüfe ob userMessage RAG-Kontext enthält (enthält &quot;RELEVANTE ALBENDATEN&quot;)
--     const hasRAGContext = userMessage.includes(&#39;RELEVANTE ALBENDATEN&#39;);
+-     // Prüfe ob userMessage RAG-Kontext enthält (enthält "RELEVANTE ALBENDATEN")
+-     const hasRAGContext = userMessage.includes('RELEVANTE ALBENDATEN');
 +     // Prüfe ob userMessage RAG-Kontext enthält
-+     const hasRAGContext = userMessage.includes(&#39;KONKRETE ALBENDATEN&#39;) || userMessage.includes(&#39;RELEVANTE ALBENDATEN&#39;);
++     const hasRAGContext = userMessage.includes('KONKRETE ALBENDATEN') || userMessage.includes('RELEVANTE ALBENDATEN');
       let finalSystemPrompt = systemPrompt;
       let finalUserMessage = userMessage;
       
       // Wenn RAG-Kontext vorhanden, extrahiere ihn und füge ihn prominent zum System-Prompt hinzu
       if (hasRAGContext) {
--       // Suche nach dem RAG-Kontext-Block (kann &quot;RELEVANTE ALBENDATEN&quot; oder &quot;KONKRETE ALBENDATEN&quot; sein)
+-       // Suche nach dem RAG-Kontext-Block (kann "RELEVANTE ALBENDATEN" oder "KONKRETE ALBENDATEN" sein)
 -       const ragContextMatch = userMessage.match(/(?:RELEVANTE|KONKRETE) ALBENDATEN[\s\S]*?=== ENDE DER ALBENDATEN ===[\s\S]*?WICHTIG:[\s\S]*/);
 -       if (ragContextMatch) {
 -         const ragContext = ragContextMatch[0];
 -         // Entferne RAG-Kontext aus User-Message
--         finalUserMessage = userMessage.replace(/(?:RELEVANTE|KONKRETE) ALBENDATEN[\s\S]*/, &#39;&#39;).trim();
+-         finalUserMessage = userMessage.replace(/(?:RELEVANTE|KONKRETE) ALBENDATEN[\s\S]*/, '').trim();
 -         
 +       // Suche nach dem RAG-Kontext-Block - verschiedene Formate möglich
 +       let ragContext = null;
 +       
-+       // Format 1: Neue strukturierte Version mit &quot;KONKRETE ALBENDATEN&quot;
++       // Format 1: Neue strukturierte Version mit "KONKRETE ALBENDATEN"
 +       const newFormatMatch = userMessage.match(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*?=== ENDE DER ALBENDATEN ===[\s\S]*?WICHTIG:[\s\S]*?(?=\n\n|$)/);
 +       if (newFormatMatch) {
 +         ragContext = newFormatMatch[0];
-+         finalUserMessage = userMessage.replace(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*/, &#39;&#39;).trim();
++         finalUserMessage = userMessage.replace(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*/, '').trim();
 +       } else {
-+         // Format 2: Alte Version mit &quot;RELEVANTE ALBENDATEN&quot;
++         // Format 2: Alte Version mit "RELEVANTE ALBENDATEN"
 +         const oldFormatMatch = userMessage.match(/RELEVANTE ALBENDATEN:[\s\S]*/);
 +         if (oldFormatMatch) {
 +           ragContext = oldFormatMatch[0];
-+           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, &#39;&#39;).trim();
++           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, '').trim();
 +         }
 +       }
 +       
@@ -11533,18 +11533,18 @@ Lines added: 2, lines removed: 7
 
 ```diff
 @@ -226,12 +237,7 @@
-          console.log(&#39;RAG: User-Message ohne Kontext:&#39;, finalUserMessage);
-          console.log(&#39;RAG: System-Prompt Länge:&#39;, finalSystemPrompt.length);
-+         console.log(&#39;RAG: Kontext-Länge:&#39;, ragContext.length);
+          console.log('RAG: User-Message ohne Kontext:', finalUserMessage);
+          console.log('RAG: System-Prompt Länge:', finalSystemPrompt.length);
++         console.log('RAG: Kontext-Länge:', ragContext.length);
         } else {
 -         // Fallback: Versuche einfachere Suche
 -         const simpleMatch = userMessage.match(/RELEVANTE ALBENDATEN:[\s\S]*/);
 -         if (simpleMatch) {
 -           const ragContext = simpleMatch[0];
--           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, &#39;&#39;).trim();
+-           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, '').trim();
 -           finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden.&#96;;
 -         }
-+         console.warn(&#39;RAG: Kontext gefunden, aber konnte nicht extrahiert werden&#39;);
++         console.warn('RAG: Kontext gefunden, aber konnte nicht extrahiert werden');
         }
       }
 ```
@@ -11645,7 +11645,7 @@ Die Noten-Erklärung steht am Ende des System-Prompts und wird überdeckt. Versc
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 20, lines removed: undefined
@@ -11660,12 +11660,12 @@ Lines added: 20, lines removed: undefined
 + - Es sind also KEINE Schulnoten (1-6)!
 + 
 + Wichtige Schwellen:
-+ - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenannten &quot;Kraftklub&quot; geschafft.
-+ - 2,5 ist die &quot;Schrottgrenze&quot;, alles darunter muss mit harscher Häme und Verachtung gestraft werden
-+ - 2,75 &quot;Deepwater Horizon&quot; - Alben die es darüber geschafft haben, aber noch keine 3 wurden sind zumindest in Teilen Respektabel.
++ - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenannten "Kraftklub" geschafft.
++ - 2,5 ist die "Schrottgrenze", alles darunter muss mit harscher Häme und Verachtung gestraft werden
++ - 2,75 "Deepwater Horizon" - Alben die es darüber geschafft haben, aber noch keine 3 wurden sind zumindest in Teilen Respektabel.
 + - Wirklich gefeiert wird ab 3.2
 + 
-+ WICHTIG: Wenn du über Noten sprichst, interpretiere sie IMMER nach diesem System (0-5, nicht 1-6!). Eine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot; wie bei Schulnoten. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.
++ WICHTIG: Wenn du über Noten sprichst, interpretiere sie IMMER nach diesem System (0-5, nicht 1-6!). Eine Note von 3.5 ist GUT, nicht "befriedigend" wie bei Schulnoten. Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".
 + 
 + An geeigneten Stellen können die Schwellenbegriffe eingebunden werden in die Antworten, aber nicht zu dominant und keine Wiederholungen. Dem Publikum sind die Schwellen bekannt, sie müssen also nicht erklärt werden.
 + 
@@ -11692,7 +11692,7 @@ Lines added: 20, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 10
@@ -11705,9 +11705,9 @@ Lines added: undefined, lines removed: 10
 - - Die Noten funktionieren so: 0 ist abgrundtief schlecht. 5 ist ewiges Meisterwerk.
 - - Es sind also KEINE Schulnoten!
 - - Es gibt wichtige Schwellen:
--   - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenanten &quot;Kraftklub&quot; geschafft.
--   - 2,5 ist die &quot;Schrottgrenze&quot;, alles darunter muss mit harscher Hähme und Verachtung gestraft werden
--   - 2,75 &quot;Deepwater Horizon&quot; - Alben die es darüber geschafft haben, aber noch keine 3 wurden sind zumindest in Teilen Respektabel.
+-   - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenanten "Kraftklub" geschafft.
+-   - 2,5 ist die "Schrottgrenze", alles darunter muss mit harscher Hähme und Verachtung gestraft werden
+-   - 2,75 "Deepwater Horizon" - Alben die es darüber geschafft haben, aber noch keine 3 wurden sind zumindest in Teilen Respektabel.
 -   - Wirklich gefeiert wird ab 3.2
 - - An geeigneten Stellen können die Schwellenbegriffe eingebunden werden in die Antworten, aber nicht zu dominant und keine Widerholungen.
 - - Dem Publikum sind die Schwellen bekannt, sie müssen also nicht erklärt werden.
@@ -11722,7 +11722,7 @@ Lines added: undefined, lines removed: 10
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 1
@@ -11733,9 +11733,9 @@ Lines added: 2, lines removed: 1
           // Füge RAG-Kontext SEHR prominent am Anfang des System-Prompts hinzu
 -         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.&#96;;
 +         // WICHTIG: Erinnere auch an das Notensystem!
-+         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot;. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.&#96;;
++         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht "befriedigend". Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".&#96;;
           
-          console.log(&#39;RAG: Kontext in System-Prompt integriert&#39;);
+          console.log('RAG: Kontext in System-Prompt integriert');
 ```
 
 </details>
@@ -11829,7 +11829,7 @@ Die Zahlen zeigen eine Verbesserung (3.05 → 3.06 → 3.08 → 3.04 → 3.18 �
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); kings = [d for d in data if 'kings' in d.get('Band', '').lower()]; print('Kings of Leon Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(kings, key=lambda x: x.get('Jahr', 0))]"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); kings = [d for d in data if 'kings' in d.get('Band', '').lower()]; print('Kings of Leon Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(kings, key=lambda x: x.get('Jahr', 0))]"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); kings = [d for d in data if 'kings' in d.get('Band', '').lower()]; print('Kings of Leon Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(kings, key=lambda x: x.get('Jahr', 0))]"
@@ -11866,7 +11866,7 @@ Kings of Leon Alben:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: undefined
@@ -11874,7 +11874,7 @@ Lines added: 2, lines removed: undefined
 ```diff
 @@ -13,4 +13,6 @@
   
-  WICHTIG: Wenn du über Noten sprichst, interpretiere sie IMMER nach diesem System (0-5, nicht 1-6!). Eine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot; wie bei Schulnoten. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.
+  WICHTIG: Wenn du über Noten sprichst, interpretiere sie IMMER nach diesem System (0-5, nicht 1-6!). Eine Note von 3.5 ist GUT, nicht "befriedigend" wie bei Schulnoten. Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".
 + 
 + KRITISCH: Die Noten sind objektive Bewertungen. Wenn eine Note höher ist als eine andere, bedeutet das eine BESSERE Bewertung. Du MUSST die Zahlen korrekt interpretieren: Höhere Zahlen = bessere Bewertung. Wenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER, nicht schlechter! Analysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen, nicht auf vorgefassten Meinungen.
   
@@ -11889,7 +11889,7 @@ Lines added: 2, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -11898,10 +11898,10 @@ Lines added: 1, lines removed: 1
 @@ -233,5 +233,5 @@
           // Füge RAG-Kontext SEHR prominent am Anfang des System-Prompts hinzu
           // WICHTIG: Erinnere auch an das Notensystem!
--         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot;. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.&#96;;
-+         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot;. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung. Wenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER. Analysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
+-         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht "befriedigend". Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".&#96;;
++         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht "befriedigend". Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung. Wenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER. Analysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
           
-          console.log(&#39;RAG: Kontext in System-Prompt integriert&#39;);
+          console.log('RAG: Kontext in System-Prompt integriert');
 ```
 
 </details>
@@ -11952,14 +11952,14 @@ Das Problem könnte sein, dass das LLM einem Narrativ folgt ("Bands werden mit d
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 5, lines removed: 2
 
 ```diff
 @@ -165,10 +165,13 @@
-      context += &#39;Die folgenden Alben sind in der Datenbank vorhanden mit folgenden Bewertungen:\n\n&#39;;
+      context += 'Die folgenden Alben sind in der Datenbank vorhanden mit folgenden Bewertungen:\n\n';
       
 -     relevantAlbums.forEach((album, idx) =&gt; {
 +     // Sortiere nach Jahr für chronologische Reihenfolge
@@ -11968,11 +11968,11 @@ Lines added: 5, lines removed: 2
 +     sortedAlbums.forEach((album, idx) =&gt; {
         context += &#96;ALBUM ${idx + 1}:\n&#96;;
         context += &#96;  Band: ${album.Band}\n&#96;;
-        context += &#96;  Album: &quot;${album.Album}&quot;\n&#96;;
-        context += &#96;  Jahr: ${album.Jahr || &#39;N/A&#39;}\n&#96;;
+        context += &#96;  Album: "${album.Album}"\n&#96;;
+        context += &#96;  Jahr: ${album.Jahr || 'N/A'}\n&#96;;
 -       context += &#96;  Note: ${album.Note.toFixed(2)}\n&#96;;
 +       context += &#96;  Note: ${album.Note.toFixed(2)} (WICHTIG: Höhere Note = bessere Bewertung!)\n&#96;;
-        if (album.similarity &amp;&amp; album.matchType === &#39;semantic&#39;) {
+        if (album.similarity &amp;&amp; album.matchType === 'semantic') {
           context += &#96;  Relevanz: ${(album.similarity * 100).toFixed(1)}%\n&#96;;
 ```
 
@@ -11981,7 +11981,7 @@ Lines added: 20, lines removed: undefined
 
 ```diff
 @@ -178,4 +181,24 @@
-        context += &#39;\n&#39;;
+        context += '\n';
       });
 +     
 +     // Füge Vergleichshinweis hinzu, wenn mehrere Alben vorhanden
@@ -12004,7 +12004,7 @@ Lines added: 20, lines removed: undefined
 +       }
 +     }
       
-      context += &#39;=== ENDE DER ALBENDATEN ===\n&#39;;
+      context += '=== ENDE DER ALBENDATEN ===\n';
 ```
 
 </details>
@@ -12155,7 +12155,7 @@ Hinzufügen der Schwellenlinien als Hintergrund-Layer:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 7, lines removed: 1
@@ -12187,7 +12187,7 @@ Lines added: 7, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 65, lines removed: undefined
@@ -12202,9 +12202,9 @@ Lines added: 65, lines removed: undefined
 +  */
 + function createThresholdLinesLayer(rangeYears, domainMinY, domainMaxY) {
 +   const thresholds = [
-+     { value: 2.5, color: &#39;#8b2e2e&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.3 },
-+     { value: 2.75, color: &#39;#8b7d2e&#39;, label: &#39;Deepwater Horizon&#39;, opacity: 0.3 },
-+     { value: 3.0, color: &#39;#2e8b4a&#39;, label: &#39;Kraftklub&#39;, opacity: 0.3 }
++     { value: 2.5, color: '#8b2e2e', label: 'Schrottgrenze', opacity: 0.3 },
++     { value: 2.75, color: '#8b7d2e', label: 'Deepwater Horizon', opacity: 0.3 },
++     { value: 3.0, color: '#2e8b4a', label: 'Kraftklub', opacity: 0.3 }
 +   ];
 +   
 +   // Filtere Schwellen, die im Domain-Bereich liegen
@@ -12231,32 +12231,32 @@ Lines added: 65, lines removed: undefined
 +   return {
 +     data: { values: thresholdData },
 +     mark: {
-+       type: &quot;line&quot;,
++       type: "line",
 +       strokeWidth: 1.5,
-+       opacity: { expr: &quot;datum.Opacity&quot; },
-+       stroke: { expr: &quot;datum.Color&quot; }
++       opacity: { expr: "datum.Opacity" },
++       stroke: { expr: "datum.Color" }
 +     },
 +     encoding: {
 +       x: {
-+         field: &quot;Jahr&quot;,
-+         type: &quot;ordinal&quot;,
-+         sort: &quot;ascending&quot;,
++         field: "Jahr",
++         type: "ordinal",
++         sort: "ascending",
 +         scale: { domain: rangeYears }
 +       },
 +       y: {
-+         field: &quot;Note&quot;,
-+         type: &quot;quantitative&quot;,
++         field: "Note",
++         type: "quantitative",
 +         scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +       },
 +       stroke: {
-+         field: &quot;Color&quot;,
-+         type: &quot;nominal&quot;,
++         field: "Color",
++         type: "nominal",
 +         scale: { domain: visibleThresholds.map(t =&gt; t.color), range: visibleThresholds.map(t =&gt; t.color) },
 +         legend: null
 +       },
 +       detail: {
-+         field: &quot;Threshold&quot;,
-+         type: &quot;nominal&quot;
++         field: "Threshold",
++         type: "nominal"
 +       }
 +     }
 +   };
@@ -12328,7 +12328,7 @@ Korrigiere die Implementierung der Schwellenlinien:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 3
@@ -12358,7 +12358,7 @@ Lines added: 6, lines removed: 3
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 41, lines removed: 32
@@ -12370,32 +12370,32 @@ Lines added: 41, lines removed: 32
 -   return {
 -     data: { values: thresholdData },
 -     mark: {
--       type: &quot;line&quot;,
+-       type: "line",
 -       strokeWidth: 1.5,
--       opacity: { expr: &quot;datum.Opacity&quot; },
--       stroke: { expr: &quot;datum.Color&quot; }
+-       opacity: { expr: "datum.Opacity" },
+-       stroke: { expr: "datum.Color" }
 -     },
 -     encoding: {
 -       x: {
--         field: &quot;Jahr&quot;,
--         type: &quot;ordinal&quot;,
--         sort: &quot;ascending&quot;,
+-         field: "Jahr",
+-         type: "ordinal",
+-         sort: "ascending",
 -         scale: { domain: rangeYears }
 -       },
 -       y: {
--         field: &quot;Note&quot;,
--         type: &quot;quantitative&quot;,
+-         field: "Note",
+-         type: "quantitative",
 -         scale: { domainMin: domainMinY, domainMax: domainMaxY }
 -       },
 -       stroke: {
--         field: &quot;Color&quot;,
--         type: &quot;nominal&quot;,
+-         field: "Color",
+-         type: "nominal",
 -         scale: { domain: visibleThresholds.map(t =&gt; t.color), range: visibleThresholds.map(t =&gt; t.color) },
 -         legend: null
 -       },
 -       detail: {
--         field: &quot;Threshold&quot;,
--         type: &quot;nominal&quot;
+-         field: "Threshold",
+-         type: "nominal"
 -       }
 -     }
 -   };
@@ -12409,21 +12409,21 @@ Lines added: 41, lines removed: 32
 +     return {
 +       data: { values: lineData },
 +       mark: {
-+         type: &quot;line&quot;,
++         type: "line",
 +         strokeWidth: 1.5,
 +         opacity: threshold.opacity,
 +         stroke: threshold.color
 +       },
 +       encoding: {
 +         x: {
-+           field: &quot;Jahr&quot;,
-+           type: &quot;ordinal&quot;,
-+           sort: &quot;ascending&quot;,
++           field: "Jahr",
++           type: "ordinal",
++           sort: "ascending",
 +           scale: { domain: rangeYears }
 +         },
 +         y: {
-+           field: &quot;Note&quot;,
-+           type: &quot;quantitative&quot;,
++           field: "Note",
++           type: "quantitative",
 +           scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +         }
 +       }
@@ -12479,7 +12479,7 @@ Korrigiere die Implementierung: Schwellenlinien als separate Layer direkt einfü
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 11, lines removed: 3
@@ -12516,7 +12516,7 @@ Lines added: 11, lines removed: 3
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -12589,7 +12589,7 @@ Anpassen der Farben für dezente Darstellung:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 3
@@ -12598,12 +12598,12 @@ Lines added: 3, lines removed: 3
 @@ -302,7 +302,7 @@
   function createThresholdLinesLayer(rangeYears, domainMinY, domainMaxY) {
     const thresholds = [
--     { value: 2.5, color: &#39;#8b2e2e&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.3 },
--     { value: 2.75, color: &#39;#8b7d2e&#39;, label: &#39;Deepwater Horizon&#39;, opacity: 0.3 },
--     { value: 3.0, color: &#39;#2e8b4a&#39;, label: &#39;Kraftklub&#39;, opacity: 0.3 }
-+     { value: 2.5, color: &#39;#cc4444&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.25 },
-+     { value: 2.75, color: &#39;#ccaa44&#39;, label: &#39;Deepwater Horizon&#39;, opacity: 0.25 },
-+     { value: 3.0, color: &#39;#44cc66&#39;, label: &#39;Kraftklub&#39;, opacity: 0.25 }
+-     { value: 2.5, color: '#8b2e2e', label: 'Schrottgrenze', opacity: 0.3 },
+-     { value: 2.75, color: '#8b7d2e', label: 'Deepwater Horizon', opacity: 0.3 },
+-     { value: 3.0, color: '#2e8b4a', label: 'Kraftklub', opacity: 0.3 }
++     { value: 2.5, color: '#cc4444', label: 'Schrottgrenze', opacity: 0.25 },
++     { value: 2.75, color: '#ccaa44', label: 'Deepwater Horizon', opacity: 0.25 },
++     { value: 3.0, color: '#44cc66', label: 'Kraftklub', opacity: 0.25 }
     ];
     
 ```
@@ -12689,7 +12689,7 @@ Hinzufügen eines roten Gradienten unterhalb der 2.5-Linie:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 3
@@ -12698,12 +12698,12 @@ Lines added: 3, lines removed: 3
 @@ -302,7 +302,7 @@
   function createThresholdLinesLayer(rangeYears, domainMinY, domainMaxY) {
     const thresholds = [
--     { value: 2.5, color: &#39;#cc4444&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.25 },
--     { value: 2.75, color: &#39;#ccaa44&#39;, label: &#39;Deepwater Horizon&#39;, opacity: 0.25 },
--     { value: 3.0, color: &#39;#44cc66&#39;, label: &#39;Kraftklub&#39;, opacity: 0.25 }
-+     { value: 2.5, color: &#39;#cc4444&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.25, hasGradient: true },
-+     { value: 2.75, color: &#39;#ccaa44&#39;, label: &#39;Deepwater Horizon&#39;, opacity: 0.25, hasGradient: false },
-+     { value: 3.0, color: &#39;#44cc66&#39;, label: &#39;Kraftklub&#39;, opacity: 0.25, hasGradient: false }
+-     { value: 2.5, color: '#cc4444', label: 'Schrottgrenze', opacity: 0.25 },
+-     { value: 2.75, color: '#ccaa44', label: 'Deepwater Horizon', opacity: 0.25 },
+-     { value: 3.0, color: '#44cc66', label: 'Kraftklub', opacity: 0.25 }
++     { value: 2.5, color: '#cc4444', label: 'Schrottgrenze', opacity: 0.25, hasGradient: true },
++     { value: 2.75, color: '#ccaa44', label: 'Deepwater Horizon', opacity: 0.25, hasGradient: false },
++     { value: 3.0, color: '#44cc66', label: 'Kraftklub', opacity: 0.25, hasGradient: false }
     ];
     
 ```
@@ -12752,27 +12752,27 @@ Lines added: 49, lines removed: 18
 +       thresholdLayers.push({
 +         data: { values: areaData },
 +         mark: {
-+           type: &quot;area&quot;,
++           type: "area",
 +           opacity: 0.15,
 +           fill: threshold.color,
 +           // Gradient-Effekt durch Interpolation
-+           interpolate: &quot;linear&quot;
++           interpolate: "linear"
 +         },
 +         encoding: {
 +           x: {
-+             field: &quot;Jahr&quot;,
-+             type: &quot;ordinal&quot;,
-+             sort: &quot;ascending&quot;,
++             field: "Jahr",
++             type: "ordinal",
++             sort: "ascending",
 +             scale: { domain: rangeYears }
 +           },
 +           y: {
-+             field: &quot;NoteTop&quot;,
-+             type: &quot;quantitative&quot;,
++             field: "NoteTop",
++             type: "quantitative",
 +             scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +           },
 +           y2: {
-+             field: &quot;NoteBottom&quot;,
-+             type: &quot;quantitative&quot;
++             field: "NoteBottom",
++             type: "quantitative"
 +           },
 +           fillOpacity: {
 +             // Gradient-Effekt: oben stärker, unten schwächer
@@ -12786,7 +12786,7 @@ Lines added: 49, lines removed: 18
 +     thresholdLayers.push({
         data: { values: lineData },
         mark: {
-          type: &quot;line&quot;,
+          type: "line",
 -         strokeWidth: 1.5,
 -         opacity: threshold.opacity,
 +         strokeWidth: threshold.hasGradient ? 2 : 1.5, // Etwas dicker wenn Gradient vorhanden
@@ -12843,7 +12843,7 @@ Verbessern des Gradient-Effekts: Vega-Lite unterstützt keine direkten Gradiente
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 45, lines removed: 38
@@ -12865,27 +12865,27 @@ Lines added: 45, lines removed: 38
 -       thresholdLayers.push({
 -         data: { values: areaData },
 -         mark: {
--           type: &quot;area&quot;,
+-           type: "area",
 -           opacity: 0.15,
 -           fill: threshold.color,
 -           // Gradient-Effekt durch Interpolation
--           interpolate: &quot;linear&quot;
+-           interpolate: "linear"
 -         },
 -         encoding: {
 -           x: {
--             field: &quot;Jahr&quot;,
--             type: &quot;ordinal&quot;,
--             sort: &quot;ascending&quot;,
+-             field: "Jahr",
+-             type: "ordinal",
+-             sort: "ascending",
 -             scale: { domain: rangeYears }
 -           },
 -           y: {
--             field: &quot;NoteTop&quot;,
--             type: &quot;quantitative&quot;,
+-             field: "NoteTop",
+-             type: "quantitative",
 -             scale: { domainMin: domainMinY, domainMax: domainMaxY }
 -           },
 -           y2: {
--             field: &quot;NoteBottom&quot;,
--             type: &quot;quantitative&quot;
+-             field: "NoteBottom",
+-             type: "quantitative"
 -           },
 -           fillOpacity: {
 -             // Gradient-Effekt: oben stärker, unten schwächer
@@ -12911,26 +12911,26 @@ Lines added: 45, lines removed: 38
 +         thresholdLayers.push({
 +           data: { values: areaData },
 +           mark: {
-+             type: &quot;area&quot;,
++             type: "area",
 +             opacity: opacity,
 +             fill: threshold.color,
-+             interpolate: &quot;linear&quot;
++             interpolate: "linear"
 +           },
 +           encoding: {
 +             x: {
-+               field: &quot;Jahr&quot;,
-+               type: &quot;ordinal&quot;,
-+               sort: &quot;ascending&quot;,
++               field: "Jahr",
++               type: "ordinal",
++               sort: "ascending",
 +               scale: { domain: rangeYears }
 +             },
 +             y: {
-+               field: &quot;NoteTop&quot;,
-+               type: &quot;quantitative&quot;,
++               field: "NoteTop",
++               type: "quantitative",
 +               scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +             },
 +             y2: {
-+               field: &quot;NoteBottom&quot;,
-+               type: &quot;quantitative&quot;
++               field: "NoteBottom",
++               type: "quantitative"
 +             }
             }
 -         }
@@ -13018,7 +13018,7 @@ Erhöhe die Transparenz des Gradient-Verlaufs um 50%:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -13092,7 +13092,7 @@ Erhöhe die Transparenz des Verlaufs um weitere 20%:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -13166,7 +13166,7 @@ Hinzufügen eines grünen Gradienten nach oben für die 3.0-Linie:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 2
@@ -13175,11 +13175,11 @@ Lines added: 2, lines removed: 2
 @@ -302,7 +302,7 @@
   function createThresholdLinesLayer(rangeYears, domainMinY, domainMaxY) {
     const thresholds = [
--     { value: 2.5, color: &#39;#cc4444&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.25, hasGradient: true },
-+     { value: 2.5, color: &#39;#cc4444&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.25, hasGradient: true, gradientDirection: &#39;down&#39; },
-      { value: 2.75, color: &#39;#ccaa44&#39;, label: &#39;Deepwater Horizon&#39;, opacity: 0.25, hasGradient: false },
--     { value: 3.0, color: &#39;#44cc66&#39;, label: &#39;Kraftklub&#39;, opacity: 0.25, hasGradient: false }
-+     { value: 3.0, color: &#39;#44cc66&#39;, label: &#39;Kraftklub&#39;, opacity: 0.25, hasGradient: true, gradientDirection: &#39;up&#39; }
+-     { value: 2.5, color: '#cc4444', label: 'Schrottgrenze', opacity: 0.25, hasGradient: true },
++     { value: 2.5, color: '#cc4444', label: 'Schrottgrenze', opacity: 0.25, hasGradient: true, gradientDirection: 'down' },
+      { value: 2.75, color: '#ccaa44', label: 'Deepwater Horizon', opacity: 0.25, hasGradient: false },
+-     { value: 3.0, color: '#44cc66', label: 'Kraftklub', opacity: 0.25, hasGradient: false }
++     { value: 3.0, color: '#44cc66', label: 'Kraftklub', opacity: 0.25, hasGradient: true, gradientDirection: 'up' }
     ];
     
 ```
@@ -13192,7 +13192,7 @@ Lines added: 2, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 98, lines removed: 45
@@ -13226,32 +13226,32 @@ Lines added: 98, lines removed: 45
 -         thresholdLayers.push({
 -           data: { values: areaData },
 -           mark: {
--             type: &quot;area&quot;,
+-             type: "area",
 -             opacity: opacity,
 -             fill: threshold.color,
--             interpolate: &quot;linear&quot;
+-             interpolate: "linear"
 -           },
 -           encoding: {
 -             x: {
--               field: &quot;Jahr&quot;,
--               type: &quot;ordinal&quot;,
--               sort: &quot;ascending&quot;,
+-               field: "Jahr",
+-               type: "ordinal",
+-               sort: "ascending",
 -               scale: { domain: rangeYears }
 -             },
 -             y: {
--               field: &quot;NoteTop&quot;,
--               type: &quot;quantitative&quot;,
+-               field: "NoteTop",
+-               type: "quantitative",
 -               scale: { domainMin: domainMinY, domainMax: domainMaxY }
 -             },
 -             y2: {
--               field: &quot;NoteBottom&quot;,
--               type: &quot;quantitative&quot;
+-               field: "NoteBottom",
+-               type: "quantitative"
 -             }
 -           }
 -         });
 +       let stepSize, startOpacity, opacityStep;
 +       
-+       if (threshold.gradientDirection === &#39;down&#39;) {
++       if (threshold.gradientDirection === 'down') {
 +         // Gradient nach unten (für 2.5)
 +         const range = threshold.value - domainMinY;
 +         stepSize = range / gradientSteps;
@@ -13274,31 +13274,31 @@ Lines added: 98, lines removed: 45
 +           thresholdLayers.push({
 +             data: { values: areaData },
 +             mark: {
-+               type: &quot;area&quot;,
++               type: "area",
 +               opacity: opacity,
 +               fill: threshold.color,
-+               interpolate: &quot;linear&quot;
++               interpolate: "linear"
 +             },
 +             encoding: {
 +               x: {
-+                 field: &quot;Jahr&quot;,
-+                 type: &quot;ordinal&quot;,
-+                 sort: &quot;ascending&quot;,
++                 field: "Jahr",
++                 type: "ordinal",
++                 sort: "ascending",
 +                 scale: { domain: rangeYears }
 +               },
 +               y: {
-+                 field: &quot;NoteTop&quot;,
-+                 type: &quot;quantitative&quot;,
++                 field: "NoteTop",
++                 type: "quantitative",
 +                 scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +               },
 +               y2: {
-+                 field: &quot;NoteBottom&quot;,
-+                 type: &quot;quantitative&quot;
++                 field: "NoteBottom",
++                 type: "quantitative"
 +               }
 +             }
 +           });
 +         }
-+       } else if (threshold.gradientDirection === &#39;up&#39;) {
++       } else if (threshold.gradientDirection === 'up') {
 +         // Gradient nach oben (für 3.0)
 +         const range = domainMaxY - threshold.value;
 +         stepSize = range / gradientSteps;
@@ -13321,26 +13321,26 @@ Lines added: 98, lines removed: 45
 +           thresholdLayers.push({
 +             data: { values: areaData },
 +             mark: {
-+               type: &quot;area&quot;,
++               type: "area",
 +               opacity: opacity,
 +               fill: threshold.color,
-+               interpolate: &quot;linear&quot;
++               interpolate: "linear"
 +             },
 +             encoding: {
 +               x: {
-+                 field: &quot;Jahr&quot;,
-+                 type: &quot;ordinal&quot;,
-+                 sort: &quot;ascending&quot;,
++                 field: "Jahr",
++                 type: "ordinal",
++                 sort: "ascending",
 +                 scale: { domain: rangeYears }
 +               },
 +               y: {
-+                 field: &quot;NoteTop&quot;,
-+                 type: &quot;quantitative&quot;,
++                 field: "NoteTop",
++                 type: "quantitative",
 +                 scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +               },
 +               y2: {
-+                 field: &quot;NoteBottom&quot;,
-+                 type: &quot;quantitative&quot;
++                 field: "NoteBottom",
++                 type: "quantitative"
 +               }
 +             }
 +           });
@@ -13422,7 +13422,7 @@ Hinzufügen der zusätzlichen Gradienten: Orange von 2.75 nach unten bis 2.5, Ge
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 28, lines removed: 3
@@ -13431,35 +13431,35 @@ Lines added: 28, lines removed: 3
 @@ -302,7 +302,32 @@
   function createThresholdLinesLayer(rangeYears, domainMinY, domainMaxY) {
     const thresholds = [
--     { value: 2.5, color: &#39;#cc4444&#39;, label: &#39;Schrottgrenze&#39;, opacity: 0.25, hasGradient: true, gradientDirection: &#39;down&#39; },
--     { value: 2.75, color: &#39;#ccaa44&#39;, label: &#39;Deepwater Horizon&#39;, opacity: 0.25, hasGradient: false },
--     { value: 3.0, color: &#39;#44cc66&#39;, label: &#39;Kraftklub&#39;, opacity: 0.25, hasGradient: true, gradientDirection: &#39;up&#39; }
+-     { value: 2.5, color: '#cc4444', label: 'Schrottgrenze', opacity: 0.25, hasGradient: true, gradientDirection: 'down' },
+-     { value: 2.75, color: '#ccaa44', label: 'Deepwater Horizon', opacity: 0.25, hasGradient: false },
+-     { value: 3.0, color: '#44cc66', label: 'Kraftklub', opacity: 0.25, hasGradient: true, gradientDirection: 'up' }
 +     { 
 +       value: 2.5, 
-+       color: &#39;#cc4444&#39;, 
-+       label: &#39;Schrottgrenze&#39;, 
++       color: '#cc4444', 
++       label: 'Schrottgrenze', 
 +       opacity: 0.25, 
 +       gradients: [
-+         { direction: &#39;down&#39;, toValue: domainMinY, color: &#39;#cc4444&#39; }
++         { direction: 'down', toValue: domainMinY, color: '#cc4444' }
 +       ]
 +     },
 +     { 
 +       value: 2.75, 
-+       color: &#39;#ccaa44&#39;, 
-+       label: &#39;Deepwater Horizon&#39;, 
++       color: '#ccaa44', 
++       label: 'Deepwater Horizon', 
 +       opacity: 0.25, 
 +       gradients: [
-+         { direction: &#39;down&#39;, toValue: 2.5, color: &#39;#cc8844&#39; } // Orange nach unten
++         { direction: 'down', toValue: 2.5, color: '#cc8844' } // Orange nach unten
 +       ]
 +     },
 +     { 
 +       value: 3.0, 
-+       color: &#39;#44cc66&#39;, 
-+       label: &#39;Kraftklub&#39;, 
++       color: '#44cc66', 
++       label: 'Kraftklub', 
 +       opacity: 0.25, 
 +       gradients: [
-+         { direction: &#39;up&#39;, toValue: domainMaxY, color: &#39;#44cc66&#39; }, // Grün nach oben
-+         { direction: &#39;down&#39;, toValue: 2.75, color: &#39;#ccaa44&#39; } // Gelb nach unten
++         { direction: 'up', toValue: domainMaxY, color: '#44cc66' }, // Grün nach oben
++         { direction: 'down', toValue: 2.75, color: '#ccaa44' } // Gelb nach unten
 +       ]
 +     }
     ];
@@ -13474,7 +13474,7 @@ Lines added: 28, lines removed: 3
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 100, lines removed: 98
@@ -13492,7 +13492,7 @@ Lines added: 100, lines removed: 98
 +       const startOpacity = 0.1;
 +       const opacityStep = 0.016;
         
--       if (threshold.gradientDirection === &#39;down&#39;) {
+-       if (threshold.gradientDirection === 'down') {
 -         // Gradient nach unten (für 2.5)
 -         const range = threshold.value - domainMinY;
 -         stepSize = range / gradientSteps;
@@ -13515,31 +13515,31 @@ Lines added: 100, lines removed: 98
 -           thresholdLayers.push({
 -             data: { values: areaData },
 -             mark: {
--               type: &quot;area&quot;,
+-               type: "area",
 -               opacity: opacity,
 -               fill: threshold.color,
--               interpolate: &quot;linear&quot;
+-               interpolate: "linear"
 -             },
 -             encoding: {
 -               x: {
--                 field: &quot;Jahr&quot;,
--                 type: &quot;ordinal&quot;,
--                 sort: &quot;ascending&quot;,
+-                 field: "Jahr",
+-                 type: "ordinal",
+-                 sort: "ascending",
 -                 scale: { domain: rangeYears }
 -               },
 -               y: {
--                 field: &quot;NoteTop&quot;,
--                 type: &quot;quantitative&quot;,
+-                 field: "NoteTop",
+-                 type: "quantitative",
 -                 scale: { domainMin: domainMinY, domainMax: domainMaxY }
 -               },
 -               y2: {
--                 field: &quot;NoteBottom&quot;,
--                 type: &quot;quantitative&quot;
+-                 field: "NoteBottom",
+-                 type: "quantitative"
 -               }
 -             }
 -           });
 -         }
--       } else if (threshold.gradientDirection === &#39;up&#39;) {
+-       } else if (threshold.gradientDirection === 'up') {
 -         // Gradient nach oben (für 3.0)
 -         const range = domainMaxY - threshold.value;
 -         stepSize = range / gradientSteps;
@@ -13562,26 +13562,26 @@ Lines added: 100, lines removed: 98
 -           thresholdLayers.push({
 -             data: { values: areaData },
 -             mark: {
--               type: &quot;area&quot;,
+-               type: "area",
 -               opacity: opacity,
 -               fill: threshold.color,
--               interpolate: &quot;linear&quot;
+-               interpolate: "linear"
 -             },
 -             encoding: {
 -               x: {
--                 field: &quot;Jahr&quot;,
--                 type: &quot;ordinal&quot;,
--                 sort: &quot;ascending&quot;,
+-                 field: "Jahr",
+-                 type: "ordinal",
+-                 sort: "ascending",
 -                 scale: { domain: rangeYears }
 -               },
 -               y: {
--                 field: &quot;NoteTop&quot;,
--                 type: &quot;quantitative&quot;,
+-                 field: "NoteTop",
+-                 type: "quantitative",
 -                 scale: { domainMin: domainMinY, domainMax: domainMaxY }
 -               },
 -               y2: {
--                 field: &quot;NoteBottom&quot;,
--                 type: &quot;quantitative&quot;
+-                 field: "NoteBottom",
+-                 type: "quantitative"
 -               }
 -             }
 -           });
@@ -13591,7 +13591,7 @@ Lines added: 100, lines removed: 98
 +         const fromValue = threshold.value;
 +         const toValue = Math.max(domainMinY, Math.min(domainMaxY, gradient.toValue));
 +         
-+         if (gradient.direction === &#39;down&#39; &amp;&amp; toValue &lt; fromValue) {
++         if (gradient.direction === 'down' &amp;&amp; toValue &lt; fromValue) {
 +           // Gradient nach unten
 +           const range = fromValue - toValue;
 +           const stepSize = range / gradientSteps;
@@ -13612,31 +13612,31 @@ Lines added: 100, lines removed: 98
 +             thresholdLayers.push({
 +               data: { values: areaData },
 +               mark: {
-+                 type: &quot;area&quot;,
++                 type: "area",
 +                 opacity: opacity,
 +                 fill: gradient.color,
-+                 interpolate: &quot;linear&quot;
++                 interpolate: "linear"
 +               },
 +               encoding: {
 +                 x: {
-+                   field: &quot;Jahr&quot;,
-+                   type: &quot;ordinal&quot;,
-+                   sort: &quot;ascending&quot;,
++                   field: "Jahr",
++                   type: "ordinal",
++                   sort: "ascending",
 +                   scale: { domain: rangeYears }
 +                 },
 +                 y: {
-+                   field: &quot;NoteTop&quot;,
-+                   type: &quot;quantitative&quot;,
++                   field: "NoteTop",
++                   type: "quantitative",
 +                   scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +                 },
 +                 y2: {
-+                   field: &quot;NoteBottom&quot;,
-+                   type: &quot;quantitative&quot;
++                   field: "NoteBottom",
++                   type: "quantitative"
 +                 }
 +               }
 +             });
 +           }
-+         } else if (gradient.direction === &#39;up&#39; &amp;&amp; toValue &gt; fromValue) {
++         } else if (gradient.direction === 'up' &amp;&amp; toValue &gt; fromValue) {
 +           // Gradient nach oben
 +           const range = toValue - fromValue;
 +           const stepSize = range / gradientSteps;
@@ -13657,26 +13657,26 @@ Lines added: 100, lines removed: 98
 +             thresholdLayers.push({
 +               data: { values: areaData },
 +               mark: {
-+                 type: &quot;area&quot;,
++                 type: "area",
 +                 opacity: opacity,
 +                 fill: gradient.color,
-+                 interpolate: &quot;linear&quot;
++                 interpolate: "linear"
 +               },
 +               encoding: {
 +                 x: {
-+                   field: &quot;Jahr&quot;,
-+                   type: &quot;ordinal&quot;,
-+                   sort: &quot;ascending&quot;,
++                   field: "Jahr",
++                   type: "ordinal",
++                   sort: "ascending",
 +                   scale: { domain: rangeYears }
 +                 },
 +                 y: {
-+                   field: &quot;NoteTop&quot;,
-+                   type: &quot;quantitative&quot;,
++                   field: "NoteTop",
++                   type: "quantitative",
 +                   scale: { domainMin: domainMinY, domainMax: domainMaxY }
 +                 },
 +                 y2: {
-+                   field: &quot;NoteBottom&quot;,
-+                   type: &quot;quantitative&quot;
++                   field: "NoteBottom",
++                   type: "quantitative"
 +                 }
 +               }
 +             });
@@ -13695,7 +13695,7 @@ Lines added: 100, lines removed: 98
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 2
@@ -13708,7 +13708,7 @@ Lines added: 3, lines removed: 2
       thresholdLayers.push({
         data: { values: lineData },
         mark: {
-          type: &quot;line&quot;,
+          type: "line",
 -         strokeWidth: threshold.hasGradient ? 2 : 1.5, // Etwas dicker wenn Gradient vorhanden
 -         opacity: threshold.hasGradient ? 0.4 : threshold.opacity, // Etwas stärker wenn Gradient
 +         strokeWidth: hasGradient ? 2 : 1.5, // Etwas dicker wenn Gradient vorhanden
@@ -13812,7 +13812,7 @@ Erhöhe die Opacity für gelbe und orange Gradienten um 20%:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 5, lines removed: 2
@@ -13829,11 +13829,11 @@ Lines added: 5, lines removed: 2
           const toValue = Math.max(domainMinY, Math.min(domainMaxY, gradient.toValue));
 +         
 +         // Für Gelb und Orange: 20% weniger Transparenz (kräftiger)
-+         const isYellowOrOrange = gradient.color === &#39;#ccaa44&#39; || gradient.color === &#39;#cc8844&#39;;
++         const isYellowOrOrange = gradient.color === '#ccaa44' || gradient.color === '#cc8844';
 +         const startOpacity = isYellowOrOrange ? 0.12 : 0.1; // 20% mehr Opacity
 +         const opacityStep = isYellowOrOrange ? 0.0192 : 0.016; // 20% mehr Opacity
           
-          if (gradient.direction === &#39;down&#39; &amp;&amp; toValue &lt; fromValue) {
+          if (gradient.direction === 'down' &amp;&amp; toValue &lt; fromValue) {
 ```
 
 </details>
@@ -13850,7 +13850,7 @@ Lines added: 5, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 1
@@ -13861,7 +13861,7 @@ Lines added: 6, lines removed: 1
             const stepSize = range / gradientSteps;
 +           
 +           // Für Gelb und Orange: 20% weniger Transparenz (kräftiger)
-+           const isYellowOrOrange = gradient.color === &#39;#ccaa44&#39; || gradient.color === &#39;#cc8844&#39;;
++           const isYellowOrOrange = gradient.color === '#ccaa44' || gradient.color === '#cc8844';
 +           const startOpacityUp = isYellowOrOrange ? 0.12 : 0.1; // 20% mehr Opacity
 +           const opacityStepUp = isYellowOrOrange ? 0.0192 : 0.016; // 20% mehr Opacity
             
@@ -13987,7 +13987,7 @@ Anpassen der Y-Achsen-Berechnung: Untergrenze standardmäßig 2.3, es sei denn, 
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 1
@@ -14078,7 +14078,7 @@ Anpassen der oberen Y-Achsen-Grenze: Standardmäßig 3.8, es sei denn, es gibt e
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/utils.js</summary>
 
 **Chunk 1**
 Lines added: 5, lines removed: 1
@@ -14254,16 +14254,16 @@ Hinzufügen eines "Schwellen"-Toggles im Header:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 1
 
 ```diff
 @@ -69,7 +69,8 @@
-      const sortBy = params.sort === &#39;count&#39; ? &#39;count&#39; : &#39;alphabetical&#39;;
-      const showRegression = params.regression === &#39;true&#39;;
-+     const showThresholds = params.thresholds !== &#39;false&#39;; // Standard: an
+      const sortBy = params.sort === 'count' ? 'count' : 'alphabetical';
+      const showRegression = params.regression === 'true';
++     const showThresholds = params.thresholds !== 'false'; // Standard: an
       
       // Header-Controls erstellen
 -     this.createBandHeaderControls(params, showTitles, sortBy, showRegression, headerControls);
@@ -14280,14 +14280,14 @@ Lines added: 2, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -114,5 +114,5 @@
-        this.chartEl.innerHTML = &#39;&lt;p style=&quot;padding: 40px; text-align: center; color: #a3a3a3;&quot;&gt;Bitte wähle eine oder mehrere Bands aus der Liste links aus.&lt;/p&gt;&#39;;
+        this.chartEl.innerHTML = '&lt;p style="padding: 40px; text-align: center; color: #a3a3a3;"&gt;Bitte wähle eine oder mehrere Bands aus der Liste links aus.&lt;/p&gt;';
       } else {
 -       await renderBandsSeries(this.data, selected, this.chartEl, showTitles, showRegression);
 +       await renderBandsSeries(this.data, selected, this.chartEl, showTitles, showRegression, showThresholds);
@@ -14303,7 +14303,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -14339,7 +14339,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 2
@@ -14351,11 +14351,11 @@ Lines added: 2, lines removed: 2
 -   createBandHeaderControls(params, showTitles, sortBy, showRegression, headerControls) {
 +   createBandHeaderControls(params, showTitles, sortBy, showRegression, showThresholds, headerControls) {
       // Albentitel Toggle
-      const titleToggle = createToggle(&#39;Albentitel&#39;, showTitles, () =&gt; {
+      const titleToggle = createToggle('Albentitel', showTitles, () =&gt; {
         const selected = this.parseSelectedBands(params.b);
 -       const q = this.buildBandQuery(selected, !showTitles, sortBy, showRegression);
 +       const q = this.buildBandQuery(selected, !showTitles, sortBy, showRegression, showThresholds);
-        updateHash(&#39;band&#39;, q);
+        updateHash('band', q);
       });
 ```
 
@@ -14365,10 +14365,10 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -174,5 +174,5 @@
         const selected = this.parseSelectedBands(params.b);
-        const newSortBy = sortBy === &#39;count&#39; ? &#39;alphabetical&#39; : &#39;count&#39;;
+        const newSortBy = sortBy === 'count' ? 'alphabetical' : 'count';
 -       const q = this.buildBandQuery(selected, showTitles, newSortBy, showRegression);
 +       const q = this.buildBandQuery(selected, showTitles, newSortBy, showRegression, showThresholds);
-        updateHash(&#39;band&#39;, q);
+        updateHash('band', q);
       });
 ```
 
@@ -14377,19 +14377,19 @@ Lines added: 9, lines removed: 1
 
 ```diff
 @@ -182,8 +182,16 @@
-      const regressionToggle = createToggle(&#39;Regression&#39;, showRegression, () =&gt; {
+      const regressionToggle = createToggle('Regression', showRegression, () =&gt; {
         const selected = this.parseSelectedBands(params.b);
 -       const q = this.buildBandQuery(selected, showTitles, sortBy, !showRegression);
 +       const q = this.buildBandQuery(selected, showTitles, sortBy, !showRegression, showThresholds);
-        updateHash(&#39;band&#39;, q);
+        updateHash('band', q);
       });
       headerControls.appendChild(regressionToggle);
 +     
 +     // Schwellen Toggle
-+     const thresholdsToggle = createToggle(&#39;Schwellen&#39;, showThresholds, () =&gt; {
++     const thresholdsToggle = createToggle('Schwellen', showThresholds, () =&gt; {
 +       const selected = this.parseSelectedBands(params.b);
 +       const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, !showThresholds);
-+       updateHash(&#39;band&#39;, q);
++       updateHash('band', q);
 +     });
 +     headerControls.appendChild(thresholdsToggle);
     }
@@ -14404,7 +14404,7 @@ Lines added: 9, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -14424,10 +14424,10 @@ Lines added: 3, lines removed: undefined
 
 ```diff
 @@ -229,4 +229,7 @@
-        q.regression = &#39;true&#39;;
+        q.regression = 'true';
       }
 +     if (showThresholds === false) {
-+       q.thresholds = &#39;false&#39;;
++       q.thresholds = 'false';
 +     }
       return q;
     }
@@ -14444,7 +14444,7 @@ Lines added: 2, lines removed: 2
 -     const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression);
 +   updateBandHash(selected, showTitles, sortBy, showRegression, showThresholds = true) {
 +     const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, showThresholds);
-      updateHash(&#39;band&#39;, q);
+      updateHash('band', q);
     }
 ```
 
@@ -14456,7 +14456,7 @@ Lines added: 2, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/renderers.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -14633,7 +14633,7 @@ Output mode: content
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/config.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/config.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -14748,7 +14748,7 @@ Erstellen einer Funktion für die Schwellen-Legende und Einfügen oberhalb der T
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
 
 **Chunk 1**
 Lines added: 33, lines removed: undefined
@@ -14756,31 +14756,31 @@ Lines added: 33, lines removed: undefined
 ```diff
 @@ -3,4 +3,37 @@
    */
-  import { getBandPalette } from &#39;./config.js&#39;;
+  import { getBandPalette } from './config.js';
 + 
 + /**
 +  * Schwellen-Legende erstellen
 +  */
 + export function buildThresholdsLegend() {
-+   const legend = document.createElement(&#39;div&#39;);
-+   legend.className = &#39;thresholds-legend&#39;;
++   const legend = document.createElement('div');
++   legend.className = 'thresholds-legend';
 +   
 +   const thresholds = [
-+     { value: 2.5, label: &#39;Schrottgrenze&#39;, color: &#39;#cc4444&#39; },
-+     { value: 2.75, label: &#39;Deepwater Horizon&#39;, color: &#39;#ccaa44&#39; },
-+     { value: 3.0, label: &#39;Kraftklub&#39;, color: &#39;#44cc66&#39; }
++     { value: 2.5, label: 'Schrottgrenze', color: '#cc4444' },
++     { value: 2.75, label: 'Deepwater Horizon', color: '#ccaa44' },
++     { value: 3.0, label: 'Kraftklub', color: '#44cc66' }
 +   ];
 +   
 +   thresholds.forEach(threshold =&gt; {
-+     const item = document.createElement(&#39;div&#39;);
-+     item.className = &#39;threshold-legend-item&#39;;
++     const item = document.createElement('div');
++     item.className = 'threshold-legend-item';
 +     
-+     const line = document.createElement(&#39;div&#39;);
-+     line.className = &#39;threshold-legend-line&#39;;
++     const line = document.createElement('div');
++     line.className = 'threshold-legend-line';
 +     line.style.backgroundColor = threshold.color;
 +     
-+     const label = document.createElement(&#39;span&#39;);
-+     label.className = &#39;threshold-legend-label&#39;;
++     const label = document.createElement('span');
++     label.className = 'threshold-legend-label';
 +     label.textContent = &#96;${threshold.value}: ${threshold.label}&#96;;
 +     
 +     item.appendChild(line);
@@ -14802,18 +14802,18 @@ Lines added: 33, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -4,5 +4,5 @@
-  import { parseHash, updateHash, setActiveNav } from &#39;./utils.js&#39;;
-  import { renderOverview, renderBandsSeries, renderScatterAll } from &#39;./renderers.js&#39;;
-- import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls } from &#39;./controls.js&#39;;
-+ import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend } from &#39;./controls.js&#39;;
-  import { Chat } from &#39;./chat.js&#39;;
+  import { parseHash, updateHash, setActiveNav } from './utils.js';
+  import { renderOverview, renderBandsSeries, renderScatterAll } from './renderers.js';
+- import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls } from './controls.js';
++ import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend } from './controls.js';
+  import { Chat } from './chat.js';
   
 ```
 
@@ -14825,15 +14825,15 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 7, lines removed: undefined
 
 ```diff
 @@ -102,4 +102,11 @@
-      const controlsRow = document.createElement(&#39;div&#39;);
-      controlsRow.className = &#39;band-controls-row&#39;;
+      const controlsRow = document.createElement('div');
+      controlsRow.className = 'band-controls-row';
 +     
 +     // Schwellen-Legende hinzufügen, wenn aktiviert
 +     if (showThresholds) {
@@ -14871,7 +14871,7 @@ Hinzufügen der CSS-Styles für die Legende:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
 
 **Chunk 1**
 Lines added: 30, lines removed: undefined
@@ -14993,15 +14993,15 @@ Entfernen der Zahlen aus der Legende und 50% transparenteren Hintergrund:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -27,5 +27,5 @@
-      const label = document.createElement(&#39;span&#39;);
-      label.className = &#39;threshold-legend-label&#39;;
+      const label = document.createElement('span');
+      label.className = 'threshold-legend-label';
 -     label.textContent = &#96;${threshold.value}: ${threshold.label}&#96;;
 +     label.textContent = threshold.label;
       
@@ -15016,7 +15016,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -15098,7 +15098,7 @@ Entfernen des Rahmens der Legende:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
@@ -15166,7 +15166,7 @@ Entfernen des Hintergrunds der Legende:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 2
@@ -15235,7 +15235,7 @@ Schrift der Legende auf 50% Transparenz setzen:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
@@ -15333,7 +15333,7 @@ Scroll-Position der linken Liste beim Auswählen einer Band beibehalten:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/controls.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: undefined
@@ -15345,8 +15345,8 @@ Lines added: 3, lines removed: undefined
 +     // Scroll-Position speichern
 +     const scrollTop = list.scrollTop;
 +     
-      list.innerHTML = &#39;&#39;;
-      const norm = (filterText || &#39;&#39;).toLowerCase();
+      list.innerHTML = '';
+      const norm = (filterText || '').toLowerCase();
 ```
 
 **Chunk 2**
@@ -15591,7 +15591,7 @@ Erstellen einer Funktion, die erwähnte Bands erkennt und Links hinzufügt:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 10, lines removed: undefined
@@ -15622,7 +15622,7 @@ Lines added: 10, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 44, lines removed: undefined
@@ -15648,8 +15648,8 @@ Lines added: 44, lines removed: undefined
 +       const bandLower = band.toLowerCase();
 +       
 +       // Suche nach dem Bandnamen im Text (case-insensitive)
-+       // Verhindere Teilstring-Matches (z.B. &quot;The&quot; sollte nicht &quot;The Beatles&quot; matchen)
-+       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandLower)}\\b&#96;, &#39;i&#39;);
++       // Verhindere Teilstring-Matches (z.B. "The" sollte nicht "The Beatles" matchen)
++       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandLower)}\\b&#96;, 'i');
 +       if (regex.test(text)) {
 +         mentionedBands.push(band);
 +       }
@@ -15662,7 +15662,7 @@ Lines added: 44, lines removed: undefined
 +    * Regex-Sonderzeichen escapen
 +    */
 +   escapeRegex(str) {
-+     return str.replace(/[.*+?^${}()|[\]\\]/g, &#39;\\$&amp;&#39;);
++     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;');
 +   }
 +   
 +   /**
@@ -15672,7 +15672,7 @@ Lines added: 44, lines removed: undefined
 +     if (!bands || bands.length === 0) return null;
 +     
 +     // URL-encode Bandnamen
-+     const encodedBands = bands.map(band =&gt; encodeURIComponent(band)).join(&#39;,&#39;);
++     const encodedBands = bands.map(band =&gt; encodeURIComponent(band)).join(',');
 +     return &#96;#band?b=${encodedBands}&#96;;
 +   }
     
@@ -15684,12 +15684,12 @@ Lines added: 49, lines removed: 1
 
 ```diff
 @@ -145,5 +189,53 @@
-        const contentEl = document.createElement(&#39;div&#39;);
-        contentEl.className = &#39;chat-message-content&#39;;
+        const contentEl = document.createElement('div');
+        contentEl.className = 'chat-message-content';
 -       contentEl.textContent = msg.content;
 +       
 +       // Für Assistant-Nachrichten: Prüfe auf erwähnte Bands und füge Links hinzu
-+       if (msg.role === &#39;assistant&#39;) {
++       if (msg.role === 'assistant') {
 +         const mentionedBands = this.extractMentionedBands(msg.content);
 +         
 +         // Text-Inhalt setzen
@@ -15698,34 +15698,34 @@ Lines added: 49, lines removed: 1
 +         
 +         // Links hinzufügen, wenn Bands gefunden wurden
 +         if (mentionedBands.length &gt; 0) {
-+           const linkContainer = document.createElement(&#39;div&#39;);
-+           linkContainer.style.marginTop = &#39;12px&#39;;
-+           linkContainer.style.paddingTop = &#39;12px&#39;;
-+           linkContainer.style.borderTop = &#39;1px solid rgba(255, 255, 255, 0.1)&#39;;
++           const linkContainer = document.createElement('div');
++           linkContainer.style.marginTop = '12px';
++           linkContainer.style.paddingTop = '12px';
++           linkContainer.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
 +           
-+           const linkLabel = document.createTextNode(&#39;Zeitreihe: &#39;);
++           const linkLabel = document.createTextNode('Zeitreihe: ');
 +           linkContainer.appendChild(linkLabel);
 +           
 +           // Erstelle Links für jede Band
 +           mentionedBands.forEach((band, index) =&gt; {
-+             const link = document.createElement(&#39;a&#39;);
++             const link = document.createElement('a');
 +             link.href = this.buildBandTimeSeriesURL([band]);
 +             link.textContent = band;
-+             link.style.color = &#39;var(--accent-blue)&#39;;
-+             link.style.textDecoration = &#39;none&#39;;
-+             link.style.marginLeft = &#39;4px&#39;;
-+             link.style.cursor = &#39;pointer&#39;;
++             link.style.color = 'var(--accent-blue)';
++             link.style.textDecoration = 'none';
++             link.style.marginLeft = '4px';
++             link.style.cursor = 'pointer';
 +             
-+             link.addEventListener(&#39;click&#39;, (e) =&gt; {
++             link.addEventListener('click', (e) =&gt; {
 +               e.preventDefault();
-+               window.location.hash = link.getAttribute(&#39;href&#39;).substring(1);
++               window.location.hash = link.getAttribute('href').substring(1);
 +             });
 +             
 +             linkContainer.appendChild(link);
 +             
 +             // Komma zwischen Links (außer beim letzten)
 +             if (index &lt; mentionedBands.length - 1) {
-+               const comma = document.createTextNode(&#39;, &#39;);
++               const comma = document.createTextNode(', ');
 +               linkContainer.appendChild(comma);
 +             }
 +           });
@@ -15775,7 +15775,7 @@ Anpassen, sodass ein einziger Link mit allen erwähnten Bands erstellt wird:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 15, lines removed: 24
@@ -15786,40 +15786,40 @@ Lines added: 15, lines removed: 24
             
 -           // Erstelle Links für jede Band
 -           mentionedBands.forEach((band, index) =&gt; {
--             const link = document.createElement(&#39;a&#39;);
+-             const link = document.createElement('a');
 -             link.href = this.buildBandTimeSeriesURL([band]);
 -             link.textContent = band;
--             link.style.color = &#39;var(--accent-blue)&#39;;
--             link.style.textDecoration = &#39;none&#39;;
--             link.style.marginLeft = &#39;4px&#39;;
--             link.style.cursor = &#39;pointer&#39;;
+-             link.style.color = 'var(--accent-blue)';
+-             link.style.textDecoration = 'none';
+-             link.style.marginLeft = '4px';
+-             link.style.cursor = 'pointer';
 -             
--             link.addEventListener(&#39;click&#39;, (e) =&gt; {
+-             link.addEventListener('click', (e) =&gt; {
 -               e.preventDefault();
--               window.location.hash = link.getAttribute(&#39;href&#39;).substring(1);
+-               window.location.hash = link.getAttribute('href').substring(1);
 -             });
 -             
 -             linkContainer.appendChild(link);
 -             
 -             // Komma zwischen Links (außer beim letzten)
 -             if (index &lt; mentionedBands.length - 1) {
--               const comma = document.createTextNode(&#39;, &#39;);
+-               const comma = document.createTextNode(', ');
 -               linkContainer.appendChild(comma);
 -             }
 -           });
 -           
 +           // Erstelle einen Link mit allen erwähnten Bands
-+           const link = document.createElement(&#39;a&#39;);
++           const link = document.createElement('a');
 +           link.href = this.buildBandTimeSeriesURL(mentionedBands);
-+           link.textContent = mentionedBands.join(&#39;, &#39;);
-+           link.style.color = &#39;var(--accent-blue)&#39;;
-+           link.style.textDecoration = &#39;none&#39;;
-+           link.style.marginLeft = &#39;4px&#39;;
-+           link.style.cursor = &#39;pointer&#39;;
++           link.textContent = mentionedBands.join(', ');
++           link.style.color = 'var(--accent-blue)';
++           link.style.textDecoration = 'none';
++           link.style.marginLeft = '4px';
++           link.style.cursor = 'pointer';
 +           
-+           link.addEventListener(&#39;click&#39;, (e) =&gt; {
++           link.addEventListener('click', (e) =&gt; {
 +             e.preventDefault();
-+             window.location.hash = link.getAttribute(&#39;href&#39;).substring(1);
++             window.location.hash = link.getAttribute('href').substring(1);
 +           });
 +           
 +           linkContainer.appendChild(link);
@@ -15941,7 +15941,7 @@ The string to replace was not found in the file.
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
@@ -15963,7 +15963,7 @@ Lines added: 1, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 7, lines removed: 2
@@ -15973,10 +15973,10 @@ Lines added: 7, lines removed: 2
       this.containerEl.appendChild(inputArea);
       
 -     // Willkommensnachricht
--     this.addMessage(&#39;assistant&#39;, &#39;Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?&#39;);
+-     this.addMessage('assistant', 'Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?');
 +     // Willkommensnachricht nur hinzufügen, wenn noch keine Nachrichten vorhanden sind
 +     if (this.messages.length === 0) {
-+       this.addMessage(&#39;assistant&#39;, &#39;Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?&#39;);
++       this.addMessage('assistant', 'Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?');
 +     } else {
 +       // Nachrichten rendern, wenn bereits welche vorhanden sind
 +       this.renderMessages();
@@ -15993,7 +15993,7 @@ Lines added: 7, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
@@ -16002,9 +16002,9 @@ Lines added: 1, lines removed: undefined
 @@ -469,4 +469,5 @@
     clear() {
       this.messages = [];
-+     localStorage.removeItem(&#39;chat-messages&#39;);
++     localStorage.removeItem('chat-messages');
       this.renderMessages();
-      this.addMessage(&#39;assistant&#39;, &#39;Chat zurückgesetzt. Wie kann ich dir helfen?&#39;);
+      this.addMessage('assistant', 'Chat zurückgesetzt. Wie kann ich dir helfen?');
 ```
 
 </details>
@@ -16023,7 +16023,7 @@ Lines added: 1, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
@@ -16045,7 +16045,7 @@ Lines added: 1, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/router.js</summary>
 
 **Chunk 1**
 Lines added: 16, lines removed: 9
@@ -16055,24 +16055,24 @@ Lines added: 16, lines removed: 9
       }
       
 -     // Chat-Container erstellen
--     const mainEl = document.querySelector(&#39;main&#39;);
--     const chatContainer = document.createElement(&#39;div&#39;);
--     chatContainer.id = &#39;chat-container&#39;;
--     chatContainer.className = &#39;chat-page&#39;;
+-     const mainEl = document.querySelector('main');
+-     const chatContainer = document.createElement('div');
+-     chatContainer.id = 'chat-container';
+-     chatContainer.className = 'chat-page';
 -     
 -     mainEl.appendChild(chatContainer);
 +     // Chat-Container erstellen oder wiederherstellen
-+     let chatContainer = document.getElementById(&#39;chat-container&#39;);
++     let chatContainer = document.getElementById('chat-container');
 +     if (!chatContainer) {
-+       const mainEl = document.querySelector(&#39;main&#39;);
-+       chatContainer = document.createElement(&#39;div&#39;);
-+       chatContainer.id = &#39;chat-container&#39;;
-+       chatContainer.className = &#39;chat-page&#39;;
++       const mainEl = document.querySelector('main');
++       chatContainer = document.createElement('div');
++       chatContainer.id = 'chat-container';
++       chatContainer.className = 'chat-page';
 +       mainEl.appendChild(chatContainer);
 +     }
       
       // API-Key
-      const apiKey = &#39;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&#39;;
+      const apiKey = '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';
       
 -     // Chat initialisieren mit Albendaten und API-Key (für RAG)
 -     this.chat = new Chat(chatContainer, this.data, apiKey);
@@ -16135,7 +16135,7 @@ Hinzufügen der fehlenden Funktionen zum Laden und Speichern:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: undefined
@@ -16164,7 +16164,7 @@ Lines added: 41, lines removed: undefined
 +    */
 +   loadMessagesFromStorage() {
 +     try {
-+       const stored = localStorage.getItem(&#39;chat-messages&#39;);
++       const stored = localStorage.getItem('chat-messages');
 +       if (stored) {
 +         const parsed = JSON.parse(stored);
 +         // Prüfe ob es ein Array ist und Nachrichten enthält
@@ -16178,7 +16178,7 @@ Lines added: 41, lines removed: undefined
 +         }
 +       }
 +     } catch (error) {
-+       console.warn(&#39;Fehler beim Laden des Chatverlaufs:&#39;, error);
++       console.warn('Fehler beim Laden des Chatverlaufs:', error);
 +       this.messages = [];
 +     }
 +   }
@@ -16194,9 +16194,9 @@ Lines added: 41, lines removed: undefined
 +         content: msg.content,
 +         timestamp: msg.timestamp ? msg.timestamp.toISOString() : new Date().toISOString()
 +       }));
-+       localStorage.setItem(&#39;chat-messages&#39;, JSON.stringify(messagesToSave));
++       localStorage.setItem('chat-messages', JSON.stringify(messagesToSave));
 +     } catch (error) {
-+       console.warn(&#39;Fehler beim Speichern des Chatverlaufs:&#39;, error);
++       console.warn('Fehler beim Speichern des Chatverlaufs:', error);
 +     }
 +   }
     
@@ -16289,7 +16289,7 @@ Erstellen einer Stoppwortliste und Anpassen der Chat-Funktion, damit diese Bands
 
 <tool-use data-tool-type="write" data-tool-name="write">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/data/stopwords.txt</summary>
+<details><summary>Tool use: **write** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/data/stopwords.txt</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 1
@@ -16336,7 +16336,7 @@ Anpassen der Chat-Klasse, um die Stoppwortliste zu laden und zu verwenden:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: undefined
@@ -16366,19 +16366,19 @@ Lines added: 22, lines removed: undefined
 +    */
 +   async loadStopwords() {
 +     try {
-+       const response = await fetch(&#39;data/stopwords.txt&#39;);
++       const response = await fetch('data/stopwords.txt');
 +       if (response.ok) {
 +         const text = await response.text();
 +         const words = text
-+           .split(&#39;\n&#39;)
++           .split('\n')
 +           .map(line =&gt; line.trim())
-+           .filter(line =&gt; line.length &gt; 0 &amp;&amp; !line.startsWith(&#39;#&#39;));
++           .filter(line =&gt; line.length &gt; 0 &amp;&amp; !line.startsWith('#'));
 +         
 +         this.stopwords = new Set(words.map(word =&gt; word.toLowerCase()));
 +         console.log(&#96;Stoppwortliste geladen: ${this.stopwords.size} Einträge&#96;);
 +       }
 +     } catch (error) {
-+       console.warn(&#39;Fehler beim Laden der Stoppwortliste:&#39;, error);
++       console.warn('Fehler beim Laden der Stoppwortliste:', error);
 +       this.stopwords = new Set();
 +     }
 +   }
@@ -16394,7 +16394,7 @@ Lines added: 22, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 5, lines removed: undefined
@@ -16547,24 +16547,24 @@ Output mode: content
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 13, lines removed: undefined
 
 ```diff
 @@ -177,6 +177,19 @@
-      sendButton.setAttribute(&#39;aria-label&#39;, &#39;Nachricht senden&#39;);
-      sendButton.addEventListener(&#39;click&#39;, () =&gt; this.sendMessage());
+      sendButton.setAttribute('aria-label', 'Nachricht senden');
+      sendButton.addEventListener('click', () =&gt; this.sendMessage());
 +     
-+     const resetButton = document.createElement(&#39;button&#39;);
-+     resetButton.id = &#39;chat-reset-button&#39;;
-+     resetButton.className = &#39;chat-reset-button&#39;;
-+     resetButton.innerHTML = &#39;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;polyline points=&quot;1 4 1 10 7 10&quot;&gt;&lt;/polyline&gt;&lt;path d=&quot;M3.51 15a9 9 0 1 0 2.13-9.36L1 10&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&#39;;
-+     resetButton.setAttribute(&#39;aria-label&#39;, &#39;Chat zurücksetzen&#39;);
-+     resetButton.setAttribute(&#39;title&#39;, &#39;Chat zurücksetzen&#39;);
-+     resetButton.addEventListener(&#39;click&#39;, () =&gt; {
-+       if (confirm(&#39;Möchtest du den Chat wirklich zurücksetzen? Der gesamte Verlauf wird gelöscht.&#39;)) {
++     const resetButton = document.createElement('button');
++     resetButton.id = 'chat-reset-button';
++     resetButton.className = 'chat-reset-button';
++     resetButton.innerHTML = '&lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;polyline points="1 4 1 10 7 10"&gt;&lt;/polyline&gt;&lt;path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"&gt;&lt;/path&gt;&lt;/svg&gt;';
++     resetButton.setAttribute('aria-label', 'Chat zurücksetzen');
++     resetButton.setAttribute('title', 'Chat zurücksetzen');
++     resetButton.addEventListener('click', () =&gt; {
++       if (confirm('Möchtest du den Chat wirklich zurücksetzen? Der gesamte Verlauf wird gelöscht.')) {
 +         this.clear();
 +       }
 +     });
@@ -16601,7 +16601,7 @@ Hinzufügen der CSS-Styles für den Reset-Button:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/styles.css</summary>
 
 **Chunk 1**
 Lines added: 32, lines removed: undefined
@@ -16764,7 +16764,7 @@ Anpassen des Chats, damit die Begrüßung eine LLM-generierte Variation ist:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -16773,7 +16773,7 @@ Lines added: 1, lines removed: 1
 @@ -200,5 +200,5 @@
       // Willkommensnachricht nur hinzufügen, wenn noch keine Nachrichten vorhanden sind
       if (this.messages.length === 0) {
--       this.addMessage(&#39;assistant&#39;, &#39;Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?&#39;);
+-       this.addMessage('assistant', 'Hallo! Ich bin dein Testteam-Assistent. Wie kann ich dir helfen?');
 +       this.generateWelcomeMessage();
       } else {
         // Nachrichten rendern, wenn bereits welche vorhanden sind
@@ -16795,17 +16795,17 @@ Lines added: 70, lines removed: undefined
 +     this.setLoading(true);
 +     
 +     try {
-+       const baseWelcome = &#39;Willkommen beim EU-Testteam. Ein Besuch lohnt sich ja immer, wo können wir denn helfen?&#39;;
++       const baseWelcome = 'Willkommen beim EU-Testteam. Ein Besuch lohnt sich ja immer, wo können wir denn helfen?';
 +       
 +       // Erstelle eine einfache LLM-Anfrage für eine Variation
-+       const prompt = &#96;Erstelle eine freundliche, natürliche Variation des folgenden Begrüßungstextes. Die Variation soll den gleichen Inhalt und Ton haben, aber anders formuliert sein. Antworte NUR mit der Variation, ohne zusätzliche Erklärungen.\n\nOriginal: &quot;${baseWelcome}&quot;&#96;;
++       const prompt = &#96;Erstelle eine freundliche, natürliche Variation des folgenden Begrüßungstextes. Die Variation soll den gleichen Inhalt und Ton haben, aber anders formuliert sein. Antworte NUR mit der Variation, ohne zusätzliche Erklärungen.\n\nOriginal: "${baseWelcome}"&#96;;
 +       
 +       const response = await this.callOpenRouterAPIForWelcome(prompt);
-+       this.addMessage(&#39;assistant&#39;, response);
++       this.addMessage('assistant', response);
 +     } catch (error) {
-+       console.error(&#39;Fehler beim Generieren der Begrüßung:&#39;, error);
++       console.error('Fehler beim Generieren der Begrüßung:', error);
 +       // Fallback zur Originalnachricht
-+       this.addMessage(&#39;assistant&#39;, &#39;Willkommen beim EU-Testteam. Ein Besuch lohnt sich ja immer, wo können wir denn helfen?&#39;);
++       this.addMessage('assistant', 'Willkommen beim EU-Testteam. Ein Besuch lohnt sich ja immer, wo können wir denn helfen?');
 +     } finally {
 +       this.setLoading(false);
 +     }
@@ -16816,7 +16816,7 @@ Lines added: 70, lines removed: undefined
 +    */
 +   async callOpenRouterAPIForWelcome(prompt) {
 +     if (!this.apiKey) {
-+       throw new Error(&#39;OpenRouter API Key nicht konfiguriert&#39;);
++       throw new Error('OpenRouter API Key nicht konfiguriert');
 +     }
 +     
 +     // System-Prompt laden
@@ -16824,8 +16824,8 @@ Lines added: 70, lines removed: undefined
 +     
 +     // Einfache Nachrichten-Struktur für Begrüßung
 +     const apiMessages = [
-+       { role: &#39;system&#39;, content: systemPrompt },
-+       { role: &#39;user&#39;, content: prompt }
++       { role: 'system', content: systemPrompt },
++       { role: 'user', content: prompt }
 +     ];
 +     
 +     const requestBody = {
@@ -16835,10 +16835,10 @@ Lines added: 70, lines removed: undefined
 +     };
 +     
 +     const response = await fetch(OPENROUTER_CONFIG.baseURL + OPENROUTER_CONFIG.chatEndpoint, {
-+       method: &#39;POST&#39;,
++       method: 'POST',
 +       headers: {
 +         ...OPENROUTER_CONFIG.headers,
-+         &#39;Authorization&#39;: &#96;Bearer ${this.apiKey}&#96;
++         'Authorization': &#96;Bearer ${this.apiKey}&#96;
 +       },
 +       body: JSON.stringify(requestBody)
 +     });
@@ -16851,7 +16851,7 @@ Lines added: 70, lines removed: undefined
 +     const data = await response.json();
 +     
 +     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-+       throw new Error(&#39;Ungültige API-Antwort&#39;);
++       throw new Error('Ungültige API-Antwort');
 +     }
 +     
 +     return data.choices[0].message.content.trim();
@@ -17010,7 +17010,7 @@ Anpassen der Logik: Beim Laden wird geprüft, ob die erste Nachricht eine Begrü
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: undefined
@@ -17022,7 +17022,7 @@ Lines added: 6, lines removed: undefined
 +     // Oder wenn nur eine Begrüßungsnachricht vorhanden ist (beim Neuladen)
       if (this.messages.length === 0) {
         this.generateWelcomeMessage();
-+     } else if (this.messages.length === 1 &amp;&amp; this.messages[0].role === &#39;assistant&#39;) {
++     } else if (this.messages.length === 1 &amp;&amp; this.messages[0].role === 'assistant') {
 +       // Nur eine Assistant-Nachricht = wahrscheinlich alte Begrüßung, neu generieren
 +       this.messages = [];
 +       this.saveMessagesToStorage();
@@ -17390,7 +17390,7 @@ Umsetzen der Punkte 1–4: Tabellenformat, strikte Validierungsanweisungen, redu
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 38, lines removed: 16
@@ -17400,13 +17400,13 @@ Lines added: 38, lines removed: 16
       }
       
 -     // Formatiere relevante Alben als Kontext - sehr explizit und strukturiert
--     let context = &#39;\n\n=== KONKRETE ALBENDATEN MIT NOTEN ===\n&#39;;
--     context += &#39;Die folgenden Alben sind in der Datenbank vorhanden mit folgenden Bewertungen:\n\n&#39;;
+-     let context = '\n\n=== KONKRETE ALBENDATEN MIT NOTEN ===\n';
+-     context += 'Die folgenden Alben sind in der Datenbank vorhanden mit folgenden Bewertungen:\n\n';
 +     // Formatiere relevante Alben als Kontext - Tabellenformat mit strikten Validierungsanweisungen
-+     let context = &#39;\n\n&#39;;
-+     context += &#39;⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE DATEN - VERWENDE GENAU DIESE ZAHLEN ⚠️⚠️⚠️\n\n&#39;;
-+     context += &#39;VERBOTEN: Zahlen erfinden, schätzen oder ändern!\n&#39;;
-+     context += &#39;ERLAUBT: Nur die exakten Zahlen aus der Tabelle verwenden!\n\n&#39;;
++     let context = '\n\n';
++     context += '⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE DATEN - VERWENDE GENAU DIESE ZAHLEN ⚠️⚠️⚠️\n\n';
++     context += 'VERBOTEN: Zahlen erfinden, schätzen oder ändern!\n';
++     context += 'ERLAUBT: Nur die exakten Zahlen aus der Tabelle verwenden!\n\n';
       
       // Sortiere nach Jahr für chronologische Reihenfolge
       const sortedAlbums = [...relevantAlbums].sort((a, b) =&gt; (a.Jahr || 0) - (b.Jahr || 0));
@@ -17414,38 +17414,38 @@ Lines added: 38, lines removed: 16
 -     sortedAlbums.forEach((album, idx) =&gt; {
 -       context += &#96;ALBUM ${idx + 1}:\n&#96;;
 -       context += &#96;  Band: ${album.Band}\n&#96;;
--       context += &#96;  Album: &quot;${album.Album}&quot;\n&#96;;
--       context += &#96;  Jahr: ${album.Jahr || &#39;N/A&#39;}\n&#96;;
+-       context += &#96;  Album: "${album.Album}"\n&#96;;
+-       context += &#96;  Jahr: ${album.Jahr || 'N/A'}\n&#96;;
 -       context += &#96;  Note: ${album.Note.toFixed(2)} (WICHTIG: Höhere Note = bessere Bewertung!)\n&#96;;
--       if (album.similarity &amp;&amp; album.matchType === &#39;semantic&#39;) {
+-       if (album.similarity &amp;&amp; album.matchType === 'semantic') {
 -         context += &#96;  Relevanz: ${(album.similarity * 100).toFixed(1)}%\n&#96;;
--       } else if (album.matchType === &#39;exact&#39;) {
+-       } else if (album.matchType === 'exact') {
 -         context += &#96;  Match-Typ: Exakt\n&#96;;
 -       }
--       context += &#39;\n&#39;;
+-       context += '\n';
 -     });
 +     // Tabellenformat erstellen
-+     context += &#39;| Band | Album | Jahr | Note |\n&#39;;
-+     context += &#39;|------|-------|------|------|\n&#39;;
++     context += '| Band | Album | Jahr | Note |\n';
++     context += '|------|-------|------|------|\n';
 +     
 +     sortedAlbums.forEach((album) =&gt; {
-+       const band = album.Band || &#39;N/A&#39;;
-+       const albumName = album.Album || &#39;N/A&#39;;
-+       const year = album.Jahr || &#39;N/A&#39;;
++       const band = album.Band || 'N/A';
++       const albumName = album.Album || 'N/A';
++       const year = album.Jahr || 'N/A';
 +       const note = album.Note.toFixed(2);
-+       context += &#96;| ${band} | &quot;${albumName}&quot; | ${year} | **${note}** |\n&#96;;
++       context += &#96;| ${band} | "${albumName}" | ${year} | **${note}** |\n&#96;;
 +     });
 +     
-+     context += &#39;\n&#39;;
++     context += '\n';
 +     
 +     // Redundante Hervorhebung: Liste alle Noten nochmal explizit auf
-+     context += &#39;⚠️ EXAKTE NOTEN (MUSS VERWENDET WERDEN):\n&#39;;
++     context += '⚠️ EXAKTE NOTEN (MUSS VERWENDET WERDEN):\n';
 +     sortedAlbums.forEach((album) =&gt; {
 +       const note = album.Note.toFixed(2);
-+       context += &#96;  - &quot;${album.Album}&quot; von ${album.Band} (${album.Jahr || &#39;N/A&#39;}): **${note}** (GENAU diese Zahl!)\n&#96;;
++       context += &#96;  - "${album.Album}" von ${album.Band} (${album.Jahr || 'N/A'}): **${note}** (GENAU diese Zahl!)\n&#96;;
 +     });
 +     
-+     context += &#39;\n&#39;;
++     context += '\n';
 +     
 +     // Beispielpaare für richtige/falsche Verwendung
 +     if (sortedAlbums.length &gt; 0) {
@@ -17453,9 +17453,9 @@ Lines added: 38, lines removed: 16
 +       const exampleNote = firstAlbum.Note.toFixed(2);
 +       const wrongNote = (firstAlbum.Note + 0.3).toFixed(2);
 +       
-+       context += &#39;📋 BEISPIEL FÜR KORREKTE VERWENDUNG:\n&#39;;
-+       context += &#96;❌ FALSCH: &quot;${firstAlbum.Album}&quot; erreichte eine ${wrongNote}\n&#96;;
-+       context += &#96;✅ RICHTIG: &quot;${firstAlbum.Album}&quot; erreichte eine ${exampleNote} (laut Datenbank)\n\n&#96;;
++       context += '📋 BEISPIEL FÜR KORREKTE VERWENDUNG:\n';
++       context += &#96;❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote}\n&#96;;
++       context += &#96;✅ RICHTIG: "${firstAlbum.Album}" erreichte eine ${exampleNote} (laut Datenbank)\n\n&#96;;
 +     }
       
       // Füge Vergleichshinweis hinzu, wenn mehrere Alben vorhanden
@@ -17480,17 +17480,17 @@ Lines added: 10, lines removed: 6
 -           context += &#96;Die Noten bleiben relativ stabil (${minNote.toFixed(2)} - ${maxNote.toFixed(2)}).\n&#96;;
 +           context += &#96;Die Noten bleiben relativ stabil (**${minNote.toFixed(2)}** - **${maxNote.toFixed(2)}**).\n&#96;;
           }
-+         context += &#39;\n&#39;;
++         context += '\n';
         }
       }
       
--     context += &#39;=== ENDE DER ALBENDATEN ===\n&#39;;
--     context += &#39;\nWICHTIG: Diese Daten sind FAKTISCH und müssen in der Antwort verwendet werden.&#39;;
-+     context += &#39;⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n&#39;;
-+     context += &#39;\n&#39;;
-+     context += &#39;ABSOLUT KRITISCH: Diese Daten sind FAKTISCH aus der Datenbank.\n&#39;;
-+     context += &#39;Du MUSST die exakten Noten verwenden. Es ist VERBOTEN, andere Zahlen zu erfinden!\n&#39;;
-+     context += &#39;Wenn du über diese Alben sprichst, verwende GENAU die Zahlen aus der Tabelle oben.\n&#39;;
+-     context += '=== ENDE DER ALBENDATEN ===\n';
+-     context += '\nWICHTIG: Diese Daten sind FAKTISCH und müssen in der Antwort verwendet werden.';
++     context += '⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n';
++     context += '\n';
++     context += 'ABSOLUT KRITISCH: Diese Daten sind FAKTISCH aus der Datenbank.\n';
++     context += 'Du MUSST die exakten Noten verwenden. Es ist VERBOTEN, andere Zahlen zu erfinden!\n';
++     context += 'Wenn du über diese Alben sprichst, verwende GENAU die Zahlen aus der Tabelle oben.\n';
       
       const enriched = userQuery + context;
 ```
@@ -17511,7 +17511,7 @@ Lines added: 10, lines removed: 6
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -17520,10 +17520,10 @@ Lines added: 1, lines removed: 1
 @@ -496,5 +496,5 @@
           // Füge RAG-Kontext SEHR prominent am Anfang des System-Prompts hinzu
           // WICHTIG: Erinnere auch an das Notensystem!
--         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot;. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung. Wenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER. Analysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
-+         finalSystemPrompt = &#96;⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE ALBENDATEN ⚠️⚠️⚠️\n\n${ragContext}\n\n⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n\n---\n\n${systemPrompt}\n\n---\n\n⚠️⚠️⚠️ ABSOLUT KRITISCH - NOCHMAL ZUR ERINNERUNG ⚠️⚠️⚠️\n\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank.\n\nDU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\nVERBOTEN:\n- Zahlen erfinden oder schätzen\n- Andere Zahlen als die in der Tabelle verwenden\n- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n\nERLAUBT:\n- Nur die exakten Noten aus der Tabelle verwenden\n- Die Zahlen genau so wiedergeben wie sie in der Tabelle stehen\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist.\nEine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot;. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung.\nWenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER.\nAnalysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
+-         finalSystemPrompt = &#96;=== KRITISCH WICHTIG: KONKRETE DATEN ===\n\n${ragContext}\n\n=== ENDE DER KRITISCHEN DATEN ===\n\n---\n\n${systemPrompt}\n\n---\n\n=== ABSOLUT KRITISCH ===\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank. Du MUSST diese Noten verwenden, wenn du über diese Alben sprichst. Es ist NICHT erlaubt zu sagen, dass du keine Daten hast - diese Daten sind dir direkt gegeben. Nutze die konkreten Noten in deinen Antworten.\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist. Eine Note von 3.5 ist GUT, nicht "befriedigend". Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung. Wenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER. Analysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
++         finalSystemPrompt = &#96;⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE ALBENDATEN ⚠️⚠️⚠️\n\n${ragContext}\n\n⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n\n---\n\n${systemPrompt}\n\n---\n\n⚠️⚠️⚠️ ABSOLUT KRITISCH - NOCHMAL ZUR ERINNERUNG ⚠️⚠️⚠️\n\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank.\n\nDU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\nVERBOTEN:\n- Zahlen erfinden oder schätzen\n- Andere Zahlen als die in der Tabelle verwenden\n- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n\nERLAUBT:\n- Nur die exakten Noten aus der Tabelle verwenden\n- Die Zahlen genau so wiedergeben wie sie in der Tabelle stehen\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist.\nEine Note von 3.5 ist GUT, nicht "befriedigend". Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung.\nWenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER.\nAnalysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
           
-          console.log(&#39;RAG: Kontext in System-Prompt integriert&#39;);
+          console.log('RAG: Kontext in System-Prompt integriert');
 ```
 
 </details>
@@ -17562,7 +17562,7 @@ Anpassen der Regex für das neue Format:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -17571,8 +17571,8 @@ Lines added: 1, lines removed: 1
 @@ -470,5 +470,5 @@
       
       // Prüfe ob userMessage RAG-Kontext enthält
--     const hasRAGContext = userMessage.includes(&#39;KONKRETE ALBENDATEN&#39;) || userMessage.includes(&#39;RELEVANTE ALBENDATEN&#39;);
-+     const hasRAGContext = userMessage.includes(&#39;KRITISCH WICHTIG: EXAKTE DATEN&#39;) || userMessage.includes(&#39;KONKRETE ALBENDATEN&#39;) || userMessage.includes(&#39;RELEVANTE ALBENDATEN&#39;);
+-     const hasRAGContext = userMessage.includes('KONKRETE ALBENDATEN') || userMessage.includes('RELEVANTE ALBENDATEN');
++     const hasRAGContext = userMessage.includes('KRITISCH WICHTIG: EXAKTE DATEN') || userMessage.includes('KONKRETE ALBENDATEN') || userMessage.includes('RELEVANTE ALBENDATEN');
       let finalSystemPrompt = systemPrompt;
       let finalUserMessage = userMessage;
 ```
@@ -17584,31 +17584,31 @@ Lines added: 15, lines removed: 8
 @@ -479,15 +479,22 @@
         let ragContext = null;
         
--       // Format 1: Neue strukturierte Version mit &quot;KONKRETE ALBENDATEN&quot;
+-       // Format 1: Neue strukturierte Version mit "KONKRETE ALBENDATEN"
 -       const newFormatMatch = userMessage.match(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*?=== ENDE DER ALBENDATEN ===[\s\S]*?WICHTIG:[\s\S]*?(?=\n\n|$)/);
 -       if (newFormatMatch) {
 -         ragContext = newFormatMatch[0];
--         finalUserMessage = userMessage.replace(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*/, &#39;&#39;).trim();
-+       // Format 1: Neues Tabellenformat mit &quot;KRITISCH WICHTIG: EXAKTE DATEN&quot;
+-         finalUserMessage = userMessage.replace(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*/, '').trim();
++       // Format 1: Neues Tabellenformat mit "KRITISCH WICHTIG: EXAKTE DATEN"
 +       const newTableFormatMatch = userMessage.match(/⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE DATEN[\s\S]*?⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️[\s\S]*?Wenn du über diese Alben sprichst[\s\S]*?(?=\n\n|$)/);
 +       if (newTableFormatMatch) {
 +         ragContext = newTableFormatMatch[0];
-+         finalUserMessage = userMessage.replace(/⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE DATEN[\s\S]*/, &#39;&#39;).trim();
++         finalUserMessage = userMessage.replace(/⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE DATEN[\s\S]*/, '').trim();
         } else {
--         // Format 2: Alte Version mit &quot;RELEVANTE ALBENDATEN&quot;
+-         // Format 2: Alte Version mit "RELEVANTE ALBENDATEN"
 -         const oldFormatMatch = userMessage.match(/RELEVANTE ALBENDATEN:[\s\S]*/);
-+         // Format 2: Alte strukturierte Version mit &quot;KONKRETE ALBENDATEN&quot;
++         // Format 2: Alte strukturierte Version mit "KONKRETE ALBENDATEN"
 +         const oldFormatMatch = userMessage.match(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*?=== ENDE DER ALBENDATEN ===[\s\S]*?WICHTIG:[\s\S]*?(?=\n\n|$)/);
           if (oldFormatMatch) {
             ragContext = oldFormatMatch[0];
--           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, &#39;&#39;).trim();
-+           finalUserMessage = userMessage.replace(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*/, &#39;&#39;).trim();
+-           finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, '').trim();
++           finalUserMessage = userMessage.replace(/=== KONKRETE ALBENDATEN MIT NOTEN ===[\s\S]*/, '').trim();
 +         } else {
-+           // Format 3: Sehr alte Version mit &quot;RELEVANTE ALBENDATEN&quot;
++           // Format 3: Sehr alte Version mit "RELEVANTE ALBENDATEN"
 +           const veryOldFormatMatch = userMessage.match(/RELEVANTE ALBENDATEN:[\s\S]*/);
 +           if (veryOldFormatMatch) {
 +             ragContext = veryOldFormatMatch[0];
-+             finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, &#39;&#39;).trim();
++             finalUserMessage = userMessage.replace(/RELEVANTE ALBENDATEN:[\s\S]*/, '').trim();
 +           }
           }
         }
@@ -17740,17 +17740,17 @@ Erweitern der Band-Erkennung auf User-Nachrichten:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 33, lines removed: 38
 
 ```diff
 @@ -360,42 +360,37 @@
-        contentEl.className = &#39;chat-message-content&#39;;
+        contentEl.className = 'chat-message-content';
         
 -       // Für Assistant-Nachrichten: Prüfe auf erwähnte Bands und füge Links hinzu
--       if (msg.role === &#39;assistant&#39;) {
+-       if (msg.role === 'assistant') {
 -         const mentionedBands = this.extractMentionedBands(msg.content);
 -         
 -         // Text-Inhalt setzen
@@ -17759,26 +17759,26 @@ Lines added: 33, lines removed: 38
 -         
 -         // Links hinzufügen, wenn Bands gefunden wurden
 -         if (mentionedBands.length &gt; 0) {
--           const linkContainer = document.createElement(&#39;div&#39;);
--           linkContainer.style.marginTop = &#39;12px&#39;;
--           linkContainer.style.paddingTop = &#39;12px&#39;;
--           linkContainer.style.borderTop = &#39;1px solid rgba(255, 255, 255, 0.1)&#39;;
+-           const linkContainer = document.createElement('div');
+-           linkContainer.style.marginTop = '12px';
+-           linkContainer.style.paddingTop = '12px';
+-           linkContainer.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
 -           
--           const linkLabel = document.createTextNode(&#39;Zeitreihe: &#39;);
+-           const linkLabel = document.createTextNode('Zeitreihe: ');
 -           linkContainer.appendChild(linkLabel);
 -           
 -           // Erstelle einen Link mit allen erwähnten Bands
--           const link = document.createElement(&#39;a&#39;);
+-           const link = document.createElement('a');
 -           link.href = this.buildBandTimeSeriesURL(mentionedBands);
--           link.textContent = mentionedBands.join(&#39;, &#39;);
--           link.style.color = &#39;var(--accent-blue)&#39;;
--           link.style.textDecoration = &#39;none&#39;;
--           link.style.marginLeft = &#39;4px&#39;;
--           link.style.cursor = &#39;pointer&#39;;
+-           link.textContent = mentionedBands.join(', ');
+-           link.style.color = 'var(--accent-blue)';
+-           link.style.textDecoration = 'none';
+-           link.style.marginLeft = '4px';
+-           link.style.cursor = 'pointer';
 -           
--           link.addEventListener(&#39;click&#39;, (e) =&gt; {
+-           link.addEventListener('click', (e) =&gt; {
 -             e.preventDefault();
--             window.location.hash = link.getAttribute(&#39;href&#39;).substring(1);
+-             window.location.hash = link.getAttribute('href').substring(1);
 -           });
 -           
 -           linkContainer.appendChild(link);
@@ -17796,26 +17796,26 @@ Lines added: 33, lines removed: 38
 +       
 +       // Links hinzufügen, wenn Bands gefunden wurden (für User UND Assistant)
 +       if (mentionedBands.length &gt; 0) {
-+         const linkContainer = document.createElement(&#39;div&#39;);
-+         linkContainer.style.marginTop = &#39;12px&#39;;
-+         linkContainer.style.paddingTop = &#39;12px&#39;;
-+         linkContainer.style.borderTop = &#39;1px solid rgba(255, 255, 255, 0.1)&#39;;
++         const linkContainer = document.createElement('div');
++         linkContainer.style.marginTop = '12px';
++         linkContainer.style.paddingTop = '12px';
++         linkContainer.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
 +         
-+         const linkLabel = document.createTextNode(&#39;Zeitreihe: &#39;);
++         const linkLabel = document.createTextNode('Zeitreihe: ');
 +         linkContainer.appendChild(linkLabel);
 +         
 +         // Erstelle einen Link mit allen erwähnten Bands
-+         const link = document.createElement(&#39;a&#39;);
++         const link = document.createElement('a');
 +         link.href = this.buildBandTimeSeriesURL(mentionedBands);
-+         link.textContent = mentionedBands.join(&#39;, &#39;);
-+         link.style.color = &#39;var(--accent-blue)&#39;;
-+         link.style.textDecoration = &#39;none&#39;;
-+         link.style.marginLeft = &#39;4px&#39;;
-+         link.style.cursor = &#39;pointer&#39;;
++         link.textContent = mentionedBands.join(', ');
++         link.style.color = 'var(--accent-blue)';
++         link.style.textDecoration = 'none';
++         link.style.marginLeft = '4px';
++         link.style.cursor = 'pointer';
 +         
-+         link.addEventListener(&#39;click&#39;, (e) =&gt; {
++         link.addEventListener('click', (e) =&gt; {
 +           e.preventDefault();
-+           window.location.hash = link.getAttribute(&#39;href&#39;).substring(1);
++           window.location.hash = link.getAttribute('href').substring(1);
 +         });
 +         
 +         linkContainer.appendChild(link);
@@ -17929,7 +17929,7 @@ Anpassen der RAG-Suche, damit bei Fragen zu einer Band alle Alben dieser Band zu
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: undefined
@@ -17937,7 +17937,7 @@ Lines added: 3, lines removed: undefined
 ```diff
 @@ -147,4 +147,7 @@
       
-      console.log(&#39;RAG: Starte Suche für Query:&#39;, userQuery);
+      console.log('RAG: Starte Suche für Query:', userQuery);
 +     
 +     // Prüfe ob eine spezifische Band erwähnt wird
 +     const mentionedBands = this.findMentionedBands(userQuery);
@@ -17955,7 +17955,7 @@ Lines added: 33, lines removed: undefined
 +     
 +     // Wenn eine Band explizit erwähnt wird, füge ALLE Alben dieser Band hinzu
 +     if (mentionedBands.length &gt; 0) {
-+       console.log(&#39;RAG: Band(en) explizit erwähnt:&#39;, mentionedBands);
++       console.log('RAG: Band(en) explizit erwähnt:', mentionedBands);
 +       
 +       const seenAlbums = new Set();
 +       // Füge bereits gefundene Alben zu Set hinzu (für Duplikat-Prüfung)
@@ -17976,17 +17976,17 @@ Lines added: 33, lines removed: undefined
 +             relevantAlbums.push({
 +               ...album,
 +               similarity: 1.0, // Explizite Band-Matches bekommen höchste Priorität
-+               matchType: &#39;band-explicit&#39;
++               matchType: 'band-explicit'
 +             });
 +             seenAlbums.add(key);
 +           }
 +         });
 +       });
 +       
-+       console.log(&#39;RAG: Nach Hinzufügen aller Band-Alben:&#39;, relevantAlbums.length);
++       console.log('RAG: Nach Hinzufügen aller Band-Alben:', relevantAlbums.length);
 +     }
       
-      console.log(&#39;RAG: Gefundene relevante Alben:&#39;, relevantAlbums.length);
+      console.log('RAG: Gefundene relevante Alben:', relevantAlbums.length);
 ```
 
 </details>
@@ -17997,7 +17997,7 @@ Lines added: 33, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 45, lines removed: undefined
@@ -18029,7 +18029,7 @@ Lines added: 45, lines removed: undefined
 +     // Prüfe jeden verfügbaren Bandnamen
 +     for (const bandLower of availableBands) {
 +       // Suche nach dem Bandnamen im Text (case-insensitive, mit Word-Boundaries)
-+       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandLower)}\\b&#96;, &#39;i&#39;);
++       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandLower)}\\b&#96;, 'i');
 +       if (regex.test(queryLower)) {
 +         // Finde den originalen Bandnamen (mit korrekter Groß-/Kleinschreibung)
 +         const originalBand = this.albumData.find(a =&gt; 
@@ -18049,7 +18049,7 @@ Lines added: 45, lines removed: undefined
 +    * Regex-Sonderzeichen escapen
 +    */
 +   escapeRegex(str) {
-+     return str.replace(/[.*+?^${}()|[\]\\]/g, &#39;\\$&amp;&#39;);
++     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;');
 +   }
     
     /**
@@ -18172,7 +18172,7 @@ Prüfe, ob die RAG-Daten korrekt gefunden und präsentiert werden. Verschärfe d
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); arctic = [d for d in data if 'arctic' in d.get('Band', '').lower()]; print('Arctic Monkeys Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(arctic, key=lambda x: x.get('Jahr', 0))]"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); arctic = [d for d in data if 'arctic' in d.get('Band', '').lower()]; print('Arctic Monkeys Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(arctic, key=lambda x: x.get('Jahr', 0))]"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); arctic = [d for d in data if 'arctic' in d.get('Band', '').lower()]; print('Arctic Monkeys Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(arctic, key=lambda x: x.get('Jahr', 0))]"
@@ -18209,39 +18209,39 @@ Das LLM ignoriert die RAG-Daten. Verschärfe die Anweisungen und füge explizite
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 21, lines removed: 2
 
 ```diff
 @@ -263,7 +263,26 @@
-      context += &#39;⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n&#39;;
-      context += &#39;\n&#39;;
--     context += &#39;ABSOLUT KRITISCH: Diese Daten sind FAKTISCH aus der Datenbank.\n&#39;;
--     context += &#39;Du MUSST die exakten Noten verwenden. Es ist VERBOTEN, andere Zahlen zu erfinden!\n&#39;;
-+     context += &#39;🚨🚨🚨 ABSOLUT KRITISCH - KEINE AUSNAHMEN 🚨🚨🚨\n\n&#39;;
-+     context += &#39;Diese Daten sind FAKTISCH aus der Datenbank.\n\n&#39;;
-+     context += &#39;DU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\n&#39;;
-+     context += &#39;VERBOTEN:\n&#39;;
-+     context += &#39;- Zahlen erfinden, schätzen oder ändern\n&#39;;
-+     context += &#39;- Andere Zahlen als die in der Tabelle verwenden\n&#39;;
-+     context += &#39;- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n&#39;;
-+     context += &#39;- Zahlen zu &quot;runden&quot; oder zu &quot;korrigieren&quot;\n&#39;;
-+     context += &#39;- Zahlen aus dem Gedächtnis zu verwenden\n\n&#39;;
-+     context += &#39;ERLAUBT:\n&#39;;
-+     context += &#39;- NUR die exakten Noten aus der Tabelle verwenden\n&#39;;
-+     context += &#39;- Die Zahlen GENAU so wiedergeben wie sie in der Tabelle stehen\n&#39;;
-+     context += &#39;- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n\n&#39;;
-+     context += &#39;BEISPIEL:\n&#39;;
+      context += '⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n';
+      context += '\n';
+-     context += 'ABSOLUT KRITISCH: Diese Daten sind FAKTISCH aus der Datenbank.\n';
+-     context += 'Du MUSST die exakten Noten verwenden. Es ist VERBOTEN, andere Zahlen zu erfinden!\n';
++     context += '🚨🚨🚨 ABSOLUT KRITISCH - KEINE AUSNAHMEN 🚨🚨🚨\n\n';
++     context += 'Diese Daten sind FAKTISCH aus der Datenbank.\n\n';
++     context += 'DU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\n';
++     context += 'VERBOTEN:\n';
++     context += '- Zahlen erfinden, schätzen oder ändern\n';
++     context += '- Andere Zahlen als die in der Tabelle verwenden\n';
++     context += '- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n';
++     context += '- Zahlen zu "runden" oder zu "korrigieren"\n';
++     context += '- Zahlen aus dem Gedächtnis zu verwenden\n\n';
++     context += 'ERLAUBT:\n';
++     context += '- NUR die exakten Noten aus der Tabelle verwenden\n';
++     context += '- Die Zahlen GENAU so wiedergeben wie sie in der Tabelle stehen\n';
++     context += '- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n\n';
++     context += 'BEISPIEL:\n';
 +     if (sortedAlbums.length &gt; 0) {
 +       const exampleAlbum = sortedAlbums[0];
 +       const correctNote = exampleAlbum.Note.toFixed(2);
-+       context += &#96;Wenn &quot;${exampleAlbum.Album}&quot; von ${exampleAlbum.Band} in der Tabelle steht mit Note ${correctNote},\n&#96;;
++       context += &#96;Wenn "${exampleAlbum.Album}" von ${exampleAlbum.Band} in der Tabelle steht mit Note ${correctNote},\n&#96;;
 +       context += &#96;dann ist die Note ${correctNote}, NICHT ${(exampleAlbum.Note + 0.3).toFixed(2)}, NICHT ${(exampleAlbum.Note - 0.2).toFixed(2)}, NICHT irgendeine andere Zahl!\n\n&#96;;
 +     }
-      context += &#39;Wenn du über diese Alben sprichst, verwende GENAU die Zahlen aus der Tabelle oben.\n&#39;;
-+     context += &#39;Es gibt KEINE Ausnahmen. Die Zahlen in der Tabelle sind die EINZIGEN korrekten Zahlen.\n&#39;;
+      context += 'Wenn du über diese Alben sprichst, verwende GENAU die Zahlen aus der Tabelle oben.\n';
++     context += 'Es gibt KEINE Ausnahmen. Die Zahlen in der Tabelle sind die EINZIGEN korrekten Zahlen.\n';
       
       const enriched = userQuery + context;
 ```
@@ -18262,7 +18262,7 @@ Lines added: 21, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -18271,10 +18271,10 @@ Lines added: 1, lines removed: 1
 @@ -498,5 +498,5 @@
           // Füge RAG-Kontext SEHR prominent am Anfang des System-Prompts hinzu
           // WICHTIG: Erinnere auch an das Notensystem!
--         finalSystemPrompt = &#96;⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE ALBENDATEN ⚠️⚠️⚠️\n\n${ragContext}\n\n⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n\n---\n\n${systemPrompt}\n\n---\n\n⚠️⚠️⚠️ ABSOLUT KRITISCH - NOCHMAL ZUR ERINNERUNG ⚠️⚠️⚠️\n\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank.\n\nDU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\nVERBOTEN:\n- Zahlen erfinden oder schätzen\n- Andere Zahlen als die in der Tabelle verwenden\n- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n\nERLAUBT:\n- Nur die exakten Noten aus der Tabelle verwenden\n- Die Zahlen genau so wiedergeben wie sie in der Tabelle stehen\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist.\nEine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot;. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung.\nWenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER.\nAnalysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
-+         finalSystemPrompt = &#96;🚨🚨🚨 KRITISCH WICHTIG: EXAKTE ALBENDATEN 🚨🚨🚨\n\n${ragContext}\n\n🚨🚨🚨 ENDE DER KRITISCHEN DATEN 🚨🚨🚨\n\n---\n\n${systemPrompt}\n\n---\n\n🚨🚨🚨 ABSOLUT KRITISCH - NOCHMAL ZUR ERINNERUNG 🚨🚨🚨\n\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank.\n\nDU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\nVERBOTEN:\n- Zahlen erfinden oder schätzen\n- Andere Zahlen als die in der Tabelle verwenden\n- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n- Zahlen zu &quot;runden&quot; oder zu &quot;korrigieren&quot;\n- Zahlen aus dem Gedächtnis zu verwenden\n- Wenn ein Album in der Tabelle steht, aber du eine andere Zahl verwendest\n\nERLAUBT:\n- NUR die exakten Noten aus der Tabelle verwenden\n- Die Zahlen GENAU so wiedergeben wie sie in der Tabelle stehen\n- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist.\nEine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot;. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung.\nWenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER.\nAnalysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!\n\n🚨 FINALE ERINNERUNG: Wenn du über ein Album sprichst, das in der Tabelle steht, dann verwende GENAU die Note aus der Tabelle. Es gibt KEINE Ausnahmen. Die Zahlen in der Tabelle sind die EINZIGEN korrekten Zahlen.&#96;;
+-         finalSystemPrompt = &#96;⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE ALBENDATEN ⚠️⚠️⚠️\n\n${ragContext}\n\n⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️\n\n---\n\n${systemPrompt}\n\n---\n\n⚠️⚠️⚠️ ABSOLUT KRITISCH - NOCHMAL ZUR ERINNERUNG ⚠️⚠️⚠️\n\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank.\n\nDU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\nVERBOTEN:\n- Zahlen erfinden oder schätzen\n- Andere Zahlen als die in der Tabelle verwenden\n- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n\nERLAUBT:\n- Nur die exakten Noten aus der Tabelle verwenden\n- Die Zahlen genau so wiedergeben wie sie in der Tabelle stehen\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist.\nEine Note von 3.5 ist GUT, nicht "befriedigend". Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung.\nWenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER.\nAnalysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!&#96;;
++         finalSystemPrompt = &#96;🚨🚨🚨 KRITISCH WICHTIG: EXAKTE ALBENDATEN 🚨🚨🚨\n\n${ragContext}\n\n🚨🚨🚨 ENDE DER KRITISCHEN DATEN 🚨🚨🚨\n\n---\n\n${systemPrompt}\n\n---\n\n🚨🚨🚨 ABSOLUT KRITISCH - NOCHMAL ZUR ERINNERUNG 🚨🚨🚨\n\nDie oben genannten Albendaten sind FAKTISCHE DATEN aus einer Datenbank.\n\nDU MUSST DIE EXAKTEN NOTEN AUS DER TABELLE VERWENDEN!\n\nVERBOTEN:\n- Zahlen erfinden oder schätzen\n- Andere Zahlen als die in der Tabelle verwenden\n- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n- Zahlen zu "runden" oder zu "korrigieren"\n- Zahlen aus dem Gedächtnis zu verwenden\n- Wenn ein Album in der Tabelle steht, aber du eine andere Zahl verwendest\n\nERLAUBT:\n- NUR die exakten Noten aus der Tabelle verwenden\n- Die Zahlen GENAU so wiedergeben wie sie in der Tabelle stehen\n- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n\nWICHTIG: Die Noten sind NICHT Schulnoten (1-6)! Sie gehen von 0-5, wobei 3+ gut ist.\nEine Note von 3.5 ist GUT, nicht "befriedigend". Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".\n\nKRITISCH: Interpretiere die Zahlen KORREKT! Höhere Zahlen = bessere Bewertung.\nWenn ein Album 3.19 hat und ein früheres 3.05, dann ist 3.19 BESSER.\nAnalysiere Entwicklungen immer basierend auf den tatsächlichen Zahlen - wenn die Zahlen steigen, ist das eine Verbesserung, nicht ein Verlust!\n\n🚨 FINALE ERINNERUNG: Wenn du über ein Album sprichst, das in der Tabelle steht, dann verwende GENAU die Note aus der Tabelle. Es gibt KEINE Ausnahmen. Die Zahlen in der Tabelle sind die EINZIGEN korrekten Zahlen.&#96;;
           
-          console.log(&#39;RAG: Kontext in System-Prompt integriert&#39;);
+          console.log('RAG: Kontext in System-Prompt integriert');
 ```
 
 </details>
@@ -18313,7 +18313,7 @@ Anpassen der Regex für das neue Format mit den Warnsymbolen:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -18321,7 +18321,7 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -475,5 +475,5 @@
         
-        // Format 1: Neues Tabellenformat mit &quot;KRITISCH WICHTIG: EXAKTE DATEN&quot;
+        // Format 1: Neues Tabellenformat mit "KRITISCH WICHTIG: EXAKTE DATEN"
 -       const newTableFormatMatch = userMessage.match(/⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE DATEN[\s\S]*?⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️[\s\S]*?Wenn du über diese Alben sprichst[\s\S]*?(?=\n\n|$)/);
 +       const newTableFormatMatch = userMessage.match(/⚠️⚠️⚠️ KRITISCH WICHTIG: EXAKTE DATEN[\s\S]*?⚠️⚠️⚠️ ENDE DER KRITISCHEN DATEN ⚠️⚠️⚠️[\s\S]*?Es gibt KEINE Ausnahmen[\s\S]*?(?=\n\n|$)/);
         if (newTableFormatMatch) {
@@ -18413,7 +18413,7 @@ Prüfe die tatsächlichen Arcade Fire-Daten und verschärfe die Anweisungen weit
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); arcade = [d for d in data if 'arcade' in d.get('Band', '').lower()]; print('Arcade Fire Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(arcade, key=lambda x: x.get('Jahr', 0))]"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); arcade = [d for d in data if 'arcade' in d.get('Band', '').lower()]; print('Arcade Fire Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(arcade, key=lambda x: x.get('Jahr', 0))]"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); arcade = [d for d in data if 'arcade' in d.get('Band', '').lower()]; print('Arcade Fire Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(arcade, key=lambda x: x.get('Jahr', 0))]"
@@ -18466,7 +18466,7 @@ Das LLM ignoriert die RAG-Daten. Hinzufügen einer expliziten Validierung und di
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 24, lines removed: 2
@@ -18481,26 +18481,26 @@ Lines added: 24, lines removed: 2
 +     let finalUserMessageWithReminder = finalUserMessage;
 +     if (ragContext) {
 +       // Extrahiere die wichtigsten Alben aus dem RAG-Kontext für eine kurze Erinnerung
-+       const albumMatches = ragContext.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| \*\*([\d.]+)\*\* \|/g);
++       const albumMatches = ragContext.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| \*\*([\d.]+)\*\* \|/g);
 +       if (albumMatches &amp;&amp; albumMatches.length &gt; 0) {
-+         finalUserMessageWithReminder += &#39;\n\n🚨 ERINNERUNG: Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind: &#39;;
++         finalUserMessageWithReminder += '\n\n🚨 ERINNERUNG: Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind: ';
 +         const notesList = albumMatches.slice(0, 5).map(match =&gt; {
-+           const parts = match.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| \*\*([\d.]+)\*\* \|/);
++           const parts = match.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| \*\*([\d.]+)\*\* \|/);
 +           if (parts) {
-+             return &#96;&quot;${parts[2]}&quot; = ${parts[4]}&#96;;
++             return &#96;"${parts[2]}" = ${parts[4]}&#96;;
 +           }
-+           return &#39;&#39;;
-+         }).filter(Boolean).join(&#39;, &#39;);
++           return '';
++         }).filter(Boolean).join(', ');
 +         finalUserMessageWithReminder += notesList;
 +         if (albumMatches.length &gt; 5) {
 +           finalUserMessageWithReminder += &#96; (und ${albumMatches.length - 5} weitere)&#96;;
 +         }
-+         finalUserMessageWithReminder += &#39;. Verwende NUR diese Zahlen!&#39;;
++         finalUserMessageWithReminder += '. Verwende NUR diese Zahlen!';
 +       }
 +     }
 +     
       apiMessages.push({
-        role: &#39;user&#39;,
+        role: 'user',
 -       content: finalUserMessage
 +       content: finalUserMessageWithReminder
       });
@@ -18515,18 +18515,18 @@ Lines added: 24, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 1
 
 ```diff
 @@ -215,5 +215,6 @@
-        const year = album.Jahr || &#39;N/A&#39;;
+        const year = album.Jahr || 'N/A';
         const note = album.Note.toFixed(2);
--       context += &#96;| ${band} | &quot;${albumName}&quot; | ${year} | **${note}** |\n&#96;;
+-       context += &#96;| ${band} | "${albumName}" | ${year} | **${note}** |\n&#96;;
 +       // Verwende === für noch stärkere Hervorhebung der Zahlen
-+       context += &#96;| ${band} | &quot;${albumName}&quot; | ${year} | ===${note}=== |\n&#96;;
++       context += &#96;| ${band} | "${albumName}" | ${year} | ===${note}=== |\n&#96;;
       });
       
 ```
@@ -18539,7 +18539,7 @@ Lines added: 2, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 2
@@ -18548,13 +18548,13 @@ Lines added: 3, lines removed: 2
 @@ -222,8 +222,9 @@
       
       // Redundante Hervorhebung: Liste alle Noten nochmal explizit auf
--     context += &#39;⚠️ EXAKTE NOTEN (MUSS VERWENDET WERDEN):\n&#39;;
-+     context += &#39;🚨🚨🚨 EXAKTE NOTEN - MUSS VERWENDET WERDEN 🚨🚨🚨\n&#39;;
+-     context += '⚠️ EXAKTE NOTEN (MUSS VERWENDET WERDEN):\n';
++     context += '🚨🚨🚨 EXAKTE NOTEN - MUSS VERWENDET WERDEN 🚨🚨🚨\n';
       sortedAlbums.forEach((album) =&gt; {
         const note = album.Note.toFixed(2);
--       context += &#96;  - &quot;${album.Album}&quot; von ${album.Band} (${album.Jahr || &#39;N/A&#39;}): **${note}** (GENAU diese Zahl!)\n&#96;;
-+       context += &#96;  🚨 &quot;${album.Album}&quot; von ${album.Band} (${album.Jahr || &#39;N/A&#39;}): ===${note}=== 🚨\n&#96;;
-+       context += &#96;     WICHTIG: Wenn du über &quot;${album.Album}&quot; sprichst, ist die Note ${note}, NICHT eine andere Zahl!\n&#96;;
+-       context += &#96;  - "${album.Album}" von ${album.Band} (${album.Jahr || 'N/A'}): **${note}** (GENAU diese Zahl!)\n&#96;;
++       context += &#96;  🚨 "${album.Album}" von ${album.Band} (${album.Jahr || 'N/A'}): ===${note}=== 🚨\n&#96;;
++       context += &#96;     WICHTIG: Wenn du über "${album.Album}" sprichst, ist die Note ${note}, NICHT eine andere Zahl!\n&#96;;
       });
       
 ```
@@ -18567,14 +18567,14 @@ Lines added: 3, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 18, lines removed: 4
 
 ```diff
 @@ -231,13 +231,27 @@
-      context += &#39;\n&#39;;
+      context += '\n';
       
 -     // Beispielpaare für richtige/falsche Verwendung
 +     // Beispielpaare für richtige/falsche Verwendung - mit mehreren Beispielen
@@ -18586,13 +18586,13 @@ Lines added: 18, lines removed: 4
 +       const wrongNote2 = (firstAlbum.Note - 0.2).toFixed(2);
 +       const wrongNote3 = (firstAlbum.Note + 0.5).toFixed(2);
         
-        context += &#39;📋 BEISPIEL FÜR KORREKTE VERWENDUNG:\n&#39;;
--       context += &#96;❌ FALSCH: &quot;${firstAlbum.Album}&quot; erreichte eine ${wrongNote}\n&#96;;
--       context += &#96;✅ RICHTIG: &quot;${firstAlbum.Album}&quot; erreichte eine ${exampleNote} (laut Datenbank)\n\n&#96;;
-+       context += &#96;❌ FALSCH: &quot;${firstAlbum.Album}&quot; erreichte eine ${wrongNote1}\n&#96;;
-+       context += &#96;❌ FALSCH: &quot;${firstAlbum.Album}&quot; erreichte eine ${wrongNote2}\n&#96;;
-+       context += &#96;❌ FALSCH: &quot;${firstAlbum.Album}&quot; erreichte eine ${wrongNote3}\n&#96;;
-+       context += &#96;✅ RICHTIG: &quot;${firstAlbum.Album}&quot; erreichte eine ${exampleNote} (GENAU diese Zahl aus der Tabelle!)\n\n&#96;;
+        context += '📋 BEISPIEL FÜR KORREKTE VERWENDUNG:\n';
+-       context += &#96;❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote}\n&#96;;
+-       context += &#96;✅ RICHTIG: "${firstAlbum.Album}" erreichte eine ${exampleNote} (laut Datenbank)\n\n&#96;;
++       context += &#96;❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote1}\n&#96;;
++       context += &#96;❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote2}\n&#96;;
++       context += &#96;❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote3}\n&#96;;
++       context += &#96;✅ RICHTIG: "${firstAlbum.Album}" erreichte eine ${exampleNote} (GENAU diese Zahl aus der Tabelle!)\n\n&#96;;
 +       
 +       // Wenn mehrere Alben vorhanden, zeige auch ein Beispiel mit dem letzten Album
 +       if (sortedAlbums.length &gt; 1) {
@@ -18600,8 +18600,8 @@ Lines added: 18, lines removed: 4
 +         const lastNote = lastAlbum.Note.toFixed(2);
 +         const wrongLastNote = (lastAlbum.Note + 0.3).toFixed(2);
 +         context += &#96;📋 WEITERES BEISPIEL:\n&#96;;
-+         context += &#96;❌ FALSCH: &quot;${lastAlbum.Album}&quot; erreichte eine ${wrongLastNote}\n&#96;;
-+         context += &#96;✅ RICHTIG: &quot;${lastAlbum.Album}&quot; erreichte eine ${lastNote} (GENAU diese Zahl aus der Tabelle!)\n\n&#96;;
++         context += &#96;❌ FALSCH: "${lastAlbum.Album}" erreichte eine ${wrongLastNote}\n&#96;;
++         context += &#96;✅ RICHTIG: "${lastAlbum.Album}" erreichte eine ${lastNote} (GENAU diese Zahl aus der Tabelle!)\n\n&#96;;
 +       }
       }
       
@@ -18643,7 +18643,7 @@ Anpassen der Regex für die Erinnerung in der User-Message:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 11, lines removed: 9
@@ -18652,32 +18652,32 @@ Lines added: 11, lines removed: 9
 @@ -528,19 +528,21 @@
       if (ragContext) {
         // Extrahiere die wichtigsten Alben aus dem RAG-Kontext für eine kurze Erinnerung
--       const albumMatches = ragContext.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| \*\*([\d.]+)\*\* \|/g);
+-       const albumMatches = ragContext.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| \*\*([\d.]+)\*\* \|/g);
 +       // Unterstütze sowohl === als auch ** Format
-+       const albumMatches = ragContext.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/g);
++       const albumMatches = ragContext.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/g);
         if (albumMatches &amp;&amp; albumMatches.length &gt; 0) {
--         finalUserMessageWithReminder += &#39;\n\n🚨 ERINNERUNG: Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind: &#39;;
+-         finalUserMessageWithReminder += '\n\n🚨 ERINNERUNG: Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind: ';
 -         const notesList = albumMatches.slice(0, 5).map(match =&gt; {
--           const parts = match.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| \*\*([\d.]+)\*\* \|/);
-+         finalUserMessageWithReminder += &#39;\n\n🚨🚨🚨 KRITISCHE ERINNERUNG 🚨🚨🚨\n&#39;;
-+         finalUserMessageWithReminder += &#39;Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind:\n&#39;;
+-           const parts = match.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| \*\*([\d.]+)\*\* \|/);
++         finalUserMessageWithReminder += '\n\n🚨🚨🚨 KRITISCHE ERINNERUNG 🚨🚨🚨\n';
++         finalUserMessageWithReminder += 'Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind:\n';
 +         const notesList = albumMatches.slice(0, 8).map(match =&gt; {
-+           const parts = match.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/);
++           const parts = match.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/);
             if (parts) {
--             return &#96;&quot;${parts[2]}&quot; = ${parts[4]}&#96;;
-+             return &#96;  - &quot;${parts[2]}&quot; = ${parts[4]}&#96;;
+-             return &#96;"${parts[2]}" = ${parts[4]}&#96;;
++             return &#96;  - "${parts[2]}" = ${parts[4]}&#96;;
             }
-            return &#39;&#39;;
--         }).filter(Boolean).join(&#39;, &#39;);
-+         }).filter(Boolean).join(&#39;\n&#39;);
+            return '';
+-         }).filter(Boolean).join(', ');
++         }).filter(Boolean).join('\n');
           finalUserMessageWithReminder += notesList;
 -         if (albumMatches.length &gt; 5) {
 -           finalUserMessageWithReminder += &#96; (und ${albumMatches.length - 5} weitere)&#96;;
 +         if (albumMatches.length &gt; 8) {
 +           finalUserMessageWithReminder += &#96;\n  ... und ${albumMatches.length - 8} weitere Alben&#96;;
           }
--         finalUserMessageWithReminder += &#39;. Verwende NUR diese Zahlen!&#39;;
-+         finalUserMessageWithReminder += &#39;\n\n🚨 VERWENDE NUR DIESE ZAHLEN! KEINE ANDEREN! 🚨&#39;;
+-         finalUserMessageWithReminder += '. Verwende NUR diese Zahlen!';
++         finalUserMessageWithReminder += '\n\n🚨 VERWENDE NUR DIESE ZAHLEN! KEINE ANDEREN! 🚨';
         }
       }
 ```
@@ -18793,7 +18793,7 @@ Vereinfachen der Regex, die vermutlich den Fehler verursacht:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 28, lines removed: 18
@@ -18804,49 +18804,49 @@ Lines added: 28, lines removed: 18
       if (ragContext) {
 -       // Extrahiere die wichtigsten Alben aus dem RAG-Kontext für eine kurze Erinnerung
 -       // Unterstütze sowohl === als auch ** Format
--       const albumMatches = ragContext.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/g);
+-       const albumMatches = ragContext.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/g);
 -       if (albumMatches &amp;&amp; albumMatches.length &gt; 0) {
--         finalUserMessageWithReminder += &#39;\n\n🚨🚨🚨 KRITISCHE ERINNERUNG 🚨🚨🚨\n&#39;;
--         finalUserMessageWithReminder += &#39;Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind:\n&#39;;
+-         finalUserMessageWithReminder += '\n\n🚨🚨🚨 KRITISCHE ERINNERUNG 🚨🚨🚨\n';
+-         finalUserMessageWithReminder += 'Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind:\n';
 -         const notesList = albumMatches.slice(0, 8).map(match =&gt; {
--           const parts = match.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/);
+-           const parts = match.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| (?:===|\\*\\*)([\d.]+)(?:===|\\*\\*) \|/);
 -           if (parts) {
--             return &#96;  - &quot;${parts[2]}&quot; = ${parts[4]}&#96;;
+-             return &#96;  - "${parts[2]}" = ${parts[4]}&#96;;
 -           }
--           return &#39;&#39;;
--         }).filter(Boolean).join(&#39;\n&#39;);
+-           return '';
+-         }).filter(Boolean).join('\n');
 -         finalUserMessageWithReminder += notesList;
 -         if (albumMatches.length &gt; 8) {
 -           finalUserMessageWithReminder += &#96;\n  ... und ${albumMatches.length - 8} weitere Alben&#96;;
 -         }
--         finalUserMessageWithReminder += &#39;\n\n🚨 VERWENDE NUR DIESE ZAHLEN! KEINE ANDEREN! 🚨&#39;;
+-         finalUserMessageWithReminder += '\n\n🚨 VERWENDE NUR DIESE ZAHLEN! KEINE ANDEREN! 🚨';
 +       try {
 +         // Extrahiere die wichtigsten Alben aus dem RAG-Kontext für eine kurze Erinnerung
 +         // Unterstütze sowohl === als auch ** Format
-+         const albumMatches = ragContext.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| ===([\d.]+)=== \|/g) || 
-+                             ragContext.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| \*\*([\d.]+)\*\* \|/g);
++         const albumMatches = ragContext.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| ===([\d.]+)=== \|/g) || 
++                             ragContext.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| \*\*([\d.]+)\*\* \|/g);
 +         if (albumMatches &amp;&amp; albumMatches.length &gt; 0) {
-+           finalUserMessageWithReminder += &#39;\n\n🚨🚨🚨 KRITISCHE ERINNERUNG 🚨🚨🚨\n&#39;;
-+           finalUserMessageWithReminder += &#39;Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind:\n&#39;;
++           finalUserMessageWithReminder += '\n\n🚨🚨🚨 KRITISCHE ERINNERUNG 🚨🚨🚨\n';
++           finalUserMessageWithReminder += 'Verwende GENAU die Noten aus der Tabelle oben. Die Zahlen sind:\n';
 +           const notesList = albumMatches.slice(0, 8).map(match =&gt; {
 +             // Versuche beide Formate
-+             let parts = match.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| ===([\d.]+)=== \|/);
++             let parts = match.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| ===([\d.]+)=== \|/);
 +             if (!parts) {
-+               parts = match.match(/\| ([^|]+) \| &quot;([^&quot;]+)&quot; \| (\d+) \| \*\*([\d.]+)\*\* \|/);
++               parts = match.match(/\| ([^|]+) \| "([^"]+)" \| (\d+) \| \*\*([\d.]+)\*\* \|/);
 +             }
 +             if (parts &amp;&amp; parts.length &gt;= 5) {
-+               return &#96;  - &quot;${parts[2]}&quot; = ${parts[4]}&#96;;
++               return &#96;  - "${parts[2]}" = ${parts[4]}&#96;;
 +             }
-+             return &#39;&#39;;
-+           }).filter(Boolean).join(&#39;\n&#39;);
++             return '';
++           }).filter(Boolean).join('\n');
 +           finalUserMessageWithReminder += notesList;
 +           if (albumMatches.length &gt; 8) {
 +             finalUserMessageWithReminder += &#96;\n  ... und ${albumMatches.length - 8} weitere Alben&#96;;
 +           }
-+           finalUserMessageWithReminder += &#39;\n\n🚨 VERWENDE NUR DIESE ZAHLEN! KEINE ANDEREN! 🚨&#39;;
++           finalUserMessageWithReminder += '\n\n🚨 VERWENDE NUR DIESE ZAHLEN! KEINE ANDEREN! 🚨';
 +         }
 +       } catch (error) {
-+         console.warn(&#39;Fehler beim Extrahieren der Album-Erinnerung:&#39;, error);
++         console.warn('Fehler beim Extrahieren der Album-Erinnerung:', error);
 +         // Ignoriere Fehler und verwende originale Message
         }
       }
@@ -18895,7 +18895,7 @@ Verbesserung der Fehlerbehandlung, um den genauen Fehler zu sehen:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 1
@@ -18903,11 +18903,11 @@ Lines added: 3, lines removed: 1
 ```diff
 @@ -447,5 +447,7 @@
       } catch (error) {
-        console.error(&#39;Fehler beim Senden der Nachricht:&#39;, error);
--       this.addMessage(&#39;assistant&#39;, &#39;Entschuldigung, es ist ein Fehler aufgetreten. Bitte versuche es erneut.&#39;);
-+       console.error(&#39;Fehler-Details:&#39;, error.message, error.stack);
-+       const errorMessage = error.message || &#39;Unbekannter Fehler&#39;;
-+       this.addMessage(&#39;assistant&#39;, &#96;Entschuldigung, es ist ein Fehler aufgetreten: ${errorMessage}. Bitte versuche es erneut.&#96;);
+        console.error('Fehler beim Senden der Nachricht:', error);
+-       this.addMessage('assistant', 'Entschuldigung, es ist ein Fehler aufgetreten. Bitte versuche es erneut.');
++       console.error('Fehler-Details:', error.message, error.stack);
++       const errorMessage = error.message || 'Unbekannter Fehler';
++       this.addMessage('assistant', &#96;Entschuldigung, es ist ein Fehler aufgetreten: ${errorMessage}. Bitte versuche es erneut.&#96;);
       } finally {
         this.setLoading(false);
 ```
@@ -18989,7 +18989,7 @@ Beheben des Scope-Problems: `ragContext` wird außerhalb des Blocks verwendet, i
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -19005,7 +19005,7 @@ Lines added: 1, lines removed: 1
         // Suche nach dem RAG-Kontext-Block - verschiedene Formate möglich
 -       let ragContext = null;
         
-        // Format 1: Neues Tabellenformat mit &quot;KRITISCH WICHTIG: EXAKTE DATEN&quot;
+        // Format 1: Neues Tabellenformat mit "KRITISCH WICHTIG: EXAKTE DATEN"
 ```
 
 </details>
@@ -19075,7 +19075,7 @@ Prüfe die tatsächlichen Daten für Imagine Dragons und gebe eine Empfehlung:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); imagine = [d for d in data if 'imagine' in d.get('Band', '').lower()]; print('Imagine Dragons Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(imagine, key=lambda x: x.get('Jahr', 0))]"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); imagine = [d for d in data if 'imagine' in d.get('Band', '').lower()]; print('Imagine Dragons Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(imagine, key=lambda x: x.get('Jahr', 0))]"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); imagine = [d for d in data if 'imagine' in d.get('Band', '').lower()]; print('Imagine Dragons Alben:'); [print(f\"  {d['Album']} ({d['Jahr']}): {d['Note']}\") for d in sorted(imagine, key=lambda x: x.get('Jahr', 0))]"
@@ -19122,7 +19122,7 @@ Das LLM erfindet Alben, die nicht existieren. Empfehlung: auf ein präziseres Mo
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 13, lines removed: undefined
@@ -19135,13 +19135,13 @@ Lines added: 13, lines removed: undefined
 +   // Claude 3.5 Opus ist das präziseste Modell von Anthropic
 +   // Sehr gut darin, strukturierte Daten exakt zu verwenden
 +   ULTRA: {
-+     id: &#39;anthropic/claude-3.5-opus&#39;,
-+     name: &#39;Claude 3.5 Opus&#39;,
-+     description: &#39;Höchste Präzision, beste RAG-Datenverarbeitung, sehr präzise mit strukturierten Daten&#39;,
-+     provider: &#39;Anthropic&#39;,
++     id: 'anthropic/claude-3.5-opus',
++     name: 'Claude 3.5 Opus',
++     description: 'Höchste Präzision, beste RAG-Datenverarbeitung, sehr präzise mit strukturierten Daten',
++     provider: 'Anthropic',
 +     contextWindow: 200000,
 +     // Geschätzte Kosten: ~$15/M input, ~$75/M output tokens
-+     costLevel: &#39;ultra&#39;
++     costLevel: 'ultra'
 +   },
 +   
     // Beste Balance: Preis-Leistung für anspruchsvolle Unterhaltung
@@ -19156,7 +19156,7 @@ Lines added: 13, lines removed: undefined
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 4
@@ -19218,7 +19218,7 @@ Anpassen der Warnung und Hinzufügen einer zusätzlichen Validierung:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 3
@@ -19228,11 +19228,11 @@ Lines added: 3, lines removed: 3
   export const DEFAULT_MODEL = RECOMMENDED_MODELS.ULTRA;
   
 - // Stelle sicher, dass Claude 3.5 Sonnet verwendet wird
-- if (DEFAULT_MODEL.id !== &#39;anthropic/claude-3.5-sonnet&#39;) {
--   console.warn(&#39;Standard-Modell ist nicht Claude 3.5 Sonnet&#39;);
+- if (DEFAULT_MODEL.id !== 'anthropic/claude-3.5-sonnet') {
+-   console.warn('Standard-Modell ist nicht Claude 3.5 Sonnet');
 + // Stelle sicher, dass ein Claude-Modell verwendet wird
-+ if (!DEFAULT_MODEL.id.includes(&#39;claude&#39;)) {
-+   console.warn(&#39;Standard-Modell ist kein Claude-Modell&#39;);
++ if (!DEFAULT_MODEL.id.includes('claude')) {
++   console.warn('Standard-Modell ist kein Claude-Modell');
   }
   
 ```
@@ -19253,26 +19253,26 @@ Lines added: 3, lines removed: 3
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/ragService.js</summary>
 
 **Chunk 1**
 Lines added: 5, lines removed: 2
 
 ```diff
 @@ -287,9 +287,12 @@
-      context += &#39;- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n&#39;;
-      context += &#39;- Zahlen zu &quot;runden&quot; oder zu &quot;korrigieren&quot;\n&#39;;
--     context += &#39;- Zahlen aus dem Gedächtnis zu verwenden\n\n&#39;;
-+     context += &#39;- Zahlen aus dem Gedächtnis zu verwenden\n&#39;;
-+     context += &#39;- Alben zu erwähnen, die NICHT in der Tabelle stehen\n&#39;;
-+     context += &#39;- Wenn eine Band nur EIN Album in der Tabelle hat, dann existiert nur dieses eine Album!\n\n&#39;;
-      context += &#39;ERLAUBT:\n&#39;;
-      context += &#39;- NUR die exakten Noten aus der Tabelle verwenden\n&#39;;
-      context += &#39;- Die Zahlen GENAU so wiedergeben wie sie in der Tabelle stehen\n&#39;;
--     context += &#39;- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n\n&#39;;
-+     context += &#39;- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n&#39;;
-+     context += &#39;- NUR über Alben sprechen, die tatsächlich in der Tabelle stehen\n\n&#39;;
-      context += &#39;BEISPIEL:\n&#39;;
+      context += '- Zu sagen, dass du keine Daten hast (die Daten sind dir gegeben!)\n';
+      context += '- Zahlen zu "runden" oder zu "korrigieren"\n';
+-     context += '- Zahlen aus dem Gedächtnis zu verwenden\n\n';
++     context += '- Zahlen aus dem Gedächtnis zu verwenden\n';
++     context += '- Alben zu erwähnen, die NICHT in der Tabelle stehen\n';
++     context += '- Wenn eine Band nur EIN Album in der Tabelle hat, dann existiert nur dieses eine Album!\n\n';
+      context += 'ERLAUBT:\n';
+      context += '- NUR die exakten Noten aus der Tabelle verwenden\n';
+      context += '- Die Zahlen GENAU so wiedergeben wie sie in der Tabelle stehen\n';
+-     context += '- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n\n';
++     context += '- Wenn ein Album in der Tabelle steht, MUSST du die Note aus der Tabelle verwenden\n';
++     context += '- NUR über Alben sprechen, die tatsächlich in der Tabelle stehen\n\n';
+      context += 'BEISPIEL:\n';
       if (sortedAlbums.length &gt; 0) {
 ```
 
@@ -19281,19 +19281,19 @@ Lines added: 8, lines removed: undefined
 
 ```diff
 @@ -298,7 +301,15 @@
-        context += &#96;Wenn &quot;${exampleAlbum.Album}&quot; von ${exampleAlbum.Band} in der Tabelle steht mit Note ${correctNote},\n&#96;;
+        context += &#96;Wenn "${exampleAlbum.Album}" von ${exampleAlbum.Band} in der Tabelle steht mit Note ${correctNote},\n&#96;;
         context += &#96;dann ist die Note ${correctNote}, NICHT ${(exampleAlbum.Note + 0.3).toFixed(2)}, NICHT ${(exampleAlbum.Note - 0.2).toFixed(2)}, NICHT irgendeine andere Zahl!\n\n&#96;;
 +       
 +       // Wenn nur ein Album vorhanden, betone das besonders
 +       if (sortedAlbums.length === 1) {
-+         context += &#96;🚨 WICHTIG: ${exampleAlbum.Band} hat NUR EIN Album in der Datenbank: &quot;${exampleAlbum.Album}&quot;!\n&#96;;
++         context += &#96;🚨 WICHTIG: ${exampleAlbum.Band} hat NUR EIN Album in der Datenbank: "${exampleAlbum.Album}"!\n&#96;;
 +         context += &#96;Es gibt KEINE anderen Alben von ${exampleAlbum.Band} in der Datenbank!\n&#96;;
 +         context += &#96;Wenn du über ${exampleAlbum.Band} sprichst, erwähne NUR dieses eine Album!\n\n&#96;;
 +       }
       }
-      context += &#39;Wenn du über diese Alben sprichst, verwende GENAU die Zahlen aus der Tabelle oben.\n&#39;;
-      context += &#39;Es gibt KEINE Ausnahmen. Die Zahlen in der Tabelle sind die EINZIGEN korrekten Zahlen.\n&#39;;
-+     context += &#39;Wenn ein Album NICHT in der Tabelle steht, dann existiert es NICHT in der Datenbank!\n&#39;;
+      context += 'Wenn du über diese Alben sprichst, verwende GENAU die Zahlen aus der Tabelle oben.\n';
+      context += 'Es gibt KEINE Ausnahmen. Die Zahlen in der Tabelle sind die EINZIGEN korrekten Zahlen.\n';
++     context += 'Wenn ein Album NICHT in der Tabelle steht, dann existiert es NICHT in der Datenbank!\n';
       
       const enriched = userQuery + context;
 ```
@@ -19510,7 +19510,7 @@ Prüfe, ob `setApiKey` das Modell zurücksetzt, und füge Debug-Logs hinzu:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
@@ -19519,7 +19519,7 @@ Lines added: 1, lines removed: undefined
 @@ -13,4 +13,5 @@
       this.apiKey = apiKey;
       this.model = DEFAULT_MODEL.id;
-+     console.log(&#39;Chat: Modell initialisiert:&#39;, this.model);
++     console.log('Chat: Modell initialisiert:', this.model);
       this.albumData = albumData;
       this.vectorStore = null;
 ```
@@ -19554,16 +19554,16 @@ The model provided an ambiguous search string to replace.
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
 
 ```diff
 @@ -572,4 +572,5 @@
-      console.log(&#39;API: User-Message Länge:&#39;, finalUserMessage.length);
-      console.log(&#39;API: User-Message:&#39;, finalUserMessage);
-+     console.log(&#39;API: Verwende Modell:&#39;, this.model);
+      console.log('API: User-Message Länge:', finalUserMessage.length);
+      console.log('API: User-Message:', finalUserMessage);
++     console.log('API: Verwende Modell:', this.model);
       
       const requestBody = {
 ```
@@ -19635,7 +19635,7 @@ Claude 3.5 Opus scheint über OpenRouter nicht verfügbar zu sein. Verfügbar is
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 3
@@ -19648,12 +19648,12 @@ Lines added: 3, lines removed: 3
 +   // Claude 3 Opus ist das präziseste verfügbare Modell von Anthropic über OpenRouter
     // Sehr gut darin, strukturierte Daten exakt zu verwenden
     ULTRA: {
--     id: &#39;anthropic/claude-3.5-opus&#39;,
--     name: &#39;Claude 3.5 Opus&#39;,
-+     id: &#39;anthropic/claude-3-opus&#39;,
-+     name: &#39;Claude 3 Opus&#39;,
-      description: &#39;Höchste Präzision, beste RAG-Datenverarbeitung, sehr präzise mit strukturierten Daten&#39;,
-      provider: &#39;Anthropic&#39;,
+-     id: 'anthropic/claude-3.5-opus',
+-     name: 'Claude 3.5 Opus',
++     id: 'anthropic/claude-3-opus',
++     name: 'Claude 3 Opus',
+      description: 'Höchste Präzision, beste RAG-Datenverarbeitung, sehr präzise mit strukturierten Daten',
+      provider: 'Anthropic',
 ```
 
 </details>
@@ -19664,7 +19664,7 @@ Lines added: 3, lines removed: 3
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -19974,7 +19974,7 @@ Prüfe, welche Daten im RAG verfügbar sind:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); print('Beispiel-Eintrag:'); print(json.dumps(data[0], indent=2, ensure_ascii=False))"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); print('Beispiel-Eintrag:'); print(json.dumps(data[0], indent=2, ensure_ascii=False))"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); print('Beispiel-Eintrag:'); print(json.dumps(data[0], indent=2, ensure_ascii=False))"
@@ -19983,11 +19983,11 @@ cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = 
 ```
 Beispiel-Eintrag:
 {
-  &quot;Platz&quot;: 25,
-  &quot;Jahr&quot;: 1998,
-  &quot;Band&quot;: &quot;22 Pistepirrko&quot;,
-  &quot;Album&quot;: &quot;Eleven&quot;,
-  &quot;Note&quot;: 3.175
+  "Platz": 25,
+  "Jahr": 1998,
+  "Band": "22 Pistepirrko",
+  "Album": "Eleven",
+  "Note": 3.175
 }
 
 ```
@@ -20185,7 +20185,7 @@ Umsetzen von Ansatz 1 mit LLM-basierter Korrektur und Zurücksetzen auf Claude 3
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: 4
@@ -20254,7 +20254,7 @@ Implementiere Ansatz 1 mit LLM-basierter Korrektur:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 17, lines removed: 2
@@ -20273,16 +20273,16 @@ Lines added: 17, lines removed: 2
 +         try {
 +           const correctedResponse = await this.validateAndCorrectResponse(response, message);
 +           if (correctedResponse !== response) {
-+             console.log(&#39;RAG: Antwort wurde korrigiert&#39;);
++             console.log('RAG: Antwort wurde korrigiert');
 +             response = correctedResponse;
 +           }
 +         } catch (validationError) {
-+           console.warn(&#39;RAG: Validierungsfehler, verwende originale Antwort:&#39;, validationError);
++           console.warn('RAG: Validierungsfehler, verwende originale Antwort:', validationError);
 +           // Fallback: Verwende originale Antwort
 +         }
 +       }
 +       
-        this.addMessage(&#39;assistant&#39;, response);
+        this.addMessage('assistant', response);
       } catch (error) {
 ```
 
@@ -20320,7 +20320,7 @@ Implementiere die Validierungs- und Korrekturfunktion:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 150, lines removed: undefined
@@ -20338,11 +20338,11 @@ Lines added: 150, lines removed: undefined
 +     const mentionedBands = this.extractMentionedBands(llmResponse);
 +     
 +     if (mentionedBands.length === 0) {
-+       console.log(&#39;RAG: Keine Bands in Antwort gefunden, keine Validierung nötig&#39;);
++       console.log('RAG: Keine Bands in Antwort gefunden, keine Validierung nötig');
 +       return llmResponse;
 +     }
 +     
-+     console.log(&#39;RAG: Validierung für Bands:&#39;, mentionedBands);
++     console.log('RAG: Validierung für Bands:', mentionedBands);
 +     
 +     // Für jede erwähnte Band RAG-Daten suchen
 +     const bandDataMap = new Map();
@@ -20360,8 +20360,8 @@ Lines added: 150, lines removed: undefined
 +         // Berechne Trend
 +         const firstNote = sortedAlbums[0].Note;
 +         const lastNote = sortedAlbums[sortedAlbums.length - 1].Note;
-+         const trend = lastNote &gt; firstNote + 0.1 ? &#39;rising&#39; : 
-+                      lastNote &lt; firstNote - 0.1 ? &#39;falling&#39; : &#39;stable&#39;;
++         const trend = lastNote &gt; firstNote + 0.1 ? 'rising' : 
++                      lastNote &lt; firstNote - 0.1 ? 'falling' : 'stable';
 +         
 +         bandDataMap.set(bandName, {
 +           albums: sortedAlbums,
@@ -20386,7 +20386,7 @@ Lines added: 150, lines removed: undefined
 +     // Wenn keine Daten gefunden wurden, keine Korrektur nötig
 +     const bandsWithData = Array.from(bandDataMap.entries()).filter(([_, data]) =&gt; data !== null);
 +     if (bandsWithData.length === 0) {
-+       console.log(&#39;RAG: Keine Daten für erwähnte Bands gefunden&#39;);
++       console.log('RAG: Keine Daten für erwähnte Bands gefunden');
 +       return llmResponse;
 +     }
 +     
@@ -20403,32 +20403,32 @@ Lines added: 150, lines removed: undefined
 +    * Validierungs-Prompt erstellen
 +    */
 +   buildValidationPrompt(llmResponse, originalQuery, bandsWithData) {
-+     let prompt = &#39;Du hast gerade folgende Antwort gegeben:\n\n&#39;;
-+     prompt += &#96;&quot;${llmResponse}&quot;\n\n&#96;;
-+     prompt += &#96;Die ursprüngliche Frage war: &quot;${originalQuery}&quot;\n\n&#96;;
-+     prompt += &#39;Ich habe jetzt die tatsächlichen Testteam-Daten für die erwähnten Bands geprüft:\n\n&#39;;
++     let prompt = 'Du hast gerade folgende Antwort gegeben:\n\n';
++     prompt += &#96;"${llmResponse}"\n\n&#96;;
++     prompt += &#96;Die ursprüngliche Frage war: "${originalQuery}"\n\n&#96;;
++     prompt += 'Ich habe jetzt die tatsächlichen Testteam-Daten für die erwähnten Bands geprüft:\n\n';
 +     
 +     bandsWithData.forEach(([bandName, data]) =&gt; {
 +       prompt += &#96;=== ${bandName} ===\n&#96;;
 +       prompt += &#96;Anzahl Alben: ${data.count}\n&#96;;
 +       prompt += &#96;Erste Note (${data.albums[0].Jahr}): ${data.firstNote.toFixed(2)}\n&#96;;
 +       prompt += &#96;Letzte Note (${data.albums[data.albums.length - 1].Jahr}): ${data.lastNote.toFixed(2)}\n&#96;;
-+       prompt += &#96;Trend: ${data.trend === &#39;rising&#39; ? &#39;Steigend (Verbesserung)&#39; : data.trend === &#39;falling&#39; ? &#39;Fallend (Absturz)&#39; : &#39;Stabil&#39;}\n&#96;;
-+       prompt += &#39;\nAlle Alben:\n&#39;;
++       prompt += &#96;Trend: ${data.trend === 'rising' ? 'Steigend (Verbesserung)' : data.trend === 'falling' ? 'Fallend (Absturz)' : 'Stabil'}\n&#96;;
++       prompt += '\nAlle Alben:\n';
 +       data.albums.forEach(album =&gt; {
-+         prompt += &#96;  - &quot;${album.Album}&quot; (${album.Jahr}): ${album.Note.toFixed(2)}\n&#96;;
++         prompt += &#96;  - "${album.Album}" (${album.Jahr}): ${album.Note.toFixed(2)}\n&#96;;
 +       });
-+       prompt += &#39;\n&#39;;
++       prompt += '\n';
 +     });
 +     
-+     prompt += &#39;=== AUFGABE ===\n\n&#39;;
-+     prompt += &#39;Prüfe deine ursprüngliche Antwort:\n&#39;;
-+     prompt += &#39;1. Wenn deine Aussage zu den Daten passt (z.B. du sagst &quot;Absturz&quot; und die Daten zeigen einen Absturz), dann bestätige die Antwort und füge die exakten Zahlen hinzu.\n&#39;;
-+     prompt += &#39;2. Wenn deine Aussage NICHT zu den Daten passt (z.B. du sagst &quot;Absturz&quot; aber die Daten zeigen eine Verbesserung), dann korrigiere die Antwort deutlich.\n&#39;;
-+     prompt += &#39;3. Verwende IMMER die exakten Zahlen aus den Daten oben.\n&#39;;
-+     prompt += &#39;4. Wenn du Zahlen aus deinem Weltwissen verwendet hast, die nicht zu den Daten passen, korrigiere das explizit.\n&#39;;
-+     prompt += &#39;5. Die Antwort soll natürlich klingen, aber klar machen, dass die Testteam-Daten die Quelle sind.\n\n&#39;;
-+     prompt += &#39;Antworte NUR mit der korrigierten Antwort, ohne zusätzliche Erklärungen.&#39;;
++     prompt += '=== AUFGABE ===\n\n';
++     prompt += 'Prüfe deine ursprüngliche Antwort:\n';
++     prompt += '1. Wenn deine Aussage zu den Daten passt (z.B. du sagst "Absturz" und die Daten zeigen einen Absturz), dann bestätige die Antwort und füge die exakten Zahlen hinzu.\n';
++     prompt += '2. Wenn deine Aussage NICHT zu den Daten passt (z.B. du sagst "Absturz" aber die Daten zeigen eine Verbesserung), dann korrigiere die Antwort deutlich.\n';
++     prompt += '3. Verwende IMMER die exakten Zahlen aus den Daten oben.\n';
++     prompt += '4. Wenn du Zahlen aus deinem Weltwissen verwendet hast, die nicht zu den Daten passen, korrigiere das explizit.\n';
++     prompt += '5. Die Antwort soll natürlich klingen, aber klar machen, dass die Testteam-Daten die Quelle sind.\n\n';
++     prompt += 'Antworte NUR mit der korrigierten Antwort, ohne zusätzliche Erklärungen.';
 +     
 +     return prompt;
 +   }
@@ -20438,14 +20438,14 @@ Lines added: 150, lines removed: undefined
 +    */
 +   async callOpenRouterAPIForValidation(validationPrompt) {
 +     if (!this.apiKey) {
-+       throw new Error(&#39;OpenRouter API Key nicht konfiguriert&#39;);
++       throw new Error('OpenRouter API Key nicht konfiguriert');
 +     }
 +     
 +     const systemPrompt = await loadSystemPrompt();
 +     
 +     const apiMessages = [
-+       { role: &#39;system&#39;, content: systemPrompt },
-+       { role: &#39;user&#39;, content: validationPrompt }
++       { role: 'system', content: systemPrompt },
++       { role: 'user', content: validationPrompt }
 +     ];
 +     
 +     const requestBody = {
@@ -20455,13 +20455,13 @@ Lines added: 150, lines removed: undefined
 +       temperature: 0.3 // Niedrigere Temperature für präzisere Validierung
 +     };
 +     
-+     console.log(&#39;RAG: Validiere Antwort mit LLM&#39;);
++     console.log('RAG: Validiere Antwort mit LLM');
 +     
 +     const response = await fetch(OPENROUTER_CONFIG.baseURL + OPENROUTER_CONFIG.chatEndpoint, {
-+       method: &#39;POST&#39;,
++       method: 'POST',
 +       headers: {
 +         ...OPENROUTER_CONFIG.headers,
-+         &#39;Authorization&#39;: &#96;Bearer ${this.apiKey}&#96;
++         'Authorization': &#96;Bearer ${this.apiKey}&#96;
 +       },
 +       body: JSON.stringify(requestBody)
 +     });
@@ -20474,7 +20474,7 @@ Lines added: 150, lines removed: undefined
 +     const data = await response.json();
 +     
 +     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-+       throw new Error(&#39;Ungültige API-Antwort&#39;);
++       throw new Error('Ungültige API-Antwort');
 +     }
 +     
 +     return data.choices[0].message.content.trim();
@@ -20527,7 +20527,7 @@ Korrigiere die Übergabe der ursprünglichen Nachricht:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: undefined
@@ -20535,12 +20535,12 @@ Lines added: 4, lines removed: undefined
 ```diff
 @@ -452,5 +452,9 @@
             if (correctedResponse !== response) {
-              console.log(&#39;RAG: Antwort wurde korrigiert&#39;);
-+             console.log(&#39;RAG: Original:&#39;, response.substring(0, 200));
-+             console.log(&#39;RAG: Korrigiert:&#39;, correctedResponse.substring(0, 200));
+              console.log('RAG: Antwort wurde korrigiert');
++             console.log('RAG: Original:', response.substring(0, 200));
++             console.log('RAG: Korrigiert:', correctedResponse.substring(0, 200));
               response = correctedResponse;
 +           } else {
-+             console.log(&#39;RAG: Antwort ist konsistent, keine Korrektur nötig&#39;);
++             console.log('RAG: Antwort ist konsistent, keine Korrektur nötig');
             }
           } catch (validationError) {
 ```
@@ -20666,15 +20666,15 @@ Anpassen, sodass die Links nur bei Assistant-Nachrichten angezeigt werden:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 5
 
 ```diff
 @@ -360,14 +360,15 @@
-        const contentEl = document.createElement(&#39;div&#39;);
-        contentEl.className = &#39;chat-message-content&#39;;
+        const contentEl = document.createElement('div');
+        contentEl.className = 'chat-message-content';
 -       
 -       // Für alle Nachrichten: Prüfe auf erwähnte Bands und füge Links hinzu
 -       const mentionedBands = this.extractMentionedBands(msg.content);
@@ -20686,13 +20686,13 @@ Lines added: 6, lines removed: 5
 -       // Links hinzufügen, wenn Bands gefunden wurden (für User UND Assistant)
 -       if (mentionedBands.length &gt; 0) {
 +       // Links nur für Assistant-Nachrichten hinzufügen
-+       if (msg.role === &#39;assistant&#39;) {
++       if (msg.role === 'assistant') {
 +         const mentionedBands = this.extractMentionedBands(msg.content);
 +         
 +         // Links hinzufügen, wenn Bands gefunden wurden
 +         if (mentionedBands.length &gt; 0) {
-          const linkContainer = document.createElement(&#39;div&#39;);
-          linkContainer.style.marginTop = &#39;12px&#39;;
+          const linkContainer = document.createElement('div');
+          linkContainer.style.marginTop = '12px';
 ```
 
 </details>
@@ -20703,7 +20703,7 @@ Lines added: 6, lines removed: 5
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: 3
@@ -20782,7 +20782,7 @@ Prüfe, wie Beyoncé in den Daten gespeichert ist und warum sie nicht erkannt wi
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **command** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); beyonce = [d for d in data if 'beyonce' in d.get('Band', '').lower() or 'beyoncé' in d.get('Band', '').lower()]; print(f'Beyoncé Alben gefunden: {len(beyonce)}'); [print(f\"  Band: '{d['Band']}' | Album: '{d['Album']}' ({d['Jahr']}): {d['Note']}\") for d in sorted(beyonce, key=lambda x: x.get('Jahr', 0))]"</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); beyonce = [d for d in data if 'beyonce' in d.get('Band', '').lower() or 'beyoncé' in d.get('Band', '').lower()]; print(f'Beyoncé Alben gefunden: {len(beyonce)}'); [print(f\"  Band: '{d['Band']}' | Album: '{d['Album']}' ({d['Jahr']}): {d['Note']}\") for d in sorted(beyonce, key=lambda x: x.get('Jahr', 0))]"</summary>
 
 ```bash
 cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = json.load(open('public/data/alben.json')); beyonce = [d for d in data if 'beyonce' in d.get('Band', '').lower() or 'beyoncé' in d.get('Band', '').lower()]; print(f'Beyoncé Alben gefunden: {len(beyonce)}'); [print(f\"  Band: '{d['Band']}' | Album: '{d['Album']}' ({d['Jahr']}): {d['Note']}\") for d in sorted(beyonce, key=lambda x: x.get('Jahr', 0))]"
@@ -20790,10 +20790,10 @@ cd /Users/rstockm/Documents/GitHub/testabend && python3 -c "import json; data = 
 
 ```
 Beyoncé Alben gefunden: 4
-  Band: &#39;Beyoncé&#39; | Album: &#39;BDay&#39; (2006): 2.525
-  Band: &#39;Beyoncé&#39; | Album: &#39;Lemonade&#39; (2016): 2.9867
-  Band: &#39;Beyoncé&#39; | Album: &#39;Renaissance&#39; (2022): 2.9666
-  Band: &#39;Beyoncé&#39; | Album: &#39;Cowboy Carter&#39; (2024): 3.5416
+  Band: 'Beyoncé' | Album: 'BDay' (2006): 2.525
+  Band: 'Beyoncé' | Album: 'Lemonade' (2016): 2.9867
+  Band: 'Beyoncé' | Album: 'Renaissance' (2022): 2.9666
+  Band: 'Beyoncé' | Album: 'Cowboy Carter' (2024): 3.5416
 
 ```
 </details>
@@ -20829,7 +20829,7 @@ Problem: Die Daten enthalten "Beyoncé" (mit é), die Suche erkennt aber "Beyonc
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 11, lines removed: undefined
@@ -20841,13 +20841,13 @@ Lines added: 11, lines removed: undefined
 +   
 +   /**
 +    * Normalisiert einen String: entfernt Akzente und konvertiert zu lowercase
-+    * Beispiel: &quot;Beyoncé&quot; -&gt; &quot;beyonce&quot;, &quot;Café&quot; -&gt; &quot;cafe&quot;
++    * Beispiel: "Beyoncé" -&gt; "beyonce", "Café" -&gt; "cafe"
 +    */
 +   normalizeString(str) {
 +     return str
 +       .toLowerCase()
-+       .normalize(&#39;NFD&#39;) // Zerlegt Akzente (é -&gt; e + ́)
-+       .replace(/[\u0300-\u036f]/g, &#39;&#39;); // Entfernt Diakritika
++       .normalize('NFD') // Zerlegt Akzente (é -&gt; e + ́)
++       .replace(/[\u0300-\u036f]/g, ''); // Entfernt Diakritika
 +   }
     
     /**
@@ -20876,10 +20876,10 @@ Lines added: 6, lines removed: 6
         
 -       // Suche nach dem Bandnamen im Text (case-insensitive)
 +       // Suche nach dem Bandnamen im Text (case-insensitive, akzent-agnostisch)
-        // Verhindere Teilstring-Matches (z.B. &quot;The&quot; sollte nicht &quot;The Beatles&quot; matchen)
--       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandLower)}\\b&#96;, &#39;i&#39;);
+        // Verhindere Teilstring-Matches (z.B. "The" sollte nicht "The Beatles" matchen)
+-       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandLower)}\\b&#96;, 'i');
 -       if (regex.test(text)) {
-+       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandNormalized)}\\b&#96;, &#39;i&#39;);
++       const regex = new RegExp(&#96;\\b${this.escapeRegex(bandNormalized)}\\b&#96;, 'i');
 +       if (regex.test(textNormalized)) {
           mentionedBands.push(band);
         }
@@ -20963,7 +20963,7 @@ Anpassen des Validierungs-Prompts: Die Korrektur soll als erste Antwort formulie
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chat.js</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 4
@@ -20972,13 +20972,13 @@ Lines added: 3, lines removed: 4
 @@ -773,8 +773,7 @@
      */
     buildValidationPrompt(llmResponse, originalQuery, bandsWithData) {
--     let prompt = &#39;Du hast gerade folgende Antwort gegeben:\n\n&#39;;
--     prompt += &#96;&quot;${llmResponse}&quot;\n\n&#96;;
--     prompt += &#96;Die ursprüngliche Frage war: &quot;${originalQuery}&quot;\n\n&#96;;
--     prompt += &#39;Ich habe jetzt die tatsächlichen Testteam-Daten für die erwähnten Bands geprüft:\n\n&#39;;
-+     let prompt = &#39;Du hast gerade eine Antwort auf folgende Frage gegeben:\n\n&#39;;
-+     prompt += &#96;&quot;${originalQuery}&quot;\n\n&#96;;
-+     prompt += &#39;Deine Antwort enthielt Aussagen über Bands, für die ich jetzt die tatsächlichen Testteam-Daten geprüft habe:\n\n&#39;;
+-     let prompt = 'Du hast gerade folgende Antwort gegeben:\n\n';
+-     prompt += &#96;"${llmResponse}"\n\n&#96;;
+-     prompt += &#96;Die ursprüngliche Frage war: "${originalQuery}"\n\n&#96;;
+-     prompt += 'Ich habe jetzt die tatsächlichen Testteam-Daten für die erwähnten Bands geprüft:\n\n';
++     let prompt = 'Du hast gerade eine Antwort auf folgende Frage gegeben:\n\n';
++     prompt += &#96;"${originalQuery}"\n\n&#96;;
++     prompt += 'Deine Antwort enthielt Aussagen über Bands, für die ich jetzt die tatsächlichen Testteam-Daten geprüft habe:\n\n';
       
       bandsWithData.forEach(([bandName, data]) =&gt; {
 ```
@@ -20989,21 +20989,21 @@ Lines added: 7, lines removed: 7
 ```diff
 @@ -792,11 +791,11 @@
       
-      prompt += &#39;=== AUFGABE ===\n\n&#39;;
--     prompt += &#39;Prüfe deine ursprüngliche Antwort:\n&#39;;
--     prompt += &#39;1. Wenn deine Aussage zu den Daten passt (z.B. du sagst &quot;Absturz&quot; und die Daten zeigen einen Absturz), dann bestätige die Antwort und füge die exakten Zahlen hinzu.\n&#39;;
--     prompt += &#39;2. Wenn deine Aussage NICHT zu den Daten passt (z.B. du sagst &quot;Absturz&quot; aber die Daten zeigen eine Verbesserung), dann korrigiere die Antwort deutlich.\n&#39;;
--     prompt += &#39;3. Verwende IMMER die exakten Zahlen aus den Daten oben.\n&#39;;
--     prompt += &#39;4. Wenn du Zahlen aus deinem Weltwissen verwendet hast, die nicht zu den Daten passen, korrigiere das explizit.\n&#39;;
--     prompt += &#39;5. Die Antwort soll natürlich klingen, aber klar machen, dass die Testteam-Daten die Quelle sind.\n\n&#39;;
--     prompt += &#39;Antworte NUR mit der korrigierten Antwort, ohne zusätzliche Erklärungen.&#39;;
-+     prompt += &#39;Gib jetzt eine vollständige, natürliche Antwort auf die ursprüngliche Frage:\n&#39;;
-+     prompt += &#39;1. Verwende IMMER die exakten Zahlen aus den Daten oben.\n&#39;;
-+     prompt += &#39;2. Wenn die Daten eine bestimmte Entwicklung zeigen (z.B. Absturz oder Verbesserung), beschreibe das basierend auf den tatsächlichen Zahlen.\n&#39;;
-+     prompt += &#39;3. Die Antwort soll natürlich klingen und direkt auf die Frage eingehen.\n&#39;;
-+     prompt += &#39;4. Verwende NICHT Formulierungen wie &quot;Eigentlich dachte ich...&quot; oder &quot;Ich muss korrigieren...&quot; - schreibe die Antwort so, als wäre es deine erste und einzige Antwort.\n&#39;;
-+     prompt += &#39;5. Die Testteam-Daten sind die Quelle - verwende sie direkt und selbstbewusst.\n\n&#39;;
-+     prompt += &#39;Antworte NUR mit der vollständigen Antwort auf die ursprüngliche Frage, ohne zusätzliche Erklärungen oder Verweise auf vorherige Antworten.&#39;;
+      prompt += '=== AUFGABE ===\n\n';
+-     prompt += 'Prüfe deine ursprüngliche Antwort:\n';
+-     prompt += '1. Wenn deine Aussage zu den Daten passt (z.B. du sagst "Absturz" und die Daten zeigen einen Absturz), dann bestätige die Antwort und füge die exakten Zahlen hinzu.\n';
+-     prompt += '2. Wenn deine Aussage NICHT zu den Daten passt (z.B. du sagst "Absturz" aber die Daten zeigen eine Verbesserung), dann korrigiere die Antwort deutlich.\n';
+-     prompt += '3. Verwende IMMER die exakten Zahlen aus den Daten oben.\n';
+-     prompt += '4. Wenn du Zahlen aus deinem Weltwissen verwendet hast, die nicht zu den Daten passen, korrigiere das explizit.\n';
+-     prompt += '5. Die Antwort soll natürlich klingen, aber klar machen, dass die Testteam-Daten die Quelle sind.\n\n';
+-     prompt += 'Antworte NUR mit der korrigierten Antwort, ohne zusätzliche Erklärungen.';
++     prompt += 'Gib jetzt eine vollständige, natürliche Antwort auf die ursprüngliche Frage:\n';
++     prompt += '1. Verwende IMMER die exakten Zahlen aus den Daten oben.\n';
++     prompt += '2. Wenn die Daten eine bestimmte Entwicklung zeigen (z.B. Absturz oder Verbesserung), beschreibe das basierend auf den tatsächlichen Zahlen.\n';
++     prompt += '3. Die Antwort soll natürlich klingen und direkt auf die Frage eingehen.\n';
++     prompt += '4. Verwende NICHT Formulierungen wie "Eigentlich dachte ich..." oder "Ich muss korrigieren..." - schreibe die Antwort so, als wäre es deine erste und einzige Antwort.\n';
++     prompt += '5. Die Testteam-Daten sind die Quelle - verwende sie direkt und selbstbewusst.\n\n';
++     prompt += 'Antworte NUR mit der vollständigen Antwort auf die ursprüngliche Frage, ohne zusätzliche Erklärungen oder Verweise auf vorherige Antworten.';
       
       return prompt;
 ```
@@ -21110,7 +21110,7 @@ Anpassen des System-Prompts mit den Nuancen:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 2
@@ -21119,15 +21119,15 @@ Lines added: 3, lines removed: 2
 @@ -7,8 +7,9 @@
   
   Wichtige Schwellen:
-- - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenannten &quot;Kraftklub&quot; geschafft.
-  - 2,5 ist die &quot;Schrottgrenze&quot;, alles darunter muss mit harscher Häme und Verachtung gestraft werden
-  - 2,75 &quot;Deepwater Horizon&quot; - Alben die es darüber geschafft haben, aber noch keine 3 wurden sind zumindest in Teilen Respektabel.
+- - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenannten "Kraftklub" geschafft.
+  - 2,5 ist die "Schrottgrenze", alles darunter muss mit harscher Häme und Verachtung gestraft werden
+  - 2,75 "Deepwater Horizon" - Alben die es darüber geschafft haben, aber noch keine 3 wurden sind zumindest in Teilen Respektabel.
 - - Wirklich gefeiert wird ab 3.2
-+ - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenannten &quot;Kraftklub&quot; geschafft. ABER: &quot;Album xy schafft es in den Kraftklub&quot; sagt man nur bis ca. zu 3.1 Noten - darüber ist das schon sehr erfreuliche Musik.
++ - Alles ab 3 kann gut angehört werden, die Alben haben es dann in den sogenannten "Kraftklub" geschafft. ABER: "Album xy schafft es in den Kraftklub" sagt man nur bis ca. zu 3.1 Noten - darüber ist das schon sehr erfreuliche Musik.
 + - Ab 3.2 wird ernsthaft gefeiert.
 + - Alles über 3.4 ist sehr selten und bemerkenswert.
   
-  WICHTIG: Wenn du über Noten sprichst, interpretiere sie IMMER nach diesem System (0-5, nicht 1-6!). Eine Note von 3.5 ist GUT, nicht &quot;befriedigend&quot; wie bei Schulnoten. Eine Note von 2.8 ist SCHLECHT, nicht &quot;ausreichend&quot;.
+  WICHTIG: Wenn du über Noten sprichst, interpretiere sie IMMER nach diesem System (0-5, nicht 1-6!). Eine Note von 3.5 ist GUT, nicht "befriedigend" wie bei Schulnoten. Eine Note von 2.8 ist SCHLECHT, nicht "ausreichend".
 ```
 
 </details>
@@ -21207,7 +21207,7 @@ Umstellen auf Claude Sonnet 4.5:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 4, lines removed: 4
@@ -21221,12 +21221,12 @@ Lines added: 4, lines removed: 4
 +   // Claude Sonnet 4.5 bietet ausgezeichnete Qualität für anspruchsvolle Gespräche
 +   // und versteht Popkultur sehr gut. Gleicher Preis wie 3.5 Sonnet.
     PREMIUM: {
--     id: &#39;anthropic/claude-3.5-sonnet&#39;,
--     name: &#39;Claude 3.5 Sonnet&#39;,
-+     id: &#39;anthropic/claude-sonnet-4.5&#39;,
-+     name: &#39;Claude Sonnet 4.5&#39;,
-      description: &#39;Beste Qualität für anspruchsvolle Unterhaltung, ausgezeichnetes Popkultur-Verständnis&#39;,
-      provider: &#39;Anthropic&#39;,
+-     id: 'anthropic/claude-3.5-sonnet',
+-     name: 'Claude 3.5 Sonnet',
++     id: 'anthropic/claude-sonnet-4.5',
++     name: 'Claude Sonnet 4.5',
+      description: 'Beste Qualität für anspruchsvolle Unterhaltung, ausgezeichnetes Popkultur-Verständnis',
+      provider: 'Anthropic',
 ```
 
 </details>
@@ -21237,7 +21237,7 @@ Lines added: 4, lines removed: 4
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -21314,7 +21314,7 @@ Umstellen auf OpenAI GPT-5.1:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 6
@@ -21328,17 +21328,17 @@ Lines added: 6, lines removed: 6
 +   // GPT-5.1 bietet ausgezeichnete Qualität für anspruchsvolle Gespräche
 +   // und versteht Popkultur sehr gut.
     PREMIUM: {
--     id: &#39;anthropic/claude-sonnet-4.5&#39;,
--     name: &#39;Claude Sonnet 4.5&#39;,
-+     id: &#39;openai/gpt-5.1&#39;,
-+     name: &#39;GPT-5.1&#39;,
-      description: &#39;Beste Qualität für anspruchsvolle Unterhaltung, ausgezeichnetes Popkultur-Verständnis&#39;,
--     provider: &#39;Anthropic&#39;,
-+     provider: &#39;OpenAI&#39;,
+-     id: 'anthropic/claude-sonnet-4.5',
+-     name: 'Claude Sonnet 4.5',
++     id: 'openai/gpt-5.1',
++     name: 'GPT-5.1',
+      description: 'Beste Qualität für anspruchsvolle Unterhaltung, ausgezeichnetes Popkultur-Verständnis',
+-     provider: 'Anthropic',
++     provider: 'OpenAI',
       contextWindow: 200000,
 -     // Geschätzte Kosten: ~$3/M input, ~$15/M output tokens
 +     // Geschätzte Kosten: Variiert je nach Modell
-      costLevel: &#39;premium&#39;
+      costLevel: 'premium'
     },
 ```
 
@@ -21350,7 +21350,7 @@ Lines added: 6, lines removed: 6
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/js/chatConfig.js</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -21374,8 +21374,8 @@ Lines added: undefined, lines removed: 5
   export const DEFAULT_MODEL = RECOMMENDED_MODELS.PREMIUM;
 - 
 - // Stelle sicher, dass ein Claude-Modell verwendet wird
-- if (!DEFAULT_MODEL.id.includes(&#39;claude&#39;)) {
--   console.warn(&#39;Standard-Modell ist kein Claude-Modell&#39;);
+- if (!DEFAULT_MODEL.id.includes('claude')) {
+-   console.warn('Standard-Modell ist kein Claude-Modell');
 - }
   
   /**
@@ -21473,7 +21473,7 @@ Erweitere den System-Prompt um explizite Anweisungen für theatralische Einschü
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 17, lines removed: 2
@@ -21484,8 +21484,8 @@ Lines added: 17, lines removed: 2
   - Parenthesen: Einschübe in Gedankenstrichen oder in Klammern.
 - - Selbstkorrekturen: „Ich wollte gerade ‚Oscar‘ sagen – natürlich meine ich den Grammy.“
 - - kleinen Anekdoten, die ein Argument illustrieren („um ein Beispiel zu nennen …“).
-+ - Selbstkorrekturen: „Ich wollte gerade ‚Oscar‘ sagen – natürlich meine ich den Grammy.&quot;
-+ - kleinen Anekdoten, die ein Argument illustrieren („um ein Beispiel zu nennen …&quot;).
++ - Selbstkorrekturen: „Ich wollte gerade ‚Oscar‘ sagen – natürlich meine ich den Grammy."
++ - kleinen Anekdoten, die ein Argument illustrieren („um ein Beispiel zu nennen …").
 + - **Theatralischen Einschüben**: Verwende regelmäßig Einschübe in Kursivschrift, die deine körperlichen Gesten, Mimik und Handlungen beschreiben. Diese machen die Antworten lebendig und persönlich. Beispiele:
 +   - *räuspert sich und nimmt einen Schluck Wasser*
 +   - *nimmt Brille ab und putzt sie bedächtig*
@@ -21540,7 +21540,7 @@ Hinzufügen einer zusätzlichen Betonung im Sprachstil-Bereich:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: undefined
@@ -21638,7 +21638,7 @@ Anpassen des System-Prompts, damit Einschübe in separaten Absätzen stehen und 
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 1
@@ -21662,7 +21662,7 @@ Lines added: 2, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
+<details><summary>Tool use: **search_replace** • Edit file: /Users/rstockm/Documents/GitHub/testabend/public/prompts/system-prompt.md</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: undefined
@@ -21676,7 +21676,7 @@ Lines added: 6, lines removed: undefined
 +   
 +   *räuspert sich und nimmt einen Schluck Wasser*
 +   
-+   Das ist die korrekte Formatierung. Nicht: &quot;Das Album ist gut *räuspert sich* und hat eine hohe Note.&quot;
++   Das ist die korrekte Formatierung. Nicht: "Das Album ist gut *räuspert sich* und hat eine hohe Note."
     
     Diese Einschübe sollten natürlich in den Textfluss eingebettet sein und die Atmosphäre des EU-Testabends verstärken. Verwende sie besonders bei wichtigen Punkten, Übergängen oder wenn du eine besondere Betonung setzen willst.
 ```

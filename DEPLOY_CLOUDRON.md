@@ -236,70 +236,26 @@ cd /app/data/public
 
 **Option C: Git-Deployment (Empfohlen für iterative Entwicklung)**
 
-**Einmaliges Setup (wenn Verzeichnis bereits Dateien enthält):**
+**Einmaliges Setup:**
 ```bash
 # Auf Cloudron Server via Web-Terminal:
 cd /app/data/public
-
-# Git im bestehenden Verzeichnis initialisieren:
-# WICHTIG: Verwende -c Option wegen "dubious ownership" Warnung
-git -c safe.directory=/app/data/public init
-git -c safe.directory=/app/data/public remote add origin https://github.com/rstockm/testabend.git
-git -c safe.directory=/app/data/public fetch origin
-git -c safe.directory=/app/data/public branch -M main
-git -c safe.directory=/app/data/public reset --hard origin/main
-
-# Falls es Konflikte gibt (z.B. index.php), diese manuell lösen:
-# rm index.php  # Falls vorhanden
-# git add .
-# git commit -m "Cleanup"
+# Falls index.php vorhanden, entfernen:
+rm index.php
+# Repo klonen:
+git clone https://github.com/dein-user/alben-dashboard.git .
 ```
-
-**Alternative: Sauberes Setup (wenn Verzeichnis leer ist):**
-```bash
-cd /app/data/public
-git clone https://github.com/rstockm/testabend.git .
-```
-
-**Hinweis:** Die `-c safe.directory=/app/data/public` Option ist nötig, weil Cloudron das Verzeichnis als `www-data` besitzt, aber du als `root` eingeloggt bist. Die `-c` Option umgeht das Problem ohne globale Config-Änderungen.
 
 **Updates (nach jedem Push zu GitHub):**
-
-**Option 1: Deployment-Script (Empfohlen - aktualisiert alle Dateien korrekt):**
 ```bash
 # Auf Cloudron Server via Web-Terminal:
 cd /app/data/public
-bash deploy.sh
+git pull
 ```
 
-**Option 2: Manueller Git Pull:**
+**Oder von lokal (SSH Einzeiler):**
 ```bash
-# Auf Cloudron Server via Web-Terminal:
-cd /app/data/public
-git -c safe.directory=/app/data/public fetch origin
-git -c safe.directory=/app/data/public reset --hard origin/main
-# Dann Dateien aus public/ ins Root kopieren (siehe deploy.sh)
-```
-
-**Option 3: Von lokal (SSH Einzeiler):**
-```bash
-ssh cloudron@deine-domain.de "cd /app/data/public && bash deploy.sh"
-```
-
-**Das `deploy.sh` Script:**
-- Führt `git pull` aus
-- Kopiert alle Dateien aus `public/` ins Root-Verzeichnis
-- Behält lokale Dateien bei: `.htaccess`, `images/`, `data/embeddings.json`
-- Funktioniert auch wenn Dateien im Repo unter `public/` liegen
-
-**Tipp:** Du kannst dir einen Alias erstellen, um nicht jedes Mal `-c safe.directory=/app/data/public` tippen zu müssen:
-```bash
-# Einmalig auf dem Server:
-echo 'alias gitpull="git -c safe.directory=/app/data/public pull"' >> ~/.bashrc
-source ~/.bashrc
-
-# Dann einfach:
-cd /app/data/public && gitpull
+ssh cloudron@deine-domain.de "cd /app/data/public && git pull"
 ```
 
 **Wichtig:**

@@ -602,7 +602,7 @@ export function buildScatterZoomControls(data, onZoomChange) {
   yMinSlider.style.cssText = 'position: absolute; transform: rotate(-90deg); width: 400px; height: 6px; margin: 0; left: -197px; top: 197px;';
   
   const yValueDisplay = document.createElement('span');
-  yValueDisplay.textContent = `${fullMinNote.toFixed(2)} - ${fullMaxNote.toFixed(2)}`;
+  yValueDisplay.textContent = `${fullMinNote} - ${fullMaxNote}`;
   yValueDisplay.style.cssText = 'color: var(--text-primary); font-size: 10px; text-align: center; margin-top: 8px;';
   
   const getYValues = () => {
@@ -612,7 +612,7 @@ export function buildScatterZoomControls(data, onZoomChange) {
   
   const updateY = () => {
     const { min, max } = getYValues();
-    yValueDisplay.textContent = `${min.toFixed(2)} - ${max.toFixed(2)}`;
+    yValueDisplay.textContent = `${min} - ${max}`;
     onZoomChange({ y: { min, max } });
   };
   

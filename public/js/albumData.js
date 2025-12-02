@@ -46,10 +46,10 @@ export function prepareAlbumDataForLLM(data) {
   
   // Statistiken berechnen
   const avgNote = notes.length > 0 
-    ? (notes.reduce((a, b) => a + b, 0) / notes.length).toFixed(2)
-    : '0';
-  const minNote = notes.length > 0 ? Math.min(...notes).toFixed(2) : '0';
-  const maxNote = notes.length > 0 ? Math.max(...notes).toFixed(2) : '0';
+    ? (notes.reduce((a, b) => a + b, 0) / notes.length)
+    : 0;
+  const minNote = notes.length > 0 ? Math.min(...notes) : 0;
+  const maxNote = notes.length > 0 ? Math.max(...notes) : 0;
   
   const yearRange = Array.from(albumsByYear.keys()).sort((a, b) => a - b);
   const minYear = yearRange.length > 0 ? yearRange[0] : null;
@@ -60,14 +60,14 @@ export function prepareAlbumDataForLLM(data) {
     const bandAlbums = albumsByBand.get(band) || [];
     const bandNotes = bandAlbums.map(a => a.Note).filter(n => n != null);
     const avgBandNote = bandNotes.length > 0
-      ? (bandNotes.reduce((a, b) => a + b, 0) / bandNotes.length).toFixed(2)
-      : '0';
+      ? (bandNotes.reduce((a, b) => a + b, 0) / bandNotes.length)
+      : 0;
     return {
       Band: band,
       AnzahlAlben: bandAlbums.length,
-      Durchschnittsnote: parseFloat(avgBandNote),
-      BesteNote: bandNotes.length > 0 ? Math.max(...bandNotes).toFixed(2) : '0',
-      SchlechtesteNote: bandNotes.length > 0 ? Math.min(...bandNotes).toFixed(2) : '0',
+      Durchschnittsnote: avgBandNote,
+      BesteNote: bandNotes.length > 0 ? Math.max(...bandNotes) : 0,
+      SchlechtesteNote: bandNotes.length > 0 ? Math.min(...bandNotes) : 0,
       Alben: bandAlbums.sort((a, b) => (b.Jahr || 0) - (a.Jahr || 0))
     };
   }).sort((a, b) => b.Durchschnittsnote - a.Durchschnittsnote);
@@ -101,7 +101,7 @@ export function prepareAlbumDataForLLM(data) {
   
   dataSummary += `TOP 20 ALBEN (nach Note):\n`;
   topAlbums.forEach((album, idx) => {
-    dataSummary += `${idx + 1}. ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): ${album.Note.toFixed(2)}\n`;
+    dataSummary += `${idx + 1}. ${album.Band} - "${album.Album}" (${album.Jahr || 'N/A'}): ${album.Note}\n`;
   });
   dataSummary += `\n`;
   
@@ -109,7 +109,7 @@ export function prepareAlbumDataForLLM(data) {
   bandStats.forEach(stat => {
     dataSummary += `\n${stat.Band} (${stat.AnzahlAlben} Alben, Ø ${stat.Durchschnittsnote}):\n`;
     stat.Alben.forEach(album => {
-      dataSummary += `  - "${album.Album}" (${album.Jahr || 'N/A'}): ${album.Note.toFixed(2)}\n`;
+      dataSummary += `  - "${album.Album}" (${album.Jahr || 'N/A'}): ${album.Note}\n`;
     });
   });
   
@@ -144,19 +144,19 @@ export function createCompactAlbumSummary(data) {
   });
   
   const avgNote = notes.length > 0 
-    ? (notes.reduce((a, b) => a + b, 0) / notes.length).toFixed(2)
-    : '0';
+    ? (notes.reduce((a, b) => a + b, 0) / notes.length)
+    : 0;
   
   const bandStats = Array.from(bands).map(band => {
     const bandAlbums = albumsByBand.get(band) || [];
     const bandNotes = bandAlbums.map(a => a.Note).filter(n => n != null);
     const avgBandNote = bandNotes.length > 0
-      ? (bandNotes.reduce((a, b) => a + b, 0) / bandNotes.length).toFixed(2)
-      : '0';
+      ? (bandNotes.reduce((a, b) => a + b, 0) / bandNotes.length)
+      : 0;
     return {
       Band: band,
       AnzahlAlben: bandAlbums.length,
-      Durchschnittsnote: parseFloat(avgBandNote),
+      Durchschnittsnote: avgBandNote,
       Alben: bandAlbums.sort((a, b) => (b.Jahr || 0) - (a.Jahr || 0))
     };
   }).sort((a, b) => b.Durchschnittsnote - a.Durchschnittsnote);
@@ -166,7 +166,7 @@ export function createCompactAlbumSummary(data) {
   // Top 15 Bands mit ihren Alben
   bandStats.slice(0, 15).forEach(stat => {
     summary += `\n${stat.Band} (${stat.AnzahlAlben} Alben, Ø ${stat.Durchschnittsnote}): `;
-    const albumList = stat.Alben.map(a => `"${a.Album}" (${a.Jahr || '?'}, ${a.Note.toFixed(2)})`).join(', ');
+    const albumList = stat.Alben.map(a => `"${a.Album}" (${a.Jahr || '?'}, ${a.Note})`).join(', ');
     summary += albumList;
   });
   

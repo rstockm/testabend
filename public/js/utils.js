@@ -116,7 +116,7 @@ export function parseHash() {
     for (const part of query.split('&')) {
       const [k, v] = part.split('=');
       if (k && v) {
-        params[decodeURIComponent(k)] = decodeURIComponent(v || '');
+      params[decodeURIComponent(k)] = decodeURIComponent(v || '');
       }
     }
   }
@@ -140,7 +140,7 @@ export function updateHash(route, params) {
  * Aktive Navigation setzen
  */
 export function setActiveNav(route) {
-  ['overview', 'band', 'scatter', 'testteam'].forEach(r => {
+  ['overview', 'band', 'scatter', 'testteam', 'jahre'].forEach(r => {
     // Desktop Navigation
     const el = document.getElementById('nav-' + r);
     if (el) el.classList.toggle('active', r === route);
@@ -183,56 +183,12 @@ export function calculateMinMaxPerYear(data) {
 }
 
 /**
- * Ermittelt den Base-Pfad für Cover-Bilder
- * Verwendet einfach den absoluten Pfad /images/covers/ 
- * (funktioniert sowohl lokal als auch auf Cloudron, da die App aus dem Root serviert wird)
- * @returns {string} Base-Pfad für Cover-Bilder: "/images/covers/"
+ * Formatiert eine Note ohne Rundung - zeigt alle verfügbaren Nachkommastellen
  */
-export function getCoversBasePath() {
-  return '/images/covers/';
-}
-
-// Synchroner Fallback (identisch)
-export function getCoversBasePathSync() {
-  return '/images/covers/';
-}
-
-/**
- * Erstellt vollständigen Pfad zu einem Cover-Bild
- * Verwendet einen PHP-Proxy, um sicherzustellen, dass Bilder korrekt als image/jpeg serviert werden
- * und nicht von der SPA-Rewrite-Regel abgefangen werden
- * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
- * @returns {string} Vollständiger Pfad zum Cover über den Proxy: "/image-proxy.php?path=images/covers/Band_Album.jpg"
- */
-export function getCoverImagePath(filename) {
-  if (!filename) return '';
-  const cleanFilename = filename.startsWith('/') ? filename.slice(1) : filename;
-  // Verwende Image-Proxy, um sicherzustellen, dass Bilder korrekt serviert werden
-  return '/image-proxy.php?path=images/covers/' + encodeURIComponent(cleanFilename);
-}
-
-/**
- * Erstellt mehrere mögliche Pfade zu einem Cover-Bild (für Fallback-Mechanismus)
- * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
- * @returns {string[]} Array von möglichen Pfaden
- */
-export function getCoverImagePaths(filename) {
-  if (!filename) return [];
-  const cleanFilename = filename.startsWith('/') ? filename.slice(1) : filename;
-  // Einfach den absoluten Pfad zurückgeben
-  return ['/images/covers/' + cleanFilename];
-}
-
-/**
- * Erstellt vollständigen Pfad zu einem Cover-Bild (async, wartet auf Pfad-Detection)
- * @param {string} filename - Dateiname des Covers (z.B. "Band_Album.jpg")
- * @returns {Promise<string>} Vollständiger Pfad zum Cover
- */
-export async function getCoverImagePathAsync(filename) {
-  if (!filename) return '';
-  const basePath = await getCoversBasePath();
-  // Stelle sicher, dass basePath mit / endet und filename nicht mit / beginnt
-  const cleanBase = basePath.endsWith('/') ? basePath : basePath + '/';
-  const cleanFilename = filename.startsWith('/') ? filename.slice(1) : filename;
-  return cleanBase + cleanFilename;
+export function formatNote(note) {
+  if (note == null || isNaN(note)) {
+    return String(note);
+  }
+  // Konvertiere zu String ohne Rundung - JavaScript zeigt automatisch alle Dezimalstellen
+  return String(Number(note));
 }

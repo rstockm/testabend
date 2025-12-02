@@ -7,19 +7,6 @@ import { setupCoverTooltipHandler } from './coverTooltip.js';
 import { setupMobileNavigation } from './mobileNav.js';
 
 /**
- * Setzt eine CSS-Variable mit der aktuellen Header-Höhe.
- * So können mobile Layouts dynamisch auf Änderungen reagieren.
- */
-function updateHeaderHeightVar() {
-  const header = document.querySelector('header');
-  if (!header) {
-    return;
-  }
-  const height = header.getBoundingClientRect().height;
-  document.documentElement.style.setProperty('--header-height-mobile', `${height}px`);
-}
-
-/**
  * Hauptfunktion
  */
 export async function main() {
@@ -31,23 +18,6 @@ export async function main() {
     if (!controlsEl || !chartEl) {
       log('Fehler: DOM-Elemente nicht gefunden');
       return;
-    }
-    
-    // Header-Höhe initial setzen und bei Resize aktualisieren
-    updateHeaderHeightVar();
-    window.addEventListener('resize', updateHeaderHeightVar);
-    
-    const mainEl = document.querySelector('main');
-    if (mainEl) {
-      const updateMainPadding = () => {
-        if (window.innerWidth <= 767) {
-          mainEl.style.paddingTop = '0px';
-        } else {
-          mainEl.style.paddingTop = '';
-        }
-      };
-      updateMainPadding();
-      window.addEventListener('resize', updateMainPadding);
     }
     
     // Daten laden
