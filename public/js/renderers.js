@@ -877,13 +877,15 @@ export async function renderYearsView(data, containerEl) {
   async function getCoverUrl(band, album, year) {
     // Importiere getBasePath dynamisch
     const { getBasePath } = await import('./utils.js');
-    const basePath = getBasePath();
-    const basePrefix = basePath ? `${basePath}/` : '';
+    const basePath = getBasePath(); // Gibt immer '/' oder '/subdir' zurück
     
     // Versuche zuerst mit Jahr
     if (year) {
       const filenameWithYear = getCoverFilename(band, album, year);
-      const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
+      // WICHTIG: Absolute Pfade mit / (nicht basePath + / + images, sondern basePath/images)
+      const coverPathWithYear = basePath === '/' 
+        ? `/images/covers/${filenameWithYear}`
+        : `${basePath}/images/covers/${filenameWithYear}`;
       try {
         const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
         if (response.ok) {
@@ -896,7 +898,9 @@ export async function renderYearsView(data, containerEl) {
     
     // Fallback: Versuche ohne Jahr
     const filenameWithoutYear = getCoverFilename(band, album, null);
-    const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
+    const coverPathWithoutYear = basePath === '/' 
+      ? `/images/covers/${filenameWithoutYear}`
+      : `${basePath}/images/covers/${filenameWithoutYear}`;
     try {
       const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
       if (response.ok) {

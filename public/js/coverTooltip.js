@@ -35,13 +35,15 @@ function getCoverFilename(band, album, year = null) {
 async function checkCoverExists(band, album, year = null) {
   // Importiere getBasePath dynamisch
   const { getBasePath } = await import('./utils.js');
-  const basePath = getBasePath();
-  const basePrefix = basePath ? `${basePath}/` : '';
+  const basePath = getBasePath(); // Gibt immer '/' oder '/subdir' zurück
   
   // Versuche zuerst mit Jahr (falls vorhanden)
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
+    // WICHTIG: Absolute Pfade mit / (verhindert //-Prefix bei Root)
+    const coverPathWithYear = basePath === '/' 
+      ? `/images/covers/${filenameWithYear}`
+      : `${basePath}/images/covers/${filenameWithYear}`;
     
     try {
       const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
@@ -55,7 +57,9 @@ async function checkCoverExists(band, album, year = null) {
   
   // Fallback: Versuche ohne Jahr
   const filenameWithoutYear = getCoverFilename(band, album, null);
-  const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
+  const coverPathWithoutYear = basePath === '/' 
+    ? `/images/covers/${filenameWithoutYear}`
+    : `${basePath}/images/covers/${filenameWithoutYear}`;
   
   try {
     const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
@@ -146,9 +150,10 @@ async function addCoverToTooltip(tooltipElement) {
     
     // Importiere getBasePath dynamisch
     const { getBasePath } = await import('./utils.js');
-    const basePath = getBasePath();
-    const basePrefix = basePath ? `${basePath}/` : '';
-    coverUrl = `${basePrefix}images/covers/${result.filename}`;
+    const basePath = getBasePath(); // Gibt immer '/' oder '/subdir' zurück
+    coverUrl = basePath === '/' 
+      ? `/images/covers/${result.filename}`
+      : `${basePath}/images/covers/${result.filename}`;
     coverUrlCache.set(cacheKey, coverUrl);
   } else if (coverUrl === null) {
     // Bereits geprüft, nicht vorhanden

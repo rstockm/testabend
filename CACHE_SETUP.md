@@ -57,4 +57,3 @@ Dies erfordert jedoch PHP oder Server-Side Rendering.
 **Für Produktion:** Verwende `.htaccess.example` → Kopiere zu `.htaccess` und passe Cache-Zeiten an
 
 Die Meta-Tags im HTML (`index.html`) unterstützen zusätzlich die Cache-Verhinderung im Browser.
-

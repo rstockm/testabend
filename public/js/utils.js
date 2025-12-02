@@ -196,6 +196,10 @@ export function formatNote(note) {
 /**
  * Ermittelt den Base-Pfad für Assets (z.B. Bilder)
  * Funktioniert sowohl lokal als auch auf Cloudron-Servern mit Unterverzeichnissen
+ * 
+ * WICHTIG: Gibt immer einen absoluten Pfad zurück (mit führendem /)
+ * - Lokal: '/' (Root)
+ * - Cloudron mit Subdirectory: '/subdir'
  */
 export function getBasePath() {
   // Prüfe ob ein <base> Tag vorhanden ist
@@ -210,7 +214,9 @@ export function getBasePath() {
       return path.endsWith('/') ? path.slice(0, -1) : path;
     } catch {
       // Falls relative URL, verwende direkt
-      return baseHref.endsWith('/') ? baseHref.slice(0, -1) : baseHref;
+      const normalized = baseHref.endsWith('/') ? baseHref.slice(0, -1) : baseHref;
+      // Stelle sicher, dass es mit / beginnt
+      return normalized.startsWith('/') ? normalized : '/' + normalized;
     }
   }
   
@@ -218,21 +224,26 @@ export function getBasePath() {
   const pathname = window.location.pathname;
   
   // Wenn wir im Root sind (z.B. "/" oder "/index.html")
-  if (pathname === '/' || pathname === '/index.html') {
-    return '';
+  // Gib immer '/' zurück, nie einen leeren String
+  if (pathname === '/' || pathname === '/index.html' || pathname === '') {
+    return '/';
   }
   
   // Entferne den Dateinamen (z.B. index.html) falls vorhanden
   let basePath = pathname;
-  if (basePath.endsWith('.html') || basePath.endsWith('/')) {
+  if (basePath.endsWith('.html')) {
     const parts = basePath.split('/').filter(p => p);
     // Entferne den letzten Teil (Dateiname)
     if (parts.length > 0 && parts[parts.length - 1].endsWith('.html')) {
       parts.pop();
     }
-    basePath = parts.length > 0 ? '/' + parts.join('/') : '';
+    basePath = parts.length > 0 ? '/' + parts.join('/') : '/';
   }
   
-  // Entferne trailing slash falls vorhanden
-  return basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+  // Entferne trailing slash falls vorhanden (außer bei Root)
+  if (basePath !== '/' && basePath.endsWith('/')) {
+    basePath = basePath.slice(0, -1);
+  }
+  
+  return basePath;
 }
