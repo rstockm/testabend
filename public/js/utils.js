@@ -192,3 +192,47 @@ export function formatNote(note) {
   // Konvertiere zu String ohne Rundung - JavaScript zeigt automatisch alle Dezimalstellen
   return String(Number(note));
 }
+
+/**
+ * Ermittelt den Base-Pfad für Assets (z.B. Bilder)
+ * Funktioniert sowohl lokal als auch auf Cloudron-Servern mit Unterverzeichnissen
+ */
+export function getBasePath() {
+  // Prüfe ob ein <base> Tag vorhanden ist
+  const baseTag = document.querySelector('base[href]');
+  if (baseTag) {
+    const baseHref = baseTag.getAttribute('href');
+    // Parse URL falls absolut
+    try {
+      const url = new URL(baseHref, window.location.origin);
+      const path = url.pathname;
+      // Entferne trailing slash falls vorhanden
+      return path.endsWith('/') ? path.slice(0, -1) : path;
+    } catch {
+      // Falls relative URL, verwende direkt
+      return baseHref.endsWith('/') ? baseHref.slice(0, -1) : baseHref;
+    }
+  }
+  
+  // Fallback: Ermittle Base-Pfad aus window.location.pathname
+  const pathname = window.location.pathname;
+  
+  // Wenn wir im Root sind (z.B. "/" oder "/index.html")
+  if (pathname === '/' || pathname === '/index.html') {
+    return '';
+  }
+  
+  // Entferne den Dateinamen (z.B. index.html) falls vorhanden
+  let basePath = pathname;
+  if (basePath.endsWith('.html') || basePath.endsWith('/')) {
+    const parts = basePath.split('/').filter(p => p);
+    // Entferne den letzten Teil (Dateiname)
+    if (parts.length > 0 && parts[parts.length - 1].endsWith('.html')) {
+      parts.pop();
+    }
+    basePath = parts.length > 0 ? '/' + parts.join('/') : '';
+  }
+  
+  // Entferne trailing slash falls vorhanden
+  return basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+}

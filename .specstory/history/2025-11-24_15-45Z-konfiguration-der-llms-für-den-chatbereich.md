@@ -28452,3 +28452,649 @@ Reordered the year containers in `rotateContainers` so the DOM actually matches 
 
 ---
 
+_**User (2025-12-02 22:14Z)**_
+
+Deploy den Stand mal nach GitHub, ich will prüfen wie das auf einem echten Gerät läuft.
+
+---
+
+_**Agent (model gpt-5.1-codex, mode Agent)**_
+
+
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && git status -sb</summary>
+
+```bash
+cd /Users/rstockm/Documents/GitHub/testabend && git status -sb
+```
+
+```
+## main...origin/main
+ M .specstory/.gitignore
+ M .specstory/history/2025-11-13_00-06Z-kannst-du-die-excel-datei-lesen.md
+ M .specstory/history/2025-11-17_23-14Z-test-the-llm-model.md
+ D .specstory/history/2025-11-24_15-45Z-welches-llm-wird-im-chat-verwendet.md
+ M DEPLOY_CLOUDRON.md
+ D MOBILE_TOUCH_CONCEPT.md
+ D README.md
+ D deploy.sh
+ M public/.htaccess.example
+ D public/image-proxy.php
+ M public/index.html
+ M public/js/albumData.js
+ M public/js/chat.js
+ M public/js/chatConfig.js
+ M public/js/controls.js
+ M public/js/coverTooltip.js
+ M public/js/main.js
+ D public/js/mobileAlbumCard.js
+ D public/js/mobileTouchHandler.js
+ M public/js/ragService.js
+ M public/js/renderers.js
+ M public/js/router.js
+ M public/js/scatterHighlight.js
+ M public/js/scatterInfoBox.js
+ M public/js/utils.js
+ D public/manifest.json
+ M public/mobile.css
+ D test_image_paths.sh
+?? ".specstory/history/2025-11-24_15-45Z-konfiguration-der-llms-f\303\274r-den-chatbereich.md"
+?? CACHE_SETUP.md
+?? public/.htaccess.dev
+
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Preparing to stage and commit changes**</details></think>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && git add -A</summary>
+
+```bash
+cd /Users/rstockm/Documents/GitHub/testabend && git add -A
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Considering commit message**</details></think>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && git commit -m "feat: improve years swipe containers"</summary>
+
+```bash
+cd /Users/rstockm/Documents/GitHub/testabend && git commit -m "feat: improve years swipe containers"
+```
+
+```
+[main 10656a3] feat: improve years swipe containers
+ 31 files changed, 35166 insertions(+), 31769 deletions(-)
+ create mode 100644 ".specstory/history/2025-11-24_15-45Z-konfiguration-der-llms-f\303\274r-den-chatbereich.md"
+ delete mode 100644 .specstory/history/2025-11-24_15-45Z-welches-llm-wird-im-chat-verwendet.md
+ create mode 100644 CACHE_SETUP.md
+ delete mode 100644 MOBILE_TOUCH_CONCEPT.md
+ delete mode 100644 README.md
+ delete mode 100755 deploy.sh
+ create mode 100644 public/.htaccess.dev
+ delete mode 100644 public/image-proxy.php
+ delete mode 100644 public/js/mobileAlbumCard.js
+ delete mode 100644 public/js/mobileTouchHandler.js
+ rewrite public/js/scatterInfoBox.js (99%)
+ delete mode 100644 public/manifest.json
+ delete mode 100755 test_image_paths.sh
+
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Preparing to push changes**</details></think>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/rstockm/Documents/GitHub/testabend && git push origin main</summary>
+
+```bash
+cd /Users/rstockm/Documents/GitHub/testabend && git push origin main
+```
+
+```
+To github.com:rstockm/testabend.git
+   982644e..10656a3  main -&gt; main
+
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Summarizing final response**</details></think>
+
+---
+
+Änderungen (inkl. der Swipe-Fixes) sind unter `feat: improve years swipe containers` auf `main` gepusht. Bitte auf dem Gerät pullen und testen; ich habe keine zusätzlichen Tests laufen lassen.
+
+---
+
+_**User (2025-12-02 22:14Z)**_
+
+Die Cover werden auf dem Cloudron Server nicht angzeigt. Das Problem hatten wir schon ein paar mal - finde in der Hostory die Ursache und korrigiere das. Die Alben werden dort anders andressiert im Pfad als lokal.
+
+---
+
+_**Agent (model composer-1, mode Agent)**_
+
+
+
+---
+
+
+Suche in der History nach der Ursache des Cover-Problems:
+
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="codebase_search">
+<details>
+                <summary>Tool use: **codebase_search** • Searched codebase "How are cover images addressed differently on Cloudron server vs local? What path differences exist?" • **15** results</summary>
+            
+| File | Lines |
+|------|-------|
+| `DEPLOY_CLOUDRON.md` | L77 |
+| `public/js/coverTooltip.js` | L20-107 |
+| `public/js/renderers.js` | L743-1580 |
+| `DEPLOY_CLOUDRON.md` | L135-207 |
+| `public/js/coverTooltip.js` | L69-220 |
+| `DEPLOY_CLOUDRON.md` | L204-269 |
+| `DEPLOY_CLOUDRON.md` | L264-344 |
+| `DEPLOY_CLOUDRON.md` | L71-139 |
+| `public/js/coverTooltip.js` | L8-33 |
+| `public/.htaccess.dev` | L64 |
+| `public/.htaccess.example` | L40 |
+| `public/js/coverTooltip.js` | L28 |
+| `DEPLOY_CLOUDRON.md` | L340-419 |
+| `public/js/main.js` | L62 |
+| `CACHE_SETUP.md` | L60 |
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="grep">
+<details>
+<summary>Tool use: **grep** • Grep for "images/covers|coverPath|getCoverUrl" in "public/js" • 13 matches</summary>
+
+Output mode: content
+
+
+| File | Content | Line |
+|------|------|------|
+| `public/js/renderers.js` | `async function getCoverUrl(band, album, year) \{` | L877 |
+| `public/js/renderers.js` | `const coverPathWithYear = `images/covers/$\{filenameWithYear\}`;` | L881 |
+| `public/js/renderers.js` | `const response = await fetch(coverPathWithYear, \{ method: 'HEAD', cache: 'no-cache' \});` | L883 |
+| `public/js/renderers.js` | `return coverPathWithYear;` | L885 |
+| `public/js/renderers.js` | `const coverPathWithoutYear = `images/covers/$\{filenameWithoutYear\}`;` | L894 |
+| `public/js/renderers.js` | `const response = await fetch(coverPathWithoutYear, \{ method: 'HEAD', cache: 'no-cache' \});` | L896 |
+| `public/js/renderers.js` | `return coverPathWithoutYear;` | L898 |
+| `public/js/renderers.js` | `const coverUrl = await getCoverUrl(album.Band, album.Album, album.Jahr);` | L923 |
+| `public/js/coverTooltip.js` | `const coverPathWithYear = `images/covers/$\{filenameWithYear\}`;` | L39 |
+| `public/js/coverTooltip.js` | `const response = await fetch(coverPathWithYear, \{ method: 'HEAD', cache: 'no-cache' \});` | L42 |
+| `public/js/coverTooltip.js` | `const coverPathWithoutYear = `images/covers/$\{filenameWithoutYear\}`;` | L53 |
+| `public/js/coverTooltip.js` | `const response = await fetch(coverPathWithoutYear, \{ method: 'HEAD', cache: 'no-cache' \});` | L56 |
+| `public/js/coverTooltip.js` | `coverUrl = `images/covers/$\{result.filename\}`;` | L142 |
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="glob_file_search">
+<details>
+<summary>Tool use: **glob_file_search** • Searched codebase "*.md" • **8** results in **1** directory</summary>
+
+Directory: **/Users/rstockm/Documents/GitHub/testabend** (8 files)
+
+| File |
+|------|
+| `CACHE_SETUP.md` |
+| `DEPLOY_CLOUDRON.md` |
+| `public/prompts/system-prompt.md` |
+| `scripts/README_COVERS.md` |
+| `public/js/chatConfig.md` |
+| `README_EMBEDDINGS.md` |
+| `RAG_ANSATZ.md` |
+| `TECHNISCHE_ANSAETZE.md` |
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+Suche in der History nach früheren Fixes für das Cover-Problem:
+
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="codebase_search">
+<details>
+                <summary>Tool use: **codebase_search** • Searched codebase "Cloudron server cover image path different from local absolute path base URL" • **14** results</summary>
+            
+| File | Lines |
+|------|-------|
+| `DEPLOY_CLOUDRON.md` | L77 |
+| `public/js/renderers.js` | L743-1580 |
+| `public/js/coverTooltip.js` | L69-220 |
+| `public/js/coverTooltip.js` | L20-107 |
+| `DEPLOY_CLOUDRON.md` | L135-207 |
+| `DEPLOY_CLOUDRON.md` | L264-344 |
+| `DEPLOY_CLOUDRON.md` | L71-139 |
+| `DEPLOY_CLOUDRON.md` | L204-269 |
+| `public/.htaccess.example` | L40 |
+| `public/js/coverTooltip.js` | L8-33 |
+| `public/.htaccess.dev` | L64 |
+| `public/js/coverTooltip.js` | L28 |
+| `DEPLOY_CLOUDRON.md` | L340-419 |
+| `public/js/coverTooltip.js` | L228-323 |
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: public/js/coverTooltip.js</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="grep">
+<details>
+<summary>Tool use: **grep** • Grep for "window\.location|baseURL|BASE_URL|getBaseUrl|baseUrl" in "public/js" • 2 matches</summary>
+
+Output mode: content
+
+
+| File | Content | Line |
+|------|------|------|
+| `public/js/chat.js` | `window.location.hash = link.getAttribute('href').substring(1);` | L453 |
+| `public/js/chatConfig.js` | `baseURL: 'https://openrouter.ai/api/v1',` | L130 |
+
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+Prüfe, ob es eine Utility-Funktion für Base-URLs gibt, und erstelle ggf. eine:
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: public/js/utils.js</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: public/index.html</summary>
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+Erstelle eine Utility-Funktion für den Base-Pfad und verwende sie in beiden Dateien:
+
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: public/js/utils.js</summary>
+
+**Chunk 1**
+Lines added: 29, lines removed: undefined
+
+```diff
+@@ -193,3 +193,32 @@
+    return String(Number(note));
+  }
++ 
++ /**
++  * Ermittelt den Base-Pfad für Assets (z.B. Bilder)
++  * Funktioniert sowohl lokal als auch auf Cloudron-Servern mit Unterverzeichnissen
++  */
++ export function getBasePath() {
++   // Prüfe ob ein &lt;base&gt; Tag vorhanden ist
++   const baseTag = document.querySelector('base[href]');
++   if (baseTag) {
++     const baseHref = baseTag.getAttribute('href');
++     // Entferne trailing slash falls vorhanden
++     return baseHref.endsWith('/') ? baseHref.slice(0, -1) : baseHref;
++   }
++   
++   // Fallback: Ermittle Base-Pfad aus window.location
++   const pathname = window.location.pathname;
++   // Entferne trailing slash falls vorhanden
++   const basePath = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
++   
++   // Wenn wir nicht im Root sind, entferne den Dateinamen (z.B. index.html)
++   if (basePath &amp;&amp; basePath !== '/') {
++     const parts = basePath.split('/');
++     // Entferne den letzten Teil (Dateiname)
++     parts.pop();
++     return parts.length &gt; 0 ? parts.join('/') : '';
++   }
++   
++   return '';
++ }
+  
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: public/js/coverTooltip.js</summary>
+
+**Chunk 1**
+Lines added: 6, lines removed: 1
+
+```diff
+@@ -34,8 +34,13 @@
+   */
+  async function checkCoverExists(band, album, year = null) {
++   // Importiere getBasePath dynamisch
++   const { getBasePath } = await import('./utils.js');
++   const basePath = getBasePath();
++   const basePrefix = basePath ? &#96;${basePath}/&#96; : '';
++   
+    // Versuche zuerst mit Jahr (falls vorhanden)
+    if (year) {
+      const filenameWithYear = getCoverFilename(band, album, year);
+-     const coverPathWithYear = &#96;images/covers/${filenameWithYear}&#96;;
++     const coverPathWithYear = &#96;${basePrefix}images/covers/${filenameWithYear}&#96;;
+      
+      try {
+```
+
+**Chunk 2**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -51,5 +56,5 @@
+    // Fallback: Versuche ohne Jahr
+    const filenameWithoutYear = getCoverFilename(band, album, null);
+-   const coverPathWithoutYear = &#96;images/covers/${filenameWithoutYear}&#96;;
++   const coverPathWithoutYear = &#96;${basePrefix}images/covers/${filenameWithoutYear}&#96;;
+    
+    try {
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: public/js/coverTooltip.js</summary>
+
+**Chunk 1**
+Lines added: 5, lines removed: 1
+
+```diff
+@@ -145,5 +145,9 @@
+      }
+      
+-     coverUrl = &#96;images/covers/${result.filename}&#96;;
++     // Importiere getBasePath dynamisch
++     const { getBasePath } = await import('./utils.js');
++     const basePath = getBasePath();
++     const basePrefix = basePath ? &#96;${basePath}/&#96; : '';
++     coverUrl = &#96;${basePrefix}images/covers/${result.filename}&#96;;
+      coverUrlCache.set(cacheKey, coverUrl);
+    } else if (coverUrl === null) {
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: public/js/renderers.js</summary>
+
+**Chunk 1**
+Lines added: 6, lines removed: 1
+
+```diff
+@@ -876,8 +876,13 @@
+    
+    async function getCoverUrl(band, album, year) {
++     // Importiere getBasePath dynamisch
++     const { getBasePath } = await import('./utils.js');
++     const basePath = getBasePath();
++     const basePrefix = basePath ? &#96;${basePath}/&#96; : '';
++     
+      // Versuche zuerst mit Jahr
+      if (year) {
+        const filenameWithYear = getCoverFilename(band, album, year);
+-       const coverPathWithYear = &#96;images/covers/${filenameWithYear}&#96;;
++       const coverPathWithYear = &#96;${basePrefix}images/covers/${filenameWithYear}&#96;;
+        try {
+          const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
+```
+
+**Chunk 2**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -892,5 +897,5 @@
+      // Fallback: Versuche ohne Jahr
+      const filenameWithoutYear = getCoverFilename(band, album, null);
+-     const coverPathWithoutYear = &#96;images/covers/${filenameWithoutYear}&#96;;
++     const coverPathWithoutYear = &#96;${basePrefix}images/covers/${filenameWithoutYear}&#96;;
+      try {
+        const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="read_lints">
+<details>
+          <summary>Tool use: **read_lints** • Read lints for 3 files</summary>
+      
+Lint paths:
+
+- `public/js/utils.js`
+- `public/js/coverTooltip.js`
+- `public/js/renderers.js`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+Prüfe, ob ein `<base>` Tag in der HTML vorhanden ist, und verbessere die Base-Path-Logik:
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: public/index.html</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: public/js/utils.js</summary>
+
+**Chunk 1**
+Lines added: 28, lines removed: 13
+
+```diff
+@@ -203,22 +203,37 @@
+    if (baseTag) {
+      const baseHref = baseTag.getAttribute('href');
+-     // Entferne trailing slash falls vorhanden
+-     return baseHref.endsWith('/') ? baseHref.slice(0, -1) : baseHref;
+-   }
++     // Parse URL falls absolut
++     try {
++       const url = new URL(baseHref, window.location.origin);
++       const path = url.pathname;
++       // Entferne trailing slash falls vorhanden
++       return path.endsWith('/') ? path.slice(0, -1) : path;
++     } catch {
++       // Falls relative URL, verwende direkt
++       return baseHref.endsWith('/') ? baseHref.slice(0, -1) : baseHref;
++     }
++   }
+    
+-   // Fallback: Ermittle Base-Pfad aus window.location
++   // Fallback: Ermittle Base-Pfad aus window.location.pathname
+    const pathname = window.location.pathname;
+-   // Entferne trailing slash falls vorhanden
+-   const basePath = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+-   
+-   // Wenn wir nicht im Root sind, entferne den Dateinamen (z.B. index.html)
+-   if (basePath &amp;&amp; basePath !== '/') {
+-     const parts = basePath.split('/');
++   
++   // Wenn wir im Root sind (z.B. "/" oder "/index.html")
++   if (pathname === '/' || pathname === '/index.html') {
++     return '';
++   }
++   
++   // Entferne den Dateinamen (z.B. index.html) falls vorhanden
++   let basePath = pathname;
++   if (basePath.endsWith('.html') || basePath.endsWith('/')) {
++     const parts = basePath.split('/').filter(p =&gt; p);
+      // Entferne den letzten Teil (Dateiname)
+-     parts.pop();
+-     return parts.length &gt; 0 ? parts.join('/') : '';
++     if (parts.length &gt; 0 &amp;&amp; parts[parts.length - 1].endsWith('.html')) {
++       parts.pop();
++     }
++     basePath = parts.length &gt; 0 ? '/' + parts.join('/') : '';
+    }
+    
+-   return '';
++   // Entferne trailing slash falls vorhanden
++   return basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+  }
+  
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="read_lints">
+<details>
+          <summary>Tool use: **read_lints** • Read lints for 1 file</summary>
+      
+Lint paths:
+
+- `public/js/utils.js`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+Ich habe die Cover-Pfad-Logik korrigiert:
+
+1. **Neue Utility-Funktion `getBasePath()`** in `utils.js`:
+   - Ermittelt den Base-Pfad dynamisch aus `window.location.pathname`
+   - Unterstützt lokale Entwicklung (Root) und Cloudron-Server (Unterverzeichnisse)
+   - Berücksichtigt auch ein `<base>` Tag, falls vorhanden
+
+2. **Aktualisiert `coverTooltip.js`**:
+   - Verwendet `getBasePath()` für alle Cover-Pfade
+   - Funktioniert sowohl lokal als auch auf dem Cloudron-Server
+
+3. **Aktualisiert `renderers.js`**:
+   - Verwendet `getBasePath()` für alle Cover-Pfade in der Jahre-View
+   - Gleiche Logik wie in `coverTooltip.js`
+
+Die Cover-Bilder sollten jetzt sowohl lokal als auch auf dem Cloudron-Server korrekt geladen werden, da der Base-Pfad automatisch ermittelt wird.
+
+Bitte testen und bei Bedarf anpassen.
+
+---
+

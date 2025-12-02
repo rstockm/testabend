@@ -875,10 +875,15 @@ export async function renderYearsView(data, containerEl) {
   }
   
   async function getCoverUrl(band, album, year) {
+    // Importiere getBasePath dynamisch
+    const { getBasePath } = await import('./utils.js');
+    const basePath = getBasePath();
+    const basePrefix = basePath ? `${basePath}/` : '';
+    
     // Versuche zuerst mit Jahr
     if (year) {
       const filenameWithYear = getCoverFilename(band, album, year);
-      const coverPathWithYear = `images/covers/${filenameWithYear}`;
+      const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
       try {
         const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
         if (response.ok) {
@@ -891,7 +896,7 @@ export async function renderYearsView(data, containerEl) {
     
     // Fallback: Versuche ohne Jahr
     const filenameWithoutYear = getCoverFilename(band, album, null);
-    const coverPathWithoutYear = `images/covers/${filenameWithoutYear}`;
+    const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
     try {
       const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
       if (response.ok) {
