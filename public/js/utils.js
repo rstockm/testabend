@@ -171,17 +171,21 @@ function updateMobileTabIndicator(route) {
     return;
   }
   
-  // Berechne Position und Größe des Ziel-Tabs
-  const containerRect = tabsContainer.getBoundingClientRect();
-  const tabRect = targetTab.getBoundingClientRect();
-  
-  const left = tabRect.left - containerRect.left;
-  const width = tabRect.width;
-  
-  // Setze Position und Breite mit Transition (Animation startet sofort)
-  indicator.style.opacity = '1';
-  indicator.style.transform = `translateX(${left}px)`;
-  indicator.style.width = `${width}px`;
+  // Verwende requestAnimationFrame um sicherzustellen, dass Layout berechnet ist
+  // aber setze die Werte synchron, damit die Animation sofort startet
+  requestAnimationFrame(() => {
+    // Berechne Position und Größe des Ziel-Tabs
+    const containerRect = tabsContainer.getBoundingClientRect();
+    const tabRect = targetTab.getBoundingClientRect();
+    
+    const left = tabRect.left - containerRect.left;
+    const width = tabRect.width;
+    
+    // Setze Position und Breite mit Transition (Animation startet sofort)
+    indicator.style.opacity = '1';
+    indicator.style.transform = `translateX(${left}px)`;
+    indicator.style.width = `${width}px`;
+  });
 }
 
 /**
