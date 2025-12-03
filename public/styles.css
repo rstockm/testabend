@@ -85,6 +85,17 @@ header h1 {
   position: relative;
   z-index: 1;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.desktop-tab-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+  transition: stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
 
 .desktop-tab:hover:not(.active) {
@@ -97,6 +108,10 @@ header h1 {
   font-weight: 600;
   text-decoration: none;
   background-color: transparent !important;
+}
+
+.desktop-tab.active .desktop-tab-icon {
+  stroke: #f7c948;
 }
 
 /* Mobile Tab Navigation: Standardmäßig versteckt */

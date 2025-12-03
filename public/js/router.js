@@ -48,14 +48,11 @@ export class Router {
       case 'band':
         await this.handleBand(params, headerControls);
         break;
-      case 'scatter':
+      case 'jahre':
         await this.handleScatter();
         break;
       case 'testteam':
         await this.handleTestteam();
-        break;
-      case 'jahre':
-        await this.handleJahre();
         break;
       default:
         await this.handleBand({}, headerControls);
