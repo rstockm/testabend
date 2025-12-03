@@ -140,17 +140,29 @@ export function updateHash(route, params) {
  * Aktive Navigation setzen
  */
 export function setActiveNav(route) {
-  // Aktualisiere Tab-Indikator ZUERST (vor dem Setzen der active-Klasse)
-  updateMobileTabIndicator(route);
-  
-  // Dann setze active-Klassen
+  // Entferne active-Klassen ZUERST (damit Animation vom alten Tab startet)
   ['band', 'scatter', 'testteam', 'jahre'].forEach(r => {
     // Desktop Navigation
     const el = document.getElementById('nav-' + r);
-    if (el) el.classList.toggle('active', r === route);
+    if (el) el.classList.remove('active');
     // Mobile Navigation
     const mobileEl = document.getElementById('nav-' + r + '-mobile');
-    if (mobileEl) mobileEl.classList.toggle('active', r === route);
+    if (mobileEl) mobileEl.classList.remove('active');
+  });
+  
+  // Starte Animation (Indikator bewegt sich vom alten zum neuen Tab)
+  updateMobileTabIndicator(route);
+  
+  // Setze neue active-Klasse NACH einem Frame (damit Animation startet)
+  requestAnimationFrame(() => {
+    ['band', 'scatter', 'testteam', 'jahre'].forEach(r => {
+      // Desktop Navigation
+      const el = document.getElementById('nav-' + r);
+      if (el) el.classList.toggle('active', r === route);
+      // Mobile Navigation
+      const mobileEl = document.getElementById('nav-' + r + '-mobile');
+      if (mobileEl) mobileEl.classList.toggle('active', r === route);
+    });
   });
 }
 
