@@ -839,6 +839,8 @@
   
   .years-album-band {
     font-size: 16px;
+    color: var(--text-secondary) !important; /* Standardfarbe wie andere Einträge */
+    text-decoration: none !important; /* Keine Unterstreichung */
   }
 }
 
@@ -993,7 +995,8 @@
   
   .years-album-band:hover,
   .years-album-band:active {
-    color: #c4d9ed; /* Dezentes Blau-Grau, ähnlich text-secondary (#d4d4d4) mit minimalem Blaustich */
+    color: #c4d9ed !important; /* Dezentes Blau-Grau, ähnlich text-secondary (#d4d4d4) mit minimalem Blaustich */
+    text-decoration: none !important; /* Keine Unterstreichung */
   }
   
   .years-album-details {
