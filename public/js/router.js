@@ -247,7 +247,7 @@ export class Router {
     }
     
     const scatterContainer = document.createElement('div');
-    scatterContainer.style.cssText = 'display: flex; gap: 16px; align-items: flex-start; width: 100%;';
+    scatterContainer.style.cssText = 'display: flex; gap: 16px; align-items: flex-start; width: 100%; justify-content: space-between;';
     scatterContainer.id = 'scatter-container';
     
     if (mainEl.contains(this.chartEl)) {
