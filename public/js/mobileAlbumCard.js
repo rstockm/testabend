@@ -155,12 +155,13 @@ export function showMobileAlbumCard(datum, albumData = null) {
     font-size: 24px !important;
     line-height: 1 !important;
     cursor: pointer !important;
-    z-index: 10 !important;
+    z-index: 100000 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 0 !important;
     margin: 0 !important;
+    pointer-events: auto !important;
   `;
   closeBtn.addEventListener('click', (e) => {
     e.preventDefault();
