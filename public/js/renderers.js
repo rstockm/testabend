@@ -1344,6 +1344,14 @@ export async function renderYearsView(data, containerEl) {
       transitionTimeout = null;
     }
     
+    // WICHTIG: Aktualisiere Jahr-Index und Select SOFORT beim Swipe-Start
+    const newYearIndex = currentYearIndex + direction;
+    const newYear = years[newYearIndex];
+    currentYearIndex = newYearIndex;
+    currentYear = newYear;
+    select.value = newYear;
+    console.log('[YearsView] Year updated immediately:', newYear, 'index:', newYearIndex);
+    
     if (animated) {
       // Berechne Ziel-Position
       const targetOffset = direction * 33.33;
@@ -1358,18 +1366,30 @@ export async function renderYearsView(data, containerEl) {
         viewport.style.transform = targetTransform;
         console.log('[YearsView] Transform applied');
         
-        // Nach Animation Container rotieren
+        // Nach Animation Container rotieren und Viewport zurücksetzen (OHNE Transition)
         const onTransitionEnd = (e) => {
           // Prüfe ob es die richtige Transition ist (transform)
           if (e.target !== viewport || e.propertyName !== 'transform') return;
           
-          console.log('[YearsView] Transition ended, rotating containers');
+          console.log('[YearsView] Transition ended, rotating containers and resetting viewport');
           viewport.removeEventListener('transitionend', onTransitionEnd);
           if (transitionTimeout) {
             clearTimeout(transitionTimeout);
             transitionTimeout = null;
           }
-          rotateContainers(direction);
+          
+          // Rotiere Container (OHNE Viewport zurücksetzen, da wir das gleich machen)
+          rotateContainers(direction, false);
+          
+          // Viewport OHNE Transition zurücksetzen (Container wurden bereits rotiert)
+          viewportOffset = 0;
+          viewport.style.transition = 'none';
+          viewport.style.transform = `translateX(-33.33%)`;
+          requestAnimationFrame(() => {
+            viewport.style.transition = '';
+            console.log('[YearsView] Viewport reset to -33.33%, transition restored');
+          });
+          
           isShifting = false;
         };
         
@@ -1378,25 +1398,43 @@ export async function renderYearsView(data, containerEl) {
         // Fallback: Falls Transition nicht feuert (z.B. wenn bereits am Ziel)
         transitionTimeout = setTimeout(() => {
           if (isShifting) {
-            console.log('[YearsView] Transition timeout, forcing rotation');
+            console.log('[YearsView] Transition timeout, rotating containers and resetting viewport');
             viewport.removeEventListener('transitionend', onTransitionEnd);
-            rotateContainers(direction);
+            
+            // Rotiere Container
+            rotateContainers(direction, false);
+            
+            // Viewport OHNE Transition zurücksetzen
+            viewportOffset = 0;
+            viewport.style.transition = 'none';
+            viewport.style.transform = `translateX(-33.33%)`;
+            requestAnimationFrame(() => {
+              viewport.style.transition = '';
+            });
+            
             isShifting = false;
           }
           transitionTimeout = null;
         }, 500);
       });
     } else {
-      rotateContainers(direction);
+      // Keine Animation: Container rotieren und Viewport sofort zurücksetzen
+      rotateContainers(direction, false);
+      viewportOffset = 0;
+      viewport.style.transition = 'none';
+      viewport.style.transform = `translateX(-33.33%)`;
+      requestAnimationFrame(() => {
+        viewport.style.transition = '';
+      });
       isShifting = false;
     }
   }
   
   // Funktion zum Rotieren der Container (prev → curr → next)
-  async function rotateContainers(direction) {
+  async function rotateContainers(direction, resetViewport = true) {
     if (direction === 0) return;
     
-    console.log('[YearsView] rotateContainers called, direction:', direction, 'currentYearIndex:', currentYearIndex);
+    console.log('[YearsView] rotateContainers called, direction:', direction, 'currentYearIndex:', currentYearIndex, 'resetViewport:', resetViewport);
     
     // Speichere Scroll-Position des aktuellen Containers BEVOR Rotation
     const oldCurrScrollTop = currContainer.scrollTop;
@@ -1409,15 +1447,8 @@ export async function renderYearsView(data, containerEl) {
     const targetPlatz = visibleItem ? parseInt(visibleItem.dataset.platz) : null;
     console.log('[YearsView] Target platz:', targetPlatz, 'old scrollTop:', oldCurrScrollTop);
     
-    // Aktualisiere Jahr-Index
-    currentYearIndex += direction;
-    currentYear = years[currentYearIndex];
-    
-    console.log('[YearsView] New year:', currentYear, 'new index:', currentYearIndex);
-    
-    // Select SOFORT aktualisieren
-    select.value = currentYear;
-    console.log('[YearsView] Select updated to:', select.value);
+    // WICHTIG: Jahr-Index wurde bereits in shiftViewport aktualisiert, nicht nochmal ändern
+    console.log('[YearsView] Current year:', currentYear, 'index:', currentYearIndex);
     
     // Rotiere Container-States und DOM-Referenzen
     if (direction > 0) {
@@ -1528,18 +1559,24 @@ export async function renderYearsView(data, containerEl) {
       }
     }
     
-    // Viewport zurücksetzen (OHNE Transition, da wir bereits am Ziel sind)
-    viewportOffset = 0;
-    viewport.classList.remove('shifting');
-    viewport.style.transition = 'none';
-    viewport.style.transform = `translateX(-33.33%)`;
-    requestAnimationFrame(() => {
-      viewport.style.transition = '';
-      console.log('[YearsView] Viewport reset to -33.33%, transition restored');
-    });
-
     // DOM-Reihenfolge anpassen, damit prev/curr/next im Viewport stimmen
     viewport.replaceChildren(prevContainer, currContainer, nextContainer);
+    
+    // Viewport zurücksetzen NUR wenn gewünscht (nicht während Transition)
+    if (resetViewport) {
+      viewportOffset = 0;
+      viewport.classList.remove('shifting');
+      viewport.style.transition = 'none';
+      viewport.style.transform = `translateX(-33.33%)`;
+      requestAnimationFrame(() => {
+        viewport.style.transition = '';
+        console.log('[YearsView] Viewport reset to -33.33%, transition restored');
+      });
+    } else {
+      // Viewport ist bereits am Ziel (während Transition), nur Offset zurücksetzen
+      viewportOffset = 0;
+      console.log('[YearsView] Viewport already at target position, no reset needed');
+    }
     
     // WICHTIG: Observer nach Rotation neu initialisieren, da Container-Referenzen sich geändert haben
     // Nur für Container, die bereits geladen sind (year !== null)
