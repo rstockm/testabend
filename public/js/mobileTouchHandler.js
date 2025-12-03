@@ -130,19 +130,27 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
         
         const trySetup = () => {
           attempts++;
+          console.log(`[MobileTouchHandler] Attempt ${attempts} to find SVG/Canvas`);
+          
           // Suche SVG direkt oder in verschachtelten Elementen
           let svg = chartEl.querySelector('svg');
+          console.log(`[MobileTouchHandler] Direct SVG search:`, !!svg);
           
           // Falls nicht gefunden, suche auch in allen Kindern
           if (!svg && chartEl.children.length > 0) {
+            console.log(`[MobileTouchHandler] Searching in ${chartEl.children.length} children`);
             for (const child of chartEl.children) {
               svg = child.querySelector('svg') || (child.tagName === 'SVG' ? child : null);
-              if (svg) break;
+              if (svg) {
+                console.log(`[MobileTouchHandler] SVG found in child:`, child.tagName, child.className);
+                break;
+              }
             }
           }
           
           // Prüfe auch auf Canvas (Fallback, sollte nicht mehr vorkommen mit SVG-Renderer)
           const canvas = chartEl.querySelector('canvas');
+          console.log(`[MobileTouchHandler] Canvas search:`, !!canvas);
           
           if (!svg && !canvas) {
             // Detaillierte Debug-Info über Chart-Struktur (nur beim ersten Versuch)
@@ -165,10 +173,18 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
             }
             
             if (attempts < maxAttempts) {
+              console.log(`[MobileTouchHandler] Waiting for SVG/Canvas... (${attempts}/${maxAttempts})`);
               showDebugMessage(`Waiting for SVG/Canvas... (${attempts}/${maxAttempts})`, '#ffaa00');
               setTimeout(trySetup, 200);
               return;
             } else {
+              console.error('[MobileTouchHandler] ERROR: SVG/Canvas not found after multiple attempts');
+              console.error('[MobileTouchHandler] ChartEl:', chartEl?.tagName, 'children:', chartEl?.children.length);
+              if (chartEl && chartEl.children.length > 0) {
+                Array.from(chartEl.children).forEach((child, i) => {
+                  console.error(`[MobileTouchHandler] Child ${i}:`, child.tagName, child.className);
+                });
+              }
               showDebugMessage('ERROR: SVG/Canvas not found after multiple attempts', '#ff0000');
               showDebugMessage(`ChartEl: ${chartEl ? chartEl.tagName : 'null'}, children: ${chartEl ? chartEl.children.length : 0}`, '#ff0000');
               return;
@@ -193,10 +209,12 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
             return;
           }
           
+          console.log(`[MobileTouchHandler] SVG found after ${attempts} attempts!`);
           showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
           
           // Ansatz 1: Nutze Vega-Lite's Event-API (wie scatterKeyboardNav)
           if (chartView && typeof chartView.addEventListener === 'function') {
+            console.log('[MobileTouchHandler] chartView.addEventListener is available, registering listeners');
             showDebugMessage('Using Vega-Lite addEventListener', '#4a9dd4');
             console.log('[MobileTouchHandler] Registering Vega-Lite event listeners');
             
