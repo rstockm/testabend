@@ -285,7 +285,7 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
                       : node.querySelector?.('.vg-tooltip, .vega-tooltip');
                     
                     if (tooltip) {
-                      console.log('[MobileTouchHandler] Tooltip created (Canvas fallback), extracting data...');
+                      console.log('[MobileTouchHandler] Tooltip created, extracting data...');
                       const data = extractDataFromTooltip(tooltip);
                       console.log('[MobileTouchHandler] Extracted data:', data);
                       
@@ -293,14 +293,15 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
                         lastTooltipData = data;
                         console.log('[MobileTouchHandler] Valid tooltip data, will show card:', data);
                         
+                        // Sofort anzeigen, kein Timeout (Tooltip wird sowieso versteckt)
                         clearTimeout(tooltipTimeout);
                         tooltipTimeout = setTimeout(() => {
                           if (lastTooltipData && lastTooltipData.Band && lastTooltipData.Album) {
-                            console.log('[MobileTouchHandler] Showing card from tooltip (Canvas):', lastTooltipData);
+                            console.log('[MobileTouchHandler] Showing card from tooltip:', lastTooltipData);
                             showMobileAlbumCard(lastTooltipData);
                             lastTooltipData = null;
                           }
-                        }, 50); // Kürzeres Timeout für schnelleres Feedback
+                        }, 10); // Sehr kurzes Timeout für sofortiges Feedback
                       } else {
                         console.log('[MobileTouchHandler] Tooltip data incomplete:', data);
                         tooltip.remove();

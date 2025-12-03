@@ -630,9 +630,11 @@ function createLineLayer(bestPoints, rangeYears, domainMinY, domainMaxY, selecte
  * Punkte-Layer erstellen
  */
 function createPointLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
+  // Mobile: Größere Punkte für bessere Touch-Erkennung
+  const pointSize = isMobile() ? CONFIG.UI.POINT_SIZE * 2 : CONFIG.UI.POINT_SIZE;
   return {
     data: { values: allPoints },
-    mark: { type: "point", size: CONFIG.UI.POINT_SIZE, filled: true, cursor: "pointer" },
+    mark: { type: "point", size: pointSize, filled: true, cursor: "pointer" },
     encoding: {
       x: { 
         field: "Jahr", 
