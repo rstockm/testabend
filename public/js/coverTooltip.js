@@ -58,6 +58,48 @@ async function getCoverUrls(band, album, year) {
 }
 
 /**
+ * Passt die Tooltip-Position an, wenn er zu weit rechts ist
+ */
+function adjustTooltipPosition(tooltipElement) {
+  if (!tooltipElement || !tooltipElement.parentElement) {
+    return;
+  }
+  
+  // Warte kurz, damit das Tooltip vollständig gerendert ist
+  requestAnimationFrame(() => {
+    const rect = tooltipElement.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const padding = 10;
+    
+    // Prüfe ob Tooltip rechts aus dem Viewport ragt
+    if (rect.right > viewportWidth - padding) {
+      // Berechne die Verschiebung nach links
+      const overflow = rect.right - (viewportWidth - padding);
+      // Vega-Lite verwendet normalerweise 'left' in Pixel
+      const currentLeft = parseFloat(tooltipElement.style.left) || rect.left;
+      
+      // Verschiebe nach links
+      tooltipElement.style.left = `${currentLeft - overflow}px`;
+    }
+    
+    // Prüfe ob Tooltip links aus dem Viewport ragt
+    if (rect.left < padding) {
+      tooltipElement.style.left = `${padding}px`;
+    }
+    
+    // Prüfe vertikale Position
+    if (rect.top < padding) {
+      tooltipElement.style.top = `${padding}px`;
+    } else if (rect.bottom > viewportHeight - padding) {
+      const bottomOverflow = rect.bottom - (viewportHeight - padding);
+      const currentTop = parseFloat(tooltipElement.style.top) || rect.top;
+      tooltipElement.style.top = `${currentTop - bottomOverflow}px`;
+    }
+  });
+}
+
+/**
  * Extrahiert Band/Album-Daten aus einem Tooltip-Element
  */
 function extractTooltipData(tooltipElement) {
@@ -182,11 +224,19 @@ async function addCoverToTooltip(tooltipElement) {
           coverContainer.remove();
           coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
         };
+        coverImage.onload = () => {
+          // Bild geladen - passe Tooltip-Position an
+          adjustTooltipPosition(tooltipElement);
+        };
       } else {
         // Kein Fallback verfügbar - entferne Cover
         coverContainer.remove();
         coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
       }
+    };
+    coverImage.onload = () => {
+      // Bild geladen - passe Tooltip-Position an
+      adjustTooltipPosition(tooltipElement);
     };
     
     // WICHTIG: Füge Bild zum Container hinzu NACH dem Setzen von src (wie in Jahresliste)
@@ -259,6 +309,9 @@ async function addCoverToTooltip(tooltipElement) {
       // Fallback: Cover einfach vorne hinzufügen
       tooltipElement.insertBefore(coverContainer, tooltipElement.firstChild);
     }
+    
+    // Passe Tooltip-Position an, wenn er zu weit rechts ist
+    adjustTooltipPosition(tooltipElement);
   } finally {
     // Observer wieder aktivieren
     if (contentObserver) {
@@ -376,6 +429,8 @@ function setupTooltipContentObserver(tooltipElement) {
       if (existingCacheKey !== cacheKey) {
         // Daten haben sich geändert - lade sofort
         addCoverToTooltip(tooltipElement);
+        // Passe Position nach dem Laden an
+        setTimeout(() => adjustTooltipPosition(tooltipElement), 50);
         return;
       }
     }
