@@ -195,19 +195,85 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
           
           // Canvas gefunden (Fallback - sollte nicht mehr vorkommen)
           if (!svg && canvas) {
+            console.log('[MobileTouchHandler] Canvas found instead of SVG, using Canvas fallback');
             showDebugMessage('WARNING: Canvas found instead of SVG!', '#ffaa00');
             showDebugMessage('Using Vega-Lite event API for Canvas...', '#4a9dd4');
-            // Für Canvas nutzen wir nur die Vega-Lite Event API
+            // Für Canvas nutzen wir die Vega-Lite Event API
             if (chartView && typeof chartView.addEventListener === 'function') {
+              console.log('[MobileTouchHandler] Registering Canvas event listeners');
+              
               chartView.addEventListener('click', (event, item) => {
-                if (item && item.datum) {
+                console.log('[MobileTouchHandler] Canvas click event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
+                if (item && item.datum && item.datum.Band && item.datum.Album) {
                   event.preventDefault();
                   event.stopPropagation();
+                  console.log('[MobileTouchHandler] Showing card from Canvas click:', item.datum.Band, '-', item.datum.Album);
                   showMobileAlbumCard(item.datum);
                 }
               });
+              
+              chartView.addEventListener('touchstart', (event, item) => {
+                console.log('[MobileTouchHandler] Canvas touchstart event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
+                if (item && item.datum && item.datum.Band && item.datum.Album) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  console.log('[MobileTouchHandler] Showing card from Canvas touchstart:', item.datum.Band, '-', item.datum.Album);
+                  showMobileAlbumCard(item.datum);
+                }
+              });
+              
+              console.log('[MobileTouchHandler] Canvas event listeners added');
               showDebugMessage('Canvas event listeners added', '#90EE90');
             }
+            
+            // Auch Tooltip-Observer für Canvas starten (Fallback)
+            console.log('[MobileTouchHandler] Setting up tooltip observer for Canvas fallback');
+            let tooltipObserver = null;
+            let lastTooltipData = null;
+            let tooltipTimeout = null;
+            
+            const handleTooltipCreation = (mutations) => {
+              mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                  if (node.nodeType === Node.ELEMENT_NODE) {
+                    const tooltip = node.classList?.contains('vg-tooltip') || node.classList?.contains('vega-tooltip')
+                      ? node
+                      : node.querySelector?.('.vg-tooltip, .vega-tooltip');
+                    
+                    if (tooltip) {
+                      console.log('[MobileTouchHandler] Tooltip created (Canvas fallback), extracting data...');
+                      const data = extractDataFromTooltip(tooltip);
+                      console.log('[MobileTouchHandler] Extracted data:', data);
+                      
+                      if (data.Band && data.Album && (data.Jahr != null || data.Note != null)) {
+                        lastTooltipData = data;
+                        console.log('[MobileTouchHandler] Valid tooltip data, will show card:', data);
+                        
+                        clearTimeout(tooltipTimeout);
+                        tooltipTimeout = setTimeout(() => {
+                          if (lastTooltipData && lastTooltipData.Band && lastTooltipData.Album) {
+                            console.log('[MobileTouchHandler] Showing card from tooltip (Canvas):', lastTooltipData);
+                            showMobileAlbumCard(lastTooltipData);
+                            lastTooltipData = null;
+                          }
+                        }, 100);
+                      } else {
+                        console.log('[MobileTouchHandler] Tooltip data incomplete:', data);
+                        tooltip.remove();
+                      }
+                    }
+                  }
+                });
+              });
+            };
+            
+            tooltipObserver = new MutationObserver(handleTooltipCreation);
+            tooltipObserver.observe(document.body, {
+              childList: true,
+              subtree: true
+            });
+            console.log('[MobileTouchHandler] Tooltip observer started for Canvas');
+            
             return;
           }
           
