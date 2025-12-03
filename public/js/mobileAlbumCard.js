@@ -208,7 +208,7 @@ export function showMobileAlbumCard(datum, albumData = null) {
   `;
   const rows = [
     { key: 'Jahr', value: datum.Jahr || '-' },
-    { key: 'Note', value: datum.Note != null ? datum.Note.toFixed(1) : '-' },
+    { key: 'Note', value: datum.Note != null ? datum.Note : '-' },
     { key: 'Platz', value: datum.Platz != null ? datum.Platz : '-' }
   ];
   
@@ -313,7 +313,7 @@ function createCardContent(datum, overlay) {
   `;
   const rows = [
     { key: 'Jahr', value: datum.Jahr || '-' },
-    { key: 'Note', value: datum.Note != null ? datum.Note.toFixed(1) : '-' },
+    { key: 'Note', value: datum.Note != null ? datum.Note : '-' },
     { key: 'Platz', value: datum.Platz != null ? datum.Platz : '-' }
   ];
   
@@ -373,7 +373,7 @@ function updateCardContent(datum, card, overlay) {
       // Jahr
       rows[0].querySelector('td:last-child').textContent = datum.Jahr || '-';
       // Note
-      rows[1].querySelector('td:last-child').textContent = datum.Note != null ? datum.Note.toFixed(1) : '-';
+      rows[1].querySelector('td:last-child').textContent = datum.Note != null ? datum.Note : '-';
       // Platz
       rows[2].querySelector('td:last-child').textContent = datum.Platz != null ? datum.Platz : '-';
     }
