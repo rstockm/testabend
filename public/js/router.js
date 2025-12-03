@@ -269,10 +269,11 @@ export class Router {
       scatterContainer.appendChild(zoomControls);
     }
     
-    // Erstelle Info-Box BEVOR Container zum DOM hinzugefügt wird
-    createScatterInfoBox('scatter-container');
-    
+    // Container ZUERST zum DOM hinzufügen, damit Info-Box den Container finden kann
     mainEl.appendChild(scatterContainer);
+    
+    // Erstelle Info-Box NACH dem Hinzufügen zum DOM
+    createScatterInfoBox('scatter-container');
     
     // Warte kurz, damit Container-Breite korrekt berechnet wird
     await new Promise(resolve => setTimeout(resolve, 0));
