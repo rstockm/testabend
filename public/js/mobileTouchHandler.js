@@ -422,7 +422,7 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
                       console.log('[MobileTouchHandler] Valid tooltip data, will show card:', data);
                       showDebugMessage(`Tooltip data: ${data.Band} - ${data.Album}`, '#90EE90');
                       
-                      // Verzögere die Karten-Anzeige etwas, falls mehrere Tooltips kommen
+                      // Sehr kurzes Timeout für sofortiges Feedback
                       clearTimeout(tooltipTimeout);
                       tooltipTimeout = setTimeout(() => {
                         if (lastTooltipData && lastTooltipData.Band && lastTooltipData.Album) {
@@ -431,7 +431,7 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
                           showMobileAlbumCard(lastTooltipData);
                           lastTooltipData = null;
                         }
-                      }, 100);
+                      }, 10); // Sehr kurzes Timeout für sofortiges Feedback
                     } else {
                       console.log('[MobileTouchHandler] Tooltip data incomplete:', data);
                       showDebugMessage('Tooltip created but no valid data extracted', '#ffaa00');
