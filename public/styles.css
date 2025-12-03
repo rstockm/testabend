@@ -650,6 +650,18 @@ div[id*="vega-tooltip"] {
   text-align: left;
 }
 
+.scatter-info-box .scatter-info-band-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.scatter-info-box .scatter-info-band-link:hover,
+.scatter-info-box .scatter-info-band-link:active {
+  color: #c4d9ed;
+  text-decoration: none;
+}
+
 /* Debug-Bereich */
 pre#debug {
   background: var(--bg-secondary) !important;

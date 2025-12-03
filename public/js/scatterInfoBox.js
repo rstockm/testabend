@@ -1,5 +1,5 @@
 import { updateScatterHighlight } from './scatterHighlight.js';
-import { isMobile, getBasePath } from './utils.js';
+import { isMobile, getBasePath, updateHash } from './utils.js';
 
 let infoBox = null;
 let currentCoverRequestId = 0;
@@ -62,15 +62,118 @@ export function updateScatterInfoBox(datum) {
   
   const contentDiv = document.createElement('div');
   contentDiv.className = 'scatter-info-content';
-  contentDiv.innerHTML = `
-    <table style="width: 100%; border-collapse: separate; border-spacing: 0;">
-      <tr><td class="key">Band</td><td class="value">${datum.Band}</td></tr>
-      <tr><td class="key">Album</td><td class="value">${datum.Album}</td></tr>
-      <tr><td class="key">Jahr</td><td class="value">${datum.Jahr}</td></tr>
-      <tr><td class="key">Platz</td><td class="value">${datum.Platz}</td></tr>
-      <tr><td class="key">Note</td><td class="value">${datum.Note != null ? datum.Note : '-'}</td></tr>
-    </table>
-  `;
+  
+  // Erstelle Tabelle mit Link für Bandnamen
+  const table = document.createElement('table');
+  table.style.cssText = 'width: 100%; border-collapse: separate; border-spacing: 0;';
+  
+  // Band-Zeile mit Link
+  const bandRow = document.createElement('tr');
+  const bandKey = document.createElement('td');
+  bandKey.className = 'key';
+  bandKey.textContent = 'Band';
+  const bandValue = document.createElement('td');
+  bandValue.className = 'value';
+  const bandLink = document.createElement('a');
+  bandLink.className = 'scatter-info-band-link';
+  bandLink.href = `#band?b=${encodeURIComponent(datum.Band)}`;
+  bandLink.textContent = datum.Band;
+  bandLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Sammle bestehende Bands: Zuerst aus URL, dann aus sessionStorage
+    const currentHash = window.location.hash;
+    const hashMatch = currentHash.match(/^#band\?/);
+    let existingBands = [];
+    
+    if (hashMatch) {
+      // Bereits auf Zeitreihen-Ansicht: Lade Bands aus URL
+      const params = new URLSearchParams(currentHash.split('?')[1] || '');
+      existingBands = params.get('b') ? params.get('b').split(',').map(b => b.trim()) : [];
+    }
+    
+    // Wenn keine Bands in URL, versuche aus sessionStorage zu laden
+    if (existingBands.length === 0) {
+      try {
+        const storedBands = sessionStorage.getItem('selectedBands');
+        if (storedBands) {
+          existingBands = JSON.parse(storedBands);
+        }
+      } catch (e) {
+        console.warn('Failed to load bands from sessionStorage:', e);
+      }
+    }
+    
+    // Füge Band hinzu, wenn noch nicht vorhanden
+    if (!existingBands.includes(datum.Band)) {
+      existingBands.push(datum.Band);
+    }
+    
+    // Speichere Bands in sessionStorage
+    try {
+      sessionStorage.setItem('selectedBands', JSON.stringify(existingBands));
+    } catch (e) {
+      console.warn('Failed to save bands to sessionStorage:', e);
+    }
+    
+    // Navigiere zur Zeitreihen-Ansicht mit allen Bands
+    updateHash('band', { b: existingBands.join(',') });
+  });
+  bandValue.appendChild(bandLink);
+  bandRow.appendChild(bandKey);
+  bandRow.appendChild(bandValue);
+  table.appendChild(bandRow);
+  
+  // Album-Zeile
+  const albumRow = document.createElement('tr');
+  const albumKey = document.createElement('td');
+  albumKey.className = 'key';
+  albumKey.textContent = 'Album';
+  const albumValue = document.createElement('td');
+  albumValue.className = 'value';
+  albumValue.textContent = datum.Album;
+  albumRow.appendChild(albumKey);
+  albumRow.appendChild(albumValue);
+  table.appendChild(albumRow);
+  
+  // Jahr-Zeile
+  const jahrRow = document.createElement('tr');
+  const jahrKey = document.createElement('td');
+  jahrKey.className = 'key';
+  jahrKey.textContent = 'Jahr';
+  const jahrValue = document.createElement('td');
+  jahrValue.className = 'value';
+  jahrValue.textContent = datum.Jahr;
+  jahrRow.appendChild(jahrKey);
+  jahrRow.appendChild(jahrValue);
+  table.appendChild(jahrRow);
+  
+  // Platz-Zeile
+  const platzRow = document.createElement('tr');
+  const platzKey = document.createElement('td');
+  platzKey.className = 'key';
+  platzKey.textContent = 'Platz';
+  const platzValue = document.createElement('td');
+  platzValue.className = 'value';
+  platzValue.textContent = datum.Platz;
+  platzRow.appendChild(platzKey);
+  platzRow.appendChild(platzValue);
+  table.appendChild(platzRow);
+  
+  // Note-Zeile
+  const noteRow = document.createElement('tr');
+  const noteKey = document.createElement('td');
+  noteKey.className = 'key';
+  noteKey.textContent = 'Note';
+  const noteValue = document.createElement('td');
+  noteValue.className = 'value';
+  noteValue.textContent = datum.Note != null ? datum.Note : '-';
+  noteRow.appendChild(noteKey);
+  noteRow.appendChild(noteValue);
+  table.appendChild(noteRow);
+  
+  contentDiv.appendChild(table);
   
   infoBox.innerHTML = '';
   infoBox.appendChild(contentDiv);
