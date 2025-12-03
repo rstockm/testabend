@@ -1016,28 +1016,49 @@ export async function renderYearsView(data, containerEl) {
   
   // Funktion zum Setzen der Container-Breiten (für Chrome Mobile Kompatibilität)
   function setContainerWidths() {
-    const containerWidth = viewContainer.clientWidth;
-    const containerWidthPx = `${containerWidth}px`;
-    prevContainer.style.width = containerWidthPx;
-    prevContainer.style.minWidth = containerWidthPx;
-    prevContainer.style.maxWidth = containerWidthPx;
-    prevContainer.style.flex = `0 0 ${containerWidthPx}`;
-    currContainer.style.width = containerWidthPx;
-    currContainer.style.minWidth = containerWidthPx;
-    currContainer.style.maxWidth = containerWidthPx;
-    currContainer.style.flex = `0 0 ${containerWidthPx}`;
-    nextContainer.style.width = containerWidthPx;
-    nextContainer.style.minWidth = containerWidthPx;
-    nextContainer.style.maxWidth = containerWidthPx;
-    nextContainer.style.flex = `0 0 ${containerWidthPx}`;
-    viewport.style.width = `${containerWidth * 3}px`;
-    debugLog('[DIAGNOSE] Set container widths:', {
-      containerWidth,
-      viewportWidth: containerWidth * 3,
-      prevWidth: prevContainer.style.width,
-      currWidth: currContainer.style.width,
-      nextWidth: nextContainer.style.width
-    });
+    try {
+      if (!viewContainer || !prevContainer || !currContainer || !nextContainer || !viewport) {
+        debugLog('[DIAGNOSE] setContainerWidths: Missing elements', {
+          viewContainer: !!viewContainer,
+          prevContainer: !!prevContainer,
+          currContainer: !!currContainer,
+          nextContainer: !!nextContainer,
+          viewport: !!viewport
+        });
+        return;
+      }
+      
+      const containerWidth = viewContainer.clientWidth;
+      if (containerWidth === 0) {
+        debugLog('[DIAGNOSE] setContainerWidths: containerWidth is 0, retrying...');
+        return;
+      }
+      
+      const containerWidthPx = `${containerWidth}px`;
+      prevContainer.style.width = containerWidthPx;
+      prevContainer.style.minWidth = containerWidthPx;
+      prevContainer.style.maxWidth = containerWidthPx;
+      prevContainer.style.flex = `0 0 ${containerWidthPx}`;
+      currContainer.style.width = containerWidthPx;
+      currContainer.style.minWidth = containerWidthPx;
+      currContainer.style.maxWidth = containerWidthPx;
+      currContainer.style.flex = `0 0 ${containerWidthPx}`;
+      nextContainer.style.width = containerWidthPx;
+      nextContainer.style.minWidth = containerWidthPx;
+      nextContainer.style.maxWidth = containerWidthPx;
+      nextContainer.style.flex = `0 0 ${containerWidthPx}`;
+      viewport.style.width = `${containerWidth * 3}px`;
+      debugLog('[DIAGNOSE] Set container widths:', {
+        containerWidth,
+        viewportWidth: containerWidth * 3,
+        prevWidth: prevContainer.style.width,
+        currWidth: currContainer.style.width,
+        nextWidth: nextContainer.style.width
+      });
+    } catch (e) {
+      debugLog('[DIAGNOSE] setContainerWidths ERROR:', e.message);
+      console.error('[YearsView] setContainerWidths error:', e);
+    }
   }
   
   // Drei Jahr-Container erstellen (müssen let sein, da sie in rotateContainers neu zugewiesen werden)
@@ -1065,11 +1086,21 @@ export async function renderYearsView(data, containerEl) {
   
   viewContainer.appendChild(viewport);
   
+  yearsView.appendChild(yearSelector);
+  yearsView.appendChild(viewContainer);
+  
+  containerEl.innerHTML = '';
+  containerEl.appendChild(yearsView);
+  
   // Setze Container-Breiten nach DOM-Insertion
   requestAnimationFrame(() => {
     setContainerWidths();
     // Auch nach kurzer Verzögerung nochmal (falls Layout noch nicht berechnet)
-    setTimeout(setContainerWidths, 100);
+    setTimeout(() => {
+      setContainerWidths();
+      // Nochmal nach längerer Verzögerung für Chrome Mobile
+      setTimeout(setContainerWidths, 200);
+    }, 100);
   });
   
   yearsView.appendChild(yearSelector);
