@@ -1685,9 +1685,36 @@ export async function renderYearsView(data, containerEl) {
       const swipePercent = (Math.abs(deltaX) / containerWidth) * 100;
       
       if (swipePercent > 20 || Math.abs(currentSwipeOffset) > 15) {
-        // Jahr wechseln - WICHTIG: Entferne shifting-Klasse BEVOR shiftViewport aufgerufen wird
+        // Jahr wechseln - WICHTIG: Rotiere Container SOFORT, dann Viewport zurücksetzen
         viewport.classList.remove('shifting');
-        shiftViewport(direction, true);
+        
+        // Prüfe Grenzen
+        const newYearIndex = currentYearIndex + direction;
+        if (newYearIndex < 0 || newYearIndex >= years.length) {
+          // Zurück zum aktuellen Jahr wenn Grenze erreicht
+          viewport.style.transform = `translateX(-33.33%)`;
+          viewportOffset = 0;
+          return;
+        }
+        
+        // Aktualisiere Jahr SOFORT
+        const newYear = years[newYearIndex];
+        currentYearIndex = newYearIndex;
+        currentYear = newYear;
+        select.value = newYear;
+        console.log('[YearsView] Year updated immediately:', newYear, 'index:', newYearIndex);
+        
+        // Rotiere Container SOFORT (ohne Viewport-Reset)
+        rotateContainers(direction, false);
+        
+        // Viewport OHNE Transition zurücksetzen (Container wurden bereits rotiert)
+        viewportOffset = 0;
+        viewport.style.transition = 'none';
+        viewport.style.transform = `translateX(-33.33%)`;
+        requestAnimationFrame(() => {
+          viewport.style.transition = '';
+          console.log('[YearsView] Viewport reset to -33.33% after container rotation');
+        });
       } else {
         // Zurück zum aktuellen Jahr
         viewport.classList.remove('shifting');
