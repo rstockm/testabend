@@ -989,6 +989,7 @@ export async function renderYearsView(data, containerEl) {
       .sort((a, b) => a.Platz - b.Platz);
     
     console.log('[YearsView] Found', albums.length, 'albums for year', year);
+    console.log('[YearsView] First 5 albums Platz:', albums.slice(0, 5).map(a => a.Platz));
     
     state.year = year;
     state.yearIndex = years.indexOf(year);
@@ -1020,7 +1021,12 @@ export async function renderYearsView(data, containerEl) {
     // Lade initialen Bereich
     const chunk = albums.slice(startIndex, endIndex);
     console.log('[YearsView] Loading chunk of', chunk.length, 'albums');
-    for (const album of chunk) {
+    console.log('[YearsView] Chunk Platz range:', chunk[0]?.Platz, '-', chunk[chunk.length - 1]?.Platz);
+    
+    // Stelle sicher, dass Chunk nach Platz sortiert ist
+    const sortedChunk = [...chunk].sort((a, b) => a.Platz - b.Platz);
+    
+    for (const album of sortedChunk) {
       const item = await createAlbumItem(album);
       list.appendChild(item);
     }
@@ -1135,7 +1141,10 @@ export async function renderYearsView(data, containerEl) {
     const endIndex = Math.min(state.loadedEnd + CHUNK_SIZE, state.albums.length);
     const chunk = state.albums.slice(state.loadedEnd, endIndex);
     
-    for (const album of chunk) {
+    // Stelle sicher, dass Chunk nach Platz sortiert ist
+    const sortedChunk = [...chunk].sort((a, b) => a.Platz - b.Platz);
+    
+    for (const album of sortedChunk) {
       const item = await createAlbumItem(album);
       list.appendChild(item);
     }
@@ -1157,13 +1166,16 @@ export async function renderYearsView(data, containerEl) {
     const startIndex = Math.max(state.loadedStart - CHUNK_SIZE, 0);
     const chunk = state.albums.slice(startIndex, state.loadedStart);
     
+    // Stelle sicher, dass Chunk nach Platz sortiert ist
+    const sortedChunk = [...chunk].sort((a, b) => a.Platz - b.Platz);
+    
     // Speichere Scroll-Position
     const scrollTop = container.scrollTop;
     const scrollHeight = container.scrollHeight;
     
     // Füge Items am Anfang ein
     const fragment = document.createDocumentFragment();
-    for (const album of chunk) {
+    for (const album of sortedChunk) {
       const item = await createAlbumItem(album);
       fragment.appendChild(item);
     }
