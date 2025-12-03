@@ -425,8 +425,25 @@ function setupTooltipContentObserver(tooltipElement) {
     // Prüfe sofort die aktuellen Daten
     const data = extractTooltipData(tooltipElement);
     if (!data.band || !data.album) {
+      // Aktualisiere Info-Box auch wenn keine Daten (zurücksetzen)
+      getUpdateScatterInfoBox().then(updateFn => {
+        if (updateFn) updateFn(null);
+      });
       return; // Keine Daten, nichts zu tun
     }
+    
+    // Aktualisiere Info-Box mit den Tooltip-Daten
+    getUpdateScatterInfoBox().then(updateFn => {
+      if (updateFn) {
+        updateFn({
+          Band: data.band,
+          Album: data.album,
+          Jahr: data.year,
+          Platz: data.platz,
+          Note: data.note ? parseFloat(data.note) : null
+        });
+      }
+    });
     
     const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
     const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
