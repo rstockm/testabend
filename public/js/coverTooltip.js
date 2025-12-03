@@ -112,7 +112,10 @@ async function addCoverToTooltip(tooltipElement) {
   // Extrahiere IMMER die aktuellen Daten (können sich bei Album-Wechsel ändern)
   const data = extractTooltipData(tooltipElement);
   
+  console.log('[CoverTooltip] addCoverToTooltip called, data:', data);
+  
   if (!data.band || !data.album) {
+    console.warn('[CoverTooltip] Missing band or album data:', data);
     return; // Keine Band/Album-Daten vorhanden
   }
   
@@ -155,34 +158,41 @@ async function addCoverToTooltip(tooltipElement) {
   
   // Lade Cover direkt mit onerror-Handler (wie in Jahresliste)
   if (coverUrls && coverUrls.primary) {
+    console.log('[CoverTooltip] Loading cover for', data.band, '-', data.album, 'primary:', coverUrls.primary, 'fallback:', coverUrls.fallback);
     // Versuche zuerst primary (mit Jahr, falls vorhanden)
     coverImage.src = coverUrls.primary;
     coverImage.onerror = () => {
+      console.warn('[CoverTooltip] Primary cover failed:', coverUrls.primary);
       // Fallback: Versuche ohne Jahr (falls vorhanden)
       if (coverUrls.fallback) {
+        console.log('[CoverTooltip] Trying fallback:', coverUrls.fallback);
         coverImage.src = coverUrls.fallback;
         coverImage.onerror = () => {
+          console.error('[CoverTooltip] Both covers failed for', data.band, '-', data.album);
           // Beide Varianten fehlgeschlagen - entferne Cover
           coverContainer.remove();
           coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
         };
       } else {
+        console.error('[CoverTooltip] No fallback available for', data.band, '-', data.album);
         // Kein Fallback verfügbar - entferne Cover
         coverContainer.remove();
         coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
       }
     };
+    coverImage.onload = () => {
+      console.log('[CoverTooltip] Cover loaded successfully:', coverImage.src);
+    };
     
     // WICHTIG: Füge Bild zum Container hinzu NACH dem Setzen von src (wie in Jahresliste)
     coverContainer.appendChild(coverImage);
   } else {
+    console.warn('[CoverTooltip] No cover URLs found for', data.band, '-', data.album, 'coverUrls:', coverUrls);
     // Keine Cover-URLs gefunden
     coverContainer.remove();
     coverUrlCache.set(cacheKey, null);
     return;
   }
-  
-  coverContainer.appendChild(coverImage);
   
   // Wrappe Tooltip-Inhalt - robuste Methode die auch bei Updates funktioniert
   const table = tooltipElement.querySelector('table');
