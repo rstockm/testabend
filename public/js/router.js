@@ -339,6 +339,40 @@ export class Router {
   }
   
   /**
+   * Setting aus localStorage laden
+   */
+  loadSetting(key, defaultValue) {
+    try {
+      const stored = localStorage.getItem(`bandSetting_${key}`);
+      if (stored === null) return defaultValue;
+      
+      // Parse je nach Typ
+      if (typeof defaultValue === 'boolean') {
+        return stored === 'true';
+      } else if (typeof defaultValue === 'string') {
+        return stored;
+      } else if (typeof defaultValue === 'number') {
+        return Number(stored);
+      }
+      return defaultValue;
+    } catch (e) {
+      console.warn(`Failed to load setting ${key}:`, e);
+      return defaultValue;
+    }
+  }
+  
+  /**
+   * Setting in localStorage speichern
+   */
+  saveSetting(key, value) {
+    try {
+      localStorage.setItem(`bandSetting_${key}`, String(value));
+    } catch (e) {
+      console.warn(`Failed to save setting ${key}:`, e);
+    }
+  }
+  
+  /**
    * Ausgewählte Bands aus Parametern parsen
    */
   parseSelectedBands(bandParam) {
