@@ -269,10 +269,13 @@ export class Router {
       scatterContainer.appendChild(zoomControls);
     }
     
+    // Füge Container ZUERST zum DOM hinzu, dann erstelle Info-Box
+    mainEl.appendChild(scatterContainer);
+    
     // Erstelle Info-Box rechts neben dem Chart (nur Desktop)
+    // WICHTIG: Muss NACH appendChild aufgerufen werden, damit das Element im DOM ist
     createScatterInfoBox('scatter-container');
     
-    mainEl.appendChild(scatterContainer);
     await renderScatterAll(this.data, this.chartEl, currentZoomY);
   }
   
