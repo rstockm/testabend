@@ -776,62 +776,101 @@ export async function renderYearsView(data, containerEl) {
   // Importiere parseHash und updateHash für URL-Parameter
   const { parseHash, updateHash } = await import('./utils.js');
   
-  // Debug-Panel erstellen (nur auf Mobile Chrome sichtbar)
+  // Debug-Panel erstellen (immer sichtbar für Debugging)
   const isChromeMobile = /Chrome/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent);
   let debugPanel = null;
   let debugLogs = [];
+  let debugPanelVisible = false;
   
-  if (isChromeMobile) {
-    debugPanel = document.createElement('div');
-    debugPanel.id = 'years-view-debug-panel';
-    debugPanel.style.cssText = `
-      position: fixed;
-      top: 60px;
-      right: 10px;
-      width: 300px;
-      max-height: 400px;
-      background: rgba(0, 0, 0, 0.9);
-      color: #0f0;
-      font-family: monospace;
-      font-size: 10px;
-      padding: 8px;
-      border: 2px solid #0f0;
-      border-radius: 4px;
-      z-index: 999999;
-      overflow-y: auto;
-      word-break: break-all;
-      display: none;
-    `;
-    debugPanel.innerHTML = '<div style="font-weight: bold; margin-bottom: 4px;">DEBUG LOGS (tap to toggle)</div><div id="debug-log-content"></div>';
-    debugPanel.addEventListener('click', () => {
-      debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
-    });
-    document.body.appendChild(debugPanel);
-    
-    // Debug-Log-Funktion
-    window.debugLog = function(...args) {
-      const logEntry = args.map(arg => {
-        if (typeof arg === 'object') {
-          try {
-            return JSON.stringify(arg, null, 2);
-          } catch (e) {
-            return String(arg);
-          }
+  // Erstelle Debug-Panel immer (nicht nur Chrome Mobile)
+  debugPanel = document.createElement('div');
+  debugPanel.id = 'years-view-debug-panel';
+  debugPanel.style.cssText = `
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    background: rgba(0, 0, 0, 0.95);
+    color: #0f0;
+    font-family: monospace;
+    font-size: 11px;
+    padding: 12px;
+    border: 3px solid #0f0;
+    border-radius: 6px;
+    z-index: 999999;
+    overflow-y: auto;
+    word-break: break-all;
+    display: none;
+    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.5);
+  `;
+  debugPanel.innerHTML = '<div style="font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #0ff;">DEBUG LOGS (tap to toggle)</div><div id="debug-log-content" style="line-height: 1.4;"></div>';
+  debugPanel.addEventListener('click', (e) => {
+    if (e.target === debugPanel || e.target.closest('#debug-log-content')) {
+      // Ignoriere Klicks auf Content
+      return;
+    }
+    debugPanelVisible = !debugPanelVisible;
+    debugPanel.style.display = debugPanelVisible ? 'block' : 'none';
+  });
+  document.body.appendChild(debugPanel);
+  
+  // Toggle-Button erstellen (immer sichtbar)
+  const debugToggle = document.createElement('button');
+  debugToggle.id = 'debug-toggle-btn';
+  debugToggle.textContent = 'DEBUG';
+  debugToggle.style.cssText = `
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 40px;
+    background: rgba(0, 255, 0, 0.8);
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+    border: 2px solid #0f0;
+    border-radius: 6px;
+    z-index: 1000000;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 255, 0, 0.6);
+  `;
+  debugToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    debugPanelVisible = !debugPanelVisible;
+    debugPanel.style.display = debugPanelVisible ? 'block' : 'none';
+    debugToggle.textContent = debugPanelVisible ? 'HIDE' : 'DEBUG';
+  });
+  document.body.appendChild(debugToggle);
+  
+  // Debug-Log-Funktion
+  window.debugLog = function(...args) {
+    const logEntry = args.map(arg => {
+      if (typeof arg === 'object') {
+        try {
+          return JSON.stringify(arg, null, 2);
+        } catch (e) {
+          return String(arg);
         }
-        return String(arg);
-      }).join(' ');
-      debugLogs.push(logEntry);
-      if (debugLogs.length > 50) debugLogs.shift(); // Max 50 Einträge
-      const logContent = document.getElementById('debug-log-content');
-      if (logContent) {
-        logContent.innerHTML = debugLogs.slice(-20).join('<br>'); // Zeige letzte 20
       }
-      console.log(...args); // Auch in Console
-    };
-  } else {
-    // Fallback für andere Browser
-    window.debugLog = console.log.bind(console);
-  }
+      return String(arg);
+    }).join(' ');
+    const timestamp = new Date().toLocaleTimeString();
+    debugLogs.push(`[${timestamp}] ${logEntry}`);
+    if (debugLogs.length > 100) debugLogs.shift(); // Max 100 Einträge
+    const logContent = document.getElementById('debug-log-content');
+    if (logContent) {
+      logContent.innerHTML = debugLogs.slice(-30).join('<br>'); // Zeige letzte 30
+      // Auto-scroll nach unten
+      logContent.scrollTop = logContent.scrollHeight;
+    }
+    console.log(...args); // Auch in Console
+  };
+  
+  // Initial-Log
+  debugLog('Debug panel initialized. User-Agent:', navigator.userAgent);
+  debugLog('Is Chrome Mobile:', isChromeMobile);
   
   // Alle verfügbaren Jahre extrahieren und sortieren
   const yearsSorted = uniqueSorted(data.map(d => d.Jahr).filter(y => y != null));
