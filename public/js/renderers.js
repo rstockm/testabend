@@ -935,7 +935,7 @@ export async function renderYearsView(data, containerEl) {
       .mobile-modal-content {
         flex: 1 !important;
         overflow-y: auto !important;
-        padding: 16px !important;
+        padding: 24px 20px 32px !important;
         background: var(--bg-primary) !important;
       }
       .mobile-modal-footer {
@@ -961,11 +961,12 @@ export async function renderYearsView(data, containerEl) {
       .mobile-settings-list {
         display: flex !important;
         flex-direction: column !important;
-        gap: 16px !important;
+        gap: 24px !important;
+        padding-bottom: 32px !important;
       }
       .mobile-settings-toggle {
-        padding: 8px 0 4px !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        padding: 4px 0 16px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
       }
       .mobile-settings-toggle:last-child {
         border-bottom: none !important;
@@ -978,16 +979,17 @@ export async function renderYearsView(data, containerEl) {
         gap: 24px !important;
       }
       .mobile-settings-toggle .title-toggle-label {
-        font-size: 17px !important;
+        font-size: 18px !important;
         color: var(--text-primary) !important;
         flex: 1 !important;
         font-weight: 500 !important;
+        line-height: 1.4 !important;
       }
       .toggle-switch {
         position: relative !important;
         display: inline-block !important;
-        width: 60px !important;
-        height: 32px !important;
+        width: 64px !important;
+        height: 34px !important;
       }
       .toggle-switch input {
         opacity: 0 !important;
@@ -1001,27 +1003,28 @@ export async function renderYearsView(data, containerEl) {
         left: 0 !important;
         right: 0 !important;
         bottom: 0 !important;
-        background-color: #2a2a2a !important;
+        background-color: #1f1f1f !important;
         transition: 0.3s !important;
         border-radius: 999px !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
       }
       .toggle-slider:before {
         position: absolute !important;
         content: '' !important;
-        height: 24px !important;
-        width: 24px !important;
+        height: 26px !important;
+        width: 26px !important;
         left: 4px !important;
-        bottom: 4px !important;
+        bottom: 3px !important;
         background-color: white !important;
         transition: 0.3s !important;
         border-radius: 50% !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35) !important;
       }
       .toggle-switch input:checked + .toggle-slider {
         background-color: var(--accent-blue) !important;
       }
       .toggle-switch input:checked + .toggle-slider:before {
-        transform: translateX(28px) !important;
+        transform: translateX(30px) !important;
       }
     `;
     document.head.appendChild(style);
