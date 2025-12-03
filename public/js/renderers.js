@@ -846,12 +846,18 @@ export async function renderYearsView(data, containerEl) {
       year = years[years.length - 1];
     }
     
-    // Scroll-Position aus sessionStorage (nur wenn nicht in URL)
-    if (!params.s && scrollTop === 0) {
+    // Scroll-Position aus sessionStorage (immer, wenn nicht in URL)
+    // WICHTIG: Auch wenn Jahr aus URL kommt, lade Scroll-Position aus sessionStorage
+    if (!params.s) {
       try {
         const storedScrollTop = sessionStorage.getItem('yearsViewScrollTop');
         if (storedScrollTop) {
-          scrollTop = parseInt(storedScrollTop) || 0;
+          const parsedScrollTop = parseInt(storedScrollTop) || 0;
+          // Nur verwenden wenn gespeichertes Jahr mit geladenem Jahr übereinstimmt
+          const storedYear = sessionStorage.getItem('yearsViewYear');
+          if (storedYear && parseInt(storedYear) === year) {
+            scrollTop = parsedScrollTop;
+          }
         }
       } catch (e) {
         console.warn('[YearsView] Failed to load scroll position from sessionStorage:', e);
@@ -1908,12 +1914,19 @@ export async function renderYearsView(data, containerEl) {
     await loadYearIntoContainer('curr', currentYear);
     console.log('[YearsView] Loaded curr year:', currentYear);
     
-    // Stelle Scroll-Position wieder her (nach kurzer Verzögerung, damit DOM gerendert ist)
+    // Stelle Scroll-Position wieder her (nach mehreren Verzögerungen, damit alle Items geladen sind)
     if (savedScrollPosition > 0) {
+      // Warte auf DOM-Rendering und Lazy Loading
       setTimeout(() => {
         currContainer.scrollTop = savedScrollPosition;
-        console.log('[YearsView] Restored scroll position:', savedScrollPosition);
-      }, 100);
+        console.log('[YearsView] Restored scroll position (first attempt):', savedScrollPosition);
+        
+        // Zweiter Versuch nach längerer Verzögerung (falls Lazy Loading noch läuft)
+        setTimeout(() => {
+          currContainer.scrollTop = savedScrollPosition;
+          console.log('[YearsView] Restored scroll position (second attempt):', savedScrollPosition);
+        }, 500);
+      }, 200);
     }
     
     // Lade vorheriges Jahr (falls vorhanden)
