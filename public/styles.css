@@ -52,6 +52,18 @@ header h1 {
   color: var(--text-primary);
 }
 
+/* Desktop Navigation: Standardmäßig sichtbar */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Mobile Tab Navigation: Standardmäßig versteckt */
+.mobile-nav-tabs {
+  display: none;
+}
+
 nav a {
   color: var(--text-secondary);
   text-decoration: none;
