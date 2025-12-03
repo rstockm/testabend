@@ -1129,6 +1129,115 @@ export async function renderYearsView(data, containerEl) {
     }
   }
   
+  // Funktion zum Synchronisieren der prev/next Container basierend auf curr Container Position
+  async function syncAdjacentContainers() {
+    // Nur synchronisieren wenn curr Container geladen ist
+    if (!containerStates.curr.year || containerStates.curr.albums.length === 0) {
+      return;
+    }
+    
+    // Finde das sichtbare Album im curr Container (basierend auf Scroll-Position)
+    const currItems = Array.from(currList.querySelectorAll('.years-album-item'));
+    const currContainerRect = currContainer.getBoundingClientRect();
+    const viewportTop = currContainerRect.top + currContainer.scrollTop;
+    const viewportBottom = viewportTop + currContainerRect.height;
+    
+    // Finde das Album, das am nächsten zur Viewport-Mitte ist
+    let visibleItem = null;
+    let minDistance = Infinity;
+    const viewportCenter = viewportTop + (viewportBottom - viewportTop) / 2;
+    
+    for (const item of currItems) {
+      const rect = item.getBoundingClientRect();
+      const itemTop = currContainer.scrollTop + (rect.top - currContainerRect.top);
+      const itemCenter = itemTop + rect.height / 2;
+      const distance = Math.abs(itemCenter - viewportCenter);
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        visibleItem = item;
+      }
+    }
+    
+    if (!visibleItem) return;
+    
+    const targetPlatz = parseInt(visibleItem.dataset.platz);
+    if (!targetPlatz) return;
+    
+    // Synchronisiere prev Container
+    if (containerStates.prev.year && containerStates.prev.albums.length > 0) {
+      await syncContainerToPlatz('prev', targetPlatz);
+    }
+    
+    // Synchronisiere next Container
+    if (containerStates.next.year && containerStates.next.albums.length > 0) {
+      await syncContainerToPlatz('next', targetPlatz);
+    }
+  }
+  
+  // Funktion zum Synchronisieren eines Containers auf einen bestimmten Platz
+  async function syncContainerToPlatz(containerKey, targetPlatz) {
+    const state = containerStates[containerKey];
+    const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
+    const container = containerKey === 'prev' ? prevContainer : containerKey === 'curr' ? currContainer : nextContainer;
+    
+    // Finde Index des Albums mit diesem Platz
+    const targetIndex = state.albums.findIndex(a => a.Platz === targetPlatz);
+    if (targetIndex === -1) return;
+    
+    // Prüfe ob der Bereich bereits geladen ist
+    const VIEWPORT_SIZE = 15;
+    const targetStart = Math.max(0, targetIndex - Math.floor(VIEWPORT_SIZE / 2));
+    const targetEnd = Math.min(state.albums.length, targetIndex + Math.ceil(VIEWPORT_SIZE / 2));
+    
+    // Lade fehlende Chunks oben
+    while (state.loadedStart > targetStart) {
+      const chunkStart = Math.max(0, state.loadedStart - CHUNK_SIZE);
+      const chunk = state.albums.slice(chunkStart, state.loadedStart);
+      const sortedChunk = [...chunk].sort((a, b) => a.Platz - b.Platz);
+      
+      const fragment = document.createDocumentFragment();
+      for (const album of sortedChunk) {
+        const item = await createAlbumItem(album);
+        fragment.appendChild(item);
+      }
+      
+      if (list.firstElementChild) {
+        list.insertBefore(fragment, list.firstElementChild);
+      } else {
+        list.appendChild(fragment);
+      }
+      
+      state.loadedStart = chunkStart;
+    }
+    
+    // Lade fehlende Chunks unten
+    while (state.loadedEnd < targetEnd) {
+      const chunkEnd = Math.min(state.albums.length, state.loadedEnd + CHUNK_SIZE);
+      const chunk = state.albums.slice(state.loadedEnd, chunkEnd);
+      const sortedChunk = [...chunk].sort((a, b) => a.Platz - b.Platz);
+      
+      for (const album of sortedChunk) {
+        const item = await createAlbumItem(album);
+        list.appendChild(item);
+      }
+      
+      state.loadedEnd = chunkEnd;
+    }
+    
+    // Setze Scroll-Position auf das Ziel-Album
+    requestAnimationFrame(() => {
+      const items = Array.from(list.querySelectorAll('.years-album-item'));
+      const targetItem = items.find(item => parseInt(item.dataset.platz) === targetPlatz);
+      if (targetItem) {
+        targetItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+    });
+    
+    // Update Sentinels
+    updateContainerSentinels(containerKey);
+  }
+  
   // Funktion zum Laden nach unten für einen Container
   async function loadChunkDownForContainer(containerKey) {
     const state = containerStates[containerKey];
@@ -1151,6 +1260,11 @@ export async function renderYearsView(data, containerEl) {
     
     state.loadedEnd = endIndex;
     updateContainerSentinels(containerKey);
+    
+    // Synchronisiere andere Container wenn curr Container geladen wurde
+    if (containerKey === 'curr') {
+      await syncAdjacentContainers();
+    }
   }
   
   // Funktion zum Laden nach oben für einen Container
@@ -1196,6 +1310,11 @@ export async function renderYearsView(data, containerEl) {
     
     state.loadedStart = startIndex;
     updateContainerSentinels(containerKey);
+    
+    // Synchronisiere andere Container wenn curr Container geladen wurde
+    if (containerKey === 'curr') {
+      await syncAdjacentContainers();
+    }
   }
   
   
@@ -1576,6 +1695,18 @@ export async function renderYearsView(data, containerEl) {
     // Setup Swipe-Gesten
     setupViewportSwipeGestures();
     console.log('[YearsView] Swipe gestures setup complete');
+    
+    // Scroll-Listener für Synchronisation der prev/next Container
+    let syncTimeout = null;
+    currContainer.addEventListener('scroll', () => {
+      // Debounce: Synchronisiere nur alle 300ms
+      if (syncTimeout) {
+        clearTimeout(syncTimeout);
+      }
+      syncTimeout = setTimeout(async () => {
+        await syncAdjacentContainers();
+      }, 300);
+    }, { passive: true });
     
     // Event Listener für Select
     select.addEventListener('change', async (e) => {
