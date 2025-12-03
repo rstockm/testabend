@@ -29,44 +29,29 @@ function getCoverFilename(band, album, year = null) {
 }
 
 /**
- * Prüft, ob ein Cover-Bild existiert (lazy loading)
- * Versucht zuerst mit Jahr, dann ohne Jahr
+ * Generiert Cover-URLs (mit/ohne Jahr) - verwendet gleiche Logik wie Jahresliste
+ * WICHTIG: Cover-Images haben ein Jahr im Dateinamen NUR wenn es Duplikate gibt
+ * Versuche ZUERST mit Jahr (spezifischer), dann ohne Jahr als Fallback
  */
-async function checkCoverExists(band, album, year = null) {
+async function getCoverUrls(band, album, year) {
   // Importiere getBasePath dynamisch
   const { getBasePath } = await import('./utils.js');
   const basePath = getBasePath();
   const basePrefix = basePath ? `${basePath}/` : '';
   
-  // Versuche zuerst mit Jahr (falls vorhanden)
-  if (year) {
-    const filenameWithYear = getCoverFilename(band, album, year);
-    const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
-    
-    try {
-      const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
-      if (response.ok) {
-        return { exists: true, filename: filenameWithYear };
-      }
-    } catch {
-      // Weiter zu Fallback ohne Jahr
-    }
-  }
-  
-  // Fallback: Versuche ohne Jahr
+  // WICHTIG: Cover-Images haben ein Jahr im Dateinamen NUR wenn es Duplikate gibt
+  // Versuche ZUERST mit Jahr (spezifischer), dann ohne Jahr als Fallback
   const filenameWithoutYear = getCoverFilename(band, album, null);
   const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
   
-  try {
-    const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
-    if (response.ok) {
-      return { exists: true, filename: filenameWithoutYear };
-    }
-  } catch {
-    // Cover nicht gefunden
+  if (year) {
+    const filenameWithYear = getCoverFilename(band, album, year);
+    const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
+    // Versuche zuerst mit Jahr (falls Duplikat), dann ohne Jahr
+    return { primary: coverPathWithYear, fallback: coverPathWithoutYear };
   }
   
-  return { exists: false, filename: null };
+  return { primary: coverPathWithoutYear, fallback: null };
 }
 
 /**
@@ -132,25 +117,14 @@ async function addCoverToTooltip(tooltipElement) {
   const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
   
   // Prüfe Cache zuerst
-  let coverUrl = coverUrlCache.get(cacheKey);
+  let coverUrls = coverUrlCache.get(cacheKey);
   
   // Wenn null im Cache, bedeutet das "bereits geprüft, nicht vorhanden"
-  if (coverUrl === undefined) {
-    // Prüfe asynchron, ob Cover existiert (mit Fallback ohne Jahr)
-    const result = await checkCoverExists(data.band, data.album, data.year);
-    
-    if (!result.exists || !result.filename) {
-      coverUrlCache.set(cacheKey, null); // Cache als "nicht vorhanden"
-      return; // Cover nicht vorhanden
-    }
-    
-    // Importiere getBasePath dynamisch
-    const { getBasePath } = await import('./utils.js');
-    const basePath = getBasePath();
-    const basePrefix = basePath ? `${basePath}/` : '';
-    coverUrl = `${basePrefix}images/covers/${result.filename}`;
-    coverUrlCache.set(cacheKey, coverUrl);
-  } else if (coverUrl === null) {
+  if (coverUrls === undefined) {
+    // Generiere Cover-URLs (mit/ohne Jahr)
+    coverUrls = await getCoverUrls(data.band, data.album, data.year);
+    coverUrlCache.set(cacheKey, coverUrls);
+  } else if (coverUrls === null) {
     // Bereits geprüft, nicht vorhanden
     return;
   }
@@ -159,7 +133,8 @@ async function addCoverToTooltip(tooltipElement) {
   const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
   if (existingCover) {
     const existingImg = existingCover.querySelector('img');
-    if (existingImg && existingImg.src === coverUrl) {
+    // Prüfe ob eines der URLs bereits geladen ist
+    if (existingImg && (existingImg.src === coverUrls.primary || existingImg.src === coverUrls.fallback)) {
       return; // Richtiges Cover bereits vorhanden
     }
     // Falsches Cover vorhanden - entferne es
@@ -171,16 +146,35 @@ async function addCoverToTooltip(tooltipElement) {
   coverContainer.className = 'tooltip-cover-container';
   
   const coverImage = document.createElement('img');
-  coverImage.src = coverUrl;
   coverImage.alt = `${data.band} - ${data.album}`;
   coverImage.className = 'tooltip-cover-image';
   coverImage.loading = 'lazy';
   
-  // Fehlerbehandlung für fehlgeschlagene Bildladung
-  coverImage.onerror = () => {
+  // Lade Cover direkt mit onerror-Handler (wie in Jahresliste)
+  if (coverUrls && coverUrls.primary) {
+    // Versuche zuerst primary (mit Jahr, falls vorhanden)
+    coverImage.src = coverUrls.primary;
+    coverImage.onerror = () => {
+      // Fallback: Versuche ohne Jahr (falls vorhanden)
+      if (coverUrls.fallback) {
+        coverImage.src = coverUrls.fallback;
+        coverImage.onerror = () => {
+          // Beide Varianten fehlgeschlagen - entferne Cover
+          coverContainer.remove();
+          coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
+        };
+      } else {
+        // Kein Fallback verfügbar - entferne Cover
+        coverContainer.remove();
+        coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
+      }
+    };
+  } else {
+    // Keine Cover-URLs gefunden
     coverContainer.remove();
-    coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
-  };
+    coverUrlCache.set(cacheKey, null);
+    return;
+  }
   
   coverContainer.appendChild(coverImage);
   
@@ -294,15 +288,23 @@ function setupTooltipContentObserver(tooltipElement) {
     }
     
     const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
-    const expectedCoverUrl = coverUrlCache.get(cacheKey);
+    const expectedCoverUrls = coverUrlCache.get(cacheKey);
     
     // Wenn Cover nicht vorhanden oder falsches Cover vorhanden
-    if (!existingCover || (expectedCoverUrl && existingCover.querySelector('img')?.src !== expectedCoverUrl)) {
-      // Füge Cover sofort wieder hinzu (ohne Debounce für sofortige Reaktion)
-      // Verwende requestAnimationFrame für optimale Performance
-      requestAnimationFrame(() => {
-        addCoverToTooltip(tooltipElement);
-      });
+    if (!existingCover || (expectedCoverUrls && expectedCoverUrls !== null)) {
+      const existingImg = existingCover?.querySelector('img');
+      const isCorrectCover = existingImg && expectedCoverUrls && (
+        existingImg.src === expectedCoverUrls.primary || 
+        existingImg.src === expectedCoverUrls.fallback
+      );
+      
+      if (!existingCover || !isCorrectCover) {
+        // Füge Cover sofort wieder hinzu (ohne Debounce für sofortige Reaktion)
+        // Verwende requestAnimationFrame für optimale Performance
+        requestAnimationFrame(() => {
+          addCoverToTooltip(tooltipElement);
+        });
+      }
     }
   });
   
