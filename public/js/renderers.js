@@ -1014,6 +1014,32 @@ export async function renderYearsView(data, containerEl) {
   viewport.style.transform = 'translateX(-33.33%)';
   viewport.style.webkitTransform = 'translateX(-33.33%)';
   
+  // Funktion zum Setzen der Container-Breiten (für Chrome Mobile Kompatibilität)
+  function setContainerWidths() {
+    const containerWidth = viewContainer.clientWidth;
+    const containerWidthPx = `${containerWidth}px`;
+    prevContainer.style.width = containerWidthPx;
+    prevContainer.style.minWidth = containerWidthPx;
+    prevContainer.style.maxWidth = containerWidthPx;
+    prevContainer.style.flex = `0 0 ${containerWidthPx}`;
+    currContainer.style.width = containerWidthPx;
+    currContainer.style.minWidth = containerWidthPx;
+    currContainer.style.maxWidth = containerWidthPx;
+    currContainer.style.flex = `0 0 ${containerWidthPx}`;
+    nextContainer.style.width = containerWidthPx;
+    nextContainer.style.minWidth = containerWidthPx;
+    nextContainer.style.maxWidth = containerWidthPx;
+    nextContainer.style.flex = `0 0 ${containerWidthPx}`;
+    viewport.style.width = `${containerWidth * 3}px`;
+    debugLog('[DIAGNOSE] Set container widths:', {
+      containerWidth,
+      viewportWidth: containerWidth * 3,
+      prevWidth: prevContainer.style.width,
+      currWidth: currContainer.style.width,
+      nextWidth: nextContainer.style.width
+    });
+  }
+  
   // Drei Jahr-Container erstellen (müssen let sein, da sie in rotateContainers neu zugewiesen werden)
   let prevContainer = document.createElement('div');
   prevContainer.className = 'year-container prev';
@@ -1038,6 +1064,13 @@ export async function renderYearsView(data, containerEl) {
   viewport.appendChild(nextContainer);
   
   viewContainer.appendChild(viewport);
+  
+  // Setze Container-Breiten nach DOM-Insertion
+  requestAnimationFrame(() => {
+    setContainerWidths();
+    // Auch nach kurzer Verzögerung nochmal (falls Layout noch nicht berechnet)
+    setTimeout(setContainerWidths, 100);
+  });
   
   yearsView.appendChild(yearSelector);
   yearsView.appendChild(viewContainer);
@@ -1951,6 +1984,11 @@ export async function renderYearsView(data, containerEl) {
     
     // DOM-Reihenfolge anpassen, damit prev/curr/next im Viewport stimmen
     viewport.replaceChildren(prevContainer, currContainer, nextContainer);
+    
+    // WICHTIG: Setze Container-Breiten nach Rotation neu (für Chrome Mobile)
+    requestAnimationFrame(() => {
+      setContainerWidths();
+    });
     
     // Viewport zurücksetzen NUR wenn gewünscht (nicht während Transition)
     if (resetViewport) {
