@@ -583,10 +583,10 @@ export function buildScatterZoomControls(data, onZoomChange) {
   
   const container = document.createElement('div');
   container.className = 'scatter-zoom-controls';
-  container.style.cssText = 'display: flex; flex-direction: column; gap: 8px; padding: 8px 4px; background: var(--bg-secondary); border-radius: 8px; align-items: center; min-width: 50px; justify-content: center; height: 100%; flex-shrink: 0;';
+  container.style.cssText = 'display: flex; flex-direction: column; gap: 8px; padding: 8px 4px; background: var(--bg-secondary); border-radius: 8px; align-items: center; width: 38px; justify-content: center; height: 100%; flex-shrink: 0;';
   
   const sliderWrapper = document.createElement('div');
-  sliderWrapper.style.cssText = 'display: flex; align-items: center; justify-content: center; height: 400px; width: 30px; position: relative;';
+  sliderWrapper.style.cssText = 'display: flex; align-items: center; justify-content: center; height: 400px; width: 30px; position: relative; margin: 0 auto;';
   
   const yMinSlider = document.createElement('input');
   yMinSlider.type = 'range';
