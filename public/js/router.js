@@ -6,6 +6,7 @@ import { renderOverview, renderBandsSeries, renderScatterAll, renderYearsView } 
 import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend, buildMobileBandToolbar, buildMobileBandModal, buildMobileSettingsModal } from './controls.js';
 import { Chat } from './chat.js';
 import { cleanupScatterKeyboardNav } from './scatterKeyboardNav.js';
+import { createScatterInfoBox, destroyScatterInfoBox } from './scatterInfoBox.js';
 
 /**
  * Router-Klasse
@@ -268,6 +269,9 @@ export class Router {
       scatterContainer.appendChild(zoomControls);
     }
     
+    // Erstelle Info-Box rechts neben dem Chart (nur Desktop)
+    createScatterInfoBox('scatter-container');
+    
     mainEl.appendChild(scatterContainer);
     await renderScatterAll(this.data, this.chartEl, currentZoomY);
   }
@@ -390,6 +394,8 @@ export class Router {
     if (scatterContainer) {
       scatterContainer.remove();
     }
+    
+    destroyScatterInfoBox();
     
     const mainEl = document.querySelector('main');
     if (!mainEl.contains(this.chartEl)) {
