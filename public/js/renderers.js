@@ -880,16 +880,16 @@ export async function renderYearsView(data, containerEl) {
     const basePath = getBasePath();
     const basePrefix = basePath ? `${basePath}/` : '';
     
-    // WICHTIG: Versuche ZUERST ohne Jahr (Dateien auf Server haben kein Jahr im Namen)
+    // WICHTIG: Cover-Images haben ein Jahr im Dateinamen NUR wenn es Duplikate gibt
+    // Versuche ZUERST mit Jahr (spezifischer), dann ohne Jahr als Fallback
     const filenameWithoutYear = getCoverFilename(band, album, null);
     const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
     
-    // Fallback: Versuche mit Jahr (falls vorhanden)
     if (year) {
       const filenameWithYear = getCoverFilename(band, album, year);
       const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
-      // Gib beide Pfade zurück, der Renderer versucht beide
-      return { primary: coverPathWithoutYear, fallback: coverPathWithYear };
+      // Versuche zuerst mit Jahr (falls Duplikat), dann ohne Jahr
+      return { primary: coverPathWithYear, fallback: coverPathWithoutYear };
     }
     
     return { primary: coverPathWithoutYear, fallback: null };
