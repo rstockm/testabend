@@ -86,7 +86,7 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
     config: getDarkThemeConfig(),
     width: "container",
     height: CONFIG.CHART.SCATTER_HEIGHT,
-    padding: CONFIG.CHART.SCATTER_PADDING,
+    padding: { left: 40, right: 20, top: 10, bottom: 50 }, // Reduziertes linkes Padding
     datasets: {
       highlightSelection: []
     },
