@@ -213,6 +213,15 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
     // Setup Keyboard-Navigation
     if (result && result.view) {
       setupScatterKeyboardNav(filtered, result.view, chartEl);
+      
+      // Trigger Resize nach kurzer Verzögerung, damit Container-Breite korrekt erkannt wird
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (result.view && typeof result.view.resize === 'function') {
+            result.view.resize();
+          }
+        });
+      });
     }
   } catch (e) {
     chartEl.innerHTML = '<p style="padding: 40px; text-align: center; color: #ff6b6b;">Fehler beim Rendering: ' + e.message + '</p>';

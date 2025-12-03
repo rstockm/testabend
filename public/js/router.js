@@ -255,7 +255,7 @@ export class Router {
     }
     
     const chartWrapper = document.createElement('div');
-    chartWrapper.style.cssText = 'flex: 1;';
+    chartWrapper.style.cssText = 'flex: 1; min-width: 0;'; // min-width: 0 für korrektes Flexbox-Verhalten
     chartWrapper.appendChild(this.chartEl);
     scatterContainer.appendChild(chartWrapper);
     
@@ -270,7 +270,22 @@ export class Router {
     }
     
     mainEl.appendChild(scatterContainer);
+    
+    // Warte kurz, damit Container-Breite korrekt berechnet wird
+    await new Promise(resolve => setTimeout(resolve, 0));
+    
     await renderScatterAll(this.data, this.chartEl, currentZoomY);
+    
+    // Trigger Resize nach Rendering, damit Chart die korrekte Breite erkennt
+    if (window.vega && window.vega.View) {
+      // Warte auf nächsten Frame, damit DOM vollständig gerendert ist
+      requestAnimationFrame(() => {
+        const scatterView = document.querySelector('#scatter-container .vega-embed');
+        if (scatterView && scatterView.__view__) {
+          scatterView.__view__.resize();
+        }
+      });
+    }
   }
   
   /**
