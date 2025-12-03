@@ -119,8 +119,8 @@ function handleKeyboardNavigation(event) {
   // Nur aktiv wenn Scatter-View aktiv ist
   if (!scatterData || !sortedByNote || !sortedByYear || sortedByNote.length === 0) return;
   
-  // Prüfe ob wir im Scatter-View sind
-  const isScatterView = window.location.hash.startsWith('#scatter');
+  // Prüfe ob wir im Scatter-View sind (jetzt #jahre)
+  const isScatterView = window.location.hash.startsWith('#jahre');
   if (!isScatterView) return;
   
   // Nur Pfeiltasten behandeln

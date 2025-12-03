@@ -141,7 +141,7 @@ export function updateHash(route, params) {
  */
 export function setActiveNav(route) {
   // Entferne active-Klassen ZUERST (damit Animation vom alten Tab startet)
-  ['band', 'scatter', 'testteam', 'jahre'].forEach(r => {
+  ['band', 'testteam', 'jahre'].forEach(r => {
     // Desktop Navigation
     const el = document.getElementById('nav-' + r);
     if (el) el.classList.remove('active');
@@ -156,7 +156,7 @@ export function setActiveNav(route) {
   
   // Setze neue active-Klasse NACH einem Frame (damit Animation startet)
   requestAnimationFrame(() => {
-    ['band', 'scatter', 'testteam', 'jahre'].forEach(r => {
+    ['band', 'testteam', 'jahre'].forEach(r => {
       // Desktop Navigation
       const el = document.getElementById('nav-' + r);
       if (el) el.classList.toggle('active', r === route);
