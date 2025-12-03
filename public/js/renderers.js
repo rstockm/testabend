@@ -777,10 +777,88 @@ export async function renderYearsView(data, containerEl) {
   const { parseHash, updateHash } = await import('./utils.js');
   
   // Debug-Panel erstellen (immer sichtbar für Debugging)
-  const isChromeMobile = /Chrome/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent);
+  const isChromeMobile = /(Chrome|CriOS)/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
+  const isCriOS = /CriOS/i.test(navigator.userAgent);
   let debugPanel = null;
   let debugLogs = [];
   let debugPanelVisible = false;
+  let chromeStylesInjected = false;
+  
+  function ensureChromeMobileStyles() {
+    if (!isCriOS || chromeStylesInjected) return;
+    if (document.getElementById('chrome-mobile-inline-styles')) {
+      chromeStylesInjected = true;
+      return;
+    }
+    chromeStylesInjected = true;
+    const style = document.createElement('style');
+    style.id = 'chrome-mobile-inline-styles';
+    style.textContent = `
+      .years-album-item {
+        display: flex !important;
+        gap: 16px !important;
+        padding: 16px !important;
+        margin-bottom: 12px !important;
+        background: var(--bg-secondary) !important;
+        border-radius: 12px !important;
+        border: 1px solid var(--border-color) !important;
+        transition: background-color 0.2s ease, border-color 0.2s ease !important;
+      }
+      .years-album-item:active {
+        background: var(--bg-tertiary) !important;
+      }
+      .years-album-cover {
+        flex-shrink: 0 !important;
+        width: 100px !important;
+        height: 100px !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        background: var(--bg-tertiary) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .years-album-cover-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+      }
+      .years-album-info {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        min-width: 0 !important;
+      }
+      .years-album-title {
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+        line-height: 1.3 !important;
+        word-break: break-word !important;
+      }
+      .years-album-band {
+        font-size: 16px !important;
+        color: #c4d9ed !important;
+        text-decoration: none !important;
+      }
+      .years-album-details {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        margin-top: auto !important;
+        font-size: 14px !important;
+        color: var(--text-secondary) !important;
+      }
+      .years-album-note,
+      .years-album-platz {
+        font-weight: 500 !important;
+      }
+    `;
+    document.head.appendChild(style);
+    console.log('[YearsView] Injected Chrome iOS styles');
+  }
   
   // Erstelle Debug-Panel immer (nicht nur Chrome Mobile)
   debugPanel = document.createElement('div');
@@ -843,6 +921,8 @@ export async function renderYearsView(data, containerEl) {
     debugToggle.textContent = debugPanelVisible ? 'HIDE' : 'DEBUG';
   });
   document.body.appendChild(debugToggle);
+  
+  ensureChromeMobileStyles();
   
   // Debug-Log-Funktion
   window.debugLog = function(...args) {
