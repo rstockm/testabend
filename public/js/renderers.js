@@ -880,33 +880,19 @@ export async function renderYearsView(data, containerEl) {
     const basePath = getBasePath();
     const basePrefix = basePath ? `${basePath}/` : '';
     
-    // Versuche zuerst mit Jahr
+    // WICHTIG: Versuche ZUERST ohne Jahr (Dateien auf Server haben kein Jahr im Namen)
+    const filenameWithoutYear = getCoverFilename(band, album, null);
+    const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
+    
+    // Fallback: Versuche mit Jahr (falls vorhanden)
     if (year) {
       const filenameWithYear = getCoverFilename(band, album, year);
       const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
-      try {
-        const response = await fetch(coverPathWithYear, { method: 'HEAD', cache: 'no-cache' });
-        if (response.ok) {
-          return coverPathWithYear;
-        }
-      } catch {
-        // Weiter zu Fallback
-      }
+      // Gib beide Pfade zurück, der Renderer versucht beide
+      return { primary: coverPathWithoutYear, fallback: coverPathWithYear };
     }
     
-    // Fallback: Versuche ohne Jahr
-    const filenameWithoutYear = getCoverFilename(band, album, null);
-    const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
-    try {
-      const response = await fetch(coverPathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
-      if (response.ok) {
-        return coverPathWithoutYear;
-      }
-    } catch {
-      // Cover nicht gefunden
-    }
-    
-    return null;
+    return { primary: coverPathWithoutYear, fallback: null };
   }
   
   // Funktion zum Erstellen eines Album-Items
@@ -924,18 +910,26 @@ export async function renderYearsView(data, containerEl) {
     coverImg.alt = `${album.Band} - ${album.Album}`;
     coverImg.loading = 'lazy';
     
-    // Cover-URL laden
-    const coverUrl = await getCoverUrl(album.Band, album.Album, album.Jahr);
-    console.log(`[YearsView] Cover URL for ${album.Band} - ${album.Album}:`, coverUrl);
-    if (coverUrl) {
-      coverImg.src = coverUrl;
-      console.log(`[YearsView] Set img.src to:`, coverImg.src);
+    // Cover-URL laden - versuche beide Varianten (mit/ohne Jahr)
+    const coverUrls = await getCoverUrl(album.Band, album.Album, album.Jahr);
+    if (coverUrls && coverUrls.primary) {
+      // Versuche zuerst primary (ohne Jahr)
+      coverImg.src = coverUrls.primary;
       coverImg.onerror = () => {
-        console.error(`[YearsView] Failed to load cover:`, coverUrl);
-        coverContainer.style.display = 'none';
+        // Fallback: Versuche mit Jahr (falls vorhanden)
+        if (coverUrls.fallback) {
+          coverImg.src = coverUrls.fallback;
+          coverImg.onerror = () => {
+            // Beide Varianten fehlgeschlagen - verstecke Cover
+            coverContainer.style.display = 'none';
+          };
+        } else {
+          // Kein Fallback verfügbar - verstecke Cover
+          coverContainer.style.display = 'none';
+        }
       };
     } else {
-      console.warn(`[YearsView] No cover URL found for ${album.Band} - ${album.Album}`);
+      // Keine Cover-URLs gefunden
       coverContainer.style.display = 'none';
     }
     
