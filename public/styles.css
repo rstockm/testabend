@@ -56,30 +56,52 @@ header h1 {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  position: relative;
+}
+
+/* Animierter Hintergrund-Indikator für Desktop */
+.desktop-tab-indicator {
+  position: absolute;
+  height: calc(100% - 8px);
+  background-color: rgba(247, 201, 72, 0.15);
+  border-radius: 6px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 0;
+  top: 4px;
+  left: 0;
+  opacity: 0;
+}
+
+/* Desktop Tab Styling */
+.desktop-tab {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+}
+
+.desktop-tab:hover:not(.active) {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.desktop-tab.active {
+  color: #f7c948;
+  font-weight: 600;
+  text-decoration: none;
+  background-color: transparent !important;
 }
 
 /* Mobile Tab Navigation: Standardmäßig versteckt */
 .mobile-nav-tabs {
   display: none;
-}
-
-nav a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  margin-right: 12px;
-  font-size: 14px;
-  transition: color 0.2s ease;
-}
-
-nav a:hover {
-  color: var(--text-primary);
-}
-
-nav a.active {
-  color: var(--accent-blue);
-  font-weight: 600;
-  text-decoration: underline;
 }
 
 main {

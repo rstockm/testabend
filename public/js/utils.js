@@ -152,6 +152,7 @@ export function setActiveNav(route) {
   
   // Starte Animation (Indikator bewegt sich vom alten zum neuen Tab)
   updateMobileTabIndicator(route);
+  updateDesktopTabIndicator(route);
   
   // Setze neue active-Klasse NACH einem Frame (damit Animation startet)
   requestAnimationFrame(() => {
@@ -201,13 +202,47 @@ function updateMobileTabIndicator(route) {
 }
 
 /**
- * Initialisiert den Tab-Indikator beim ersten Laden
+ * Aktualisiert die Position des Desktop-Tab-Indikators mit Animation
+ */
+function updateDesktopTabIndicator(route) {
+  const indicator = document.getElementById('desktop-tab-indicator');
+  const tabsContainer = document.querySelector('.desktop-nav');
+  
+  if (!indicator || !tabsContainer) return;
+  
+  // Finde den Ziel-Tab (auch wenn noch nicht aktiv)
+  const targetTab = document.getElementById('nav-' + route);
+  if (!targetTab) {
+    // Falls Tab nicht gefunden, verstecke Indikator
+    indicator.style.opacity = '0';
+    return;
+  }
+  
+  // Verwende requestAnimationFrame um sicherzustellen, dass Layout berechnet ist
+  requestAnimationFrame(() => {
+    // Berechne Position und Größe des Ziel-Tabs
+    const containerRect = tabsContainer.getBoundingClientRect();
+    const tabRect = targetTab.getBoundingClientRect();
+    
+    const left = tabRect.left - containerRect.left;
+    const width = tabRect.width;
+    
+    // Setze Position und Breite mit Transition (Animation startet sofort)
+    indicator.style.opacity = '1';
+    indicator.style.transform = `translateX(${left}px)`;
+    indicator.style.width = `${width}px`;
+  });
+}
+
+/**
+ * Initialisiert die Tab-Indikatoren beim ersten Laden
  */
 export function initMobileTabIndicator() {
   const { route } = parseHash();
   // Kleine Verzögerung, damit Layout berechnet ist
   setTimeout(() => {
     updateMobileTabIndicator(route);
+    updateDesktopTabIndicator(route);
   }, 100);
 }
 
