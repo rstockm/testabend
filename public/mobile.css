@@ -466,24 +466,12 @@
   }
 
   .mobile-tab.active {
-    color: var(--accent-blue);
-    background-color: rgba(59, 130, 246, 0.1);
+    color: #f7c948;
+    background-color: rgba(247, 201, 72, 0.15);
   }
 
   .mobile-tab.active .mobile-tab-icon {
-    stroke: var(--accent-blue);
-  }
-
-  .mobile-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background-color: var(--accent-blue);
+    stroke: #f7c948;
   }
 
   /* Mobile Navigation Overlay: Versteckt (nicht mehr benötigt) */
