@@ -116,4 +116,3 @@ echo "    rsync -avz public/images/covers/ cloudron@testabend.wolkenbar.de:/app/
 - Cover-Bilder müssen manuell verwaltet werden
 - Lokale Entwicklung: Bilder in `public/images/covers/` (im `.gitignore`)
 - Server: Bilder in `/app/data/public/images/covers/` (manuell hochgeladen)
-

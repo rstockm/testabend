@@ -180,4 +180,3 @@ Diese Dateien sind auf dem Server manuell gepflegt und werden vom `deploy.sh`-Sc
 - Interner Browser: Hard-Reload oft buggy, manuell auslösen lassen
 - `.htaccess` enthält API-Key → kann nicht über Git aktualisiert werden
 - Alle Asset-Pfade müssen absolut sein (mit führendem `/`)
-
