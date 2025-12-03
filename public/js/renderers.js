@@ -794,6 +794,45 @@ export async function renderYearsView(data, containerEl) {
     const style = document.createElement('style');
     style.id = 'chrome-mobile-inline-styles';
     style.textContent = `
+      .year-selector {
+        padding: 16px !important;
+        background: var(--bg-secondary) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        flex-shrink: 0 !important;
+      }
+      .year-select {
+        flex: 1 !important;
+        padding: 14px 16px !important;
+        padding-right: 44px !important;
+        background: var(--bg-tertiary) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 12px !important;
+        color: var(--text-primary) !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        font-family: inherit !important;
+        cursor: pointer !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35) !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%23d4d4d4' d='M7 10L2 5h10z'/%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 18px center !important;
+        background-size: 14px !important;
+      }
+      .year-select:focus {
+        outline: none !important;
+        border-color: var(--accent-blue) !important;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25), 0 6px 14px rgba(0, 0, 0, 0.4) !important;
+      }
+      .year-select option {
+        background: var(--bg-tertiary) !important;
+        color: var(--text-primary) !important;
+      }
       .years-album-item {
         display: flex !important;
         gap: 16px !important;
