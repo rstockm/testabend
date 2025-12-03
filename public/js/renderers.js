@@ -6,7 +6,7 @@ import { generateYearRange, calculateYDomain, calculateMinMaxPerYear, isMobile, 
 import { polynomialRegression, generateRegressionPoints } from './regression.js';
 import { setupCoverTooltipHandler } from './coverTooltip.js';
 import { setupScatterKeyboardNav } from './scatterKeyboardNav.js';
-import { setupMobileAlbumCard } from './mobileAlbumCard.js';
+import { setupMobileTouchHandlers } from './mobileTouchHandler.js';
 
 /**
  * Overview-Chart rendern
@@ -317,14 +317,21 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
   };
   
   const result = await vegaEmbed(chartEl, spec, { actions: false });
-  setupCoverTooltipHandler();
   
-  // Mobile Album-Karte Setup
-  if (isMobile() && result && result.view) {
-    // Verwende alle Datenpunkte für die Navigation (alle Alben der ausgewählten Bands)
-    const allAlbumsForBands = data.filter(d => selectedBands.includes(d.Band));
-    setupMobileAlbumCard(result.view, allAlbumsForBands, selectedBands);
+  // Mobile vs Desktop: Unterschiedliche Handler
+  if (isMobile()) {
+    // Mobile: Touch-Handler für Album-Karte
+    setTimeout(() => {
+      if (result && result.view) {
+        setupMobileTouchHandlers(result.view, chartEl, data); // Übergebe Daten für Swipe
+      }
+    }, 300);
+  } else {
+    // Desktop: Standard Tooltip-Handler
+    setupCoverTooltipHandler();
   }
+  
+  return result;
 }
 
 /**
