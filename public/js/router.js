@@ -77,9 +77,6 @@ export class Router {
     
     const isMobileView = isMobile();
     
-    // Header-Controls erstellen (Desktop)
-    this.createBandHeaderControls(params, showTitles, sortBy, showRegression, showThresholds, headerControls);
-    
     // Ausgewählte Bands parsen: Zuerst aus URL, dann aus sessionStorage
     let selected = this.parseSelectedBands(params.b);
     
@@ -89,13 +86,6 @@ export class Router {
         const storedBands = sessionStorage.getItem('selectedBands');
         if (storedBands) {
           selected = JSON.parse(storedBands);
-          // Aktualisiere URL mit gespeicherten Bands (ohne Navigation)
-          if (selected.length > 0) {
-            const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, showThresholds);
-            // Aktualisiere Hash ohne Navigation (replaceState)
-            const newHash = `band?${new URLSearchParams(q).toString()}`;
-            window.history.replaceState(null, '', `#${newHash}`);
-          }
         }
       } catch (e) {
         console.warn('Failed to load bands from sessionStorage:', e);
@@ -108,6 +98,17 @@ export class Router {
         console.warn('Failed to save bands to sessionStorage:', e);
       }
     }
+    
+    // Aktualisiere URL mit Settings und Bands (falls Settings aus localStorage geladen wurden)
+    const needsUrlUpdate = params.titles === undefined || params.sort === undefined || params.regression === undefined || params.thresholds === undefined;
+    if (needsUrlUpdate || selected.length > 0) {
+      const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, showThresholds);
+      const newHash = `band?${new URLSearchParams(q).toString()}`;
+      window.history.replaceState(null, '', `#${newHash}`);
+    }
+    
+    // Header-Controls erstellen (Desktop)
+    this.createBandHeaderControls(params, showTitles, sortBy, showRegression, showThresholds, headerControls);
     
     // Layout erstellen
     const mainEl = document.querySelector('main');
