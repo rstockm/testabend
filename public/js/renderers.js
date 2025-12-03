@@ -1143,8 +1143,32 @@ export async function renderYearsView(data, containerEl) {
     const container = containerKey === 'prev' ? prevContainer : containerKey === 'curr' ? currContainer : nextContainer;
     const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
     
+    // DIAGNOSE: Prüfe Container-Referenzen
+    console.log('[YearsView] DIAGNOSE - Container references:', {
+      containerKey,
+      year,
+      containerExists: !!container,
+      listExists: !!list,
+      containerClassName: container?.className,
+      listClassName: list?.className,
+      containerParent: container?.parentElement?.className,
+      prevContainerYear: containerStates.prev?.year,
+      currContainerYear: containerStates.curr?.year,
+      nextContainerYear: containerStates.next?.year,
+      prevContainerRef: prevContainer === container,
+      currContainerRef: currContainer === container,
+      nextContainerRef: nextContainer === container
+    });
+    
     if (!container || !list) {
-      console.error('[YearsView] Container or list not found for:', containerKey);
+      console.error('[YearsView] Container or list not found for:', containerKey, {
+        prevContainer: !!prevContainer,
+        currContainer: !!currContainer,
+        nextContainer: !!nextContainer,
+        prevList: !!prevList,
+        currList: !!currList,
+        nextList: !!nextList
+      });
       return;
     }
     
@@ -1153,8 +1177,20 @@ export async function renderYearsView(data, containerEl) {
       .filter(d => d.Jahr === year && d.Platz != null)
       .sort((a, b) => a.Platz - b.Platz);
     
+    // DIAGNOSE: Prüfe gefilterte Alben
+    const sampleAlbums = albums.slice(0, 3).map(a => ({ Band: a.Band, Album: a.Album, Jahr: a.Jahr, Platz: a.Platz }));
     console.log('[YearsView] Found', albums.length, 'albums for year', year);
+    console.log('[YearsView] DIAGNOSE - Sample albums:', sampleAlbums);
     console.log('[YearsView] First 5 albums Platz:', albums.slice(0, 5).map(a => a.Platz));
+    
+    // DIAGNOSE: Prüfe ob falsche Jahre in den Daten sind
+    const wrongYearAlbums = albums.filter(a => a.Jahr !== year);
+    if (wrongYearAlbums.length > 0) {
+      console.error('[YearsView] DIAGNOSE - ERROR: Found albums with wrong year!', {
+        expectedYear: year,
+        wrongAlbums: wrongYearAlbums.slice(0, 3).map(a => ({ Jahr: a.Jahr, Band: a.Band, Album: a.Album }))
+      });
+    }
     
     state.year = year;
     state.yearIndex = years.indexOf(year);
@@ -1650,6 +1686,19 @@ export async function renderYearsView(data, containerEl) {
       nextContainer = oldPrev;
       nextList = nextContainer.querySelector('.years-album-list');
       
+      // DIAGNOSE: Prüfe Referenzen nach Rotation
+      console.log('[YearsView] DIAGNOSE - After rotation (right):', {
+        prevContainerYear: containerStates.prev?.year,
+        currContainerYear: containerStates.curr?.year,
+        nextContainerYear: containerStates.next?.year,
+        prevListFound: !!prevList,
+        currListFound: !!currList,
+        nextListFound: !!nextList,
+        prevContainerClass: prevContainer?.className,
+        currContainerClass: currContainer?.className,
+        nextContainerClass: nextContainer?.className
+      });
+      
       // Klassen aktualisieren
       prevContainer.className = 'year-container prev';
       currContainer.className = 'year-container curr';
@@ -1702,6 +1751,19 @@ export async function renderYearsView(data, containerEl) {
       currList = currContainer.querySelector('.years-album-list');
       nextContainer = oldCurr;
       nextList = nextContainer.querySelector('.years-album-list');
+      
+      // DIAGNOSE: Prüfe Referenzen nach Rotation
+      console.log('[YearsView] DIAGNOSE - After rotation (left):', {
+        prevContainerYear: containerStates.prev?.year,
+        currContainerYear: containerStates.curr?.year,
+        nextContainerYear: containerStates.next?.year,
+        prevListFound: !!prevList,
+        currListFound: !!currList,
+        nextListFound: !!nextList,
+        prevContainerClass: prevContainer?.className,
+        currContainerClass: currContainer?.className,
+        nextContainerClass: nextContainer?.className
+      });
       
       // Klassen aktualisieren
       prevContainer.className = 'year-container prev';
@@ -1918,6 +1980,19 @@ export async function renderYearsView(data, containerEl) {
   // Initialisierung
   async function initialize() {
     console.log('[YearsView] Initializing, currentYear:', currentYear, 'currentYearIndex:', currentYearIndex, 'savedScrollPosition:', savedScrollPosition);
+    
+    // DIAGNOSE: Prüfe initiale Container-Referenzen
+    console.log('[YearsView] DIAGNOSE - Initial container state:', {
+      prevContainerExists: !!prevContainer,
+      currContainerExists: !!currContainer,
+      nextContainerExists: !!nextContainer,
+      prevListExists: !!prevList,
+      currListExists: !!currList,
+      nextListExists: !!nextList,
+      viewportTransform: viewport.style.transform,
+      viewportComputedStyle: window.getComputedStyle(viewport).transform,
+      userAgent: navigator.userAgent
+    });
     
     // Lade aktuelles Jahr
     await loadYearIntoContainer('curr', currentYear);
