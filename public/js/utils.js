@@ -148,6 +148,34 @@ export function setActiveNav(route) {
     const mobileEl = document.getElementById('nav-' + r + '-mobile');
     if (mobileEl) mobileEl.classList.toggle('active', r === route);
   });
+  
+  // Animiere Tab-Indikator für Mobile-Tabs
+  updateMobileTabIndicator(route);
+}
+
+/**
+ * Aktualisiert die Position des Mobile-Tab-Indikators mit Animation
+ */
+function updateMobileTabIndicator(route) {
+  const indicator = document.getElementById('mobile-tab-indicator');
+  const tabsContainer = document.querySelector('.mobile-nav-tabs');
+  
+  if (!indicator || !tabsContainer) return;
+  
+  // Finde den aktiven Tab
+  const activeTab = document.getElementById('nav-' + route + '-mobile');
+  if (!activeTab) return;
+  
+  // Berechne Position und Größe
+  const containerRect = tabsContainer.getBoundingClientRect();
+  const tabRect = activeTab.getBoundingClientRect();
+  
+  const left = tabRect.left - containerRect.left;
+  const width = tabRect.width;
+  
+  // Setze Position und Breite mit Transition
+  indicator.style.transform = `translateX(${left}px)`;
+  indicator.style.width = `${width}px`;
 }
 
 /**

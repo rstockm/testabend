@@ -428,6 +428,19 @@
     gap: 4px;
     margin-left: auto;
     margin-right: 8px;
+    position: relative;
+  }
+
+  /* Animierter Hintergrund-Indikator */
+  .mobile-tab-indicator {
+    position: absolute;
+    height: calc(100% - 4px);
+    background-color: rgba(247, 201, 72, 0.15);
+    border-radius: 8px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+    top: 2px;
   }
 
   .mobile-tab {
@@ -440,10 +453,11 @@
     border-radius: 8px;
     text-decoration: none;
     color: var(--text-secondary);
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
     position: relative;
     gap: 2px;
     border-bottom: none;
+    z-index: 1;
   }
 
   .mobile-tab-icon {
@@ -468,7 +482,6 @@
 
   .mobile-tab.active {
     color: #f7c948;
-    background-color: rgba(247, 201, 72, 0.15);
     text-decoration: none;
   }
 
