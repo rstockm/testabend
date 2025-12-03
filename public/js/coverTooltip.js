@@ -37,6 +37,9 @@ async function getCoverUrls(band, album, year) {
   // Importiere getBasePath dynamisch
   const { getBasePath } = await import('./utils.js');
   const basePath = getBasePath();
+  // WICHTIG: Verwende relative Pfade (wie in Jahresliste)
+  // basePath ist '' für Root, daher wird basePrefix zu ''
+  // Relative Pfade funktionieren im Browser automatisch
   const basePrefix = basePath ? `${basePath}/` : '';
   
   // WICHTIG: Cover-Images haben ein Jahr im Dateinamen NUR wenn es Duplikate gibt
@@ -169,6 +172,9 @@ async function addCoverToTooltip(tooltipElement) {
         coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
       }
     };
+    
+    // WICHTIG: Füge Bild zum Container hinzu NACH dem Setzen von src (wie in Jahresliste)
+    coverContainer.appendChild(coverImage);
   } else {
     // Keine Cover-URLs gefunden
     coverContainer.remove();
