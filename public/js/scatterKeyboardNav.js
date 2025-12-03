@@ -25,10 +25,7 @@ export function setupScatterKeyboardNav(data, view, chartEl) {
   chartElement = chartEl;
   setupScatterHighlight(view);
   
-  // Erstelle feste Info-Box rechts neben dem Chart (nur Desktop)
-  if (!isMobile()) {
-    createScatterInfoBox();
-  }
+  // Info-Box wird bereits im Router erstellt, hier nicht nochmal erstellen
   
   // Sortiere Daten nach Note (Y-Koordinate) für Links/Rechts-Navigation
   sortedByNote = [...data]
