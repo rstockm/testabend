@@ -2160,12 +2160,31 @@ export async function renderYearsView(data, containerEl) {
             album: titleEl?.textContent || 'N/A'
           };
         });
-        debugLog('[DIAGNOSE] What is actually visible in curr container:', JSON.stringify({
+        const viewportRect = viewport.getBoundingClientRect();
+        const prevRect = prevContainer.getBoundingClientRect();
+        const currRect = currContainer.getBoundingClientRect();
+        const nextRect = nextContainer.getBoundingClientRect();
+        const viewportComputed = window.getComputedStyle(viewport);
+        const viewContainerRect = viewContainer.getBoundingClientRect();
+        
+        debugLog('[DIAGNOSE] Initial layout check:', JSON.stringify({
           expectedYear: currentYear,
           containerYear: containerStates.curr?.year,
           visibleAlbums: visibleCurrAlbums,
-          viewportTransform: window.getComputedStyle(viewport).transform,
-          viewportOffset: viewportOffset
+          viewportTransform: viewport.style.transform,
+          viewportComputedTransform: viewportComputed.transform,
+          viewportWidth: viewportRect.width,
+          viewportLeft: viewportRect.left,
+          viewContainerWidth: viewContainerRect.width,
+          viewContainerLeft: viewContainerRect.left,
+          prevContainerLeft: prevRect.left,
+          prevContainerWidth: prevRect.width,
+          currContainerLeft: currRect.left,
+          currContainerWidth: currRect.width,
+          nextContainerLeft: nextRect.left,
+          nextContainerWidth: nextRect.width,
+          viewportOffset: viewportOffset,
+          userAgent: navigator.userAgent
         }, null, 2));
       }
     }, 500);
