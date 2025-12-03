@@ -354,51 +354,65 @@ function setupTooltipContentObserver(tooltipElement) {
       return;
     }
     
-    // Debounce: Lösche vorherigen Timer falls vorhanden
+    // Prüfe sofort die aktuellen Daten
+    const data = extractTooltipData(tooltipElement);
+    if (!data.band || !data.album) {
+      return; // Keine Daten, nichts zu tun
+    }
+    
+    const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
+    const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
+    
+    // Prüfe ob bereits das richtige Cover vorhanden ist (mit Cache-Key)
+    if (existingCover) {
+      const existingCacheKey = existingCover.dataset.cacheKey;
+      const existingImg = existingCover.querySelector('img');
+      // Wenn das Cover für diese Daten bereits vorhanden ist und geladen wurde, nichts tun
+      if (existingCacheKey === cacheKey && existingImg && existingImg.complete && existingImg.naturalWidth > 0) {
+        return; // Richtiges Cover bereits vorhanden und geladen
+      }
+      
+      // Wenn sich die Daten geändert haben (anderes Album), lade sofort das neue Cover
+      if (existingCacheKey !== cacheKey) {
+        // Daten haben sich geändert - lade sofort
+        addCoverToTooltip(tooltipElement);
+        return;
+      }
+    }
+    
+    // Wenn kein Cover vorhanden, lade sofort
+    if (!existingCover) {
+      addCoverToTooltip(tooltipElement);
+      return;
+    }
+    
+    // Für wiederholte Mutationen mit denselben Daten: Debouncing
     const existingTimer = observerDebounceTimers.get(tooltipElement);
     if (existingTimer) {
       clearTimeout(existingTimer);
     }
     
-    // Setze neuen Timer für Debouncing (150ms)
+    // Setze Timer für Debouncing (nur für wiederholte Mutationen)
     const timer = setTimeout(() => {
-      // Prüfe ob Cover vorhanden ist und ob es das richtige ist
-      const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
-      const data = extractTooltipData(tooltipElement);
-      
-      if (!data.band || !data.album) {
-        return; // Keine Daten, nichts zu tun
+      // Prüfe nochmal, ob Cover korrekt ist
+      const currentCover = tooltipElement.querySelector('.tooltip-cover-container');
+      const currentData = extractTooltipData(tooltipElement);
+      if (!currentData.band || !currentData.album) {
+        return;
       }
+      const currentCacheKey = `${currentData.band}|${currentData.album}|${currentData.year || ''}`;
       
-      const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
-      
-      // Prüfe ob bereits das richtige Cover vorhanden ist (mit Cache-Key)
-      if (existingCover) {
-        const existingCacheKey = existingCover.dataset.cacheKey;
-        const existingImg = existingCover.querySelector('img');
-        // Wenn das Cover für diese Daten bereits vorhanden ist und geladen wurde, nichts tun
-        if (existingCacheKey === cacheKey && existingImg && existingImg.complete && existingImg.naturalWidth > 0) {
-          return; // Richtiges Cover bereits vorhanden und geladen
+      if (currentCover) {
+        const currentCacheKeyAttr = currentCover.dataset.cacheKey;
+        const currentImg = currentCover.querySelector('img');
+        if (currentCacheKeyAttr === currentCacheKey && currentImg && currentImg.complete && currentImg.naturalWidth > 0) {
+          return; // Cover ist korrekt
         }
       }
       
-      const expectedCoverUrls = coverUrlCache.get(cacheKey);
-      
-      // Wenn bereits geprüft und nicht vorhanden, nichts tun
-      if (expectedCoverUrls === null) {
-        return;
-      }
-      
-      // Prüfe ob Cover vorhanden und korrekt ist
-      if (!existingCover) {
-        // Kein Cover vorhanden - füge hinzu
-        addCoverToTooltip(tooltipElement);
-        return;
-      }
-      
-      // Cover vorhanden aber falsch - aktualisiere
+      // Cover fehlt oder ist falsch - lade
       addCoverToTooltip(tooltipElement);
-    }, 150);
+    }, 100);
     
     observerDebounceTimers.set(tooltipElement, timer);
   });
