@@ -411,9 +411,9 @@
     flex: 1;
   }
 
-  /* Burger-Button: Sichtbar auf Mobile */
+  /* Burger-Button: Versteckt auf Mobile (ersetzt durch Tabs) */
   .burger-menu-button {
-    display: flex;
+    display: none;
   }
 
   /* Desktop Navigation: Versteckt auf Mobile */
@@ -421,9 +421,74 @@
     display: none;
   }
 
-  /* Mobile Navigation: Sichtbar auf Mobile */
+  /* Mobile Tab Navigation */
+  .mobile-nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: 8px;
+  }
+
+  .mobile-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    min-width: 48px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    position: relative;
+    gap: 2px;
+  }
+
+  .mobile-tab-icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-tab-label {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-tab:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+
+  .mobile-tab.active {
+    color: var(--accent-blue);
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+
+  .mobile-tab.active .mobile-tab-icon {
+    stroke: var(--accent-blue);
+  }
+
+  .mobile-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--accent-blue);
+  }
+
+  /* Mobile Navigation Overlay: Versteckt (nicht mehr benötigt) */
   .mobile-nav-overlay {
-    display: block;
+    display: none;
   }
 
   /* Layout Reset für Band-View */
