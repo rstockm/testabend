@@ -156,10 +156,10 @@ export function showMobileAlbumCard(datum, albumData = null) {
   card.style.cssText = `
     background: #1e1e1e !important;
     color: #f5f5f5 !important;
-    border-radius: 16px !important;
-    width: 90% !important;
-    max-width: 420px !important;
-    max-height: 80vh !important;
+    border-radius: 20px !important;
+    width: 92% !important;
+    max-width: 450px !important;
+    max-height: 85vh !important;
     display: flex !important;
     flex-direction: column !important;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
@@ -202,24 +202,32 @@ export function showMobileAlbumCard(datum, albumData = null) {
   const content = document.createElement('div');
   content.className = 'mobile-album-card-content';
   content.style.cssText = `
-    padding: 20px !important;
+    padding: 32px 24px 24px 24px !important;
     overflow-y: auto !important;
     flex: 1 !important;
     background: transparent !important;
     color: #f5f5f5 !important;
   `;
   
+  // Lade Cover-Bild ZUERST (wird oben eingefügt)
+  loadCoverImage(datum.Band, datum.Album, datum.Jahr, content, null);
+  
   const info = document.createElement('div');
   info.className = 'mobile-album-card-info';
+  info.style.cssText = `
+    margin-top: 24px !important;
+  `;
   
   const title = document.createElement('h3');
   title.textContent = `${datum.Band} - ${datum.Album}`;
   title.style.cssText = `
-    margin: 0 0 20px 0 !important;
-    font-size: 20px !important;
+    margin: 0 0 24px 0 !important;
+    font-size: 22px !important;
+    line-height: 1.3 !important;
     text-align: center !important;
     color: #f5f5f5 !important;
     font-weight: 600 !important;
+    padding: 0 8px !important;
   `;
   info.appendChild(title);
   
@@ -242,16 +250,18 @@ export function showMobileAlbumCard(datum, albumData = null) {
     const tdKey = document.createElement('td');
     tdKey.textContent = row.key + ':';
     tdKey.style.cssText = `
-      padding: 12px 12px 12px 0 !important;
+      padding: 14px 16px 14px 0 !important;
       color: #d4d4d4 !important;
       font-weight: 600 !important;
-      width: 30% !important;
+      font-size: 16px !important;
+      width: 35% !important;
     `;
     const tdValue = document.createElement('td');
     tdValue.textContent = row.value;
     tdValue.style.cssText = `
-      padding: 12px 0 !important;
+      padding: 14px 0 !important;
       color: #f5f5f5 !important;
+      font-size: 16px !important;
       text-align: left !important;
     `;
     tr.appendChild(tdKey);
@@ -261,8 +271,6 @@ export function showMobileAlbumCard(datum, albumData = null) {
   
   info.appendChild(table);
   content.appendChild(info);
-  
-  loadCoverImage(datum.Band, datum.Album, datum.Jahr, content, info);
   
   card.appendChild(closeBtn);
   card.appendChild(content);
@@ -638,14 +646,15 @@ async function loadCoverImage(band, album, year, content, info) {
       coverContainer.className = 'mobile-album-card-cover-container';
       coverContainer.style.cssText = `
         width: 100% !important;
-        max-width: 300px !important;
-        margin: 0 auto 20px !important;
-        border-radius: 8px !important;
+        max-width: 320px !important;
+        margin: 0 auto 24px !important;
+        border-radius: 12px !important;
         overflow: hidden !important;
         border: 2px solid #404040 !important;
         background: #2a2a2a !important;
         display: block !important;
         aspect-ratio: 1 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
       `;
       
       const coverImage = document.createElement('img');
@@ -662,40 +671,28 @@ async function loadCoverImage(band, album, year, content, info) {
       // Setze Handler BEVOR src gesetzt wird
       coverImage.onload = () => {
         console.log('[MobileAlbumCard] ✅ Cover image loaded successfully:', coverUrl);
+        coverImage.style.display = 'block';
       };
       
       coverImage.onerror = (e) => {
         console.error('[MobileAlbumCard] ❌ Cover image failed to load:', coverUrl);
-        console.error('[MobileAlbumCard] Error details:', e);
-        console.error('[MobileAlbumCard] Image naturalWidth:', coverImage.naturalWidth, 'naturalHeight:', coverImage.naturalHeight);
-        console.error('[MobileAlbumCard] Image complete:', coverImage.complete);
-        console.error('[MobileAlbumCard] Image src:', coverImage.src);
-        
-        // Versuche zu prüfen, was tatsächlich geladen wurde
-        fetch(coverUrl, { method: 'GET', cache: 'no-cache' })
-          .then(response => {
-            console.error('[MobileAlbumCard] GET response status:', response.status);
-            console.error('[MobileAlbumCard] GET response Content-Type:', response.headers.get('Content-Type'));
-            return response.text();
-          })
-          .then(text => {
-            console.error('[MobileAlbumCard] Response preview (first 200 chars):', text.substring(0, 200));
-            if (text.startsWith('<!DOCTYPE') || text.startsWith('<html')) {
-              console.error('[MobileAlbumCard] ⚠️ Bild wird als HTML serviert! Das ist das Problem.');
-            }
-          })
-          .catch(err => console.error('[MobileAlbumCard] Fetch error:', err));
-        
         coverContainer.remove();
       };
       
       // Hänge Container ZUERST an DOM, dann setze src (damit onload/onerror funktionieren)
       coverContainer.appendChild(coverImage);
-      content.insertBefore(coverContainer, info);
+      // Füge Cover ganz oben ein (vor info, falls vorhanden)
+      if (info && info.parentNode) {
+        content.insertBefore(coverContainer, info);
+      } else {
+        content.insertBefore(coverContainer, content.firstChild);
+      }
       
       // Setze src NACH dem Anhängen an DOM
       console.log('[MobileAlbumCard] Setting image src:', coverUrl);
       coverImage.src = coverUrl;
+    } else {
+      console.log('[MobileAlbumCard] Cover not found for:', band, album, year);
     }
   } catch (error) {
     console.error('[MobileAlbumCard] Cover konnte nicht geladen werden:', error);
