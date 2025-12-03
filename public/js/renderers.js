@@ -1349,12 +1349,27 @@ export async function renderYearsView(data, containerEl) {
     if (renderedItems.length > 0) {
       const firstItem = renderedItems[0];
       const firstItemData = firstItem.dataset;
+      
+      // Prüfe auch die tatsächlichen Text-Inhalte der gerenderten Items
+      const visibleAlbums = Array.from(renderedItems).slice(0, 5).map(item => {
+        const bandEl = item.querySelector('.years-album-band');
+        const titleEl = item.querySelector('.years-album-title');
+        return {
+          platz: item.dataset.platz,
+          band: bandEl?.textContent || 'N/A',
+          album: titleEl?.textContent || 'N/A',
+          containerKey: containerKey,
+          expectedYear: year
+        };
+      });
+      
       const renderedInfo = {
         containerKey,
         year,
         firstItemPlatz: firstItemData.platz,
         totalItems: renderedItems.length,
-        listParent: list.parentElement?.className
+        listParent: list.parentElement?.className,
+        visibleAlbums: visibleAlbums
       };
       debugLog('[DIAGNOSE] First rendered item:', JSON.stringify(renderedInfo, null, 2));
       console.log('[YearsView] DIAGNOSE - First rendered item:', renderedInfo);
@@ -2131,6 +2146,29 @@ export async function renderYearsView(data, containerEl) {
     // Lade aktuelles Jahr
     await loadYearIntoContainer('curr', currentYear);
     console.log('[YearsView] Loaded curr year:', currentYear);
+    
+    // DIAGNOSE: Prüfe was tatsächlich im curr-Container angezeigt wird
+    setTimeout(() => {
+      const currItems = currList.querySelectorAll('.years-album-item');
+      if (currItems.length > 0) {
+        const visibleCurrAlbums = Array.from(currItems).slice(0, 5).map(item => {
+          const bandEl = item.querySelector('.years-album-band');
+          const titleEl = item.querySelector('.years-album-title');
+          return {
+            platz: item.dataset.platz,
+            band: bandEl?.textContent || 'N/A',
+            album: titleEl?.textContent || 'N/A'
+          };
+        });
+        debugLog('[DIAGNOSE] What is actually visible in curr container:', JSON.stringify({
+          expectedYear: currentYear,
+          containerYear: containerStates.curr?.year,
+          visibleAlbums: visibleCurrAlbums,
+          viewportTransform: window.getComputedStyle(viewport).transform,
+          viewportOffset: viewportOffset
+        }, null, 2));
+      }
+    }, 500);
     
     // Stelle Scroll-Position wieder her (nach mehreren Verzögerungen, damit alle Items geladen sind)
     if (savedScrollPosition > 0) {
