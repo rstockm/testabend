@@ -951,28 +951,36 @@ export async function renderYearsView(data, containerEl) {
       e.preventDefault();
       e.stopPropagation();
       
-      // Prüfe ob bereits Bands ausgewählt sind
+      // Sammle bestehende Bands: Zuerst aus URL, dann aus sessionStorage
       const currentHash = window.location.hash;
       const hashMatch = currentHash.match(/^#band\?/);
+      let existingBands = [];
       
       if (hashMatch) {
-        // Bereits auf Zeitreihen-Ansicht: Füge Band zu bestehenden hinzu
+        // Bereits auf Zeitreihen-Ansicht: Lade Bands aus URL
         const params = new URLSearchParams(currentHash.split('?')[1] || '');
-        const existingBands = params.get('b') ? params.get('b').split(',') : [];
-        
-        // Füge Band hinzu, wenn noch nicht vorhanden
-        if (!existingBands.includes(album.Band)) {
-          existingBands.push(album.Band);
-        }
-        
-        // Erstelle neue URL mit allen Bands
-        const newParams = new URLSearchParams(params);
-        newParams.set('b', existingBands.join(','));
-        window.location.hash = `band?${newParams.toString()}`;
-      } else {
-        // Nicht auf Zeitreihen-Ansicht: Navigiere mit dieser Band
-        window.location.hash = `band?b=${encodeURIComponent(album.Band)}`;
+        existingBands = params.get('b') ? params.get('b').split(',').map(b => b.trim()) : [];
       }
+      
+      // Wenn keine Bands in URL, versuche aus sessionStorage zu laden
+      if (existingBands.length === 0) {
+        try {
+          const storedBands = sessionStorage.getItem('selectedBands');
+          if (storedBands) {
+            existingBands = JSON.parse(storedBands);
+          }
+        } catch (e) {
+          console.warn('Failed to load bands from sessionStorage:', e);
+        }
+      }
+      
+      // Füge Band hinzu, wenn noch nicht vorhanden
+      if (!existingBands.includes(album.Band)) {
+        existingBands.push(album.Band);
+      }
+      
+      // Navigiere zur Zeitreihen-Ansicht mit allen Bands
+      window.location.hash = `band?b=${existingBands.map(b => encodeURIComponent(b)).join(',')}`;
     });
     
     const details = document.createElement('div');

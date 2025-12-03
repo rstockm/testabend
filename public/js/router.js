@@ -84,8 +84,34 @@ export class Router {
     // Header-Controls erstellen (Desktop)
     this.createBandHeaderControls(params, showTitles, sortBy, showRegression, showThresholds, headerControls);
     
-    // Ausgewählte Bands parsen
-    const selected = this.parseSelectedBands(params.b);
+    // Ausgewählte Bands parsen: Zuerst aus URL, dann aus sessionStorage
+    let selected = this.parseSelectedBands(params.b);
+    
+    // Wenn keine Bands in URL, versuche aus sessionStorage zu laden
+    if (selected.length === 0) {
+      try {
+        const storedBands = sessionStorage.getItem('selectedBands');
+        if (storedBands) {
+          selected = JSON.parse(storedBands);
+          // Aktualisiere URL mit gespeicherten Bands (ohne Navigation)
+          if (selected.length > 0) {
+            const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, showThresholds);
+            // Aktualisiere Hash ohne Navigation (replaceState)
+            const newHash = `band?${new URLSearchParams(q).toString()}`;
+            window.history.replaceState(null, '', `#${newHash}`);
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load bands from sessionStorage:', e);
+      }
+    } else {
+      // Bands in URL vorhanden: Speichere sie in sessionStorage
+      try {
+        sessionStorage.setItem('selectedBands', JSON.stringify(selected));
+      } catch (e) {
+        console.warn('Failed to save bands to sessionStorage:', e);
+      }
+    }
     
     // Layout erstellen
     const mainEl = document.querySelector('main');
@@ -330,6 +356,17 @@ export class Router {
    * Hash für Band-Route aktualisieren
    */
   updateBandHash(selected, showTitles, sortBy, showRegression, showThresholds = true) {
+    // Speichere ausgewählte Bands in sessionStorage (oder entferne wenn leer)
+    try {
+      if (selected && selected.length > 0) {
+        sessionStorage.setItem('selectedBands', JSON.stringify(selected));
+      } else {
+        sessionStorage.removeItem('selectedBands');
+      }
+    } catch (e) {
+      console.warn('Failed to save bands to sessionStorage:', e);
+    }
+    
     const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, showThresholds);
     updateHash('band', q);
   }
