@@ -108,16 +108,24 @@ const coverUrlCache = new Map(); // Key: "Band|Album|Year", Value: coverUrl oder
 /**
  * Fügt Cover-Bild zu einem Tooltip hinzu
  */
+// Flag um Endlosschleifen zu verhindern
+const processingTooltips = new WeakSet();
+
 async function addCoverToTooltip(tooltipElement) {
+  // Verhindere Endlosschleife: Wenn bereits in Bearbeitung, überspringe
+  if (processingTooltips.has(tooltipElement)) {
+    return;
+  }
+  
   // Extrahiere IMMER die aktuellen Daten (können sich bei Album-Wechsel ändern)
   const data = extractTooltipData(tooltipElement);
   
-  console.log('[CoverTooltip] addCoverToTooltip called, data:', data);
-  
   if (!data.band || !data.album) {
-    console.warn('[CoverTooltip] Missing band or album data:', data);
     return; // Keine Band/Album-Daten vorhanden
   }
+  
+  // Markiere als in Bearbeitung
+  processingTooltips.add(tooltipElement);
   
   // Erstelle Cache-Key basierend auf Album-Daten
   const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
@@ -132,6 +140,7 @@ async function addCoverToTooltip(tooltipElement) {
     coverUrlCache.set(cacheKey, coverUrls);
   } else if (coverUrls === null) {
     // Bereits geprüft, nicht vorhanden
+    processingTooltips.delete(tooltipElement);
     return;
   }
   
@@ -141,6 +150,7 @@ async function addCoverToTooltip(tooltipElement) {
     const existingImg = existingCover.querySelector('img');
     // Prüfe ob eines der URLs bereits geladen ist
     if (existingImg && (existingImg.src === coverUrls.primary || existingImg.src === coverUrls.fallback)) {
+      processingTooltips.delete(tooltipElement);
       return; // Richtiges Cover bereits vorhanden
     }
     // Falsches Cover vorhanden - entferne es
@@ -158,84 +168,99 @@ async function addCoverToTooltip(tooltipElement) {
   
   // Lade Cover direkt mit onerror-Handler (wie in Jahresliste)
   if (coverUrls && coverUrls.primary) {
-    console.log('[CoverTooltip] Loading cover for', data.band, '-', data.album, 'primary:', coverUrls.primary, 'fallback:', coverUrls.fallback);
     // Versuche zuerst primary (mit Jahr, falls vorhanden)
     coverImage.src = coverUrls.primary;
     coverImage.onerror = () => {
-      console.warn('[CoverTooltip] Primary cover failed:', coverUrls.primary);
       // Fallback: Versuche ohne Jahr (falls vorhanden)
       if (coverUrls.fallback) {
-        console.log('[CoverTooltip] Trying fallback:', coverUrls.fallback);
         coverImage.src = coverUrls.fallback;
         coverImage.onerror = () => {
-          console.error('[CoverTooltip] Both covers failed for', data.band, '-', data.album);
           // Beide Varianten fehlgeschlagen - entferne Cover
           coverContainer.remove();
           coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
+          processingTooltips.delete(tooltipElement);
         };
       } else {
-        console.error('[CoverTooltip] No fallback available for', data.band, '-', data.album);
         // Kein Fallback verfügbar - entferne Cover
         coverContainer.remove();
         coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
+        processingTooltips.delete(tooltipElement);
       }
     };
     coverImage.onload = () => {
-      console.log('[CoverTooltip] Cover loaded successfully:', coverImage.src);
+      processingTooltips.delete(tooltipElement);
     };
     
     // WICHTIG: Füge Bild zum Container hinzu NACH dem Setzen von src (wie in Jahresliste)
     coverContainer.appendChild(coverImage);
   } else {
-    console.warn('[CoverTooltip] No cover URLs found for', data.band, '-', data.album, 'coverUrls:', coverUrls);
     // Keine Cover-URLs gefunden
     coverContainer.remove();
     coverUrlCache.set(cacheKey, null);
+    processingTooltips.delete(tooltipElement);
     return;
   }
   
-  // Wrappe Tooltip-Inhalt - robuste Methode die auch bei Updates funktioniert
-  const table = tooltipElement.querySelector('table');
-  if (table) {
-    // Prüfe ob bereits ein Wrapper existiert
-    let wrapper = tooltipElement.querySelector('.tooltip-with-cover');
-    let contentDiv = tooltipElement.querySelector('.tooltip-content');
-    
-    if (!wrapper) {
-      // Erstelle neuen Wrapper
-      wrapper = document.createElement('div');
-      wrapper.className = 'tooltip-with-cover';
+  // Temporär Observer deaktivieren während DOM-Manipulation
+  const contentObserver = tooltipObservers.get(tooltipElement);
+  if (contentObserver) {
+    contentObserver.disconnect();
+  }
+  
+  try {
+    // Wrappe Tooltip-Inhalt - robuste Methode die auch bei Updates funktioniert
+    const table = tooltipElement.querySelector('table');
+    if (table) {
+      // Prüfe ob bereits ein Wrapper existiert
+      let wrapper = tooltipElement.querySelector('.tooltip-with-cover');
+      let contentDiv = tooltipElement.querySelector('.tooltip-content');
       
-      contentDiv = document.createElement('div');
-      contentDiv.className = 'tooltip-content';
-      
-      // Verschiebe bestehenden Inhalt in contentDiv
-      const children = Array.from(tooltipElement.childNodes);
-      children.forEach(child => {
-        if (child.nodeType === Node.ELEMENT_NODE && !child.classList?.contains('tooltip-cover-container')) {
-          contentDiv.appendChild(child);
-        } else if (child.nodeType === Node.TEXT_NODE && child.textContent.trim()) {
-          contentDiv.appendChild(child);
+      if (!wrapper) {
+        // Erstelle neuen Wrapper
+        wrapper = document.createElement('div');
+        wrapper.className = 'tooltip-with-cover';
+        
+        contentDiv = document.createElement('div');
+        contentDiv.className = 'tooltip-content';
+        
+        // Verschiebe bestehenden Inhalt in contentDiv
+        const children = Array.from(tooltipElement.childNodes);
+        children.forEach(child => {
+          if (child.nodeType === Node.ELEMENT_NODE && !child.classList?.contains('tooltip-cover-container')) {
+            contentDiv.appendChild(child);
+          } else if (child.nodeType === Node.TEXT_NODE && child.textContent.trim()) {
+            contentDiv.appendChild(child);
+          }
+        });
+        
+        // Füge Cover und Content hinzu
+        wrapper.appendChild(coverContainer);
+        wrapper.appendChild(contentDiv);
+        
+        // Ersetze alle Kinder durch Wrapper
+        tooltipElement.innerHTML = '';
+        tooltipElement.appendChild(wrapper);
+      } else {
+        // Wrapper existiert bereits, füge nur Cover hinzu falls fehlt
+        const existingCoverInWrapper = wrapper.querySelector('.tooltip-cover-container');
+        if (!existingCoverInWrapper) {
+          wrapper.insertBefore(coverContainer, wrapper.firstChild);
         }
-      });
-      
-      // Füge Cover und Content hinzu
-      wrapper.appendChild(coverContainer);
-      wrapper.appendChild(contentDiv);
-      
-      // Ersetze alle Kinder durch Wrapper
-      tooltipElement.innerHTML = '';
-      tooltipElement.appendChild(wrapper);
-    } else {
-      // Wrapper existiert bereits, füge nur Cover hinzu falls fehlt
-      const existingCoverInWrapper = wrapper.querySelector('.tooltip-cover-container');
-      if (!existingCoverInWrapper) {
-        wrapper.insertBefore(coverContainer, wrapper.firstChild);
       }
+    } else {
+      // Fallback: Cover einfach vorne hinzufügen
+      tooltipElement.insertBefore(coverContainer, tooltipElement.firstChild);
     }
-  } else {
-    // Fallback: Cover einfach vorne hinzufügen
-    tooltipElement.insertBefore(coverContainer, tooltipElement.firstChild);
+  } finally {
+    // Observer wieder aktivieren
+    if (contentObserver) {
+      contentObserver.observe(tooltipElement, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+        attributes: false
+      });
+    }
   }
 }
 
@@ -295,6 +320,11 @@ function setupTooltipContentObserver(tooltipElement) {
   }
   
   const contentObserver = new MutationObserver(() => {
+    // Überspringe wenn bereits in Bearbeitung
+    if (processingTooltips.has(tooltipElement)) {
+      return;
+    }
+    
     // Prüfe ob Cover vorhanden ist und ob es das richtige ist
     const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
     const data = extractTooltipData(tooltipElement);
@@ -306,17 +336,27 @@ function setupTooltipContentObserver(tooltipElement) {
     const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
     const expectedCoverUrls = coverUrlCache.get(cacheKey);
     
-    // Wenn Cover nicht vorhanden oder falsches Cover vorhanden
-    if (!existingCover || (expectedCoverUrls && expectedCoverUrls !== null)) {
-      const existingImg = existingCover?.querySelector('img');
-      const isCorrectCover = existingImg && expectedCoverUrls && (
-        existingImg.src === expectedCoverUrls.primary || 
-        existingImg.src === expectedCoverUrls.fallback
-      );
-      
-      if (!existingCover || !isCorrectCover) {
-        // Füge Cover sofort wieder hinzu (ohne Debounce für sofortige Reaktion)
-        // Verwende requestAnimationFrame für optimale Performance
+    // Wenn bereits geprüft und nicht vorhanden, nichts tun
+    if (expectedCoverUrls === null) {
+      return;
+    }
+    
+    // Prüfe ob Cover vorhanden und korrekt ist
+    if (!existingCover) {
+      // Kein Cover vorhanden - füge hinzu
+      requestAnimationFrame(() => {
+        addCoverToTooltip(tooltipElement);
+      });
+      return;
+    }
+    
+    // Cover vorhanden - prüfe ob es das richtige ist
+    const existingImg = existingCover.querySelector('img');
+    if (existingImg && expectedCoverUrls && expectedCoverUrls !== null) {
+      const isCorrectCover = existingImg.src === expectedCoverUrls.primary || 
+                             existingImg.src === expectedCoverUrls.fallback;
+      if (!isCorrectCover) {
+        // Falsches Cover - aktualisiere
         requestAnimationFrame(() => {
           addCoverToTooltip(tooltipElement);
         });
