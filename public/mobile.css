@@ -443,6 +443,7 @@
     transition: all 0.2s ease;
     position: relative;
     gap: 2px;
+    border-bottom: none;
   }
 
   .mobile-tab-icon {
@@ -468,6 +469,7 @@
   .mobile-tab.active {
     color: #f7c948;
     background-color: rgba(247, 201, 72, 0.15);
+    text-decoration: none;
   }
 
   .mobile-tab.active .mobile-tab-icon {
