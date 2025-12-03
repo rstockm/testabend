@@ -894,6 +894,135 @@ export async function renderYearsView(data, containerEl) {
       .years-album-platz {
         font-weight: 500 !important;
       }
+      .mobile-band-modal {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background-color: var(--bg-primary) !important;
+        z-index: 2000 !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+      }
+      .mobile-band-modal.active {
+        display: flex !important;
+      }
+      .mobile-modal-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 12px 16px !important;
+        background-color: var(--bg-secondary) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+      }
+      .mobile-modal-title {
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        margin: 0 !important;
+        color: var(--text-primary) !important;
+      }
+      .mobile-modal-close {
+        background: none !important;
+        border: none !important;
+        color: var(--text-primary) !important;
+        font-size: 26px !important;
+        padding: 8px !important;
+        cursor: pointer !important;
+        line-height: 1 !important;
+      }
+      .mobile-modal-content {
+        flex: 1 !important;
+        overflow-y: auto !important;
+        padding: 16px !important;
+        background: var(--bg-primary) !important;
+      }
+      .mobile-modal-footer {
+        padding: 12px 16px 24px !important;
+        background: var(--bg-primary) !important;
+        border-top: 1px solid var(--border-color) !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+      }
+      .mobile-modal-done-btn {
+        padding: 12px 24px !important;
+        border-radius: 12px !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        cursor: pointer !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        background: var(--accent-blue) !important;
+        color: #fff !important;
+        border: none !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+      }
+      .mobile-settings-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+      .mobile-settings-toggle {
+        padding: 8px 0 4px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+      }
+      .mobile-settings-toggle:last-child {
+        border-bottom: none !important;
+      }
+      .mobile-settings-toggle .title-toggle-container {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 24px !important;
+      }
+      .mobile-settings-toggle .title-toggle-label {
+        font-size: 17px !important;
+        color: var(--text-primary) !important;
+        flex: 1 !important;
+        font-weight: 500 !important;
+      }
+      .toggle-switch {
+        position: relative !important;
+        display: inline-block !important;
+        width: 60px !important;
+        height: 32px !important;
+      }
+      .toggle-switch input {
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+      .toggle-slider {
+        position: absolute !important;
+        cursor: pointer !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background-color: #2a2a2a !important;
+        transition: 0.3s !important;
+        border-radius: 999px !important;
+      }
+      .toggle-slider:before {
+        position: absolute !important;
+        content: '' !important;
+        height: 24px !important;
+        width: 24px !important;
+        left: 4px !important;
+        bottom: 4px !important;
+        background-color: white !important;
+        transition: 0.3s !important;
+        border-radius: 50% !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+      }
+      .toggle-switch input:checked + .toggle-slider {
+        background-color: var(--accent-blue) !important;
+      }
+      .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(28px) !important;
+      }
     `;
     document.head.appendChild(style);
     console.log('[YearsView] Injected Chrome iOS styles');
