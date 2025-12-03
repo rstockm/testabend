@@ -485,10 +485,12 @@
   .mobile-tab.active {
     color: #f7c948;
     text-decoration: none;
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .mobile-tab.active .mobile-tab-icon {
     stroke: #f7c948;
+    transition: stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Mobile Navigation Overlay: Versteckt (nicht mehr benötigt) */
