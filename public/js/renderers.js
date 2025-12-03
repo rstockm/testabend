@@ -1065,7 +1065,7 @@ export async function renderYearsView(data, containerEl) {
   });
   document.body.appendChild(debugPanel);
   
-  // Toggle-Button erstellen (immer sichtbar)
+  // Toggle-Button erstellen (versteckt, Code bleibt erhalten)
   const debugToggle = document.createElement('button');
   debugToggle.id = 'debug-toggle-btn';
   debugToggle.textContent = 'DEBUG';
@@ -1084,6 +1084,7 @@ export async function renderYearsView(data, containerEl) {
     z-index: 1000000;
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0, 255, 0, 0.6);
+    display: none;
   `;
   debugToggle.addEventListener('click', (e) => {
     e.stopPropagation();
