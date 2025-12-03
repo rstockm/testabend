@@ -1103,12 +1103,6 @@ export async function renderYearsView(data, containerEl) {
     }, 100);
   });
   
-  yearsView.appendChild(yearSelector);
-  yearsView.appendChild(viewContainer);
-  
-  containerEl.innerHTML = '';
-  containerEl.appendChild(yearsView);
-  
   // Multi-Container State
   let currentYearIndex = years.indexOf(savedYear);
   if (currentYearIndex === -1) {
