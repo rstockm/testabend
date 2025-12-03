@@ -777,24 +777,30 @@ export async function renderYearsView(data, containerEl) {
     return;
   }
   
-  // Funktion zum Speichern von Jahr und Position
+  // Funktion zum Speichern von Jahr und Position (nur sessionStorage, keine URL)
+  function saveYearAndPositionToStorage(year, scrollTop = 0) {
+    try {
+      sessionStorage.setItem('yearsViewYear', String(year));
+      sessionStorage.setItem('yearsViewScrollTop', String(scrollTop));
+    } catch (e) {
+      console.warn('[YearsView] Failed to save year and position to storage:', e);
+    }
+  }
+  
+  // Funktion zum Speichern von Jahr und Position (mit URL-Update)
   function saveYearAndPosition(year, scrollTop = 0, updateUrl = true) {
     try {
       // Speichere in sessionStorage
-      sessionStorage.setItem('yearsViewYear', String(year));
-      sessionStorage.setItem('yearsViewScrollTop', String(scrollTop));
+      saveYearAndPositionToStorage(year, scrollTop);
       
-      // Aktualisiere URL-Parameter nur wenn explizit gewünscht (nicht bei jedem Scroll)
+      // Aktualisiere URL-Parameter nur wenn gewünscht (nicht beim Scrollen)
       if (updateUrl) {
         const { params } = parseHash();
         const newParams = { ...params };
         if (year) {
           newParams.y = String(year);
-          if (scrollTop > 0) {
-            newParams.s = String(Math.round(scrollTop));
-          } else {
-            delete newParams.s; // Entferne Scroll-Parameter wenn 0
-          }
+          // Scroll-Position nicht in URL speichern (nur Jahr)
+          delete newParams.s;
         }
         updateHash('jahre', newParams);
       }
@@ -1055,6 +1061,9 @@ export async function renderYearsView(data, containerEl) {
     bandName.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
+      
+      // Speichere aktuelle Position BEVOR Navigation (nur sessionStorage, keine URL)
+      saveYearAndPositionToStorage(currentYear, currContainer.scrollTop);
       
       // Sammle bestehende Bands: Zuerst aus URL, dann aus sessionStorage
       const currentHash = window.location.hash;
@@ -1946,20 +1955,24 @@ export async function renderYearsView(data, containerEl) {
       console.log('[YearsView] Select changed:', newYear, 'direction:', direction);
       
       if (direction !== 0) {
-        // Speichere alte Position (nur sessionStorage, kein URL-Update)
-        saveYearAndPosition(currentYear, currContainer.scrollTop, false);
+        // Speichere alte Position (nur sessionStorage)
+        saveYearAndPositionToStorage(currentYear, currContainer.scrollTop);
         
         // Lade direkt ohne Animation
         currentYearIndex = newIndex;
         currentYear = newYear;
         await loadYearIntoContainer('curr', newYear);
         
-        // Stelle Scroll-Position wieder her (nur beim ersten Laden, nicht bei Select-Change)
-        // Beim Select-Change starten wir bei 0
-        currContainer.scrollTop = 0;
+        // Stelle Scroll-Position wieder her (falls gespeichert)
+        const { scrollTop: restoredScrollTop } = loadYearAndPosition();
+        if (restoredScrollTop > 0) {
+          setTimeout(() => {
+            currContainer.scrollTop = restoredScrollTop;
+          }, 100);
+        }
         
-        // Aktualisiere URL mit neuem Jahr (ohne Scroll-Position)
-        saveYearAndPosition(newYear, 0, true);
+        // Speichere neues Jahr (mit URL-Update)
+        saveYearAndPosition(newYear, 0, true); // Reset scroll wenn Jahr gewechselt
         
         // Lade Nachbarn
         if (newIndex > 0) {
@@ -1971,30 +1984,25 @@ export async function renderYearsView(data, containerEl) {
       }
     });
     
-    // Speichere Position beim Scrollen (debounced, ohne URL-Update um Flackern zu vermeiden)
+    // Speichere Position beim Scrollen (debounced, nur sessionStorage, keine URL)
     let scrollSaveTimeout = null;
-    currContainer.addEventListener('scroll', (e) => {
-      // Ignoriere Scroll-Events wenn auf einem Link geklickt wird
-      if (e.target.closest('a.years-album-band')) {
-        return;
-      }
+    currContainer.addEventListener('scroll', () => {
       clearTimeout(scrollSaveTimeout);
       scrollSaveTimeout = setTimeout(() => {
-        saveYearAndPosition(currentYear, currContainer.scrollTop, false); // Kein URL-Update beim Scrollen
+        saveYearAndPositionToStorage(currentYear, currContainer.scrollTop);
       }, 1000); // Längeres Debounce für weniger Speicherungen
     }, { passive: true });
     
-    // Speichere Position beim Verlassen der View
+    // Speichere Position beim Verlassen der View (nur sessionStorage)
     window.addEventListener('beforeunload', () => {
-      saveYearAndPosition(currentYear, currContainer.scrollTop);
+      saveYearAndPositionToStorage(currentYear, currContainer.scrollTop);
     });
     
     // Speichere Position bei Hash-Change (wenn zu anderer Route navigiert wird)
-    const originalHashChange = window.onhashchange;
     window.addEventListener('hashchange', () => {
       const { route } = parseHash();
       if (route !== 'jahre') {
-        saveYearAndPosition(currentYear, currContainer.scrollTop);
+        saveYearAndPositionToStorage(currentYear, currContainer.scrollTop);
       }
     });
   }
