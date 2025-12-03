@@ -274,26 +274,31 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
                     : node.querySelector?.('.vg-tooltip, .vega-tooltip');
                   
                   if (tooltip) {
+                    console.log('[MobileTouchHandler] Tooltip created, extracting data...');
                     showDebugMessage('Tooltip created!', '#ff6b35');
                     
                     // Extrahiere Daten aus Tooltip
                     const data = extractDataFromTooltip(tooltip);
+                    console.log('[MobileTouchHandler] Extracted data:', data);
                     
                     // Nur Card anzeigen, wenn vollständige Daten vorhanden sind
                     if (data.Band && data.Album && (data.Jahr != null || data.Note != null)) {
                       lastTooltipData = data;
+                      console.log('[MobileTouchHandler] Valid tooltip data, will show card:', data);
                       showDebugMessage(`Tooltip data: ${data.Band} - ${data.Album}`, '#90EE90');
                       
                       // Verzögere die Karten-Anzeige etwas, falls mehrere Tooltips kommen
                       clearTimeout(tooltipTimeout);
                       tooltipTimeout = setTimeout(() => {
                         if (lastTooltipData && lastTooltipData.Band && lastTooltipData.Album) {
+                          console.log('[MobileTouchHandler] Showing card from tooltip:', lastTooltipData);
                           showDebugMessage(`Showing card from tooltip: ${lastTooltipData.Band}`, '#90EE90');
                           showMobileAlbumCard(lastTooltipData);
                           lastTooltipData = null;
                         }
                       }, 100);
                     } else {
+                      console.log('[MobileTouchHandler] Tooltip data incomplete:', data);
                       showDebugMessage('Tooltip created but no valid data extracted', '#ffaa00');
                       // Entferne Tooltip ohne Card anzuzeigen
                       tooltip.remove();
@@ -309,6 +314,7 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
             childList: true,
             subtree: true
           });
+          console.log('[MobileTouchHandler] Tooltip observer started');
           showDebugMessage('Tooltip observer started', '#4a9dd4');
           
           // Ansatz 3: Direkte SVG-Events nur für Debugging
