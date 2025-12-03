@@ -62,33 +62,8 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
     // Warte bis Chart vollständig gerendert ist
     setTimeout(() => {
       try {
-        let attempts = 0;
-        const maxAttempts = 20;
-        
-        const trySetup = () => {
-          attempts++;
-          let svg = chartEl.querySelector('svg');
-          
-          // Falls nicht gefunden, suche auch in allen Kindern
-          if (!svg && chartEl.children.length > 0) {
-            for (const child of chartEl.children) {
-              svg = child.querySelector('svg') || (child.tagName === 'SVG' ? child : null);
-              if (svg) break;
-            }
-          }
-          
-          if (!svg) {
-            if (attempts < maxAttempts) {
-              setTimeout(trySetup, 200);
-              return;
-            } else {
-              console.warn('[MobileTouchHandler] SVG not found after multiple attempts');
-              return;
-            }
-          }
-          
-          // Nutze Vega-Lite's Event-API
-          if (chartView && typeof chartView.addEventListener === 'function') {
+        // Nutze direkt Vega-Lite's Event-API (braucht kein SVG)
+        if (chartView && typeof chartView.addEventListener === 'function') {
             // Click-Events (funktionieren auch auf Touch)
             chartView.addEventListener('click', (event, item) => {
               // Nur anzeigen, wenn wirklich ein Datum vorhanden ist (Punkt getroffen)
@@ -162,10 +137,9 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
             childList: true,
             subtree: true
           });
-        };
-        
-        // Starte Setup-Versuch
-        trySetup();
+        } else {
+          console.warn('[MobileTouchHandler] chartView.addEventListener not available');
+        }
       } catch (error) {
         console.error('[MobileTouchHandler] Setup error:', error);
       }
@@ -174,4 +148,3 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
     console.error('[MobileTouchHandler] Fatal error:', error);
   }
 }
-
