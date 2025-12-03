@@ -63,10 +63,18 @@ export class Router {
    * Band-Route
    */
   async handleBand(params, headerControls) {
-    const showTitles = params.titles !== 'false';
-    const sortBy = params.sort === 'count' ? 'count' : 'alphabetical';
-    const showRegression = params.regression === 'true';
-    const showThresholds = params.thresholds !== 'false'; // Standard: an
+    // Lade Settings: Zuerst aus URL, dann aus localStorage
+    let showTitles = params.titles !== undefined ? params.titles !== 'false' : this.loadSetting('showTitles', true);
+    let sortBy = params.sort !== undefined ? (params.sort === 'count' ? 'count' : 'alphabetical') : this.loadSetting('sortBy', 'alphabetical');
+    let showRegression = params.regression !== undefined ? params.regression === 'true' : this.loadSetting('showRegression', false);
+    let showThresholds = params.thresholds !== undefined ? params.thresholds !== 'false' : this.loadSetting('showThresholds', true);
+    
+    // Speichere Settings in localStorage (falls aus URL geladen)
+    if (params.titles !== undefined) this.saveSetting('showTitles', showTitles);
+    if (params.sort !== undefined) this.saveSetting('sortBy', sortBy);
+    if (params.regression !== undefined) this.saveSetting('showRegression', showRegression);
+    if (params.thresholds !== undefined) this.saveSetting('showThresholds', showThresholds);
+    
     const isMobileView = isMobile();
     
     // Header-Controls erstellen (Desktop)
@@ -136,6 +144,12 @@ export class Router {
         showRegression,
         showThresholds,
         onApply: (nextState) => {
+          // Speichere Settings in localStorage
+          this.saveSetting('showTitles', nextState.showTitles);
+          this.saveSetting('sortBy', nextState.sortBy);
+          this.saveSetting('showRegression', nextState.showRegression);
+          this.saveSetting('showThresholds', nextState.showThresholds);
+          
           this.updateBandHash(
             selected,
             nextState.showTitles,
@@ -285,7 +299,9 @@ export class Router {
     // Albentitel Toggle
     const titleToggle = createToggle('Albentitel', showTitles, () => {
       const selected = this.parseSelectedBands(params.b);
-      const q = this.buildBandQuery(selected, !showTitles, sortBy, showRegression, showThresholds);
+      const newShowTitles = !showTitles;
+      this.saveSetting('showTitles', newShowTitles);
+      const q = this.buildBandQuery(selected, newShowTitles, sortBy, showRegression, showThresholds);
       updateHash('band', q);
     });
     headerControls.appendChild(titleToggle);
@@ -294,6 +310,7 @@ export class Router {
     const sortToggle = createToggle('Nach Anzahl', sortBy === 'count', () => {
       const selected = this.parseSelectedBands(params.b);
       const newSortBy = sortBy === 'count' ? 'alphabetical' : 'count';
+      this.saveSetting('sortBy', newSortBy);
       const q = this.buildBandQuery(selected, showTitles, newSortBy, showRegression, showThresholds);
       updateHash('band', q);
     });
@@ -302,7 +319,9 @@ export class Router {
     // Regression Toggle
     const regressionToggle = createToggle('Regression', showRegression, () => {
       const selected = this.parseSelectedBands(params.b);
-      const q = this.buildBandQuery(selected, showTitles, sortBy, !showRegression, showThresholds);
+      const newShowRegression = !showRegression;
+      this.saveSetting('showRegression', newShowRegression);
+      const q = this.buildBandQuery(selected, showTitles, sortBy, newShowRegression, showThresholds);
       updateHash('band', q);
     });
     headerControls.appendChild(regressionToggle);
@@ -310,7 +329,9 @@ export class Router {
     // Schwellen Toggle
     const thresholdsToggle = createToggle('Schwellen', showThresholds, () => {
       const selected = this.parseSelectedBands(params.b);
-      const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, !showThresholds);
+      const newShowThresholds = !showThresholds;
+      this.saveSetting('showThresholds', newShowThresholds);
+      const q = this.buildBandQuery(selected, showTitles, sortBy, showRegression, newShowThresholds);
       updateHash('band', q);
     });
     headerControls.appendChild(thresholdsToggle);
