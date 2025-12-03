@@ -112,20 +112,12 @@ const coverUrlCache = new Map(); // Key: "Band|Album|Year", Value: coverUrl oder
 const processingTooltips = new WeakSet();
 
 async function addCoverToTooltip(tooltipElement) {
-  // Verhindere Endlosschleife: Wenn bereits in Bearbeitung, überspringe
-  if (processingTooltips.has(tooltipElement)) {
-    return;
-  }
-  
   // Extrahiere IMMER die aktuellen Daten (können sich bei Album-Wechsel ändern)
   const data = extractTooltipData(tooltipElement);
   
   if (!data.band || !data.album) {
     return; // Keine Band/Album-Daten vorhanden
   }
-  
-  // Markiere als in Bearbeitung
-  processingTooltips.add(tooltipElement);
   
   // Erstelle Cache-Key basierend auf Album-Daten
   const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
@@ -140,26 +132,32 @@ async function addCoverToTooltip(tooltipElement) {
     coverUrlCache.set(cacheKey, coverUrls);
   } else if (coverUrls === null) {
     // Bereits geprüft, nicht vorhanden
-    processingTooltips.delete(tooltipElement);
     return;
   }
   
   // Prüfe ob bereits das richtige Cover vorhanden ist
   const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
   if (existingCover) {
+    const existingCacheKey = existingCover.dataset.cacheKey;
     const existingImg = existingCover.querySelector('img');
-    // Prüfe ob eines der URLs bereits geladen ist
-    if (existingImg && (existingImg.src === coverUrls.primary || existingImg.src === coverUrls.fallback)) {
-      processingTooltips.delete(tooltipElement);
-      return; // Richtiges Cover bereits vorhanden
+    // Prüfe ob das Cover für diese Band/Album-Kombination bereits vorhanden ist
+    if (existingCacheKey === cacheKey && existingImg && existingImg.src) {
+      // Prüfe ob das Bild erfolgreich geladen wurde
+      if (existingImg.complete && existingImg.naturalWidth > 0) {
+        return; // Richtiges Cover bereits vorhanden und geladen
+      }
+      // Bild lädt noch oder ist fehlgeschlagen - warte nicht, entferne und lade neu
+      existingCover.remove();
+    } else {
+      // Falsches Cover vorhanden - entferne es
+      existingCover.remove();
     }
-    // Falsches Cover vorhanden - entferne es
-    existingCover.remove();
   }
   
   // Erstelle Cover-Container
   const coverContainer = document.createElement('div');
   coverContainer.className = 'tooltip-cover-container';
+  coverContainer.dataset.cacheKey = cacheKey; // Speichere Cache-Key für spätere Prüfung
   
   const coverImage = document.createElement('img');
   coverImage.alt = `${data.band} - ${data.album}`;
@@ -178,17 +176,12 @@ async function addCoverToTooltip(tooltipElement) {
           // Beide Varianten fehlgeschlagen - entferne Cover
           coverContainer.remove();
           coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
-          processingTooltips.delete(tooltipElement);
         };
       } else {
         // Kein Fallback verfügbar - entferne Cover
         coverContainer.remove();
         coverUrlCache.set(cacheKey, null); // Markiere als nicht vorhanden
-        processingTooltips.delete(tooltipElement);
       }
-    };
-    coverImage.onload = () => {
-      processingTooltips.delete(tooltipElement);
     };
     
     // WICHTIG: Füge Bild zum Container hinzu NACH dem Setzen von src (wie in Jahresliste)
@@ -197,9 +190,19 @@ async function addCoverToTooltip(tooltipElement) {
     // Keine Cover-URLs gefunden
     coverContainer.remove();
     coverUrlCache.set(cacheKey, null);
-    processingTooltips.delete(tooltipElement);
+    return; // Keine DOM-Manipulation nötig, Flag wurde noch nicht gesetzt
+  }
+  
+  // Wenn wir hier sind, wurde das Cover-Container erstellt, aber noch nicht zum DOM hinzugefügt
+  // Die DOM-Manipulation passiert im try-Block weiter unten
+  
+  // Verhindere Endlosschleife: Wenn bereits in Bearbeitung, überspringe
+  if (processingTooltips.has(tooltipElement)) {
     return;
   }
+  
+  // Markiere als in Bearbeitung (nur während DOM-Manipulation)
+  processingTooltips.add(tooltipElement);
   
   // Temporär Observer deaktivieren während DOM-Manipulation
   const contentObserver = tooltipObservers.get(tooltipElement);
@@ -261,6 +264,8 @@ async function addCoverToTooltip(tooltipElement) {
         attributes: false
       });
     }
+    // Flag zurücksetzen nach DOM-Manipulation
+    processingTooltips.delete(tooltipElement);
   }
 }
 
