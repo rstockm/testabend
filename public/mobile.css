@@ -401,6 +401,11 @@
     gap: 8px;
   }
 
+  .header-logo {
+    width: 28px;
+    height: 28px;
+  }
+
   header h1 {
     font-size: 16px;
     flex: 1;
