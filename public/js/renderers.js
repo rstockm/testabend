@@ -1010,6 +1010,9 @@ export async function renderYearsView(data, containerEl) {
   
   const viewport = document.createElement('div');
   viewport.className = 'years-viewport';
+  // WICHTIG: Setze Transform explizit beim Erstellen (für Chrome Mobile)
+  viewport.style.transform = 'translateX(-33.33%)';
+  viewport.style.webkitTransform = 'translateX(-33.33%)';
   
   // Drei Jahr-Container erstellen (müssen let sein, da sie in rotateContainers neu zugewiesen werden)
   let prevContainer = document.createElement('div');
