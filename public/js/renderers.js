@@ -764,6 +764,9 @@ function createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selecte
  * Jahre-View rendern (nur Mobile)
  */
 export async function renderYearsView(data, containerEl) {
+  // Importiere parseHash und updateHash für URL-Parameter
+  const { parseHash, updateHash } = await import('./utils.js');
+  
   // Alle verfügbaren Jahre extrahieren und sortieren
   const yearsSorted = uniqueSorted(data.map(d => d.Jahr).filter(y => y != null));
   const years = [...yearsSorted]; // Kopie für Navigation (aufsteigend)
@@ -773,6 +776,85 @@ export async function renderYearsView(data, containerEl) {
     containerEl.innerHTML = '<p style="padding: 40px; text-align: center; color: #a3a3a3;">Keine Daten verfügbar.</p>';
     return;
   }
+  
+  // Funktion zum Speichern von Jahr und Position
+  function saveYearAndPosition(year, scrollTop = 0) {
+    try {
+      // Speichere in sessionStorage
+      sessionStorage.setItem('yearsViewYear', String(year));
+      sessionStorage.setItem('yearsViewScrollTop', String(scrollTop));
+      
+      // Aktualisiere URL-Parameter
+      const { params } = parseHash();
+      const newParams = { ...params };
+      if (year) {
+        newParams.y = String(year);
+        if (scrollTop > 0) {
+          newParams.s = String(Math.round(scrollTop));
+        } else {
+          delete newParams.s; // Entferne Scroll-Parameter wenn 0
+        }
+      }
+      updateHash('jahre', newParams);
+    } catch (e) {
+      console.warn('[YearsView] Failed to save year and position:', e);
+    }
+  }
+  
+  // Funktion zum Laden von Jahr und Position
+  function loadYearAndPosition() {
+    let year = null;
+    let scrollTop = 0;
+    
+    // Versuche zuerst aus URL-Parametern
+    const { params } = parseHash();
+    if (params.y) {
+      const urlYear = parseInt(params.y);
+      if (years.includes(urlYear)) {
+        year = urlYear;
+      }
+    }
+    if (params.s) {
+      scrollTop = parseInt(params.s) || 0;
+    }
+    
+    // Falls nicht in URL, versuche aus sessionStorage
+    if (!year) {
+      try {
+        const storedYear = sessionStorage.getItem('yearsViewYear');
+        if (storedYear) {
+          const parsedYear = parseInt(storedYear);
+          if (years.includes(parsedYear)) {
+            year = parsedYear;
+          }
+        }
+      } catch (e) {
+        console.warn('[YearsView] Failed to load year from sessionStorage:', e);
+      }
+    }
+    
+    if (!year) {
+      // Fallback: Neuestes Jahr
+      year = years[years.length - 1];
+    }
+    
+    // Scroll-Position aus sessionStorage (nur wenn nicht in URL)
+    if (!params.s && scrollTop === 0) {
+      try {
+        const storedScrollTop = sessionStorage.getItem('yearsViewScrollTop');
+        if (storedScrollTop) {
+          scrollTop = parseInt(storedScrollTop) || 0;
+        }
+      } catch (e) {
+        console.warn('[YearsView] Failed to load scroll position from sessionStorage:', e);
+      }
+    }
+    
+    return { year, scrollTop };
+  }
+  
+  // Lade gespeichertes Jahr und Position
+  const { year: savedYear, scrollTop: savedScrollTop } = loadYearAndPosition();
   
   // Container für Jahre-View erstellen
   const yearsView = document.createElement('div');
@@ -796,6 +878,9 @@ export async function renderYearsView(data, containerEl) {
     option.textContent = year;
     select.appendChild(option);
   });
+  
+  // Setze gespeichertes Jahr im Select
+  select.value = savedYear;
   
   yearSelector.appendChild(selectorLabel);
   yearSelector.appendChild(select);
@@ -839,11 +924,12 @@ export async function renderYearsView(data, containerEl) {
   containerEl.appendChild(yearsView);
   
   // Multi-Container State
-  let currentYearIndex = years.indexOf(parseInt(select.value));
+  let currentYearIndex = years.indexOf(savedYear);
   if (currentYearIndex === -1) {
-    currentYearIndex = 0; // Fallback falls Jahr nicht gefunden
+    currentYearIndex = years.length - 1; // Fallback: Neuestes Jahr
   }
   let currentYear = years[currentYearIndex];
+  let savedScrollPosition = savedScrollTop; // Speichere für später
   
   console.log('[YearsView] Setup complete, currentYear:', currentYear, 'currentYearIndex:', currentYearIndex, 'years:', years);
   const CHUNK_SIZE = 10;
@@ -1413,6 +1499,9 @@ export async function renderYearsView(data, containerEl) {
     currentYearIndex = newYearIndex;
     currentYear = newYear;
     select.value = newYear;
+    
+    // Speichere Jahr und Scroll-Position
+    saveYearAndPosition(newYear, currContainer.scrollTop);
     console.log('[YearsView] Year updated immediately:', newYear, 'index:', newYearIndex);
     
     if (animated) {
@@ -1767,6 +1856,9 @@ export async function renderYearsView(data, containerEl) {
         select.value = newYear;
         console.log('[YearsView] Year updated immediately:', newYear, 'index:', newYearIndex);
         
+        // Speichere Jahr und Scroll-Position
+        saveYearAndPosition(newYear, currContainer.scrollTop);
+        
         // Rotiere Container SOFORT (ohne Viewport-Reset)
         rotateContainers(direction, false);
         
@@ -1799,11 +1891,19 @@ export async function renderYearsView(data, containerEl) {
   
   // Initialisierung
   async function initialize() {
-    console.log('[YearsView] Initializing, currentYear:', currentYear, 'currentYearIndex:', currentYearIndex);
+    console.log('[YearsView] Initializing, currentYear:', currentYear, 'currentYearIndex:', currentYearIndex, 'savedScrollPosition:', savedScrollPosition);
     
     // Lade aktuelles Jahr
     await loadYearIntoContainer('curr', currentYear);
     console.log('[YearsView] Loaded curr year:', currentYear);
+    
+    // Stelle Scroll-Position wieder her (nach kurzer Verzögerung, damit DOM gerendert ist)
+    if (savedScrollPosition > 0) {
+      setTimeout(() => {
+        currContainer.scrollTop = savedScrollPosition;
+        console.log('[YearsView] Restored scroll position:', savedScrollPosition);
+      }, 100);
+    }
     
     // Lade vorheriges Jahr (falls vorhanden)
     if (currentYearIndex > 0) {
@@ -1844,10 +1944,24 @@ export async function renderYearsView(data, containerEl) {
       console.log('[YearsView] Select changed:', newYear, 'direction:', direction);
       
       if (direction !== 0) {
+        // Speichere alte Position
+        saveYearAndPosition(currentYear, currContainer.scrollTop);
+        
         // Lade direkt ohne Animation
         currentYearIndex = newIndex;
         currentYear = newYear;
         await loadYearIntoContainer('curr', newYear);
+        
+        // Stelle Scroll-Position wieder her (falls gespeichert)
+        const { scrollTop: restoredScrollTop } = loadYearAndPosition();
+        if (restoredScrollTop > 0) {
+          setTimeout(() => {
+            currContainer.scrollTop = restoredScrollTop;
+          }, 100);
+        }
+        
+        // Speichere neue Position
+        saveYearAndPosition(newYear, 0); // Reset scroll wenn Jahr gewechselt
         
         // Lade Nachbarn
         if (newIndex > 0) {
@@ -1856,6 +1970,29 @@ export async function renderYearsView(data, containerEl) {
         if (newIndex < years.length - 1) {
           await loadYearIntoContainer('next', years[newIndex + 1]);
         }
+      }
+    });
+    
+    // Speichere Position beim Scrollen (debounced)
+    let scrollSaveTimeout = null;
+    currContainer.addEventListener('scroll', () => {
+      clearTimeout(scrollSaveTimeout);
+      scrollSaveTimeout = setTimeout(() => {
+        saveYearAndPosition(currentYear, currContainer.scrollTop);
+      }, 500); // Speichere nach 500ms Pause
+    }, { passive: true });
+    
+    // Speichere Position beim Verlassen der View
+    window.addEventListener('beforeunload', () => {
+      saveYearAndPosition(currentYear, currContainer.scrollTop);
+    });
+    
+    // Speichere Position bei Hash-Change (wenn zu anderer Route navigiert wird)
+    const originalHashChange = window.onhashchange;
+    window.addEventListener('hashchange', () => {
+      const { route } = parseHash();
+      if (route !== 'jahre') {
+        saveYearAndPosition(currentYear, currContainer.scrollTop);
       }
     });
   }
