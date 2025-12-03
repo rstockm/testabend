@@ -6,6 +6,7 @@ import { generateYearRange, calculateYDomain, calculateMinMaxPerYear, isMobile, 
 import { polynomialRegression, generateRegressionPoints } from './regression.js';
 import { setupCoverTooltipHandler } from './coverTooltip.js';
 import { setupScatterKeyboardNav } from './scatterKeyboardNav.js';
+import { setupMobileAlbumCard } from './mobileAlbumCard.js';
 
 /**
  * Overview-Chart rendern
@@ -315,8 +316,15 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     layer: layers
   };
   
-  await vegaEmbed(chartEl, spec, { actions: false });
+  const result = await vegaEmbed(chartEl, spec, { actions: false });
   setupCoverTooltipHandler();
+  
+  // Mobile Album-Karte Setup
+  if (isMobile() && result && result.view) {
+    // Verwende alle Datenpunkte für die Navigation (alle Alben der ausgewählten Bands)
+    const allAlbumsForBands = data.filter(d => selectedBands.includes(d.Band));
+    setupMobileAlbumCard(result.view, allAlbumsForBands, selectedBands);
+  }
 }
 
 /**
