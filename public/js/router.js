@@ -2,7 +2,7 @@
  * Routing-Logik
  */
 import { parseHash, updateHash, setActiveNav, isMobile } from './utils.js';
-import { renderOverview, renderBandsSeries, renderScatterAll, renderYearsView } from './renderers.js';
+import { renderBandsSeries, renderScatterAll, renderYearsView } from './renderers.js';
 import { buildBandPanel, buildTagBar, createToggle, buildScatterZoomControls, buildThresholdsLegend, buildMobileBandToolbar, buildMobileBandModal, buildMobileSettingsModal } from './controls.js';
 import { Chat } from './chat.js';
 import { cleanupScatterKeyboardNav } from './scatterKeyboardNav.js';
@@ -45,9 +45,6 @@ export class Router {
     headerControls.innerHTML = '';
     
     switch (route) {
-      case 'overview':
-        await this.handleOverview();
-        break;
       case 'band':
         await this.handleBand(params, headerControls);
         break;
@@ -61,15 +58,8 @@ export class Router {
         await this.handleJahre();
         break;
       default:
-        await this.handleOverview();
+        await this.handleBand({}, headerControls);
     }
-  }
-  
-  /**
-   * Overview-Route
-   */
-  async handleOverview() {
-    await renderOverview(this.data, this.chartEl);
   }
   
   /**
@@ -396,8 +386,8 @@ export class Router {
   async handleJahre() {
     // Nur auf Mobile anzeigen
     if (!isMobile()) {
-      // Auf Desktop zu Overview umleiten
-      updateHash('overview', {});
+      // Auf Desktop zu Band umleiten
+      updateHash('band', {});
       return;
     }
     

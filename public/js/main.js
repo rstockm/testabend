@@ -43,7 +43,7 @@ export async function main() {
     
     // Initiale Route
     if (!location.hash) {
-      location.hash = '#overview';
+      location.hash = '#band';
     }
     
     await router.route();

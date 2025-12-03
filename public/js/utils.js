@@ -108,7 +108,7 @@ export function simplifyYearLabels(years, step = 5) {
  * Hash-Parameter parsen
  */
 export function parseHash() {
-  const hash = (location.hash || '#overview').slice(1);
+  const hash = (location.hash || '#band').slice(1);
   const [route, query] = hash.split('?');
   const params = {};
   
@@ -121,7 +121,7 @@ export function parseHash() {
     }
   }
   
-  return { route: route || 'overview', params };
+  return { route: route || 'band', params };
 }
 
 /**
@@ -140,7 +140,7 @@ export function updateHash(route, params) {
  * Aktive Navigation setzen
  */
 export function setActiveNav(route) {
-  ['overview', 'band', 'scatter', 'testteam', 'jahre'].forEach(r => {
+  ['band', 'scatter', 'testteam', 'jahre'].forEach(r => {
     // Desktop Navigation
     const el = document.getElementById('nav-' + r);
     if (el) el.classList.toggle('active', r === route);
