@@ -943,9 +943,37 @@ export async function renderYearsView(data, containerEl) {
     albumTitle.className = 'years-album-title';
     albumTitle.textContent = album.Album;
     
-    const bandName = document.createElement('div');
+    const bandName = document.createElement('a');
     bandName.className = 'years-album-band';
     bandName.textContent = album.Band;
+    bandName.href = `#band?b=${encodeURIComponent(album.Band)}`;
+    bandName.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Prüfe ob bereits Bands ausgewählt sind
+      const currentHash = window.location.hash;
+      const hashMatch = currentHash.match(/^#band\?/);
+      
+      if (hashMatch) {
+        // Bereits auf Zeitreihen-Ansicht: Füge Band zu bestehenden hinzu
+        const params = new URLSearchParams(currentHash.split('?')[1] || '');
+        const existingBands = params.get('b') ? params.get('b').split(',') : [];
+        
+        // Füge Band hinzu, wenn noch nicht vorhanden
+        if (!existingBands.includes(album.Band)) {
+          existingBands.push(album.Band);
+        }
+        
+        // Erstelle neue URL mit allen Bands
+        const newParams = new URLSearchParams(params);
+        newParams.set('b', existingBands.join(','));
+        window.location.hash = `band?${newParams.toString()}`;
+      } else {
+        // Nicht auf Zeitreihen-Ansicht: Navigiere mit dieser Band
+        window.location.hash = `band?b=${encodeURIComponent(album.Band)}`;
+      }
+    });
     
     const details = document.createElement('div');
     details.className = 'years-album-details';
