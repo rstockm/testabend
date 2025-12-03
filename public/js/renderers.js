@@ -926,12 +926,16 @@ export async function renderYearsView(data, containerEl) {
     
     // Cover-URL laden
     const coverUrl = await getCoverUrl(album.Band, album.Album, album.Jahr);
+    console.log(`[YearsView] Cover URL for ${album.Band} - ${album.Album}:`, coverUrl);
     if (coverUrl) {
       coverImg.src = coverUrl;
+      console.log(`[YearsView] Set img.src to:`, coverImg.src);
       coverImg.onerror = () => {
+        console.error(`[YearsView] Failed to load cover:`, coverUrl);
         coverContainer.style.display = 'none';
       };
     } else {
+      console.warn(`[YearsView] No cover URL found for ${album.Band} - ${album.Album}`);
       coverContainer.style.display = 'none';
     }
     
