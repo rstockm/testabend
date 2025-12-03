@@ -1138,24 +1138,29 @@ export async function renderYearsView(data, containerEl) {
     
     // Finde das sichtbare Album im curr Container (basierend auf Scroll-Position)
     const currItems = Array.from(currList.querySelectorAll('.years-album-item'));
+    if (currItems.length === 0) return;
+    
     const currContainerRect = currContainer.getBoundingClientRect();
-    const viewportTop = currContainerRect.top + currContainer.scrollTop;
-    const viewportBottom = viewportTop + currContainerRect.height;
+    const viewportTop = currContainer.scrollTop;
+    const viewportHeight = currContainerRect.height;
+    const viewportCenter = viewportTop + viewportHeight / 2;
     
     // Finde das Album, das am nächsten zur Viewport-Mitte ist
     let visibleItem = null;
     let minDistance = Infinity;
-    const viewportCenter = viewportTop + (viewportBottom - viewportTop) / 2;
+    let visibleItemOffset = 0; // Offset vom Viewport-Top
     
     for (const item of currItems) {
       const rect = item.getBoundingClientRect();
       const itemTop = currContainer.scrollTop + (rect.top - currContainerRect.top);
-      const itemCenter = itemTop + rect.height / 2;
+      const itemHeight = rect.height;
+      const itemCenter = itemTop + itemHeight / 2;
       const distance = Math.abs(itemCenter - viewportCenter);
       
       if (distance < minDistance) {
         minDistance = distance;
         visibleItem = item;
+        visibleItemOffset = itemTop - viewportTop; // Offset vom Viewport-Top
       }
     }
     
@@ -1164,19 +1169,19 @@ export async function renderYearsView(data, containerEl) {
     const targetPlatz = parseInt(visibleItem.dataset.platz);
     if (!targetPlatz) return;
     
-    // Synchronisiere prev Container
+    // Synchronisiere prev Container mit exakter Scroll-Position
     if (containerStates.prev.year && containerStates.prev.albums.length > 0) {
-      await syncContainerToPlatz('prev', targetPlatz);
+      await syncContainerToPlatz('prev', targetPlatz, visibleItemOffset);
     }
     
-    // Synchronisiere next Container
+    // Synchronisiere next Container mit exakter Scroll-Position
     if (containerStates.next.year && containerStates.next.albums.length > 0) {
-      await syncContainerToPlatz('next', targetPlatz);
+      await syncContainerToPlatz('next', targetPlatz, visibleItemOffset);
     }
   }
   
   // Funktion zum Synchronisieren eines Containers auf einen bestimmten Platz
-  async function syncContainerToPlatz(containerKey, targetPlatz) {
+  async function syncContainerToPlatz(containerKey, targetPlatz, offsetFromTop = 0) {
     const state = containerStates[containerKey];
     const list = containerKey === 'prev' ? prevList : containerKey === 'curr' ? currList : nextList;
     const container = containerKey === 'prev' ? prevContainer : containerKey === 'curr' ? currContainer : nextContainer;
@@ -1225,12 +1230,17 @@ export async function renderYearsView(data, containerEl) {
       state.loadedEnd = chunkEnd;
     }
     
-    // Setze Scroll-Position auf das Ziel-Album
+    // Setze Scroll-Position auf das Ziel-Album mit exaktem Offset
     requestAnimationFrame(() => {
       const items = Array.from(list.querySelectorAll('.years-album-item'));
       const targetItem = items.find(item => parseInt(item.dataset.platz) === targetPlatz);
       if (targetItem) {
-        targetItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+        const containerRect = container.getBoundingClientRect();
+        const itemRect = targetItem.getBoundingClientRect();
+        const itemTop = container.scrollTop + (itemRect.top - containerRect.top);
+        
+        // Setze Scroll-Position so, dass das Item an der gleichen Position wie im curr Container ist
+        container.scrollTop = itemTop - offsetFromTop;
       }
     });
     
@@ -1763,13 +1773,13 @@ export async function renderYearsView(data, containerEl) {
     // Scroll-Listener für Synchronisation der prev/next Container
     let syncTimeout = null;
     currContainer.addEventListener('scroll', () => {
-      // Debounce: Synchronisiere nur alle 300ms
+      // Debounce: Synchronisiere nur alle 150ms (schneller für bessere Sync)
       if (syncTimeout) {
         clearTimeout(syncTimeout);
       }
       syncTimeout = setTimeout(async () => {
         await syncAdjacentContainers();
-      }, 300);
+      }, 150);
     }, { passive: true });
     
     // Event Listener für Select
