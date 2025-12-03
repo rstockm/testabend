@@ -140,6 +140,10 @@ export function updateHash(route, params) {
  * Aktive Navigation setzen
  */
 export function setActiveNav(route) {
+  // Aktualisiere Tab-Indikator ZUERST (vor dem Setzen der active-Klasse)
+  updateMobileTabIndicator(route);
+  
+  // Dann setze active-Klassen
   ['band', 'scatter', 'testteam', 'jahre'].forEach(r => {
     // Desktop Navigation
     const el = document.getElementById('nav-' + r);
@@ -148,9 +152,6 @@ export function setActiveNav(route) {
     const mobileEl = document.getElementById('nav-' + r + '-mobile');
     if (mobileEl) mobileEl.classList.toggle('active', r === route);
   });
-  
-  // Animiere Tab-Indikator für Mobile-Tabs
-  updateMobileTabIndicator(route);
 }
 
 /**
@@ -162,28 +163,25 @@ function updateMobileTabIndicator(route) {
   
   if (!indicator || !tabsContainer) return;
   
-  // Finde den aktiven Tab
-  const activeTab = document.getElementById('nav-' + route + '-mobile');
-  if (!activeTab) {
+  // Finde den Ziel-Tab (auch wenn noch nicht aktiv)
+  const targetTab = document.getElementById('nav-' + route + '-mobile');
+  if (!targetTab) {
     // Falls Tab nicht gefunden, verstecke Indikator
     indicator.style.opacity = '0';
     return;
   }
   
-  // Warte kurz auf Layout-Berechnung
-  requestAnimationFrame(() => {
-    // Berechne Position und Größe
-    const containerRect = tabsContainer.getBoundingClientRect();
-    const tabRect = activeTab.getBoundingClientRect();
-    
-    const left = tabRect.left - containerRect.left;
-    const width = tabRect.width;
-    
-    // Setze Position und Breite mit Transition
-    indicator.style.opacity = '1';
-    indicator.style.transform = `translateX(${left}px)`;
-    indicator.style.width = `${width}px`;
-  });
+  // Berechne Position und Größe des Ziel-Tabs
+  const containerRect = tabsContainer.getBoundingClientRect();
+  const tabRect = targetTab.getBoundingClientRect();
+  
+  const left = tabRect.left - containerRect.left;
+  const width = tabRect.width;
+  
+  // Setze Position und Breite mit Transition (Animation startet sofort)
+  indicator.style.opacity = '1';
+  indicator.style.transform = `translateX(${left}px)`;
+  indicator.style.width = `${width}px`;
 }
 
 /**
