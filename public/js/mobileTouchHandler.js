@@ -226,6 +226,50 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
               showDebugMessage('Canvas event listeners added', '#90EE90');
             }
             
+            // Direkte Touch-Events auf Canvas für bessere Zuverlässigkeit
+            console.log('[MobileTouchHandler] Adding direct touch handlers to Canvas');
+            let touchStartTime = 0;
+            let touchStartPos = null;
+            
+            canvas.addEventListener('touchstart', (e) => {
+              touchStartTime = Date.now();
+              touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+              console.log('[MobileTouchHandler] Canvas direct touchstart at:', touchStartPos);
+            }, { passive: true });
+            
+            canvas.addEventListener('touchend', (e) => {
+              if (!touchStartPos) return;
+              
+              const touchEndPos = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+              const deltaX = Math.abs(touchEndPos.x - touchStartPos.x);
+              const deltaY = Math.abs(touchEndPos.y - touchStartPos.y);
+              const deltaTime = Date.now() - touchStartTime;
+              
+              // Nur wenn Bewegung minimal (Tap, kein Swipe)
+              if (deltaX < 10 && deltaY < 10 && deltaTime < 300) {
+                console.log('[MobileTouchHandler] Canvas tap detected, querying Vega-Lite for datum');
+                // Frage Vega-Lite nach Datum an dieser Position
+                if (chartView && chartView.signal) {
+                  // Versuche Daten über Vega-Lite API zu bekommen
+                  const x = touchStartPos.x - canvas.getBoundingClientRect().left;
+                  const y = touchStartPos.y - canvas.getBoundingClientRect().top;
+                  
+                  // Verwende Vega-Lite's pick-Methode falls verfügbar
+                  if (chartView.scene && chartView.scene().pick) {
+                    const picked = chartView.scene().pick({ x, y });
+                    if (picked && picked.datum && picked.datum.Band && picked.datum.Album) {
+                      console.log('[MobileTouchHandler] Datum found via pick:', picked.datum);
+                      e.preventDefault();
+                      e.stopPropagation();
+                      showMobileAlbumCard(picked.datum);
+                    }
+                  }
+                }
+              }
+              
+              touchStartPos = null;
+            }, { passive: false });
+            
             // Auch Tooltip-Observer für Canvas starten (Fallback)
             console.log('[MobileTouchHandler] Setting up tooltip observer for Canvas fallback');
             let tooltipObserver = null;
@@ -256,7 +300,7 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
                             showMobileAlbumCard(lastTooltipData);
                             lastTooltipData = null;
                           }
-                        }, 100);
+                        }, 50); // Kürzeres Timeout für schnelleres Feedback
                       } else {
                         console.log('[MobileTouchHandler] Tooltip data incomplete:', data);
                         tooltip.remove();

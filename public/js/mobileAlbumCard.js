@@ -31,54 +31,23 @@ function getCoverFilename(band, album, year = null) {
 }
 
 /**
- * Prüft, ob ein Cover-Bild existiert
+ * Generiert Cover-URLs (mit/ohne Jahr) - verwendet gleiche robuste Logik wie coverTooltip.js
  */
-async function checkCoverExists(band, album, year = null) {
-  console.log('[MobileAlbumCard] Checking cover exists:', band, album, year);
-  
+function getCoverUrls(band, album, year) {
   const basePath = getBasePath();
   const basePrefix = basePath ? `${basePath}/` : '';
   
-  // Teste zuerst mit Jahr (falls vorhanden)
+  const filenameWithoutYear = getCoverFilename(band, album, null);
+  const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
+  
   if (year) {
     const filenameWithYear = getCoverFilename(band, album, year);
-    const pathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
-    console.log('[MobileAlbumCard] Trying cover with year:', filenameWithYear, '->', pathWithYear);
-    
-    try {
-      const response = await fetch(pathWithYear, { method: 'HEAD', cache: 'no-cache' });
-      console.log('[MobileAlbumCard] Cover check response (with year):', pathWithYear, 'status:', response.status, 'ok:', response.ok);
-      if (response.ok) {
-        console.log('[MobileAlbumCard] ✅ Cover found with year:', filenameWithYear);
-        return { exists: true, filename: filenameWithYear };
-      } else {
-        console.log('[MobileAlbumCard] ❌ Cover not found (with year), status:', response.status);
-      }
-    } catch (error) {
-      console.error('[MobileAlbumCard] ❌ Cover check failed (with year):', pathWithYear, error);
-    }
+    const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
+    // Versuche zuerst mit Jahr (falls Duplikat), dann ohne Jahr
+    return { primary: coverPathWithYear, fallback: coverPathWithoutYear };
   }
   
-  // Fallback: Versuche ohne Jahr
-  const filenameWithoutYear = getCoverFilename(band, album, null);
-  const pathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
-  console.log('[MobileAlbumCard] Trying cover without year:', filenameWithoutYear, '->', pathWithoutYear);
-  
-  try {
-    const response = await fetch(pathWithoutYear, { method: 'HEAD', cache: 'no-cache' });
-    console.log('[MobileAlbumCard] Cover check response (without year):', pathWithoutYear, 'status:', response.status, 'ok:', response.ok);
-    if (response.ok) {
-      console.log('[MobileAlbumCard] ✅ Cover found without year:', filenameWithoutYear);
-      return { exists: true, filename: filenameWithoutYear };
-    } else {
-      console.log('[MobileAlbumCard] ❌ Cover not found (without year), status:', response.status);
-    }
-  } catch (error) {
-    console.error('[MobileAlbumCard] ❌ Cover check failed (without year):', pathWithoutYear, error);
-  }
-  
-  console.log('[MobileAlbumCard] ❌ Cover not found for:', band, album, year);
-  return { exists: false, filename: null };
+  return { primary: coverPathWithoutYear, fallback: null };
 }
 
 let currentCard = null;
@@ -138,7 +107,7 @@ export function showMobileAlbumCard(datum, albumData = null) {
     width: 100% !important;
     height: 100% !important;
     min-height: 100vh !important;
-    padding: 20px !important;
+    padding: 0 !important;
     margin: 0 !important;
     background: rgba(0, 0, 0, 0.85) !important;
     display: flex !important;
@@ -166,7 +135,7 @@ export function showMobileAlbumCard(datum, albumData = null) {
     border: 1px solid #404040 !important;
     overflow: hidden !important;
     position: relative !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
   `;
   
   const closeBtn = document.createElement('button');
@@ -633,69 +602,63 @@ function setupSwipeGestures(card, overlay) {
 /**
  * Lädt Cover-Bild asynchron und fügt es ein
  */
-async function loadCoverImage(band, album, year, content, info) {
-  try {
-    const result = await checkCoverExists(band, album, year);
-    
-    if (result.exists && result.filename) {
-      const basePath = getBasePath();
-      const basePrefix = basePath ? `${basePath}/` : '';
-      const coverUrl = `${basePrefix}images/covers/${result.filename}`;
-      
-      const coverContainer = document.createElement('div');
-      coverContainer.className = 'mobile-album-card-cover-container';
-      coverContainer.style.cssText = `
-        width: 100% !important;
-        max-width: 320px !important;
-        margin: 0 auto 24px !important;
-        border-radius: 12px !important;
-        overflow: hidden !important;
-        border: 2px solid #404040 !important;
-        background: #2a2a2a !important;
-        display: block !important;
-        aspect-ratio: 1 !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
-      `;
-      
-      const coverImage = document.createElement('img');
-      coverImage.alt = `${band} - ${album}`;
-      coverImage.className = 'mobile-album-card-cover';
-      coverImage.loading = 'eager';
-      coverImage.style.cssText = `
-        width: 100% !important;
-        height: 100% !important;
-        display: block !important;
-        object-fit: cover !important;
-      `;
-      
-      // Setze Handler BEVOR src gesetzt wird
-      coverImage.onload = () => {
-        console.log('[MobileAlbumCard] ✅ Cover image loaded successfully:', coverUrl);
-        coverImage.style.display = 'block';
-      };
-      
-      coverImage.onerror = (e) => {
-        console.error('[MobileAlbumCard] ❌ Cover image failed to load:', coverUrl);
-        coverContainer.remove();
-      };
-      
-      // Hänge Container ZUERST an DOM, dann setze src (damit onload/onerror funktionieren)
-      coverContainer.appendChild(coverImage);
-      // Füge Cover ganz oben ein (vor info, falls vorhanden)
-      if (info && info.parentNode) {
-        content.insertBefore(coverContainer, info);
+function loadCoverImage(band, album, year, content, info) {
+  const coverUrls = getCoverUrls(band, album, year);
+  
+  const coverContainer = document.createElement('div');
+  coverContainer.className = 'mobile-album-card-cover-container';
+  coverContainer.style.cssText = `
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto 24px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    border: 2px solid #404040 !important;
+    background: #2a2a2a !important;
+    display: block !important;
+    aspect-ratio: 1 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  `;
+  
+  const coverImage = document.createElement('img');
+  coverImage.alt = `${band} - ${album}`;
+  coverImage.className = 'mobile-album-card-cover';
+  coverImage.loading = 'eager';
+  coverImage.style.cssText = `
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+  `;
+  
+  // Robuste Logik: Versuche primary, dann fallback (wie in coverTooltip.js)
+  if (coverUrls && coverUrls.primary) {
+    coverImage.src = coverUrls.primary;
+    coverImage.onerror = () => {
+      // Fallback: Versuche ohne Jahr (falls vorhanden)
+      if (coverUrls.fallback) {
+        coverImage.src = coverUrls.fallback;
+        coverImage.onerror = () => {
+          // Beide Varianten fehlgeschlagen - entferne Cover
+          coverContainer.remove();
+        };
       } else {
-        content.insertBefore(coverContainer, content.firstChild);
+        // Kein Fallback verfügbar - entferne Cover
+        coverContainer.remove();
       }
-      
-      // Setze src NACH dem Anhängen an DOM
-      console.log('[MobileAlbumCard] Setting image src:', coverUrl);
-      coverImage.src = coverUrl;
+    };
+    coverImage.onload = () => {
+      console.log('[MobileAlbumCard] ✅ Cover image loaded:', coverImage.src);
+    };
+    
+    // Hänge Container ZUERST an DOM, dann setze src (damit onload/onerror funktionieren)
+    coverContainer.appendChild(coverImage);
+    // Füge Cover ganz oben ein (vor info, falls vorhanden)
+    if (info && info.parentNode) {
+      content.insertBefore(coverContainer, info);
     } else {
-      console.log('[MobileAlbumCard] Cover not found for:', band, album, year);
+      content.insertBefore(coverContainer, content.firstChild);
     }
-  } catch (error) {
-    console.error('[MobileAlbumCard] Cover konnte nicht geladen werden:', error);
   }
 }
 
