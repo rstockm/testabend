@@ -106,6 +106,11 @@ function extractTooltipData(tooltipElement) {
 const coverUrlCache = new Map(); // Key: "Band|Album|Year", Value: coverUrl oder null
 
 /**
+ * Debounce-Timer für Observer-Callbacks
+ */
+const observerDebounceTimers = new WeakMap();
+
+/**
  * Fügt Cover-Bild zu einem Tooltip hinzu
  */
 // Flag um Endlosschleifen zu verhindern
@@ -324,49 +329,78 @@ function setupTooltipContentObserver(tooltipElement) {
     return;
   }
   
-  const contentObserver = new MutationObserver(() => {
+  const contentObserver = new MutationObserver((mutations) => {
     // Überspringe wenn bereits in Bearbeitung
     if (processingTooltips.has(tooltipElement)) {
       return;
     }
     
-    // Prüfe ob Cover vorhanden ist und ob es das richtige ist
-    const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
-    const data = extractTooltipData(tooltipElement);
-    
-    if (!data.band || !data.album) {
-      return; // Keine Daten, nichts zu tun
-    }
-    
-    const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
-    const expectedCoverUrls = coverUrlCache.get(cacheKey);
-    
-    // Wenn bereits geprüft und nicht vorhanden, nichts tun
-    if (expectedCoverUrls === null) {
-      return;
-    }
-    
-    // Prüfe ob Cover vorhanden und korrekt ist
-    if (!existingCover) {
-      // Kein Cover vorhanden - füge hinzu
-      requestAnimationFrame(() => {
-        addCoverToTooltip(tooltipElement);
-      });
-      return;
-    }
-    
-    // Cover vorhanden - prüfe ob es das richtige ist
-    const existingImg = existingCover.querySelector('img');
-    if (existingImg && expectedCoverUrls && expectedCoverUrls !== null) {
-      const isCorrectCover = existingImg.src === expectedCoverUrls.primary || 
-                             existingImg.src === expectedCoverUrls.fallback;
-      if (!isCorrectCover) {
-        // Falsches Cover - aktualisiere
-        requestAnimationFrame(() => {
-          addCoverToTooltip(tooltipElement);
-        });
+    // Ignoriere Änderungen innerhalb des Cover-Containers (z.B. Bildladen)
+    const hasNonCoverChanges = mutations.some(mutation => {
+      // Prüfe ob die Änderung außerhalb des Cover-Containers ist
+      for (const node of mutation.addedNodes) {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          const isInCoverContainer = node.closest?.('.tooltip-cover-container');
+          if (!isInCoverContainer) {
+            return true; // Änderung außerhalb des Cover-Containers
+          }
+        }
       }
+      return false;
+    });
+    
+    // Wenn nur Änderungen im Cover-Container, ignoriere
+    if (!hasNonCoverChanges && mutations.length > 0) {
+      return;
     }
+    
+    // Debounce: Lösche vorherigen Timer falls vorhanden
+    const existingTimer = observerDebounceTimers.get(tooltipElement);
+    if (existingTimer) {
+      clearTimeout(existingTimer);
+    }
+    
+    // Setze neuen Timer für Debouncing (150ms)
+    const timer = setTimeout(() => {
+      // Prüfe ob Cover vorhanden ist und ob es das richtige ist
+      const existingCover = tooltipElement.querySelector('.tooltip-cover-container');
+      const data = extractTooltipData(tooltipElement);
+      
+      if (!data.band || !data.album) {
+        return; // Keine Daten, nichts zu tun
+      }
+      
+      const cacheKey = `${data.band}|${data.album}|${data.year || ''}`;
+      
+      // Prüfe ob bereits das richtige Cover vorhanden ist (mit Cache-Key)
+      if (existingCover) {
+        const existingCacheKey = existingCover.dataset.cacheKey;
+        const existingImg = existingCover.querySelector('img');
+        // Wenn das Cover für diese Daten bereits vorhanden ist und geladen wurde, nichts tun
+        if (existingCacheKey === cacheKey && existingImg && existingImg.complete && existingImg.naturalWidth > 0) {
+          return; // Richtiges Cover bereits vorhanden und geladen
+        }
+      }
+      
+      const expectedCoverUrls = coverUrlCache.get(cacheKey);
+      
+      // Wenn bereits geprüft und nicht vorhanden, nichts tun
+      if (expectedCoverUrls === null) {
+        return;
+      }
+      
+      // Prüfe ob Cover vorhanden und korrekt ist
+      if (!existingCover) {
+        // Kein Cover vorhanden - füge hinzu
+        addCoverToTooltip(tooltipElement);
+        return;
+      }
+      
+      // Cover vorhanden aber falsch - aktualisiere
+      addCoverToTooltip(tooltipElement);
+    }, 150);
+    
+    observerDebounceTimers.set(tooltipElement, timer);
   });
   
   // Beobachte Änderungen im Tooltip-Inhalt, aber ignoriere Attribute-Änderungen
