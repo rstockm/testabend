@@ -778,24 +778,26 @@ export async function renderYearsView(data, containerEl) {
   }
   
   // Funktion zum Speichern von Jahr und Position
-  function saveYearAndPosition(year, scrollTop = 0) {
+  function saveYearAndPosition(year, scrollTop = 0, updateUrl = true) {
     try {
       // Speichere in sessionStorage
       sessionStorage.setItem('yearsViewYear', String(year));
       sessionStorage.setItem('yearsViewScrollTop', String(scrollTop));
       
-      // Aktualisiere URL-Parameter
-      const { params } = parseHash();
-      const newParams = { ...params };
-      if (year) {
-        newParams.y = String(year);
-        if (scrollTop > 0) {
-          newParams.s = String(Math.round(scrollTop));
-        } else {
-          delete newParams.s; // Entferne Scroll-Parameter wenn 0
+      // Aktualisiere URL-Parameter nur wenn explizit gewünscht (nicht bei jedem Scroll)
+      if (updateUrl) {
+        const { params } = parseHash();
+        const newParams = { ...params };
+        if (year) {
+          newParams.y = String(year);
+          if (scrollTop > 0) {
+            newParams.s = String(Math.round(scrollTop));
+          } else {
+            delete newParams.s; // Entferne Scroll-Parameter wenn 0
+          }
         }
+        updateHash('jahre', newParams);
       }
-      updateHash('jahre', newParams);
     } catch (e) {
       console.warn('[YearsView] Failed to save year and position:', e);
     }
@@ -1944,24 +1946,20 @@ export async function renderYearsView(data, containerEl) {
       console.log('[YearsView] Select changed:', newYear, 'direction:', direction);
       
       if (direction !== 0) {
-        // Speichere alte Position
-        saveYearAndPosition(currentYear, currContainer.scrollTop);
+        // Speichere alte Position (nur sessionStorage, kein URL-Update)
+        saveYearAndPosition(currentYear, currContainer.scrollTop, false);
         
         // Lade direkt ohne Animation
         currentYearIndex = newIndex;
         currentYear = newYear;
         await loadYearIntoContainer('curr', newYear);
         
-        // Stelle Scroll-Position wieder her (falls gespeichert)
-        const { scrollTop: restoredScrollTop } = loadYearAndPosition();
-        if (restoredScrollTop > 0) {
-          setTimeout(() => {
-            currContainer.scrollTop = restoredScrollTop;
-          }, 100);
-        }
+        // Stelle Scroll-Position wieder her (nur beim ersten Laden, nicht bei Select-Change)
+        // Beim Select-Change starten wir bei 0
+        currContainer.scrollTop = 0;
         
-        // Speichere neue Position
-        saveYearAndPosition(newYear, 0); // Reset scroll wenn Jahr gewechselt
+        // Aktualisiere URL mit neuem Jahr (ohne Scroll-Position)
+        saveYearAndPosition(newYear, 0, true);
         
         // Lade Nachbarn
         if (newIndex > 0) {
@@ -1973,13 +1971,17 @@ export async function renderYearsView(data, containerEl) {
       }
     });
     
-    // Speichere Position beim Scrollen (debounced)
+    // Speichere Position beim Scrollen (debounced, ohne URL-Update um Flackern zu vermeiden)
     let scrollSaveTimeout = null;
-    currContainer.addEventListener('scroll', () => {
+    currContainer.addEventListener('scroll', (e) => {
+      // Ignoriere Scroll-Events wenn auf einem Link geklickt wird
+      if (e.target.closest('a.years-album-band')) {
+        return;
+      }
       clearTimeout(scrollSaveTimeout);
       scrollSaveTimeout = setTimeout(() => {
-        saveYearAndPosition(currentYear, currContainer.scrollTop);
-      }, 500); // Speichere nach 500ms Pause
+        saveYearAndPosition(currentYear, currContainer.scrollTop, false); // Kein URL-Update beim Scrollen
+      }, 1000); // Längeres Debounce für weniger Speicherungen
     }, { passive: true });
     
     // Speichere Position beim Verlassen der View
