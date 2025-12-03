@@ -1,7 +1,7 @@
 /**
  * Hauptanwendungslogik
  */
-import { log, normalizeData, uniqueSorted } from './utils.js';
+import { log, normalizeData, uniqueSorted, initMobileTabIndicator } from './utils.js';
 import { Router } from './router.js';
 import { setupCoverTooltipHandler } from './coverTooltip.js';
 import { setupMobileNavigation } from './mobileNav.js';
@@ -53,6 +53,9 @@ export async function main() {
     
     // Initialisiere Mobile Navigation (Burger-Menü)
     setupMobileNavigation();
+    
+    // Initialisiere Mobile Tab-Indikator
+    initMobileTabIndicator();
   } catch (e) {
     console.error(e);
     log('Fehler: ' + (e && e.message ? e.message : String(e)));

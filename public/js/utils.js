@@ -164,18 +164,37 @@ function updateMobileTabIndicator(route) {
   
   // Finde den aktiven Tab
   const activeTab = document.getElementById('nav-' + route + '-mobile');
-  if (!activeTab) return;
+  if (!activeTab) {
+    // Falls Tab nicht gefunden, verstecke Indikator
+    indicator.style.opacity = '0';
+    return;
+  }
   
-  // Berechne Position und Größe
-  const containerRect = tabsContainer.getBoundingClientRect();
-  const tabRect = activeTab.getBoundingClientRect();
-  
-  const left = tabRect.left - containerRect.left;
-  const width = tabRect.width;
-  
-  // Setze Position und Breite mit Transition
-  indicator.style.transform = `translateX(${left}px)`;
-  indicator.style.width = `${width}px`;
+  // Warte kurz auf Layout-Berechnung
+  requestAnimationFrame(() => {
+    // Berechne Position und Größe
+    const containerRect = tabsContainer.getBoundingClientRect();
+    const tabRect = activeTab.getBoundingClientRect();
+    
+    const left = tabRect.left - containerRect.left;
+    const width = tabRect.width;
+    
+    // Setze Position und Breite mit Transition
+    indicator.style.opacity = '1';
+    indicator.style.transform = `translateX(${left}px)`;
+    indicator.style.width = `${width}px`;
+  });
+}
+
+/**
+ * Initialisiert den Tab-Indikator beim ersten Laden
+ */
+export function initMobileTabIndicator() {
+  const { route } = parseHash();
+  // Kleine Verzögerung, damit Layout berechnet ist
+  setTimeout(() => {
+    updateMobileTabIndicator(route);
+  }, 100);
 }
 
 /**
