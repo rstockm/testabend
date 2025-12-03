@@ -1034,6 +1034,26 @@ export async function renderYearsView(data, containerEl) {
         return;
       }
       
+      // Erzwinge Flex-Layout auch bei Browsern mit Bugs
+      viewport.style.display = '-webkit-box';
+      viewport.style.display = '-webkit-flex';
+      viewport.style.display = 'flex';
+      viewport.style.flexDirection = 'row';
+      viewport.style.flexWrap = 'nowrap';
+      viewport.style.alignItems = 'stretch';
+      viewport.style.justifyContent = 'flex-start';
+      viewport.style.webkitBoxOrient = 'horizontal';
+      viewport.style.webkitBoxAlign = 'stretch';
+      
+      const applyContainerFlex = (container) => {
+        container.style.display = 'block';
+        container.style.flexShrink = '0';
+        container.style.flexGrow = '0';
+      };
+      applyContainerFlex(prevContainer);
+      applyContainerFlex(currContainer);
+      applyContainerFlex(nextContainer);
+      
       const containerWidthPx = `${containerWidth}px`;
       prevContainer.style.width = containerWidthPx;
       prevContainer.style.minWidth = containerWidthPx;
@@ -1048,12 +1068,23 @@ export async function renderYearsView(data, containerEl) {
       nextContainer.style.maxWidth = containerWidthPx;
       nextContainer.style.flex = `0 0 ${containerWidthPx}`;
       viewport.style.width = `${containerWidth * 3}px`;
+      
+      const viewportStyles = window.getComputedStyle(viewport);
+      const prevOffset = prevContainer.offsetLeft;
+      const currOffset = currContainer.offsetLeft;
+      const nextOffset = nextContainer.offsetLeft;
+      
       debugLog('[DIAGNOSE] Set container widths:', {
         containerWidth,
         viewportWidth: containerWidth * 3,
         prevWidth: prevContainer.style.width,
         currWidth: currContainer.style.width,
-        nextWidth: nextContainer.style.width
+        nextWidth: nextContainer.style.width,
+        viewportDisplay: viewportStyles.display,
+        viewportWebkitBoxOrient: viewport.style.webkitBoxOrient,
+        prevOffset,
+        currOffset,
+        nextOffset
       });
     } catch (e) {
       debugLog('[DIAGNOSE] setContainerWidths ERROR:', e.message);
