@@ -123,7 +123,9 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
     }
     
     // Warte bis Chart vollständig gerendert ist - mehrere Versuche
+    console.log('[MobileTouchHandler] Starting setup timeout, will try to find SVG/Canvas');
     setTimeout(() => {
+      console.log('[MobileTouchHandler] Setup timeout fired, starting trySetup');
       try {
         let attempts = 0;
         const maxAttempts = 20; // Erhöht von 10 auf 20
@@ -275,10 +277,14 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
               }
             });
           } else {
+            console.error('[MobileTouchHandler] ERROR: chartView.addEventListener not available');
+            console.error('[MobileTouchHandler] chartView:', chartView);
+            console.error('[MobileTouchHandler] chartView.addEventListener:', typeof chartView?.addEventListener);
             showDebugMessage('ERROR: chartView.addEventListener not available', '#ff0000');
           }
           
-          // Ansatz 2: Beobachte Tooltip-Erstellung und extrahiere Daten
+          // Ansatz 2: Beobachte Tooltip-Erstellung und extrahiere Daten (funktioniert auch ohne SVG)
+          console.log('[MobileTouchHandler] Setting up tooltip observer as fallback');
           let tooltipObserver = null;
           let lastTooltipData = null;
           let tooltipTimeout = null;
