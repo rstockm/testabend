@@ -1,5 +1,5 @@
 import { updateScatterHighlight } from './scatterHighlight.js';
-import { isMobile } from './utils.js';
+import { isMobile, getBasePath } from './utils.js';
 
 let infoBox = null;
 let currentCoverRequestId = 0;
@@ -90,6 +90,42 @@ export function destroyScatterInfoBox() {
   updateScatterHighlight(null);
 }
 
+// Hilfsfunktionen für Cover-Pfade (wie in Jahresliste)
+function sanitizeFilename(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/[<>:"/\\|?*]/g, '')
+    .replace(/\s+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 100);
+}
+
+function getCoverFilename(band, album, year = null) {
+  const bandSafe = sanitizeFilename(band);
+  const albumSafe = sanitizeFilename(album);
+  if (year) {
+    return `${bandSafe}_${albumSafe}_${year}.jpg`;
+  }
+  return `${bandSafe}_${albumSafe}.jpg`;
+}
+
+function getCoverUrls(band, album, year) {
+  const basePath = getBasePath();
+  const basePrefix = basePath ? `${basePath}/` : '';
+  
+  const filenameWithoutYear = getCoverFilename(band, album, null);
+  const coverPathWithoutYear = `${basePrefix}images/covers/${filenameWithoutYear}`;
+  
+  if (year) {
+    const filenameWithYear = getCoverFilename(band, album, year);
+    const coverPathWithYear = `${basePrefix}images/covers/${filenameWithYear}`;
+    // Versuche zuerst mit Jahr (falls Duplikat), dann ohne Jahr
+    return { primary: coverPathWithYear, fallback: coverPathWithoutYear };
+  }
+  
+  return { primary: coverPathWithoutYear, fallback: null };
+}
+
 async function addCoverToInfoBox(datum, requestId) {
   if (!infoBox) return;
   
@@ -105,9 +141,7 @@ async function addCoverToInfoBox(datum, requestId) {
     return;
   }
   
-  // Importiere getCoverUrls dynamisch (ist async in coverTooltip.js)
-  const { getCoverUrls } = await import('./coverTooltip.js');
-  const coverUrls = await getCoverUrls(datum.Band, datum.Album, datum.Jahr);
+  const coverUrls = getCoverUrls(datum.Band, datum.Album, datum.Jahr);
   
   const coverContainer = document.createElement('div');
   coverContainer.className = 'scatter-info-cover';
@@ -132,38 +166,49 @@ async function addCoverToInfoBox(datum, requestId) {
     display: block;
   `;
   
-  // Robuste Logik: Versuche primary, dann fallback
-  coverImage.onload = () => {
-    if (coverContainer.parentNode && requestId === currentCoverRequestId) {
-      console.log('[scatterInfoBox] Cover image loaded successfully');
-    } else {
-      coverContainer.remove();
-    }
-  };
-  
-  coverImage.onerror = () => {
-    // Versuche Fallback-URL
-    if (coverUrls.fallback && coverImage.src !== coverUrls.fallback) {
-      console.log('[scatterInfoBox] Primary cover failed, trying fallback:', coverUrls.fallback);
-      coverImage.src = coverUrls.fallback;
-    } else {
-      console.log('[scatterInfoBox] Cover image failed to load');
-      if (coverContainer.parentNode) {
+  // Robuste Logik: Versuche primary, dann fallback (wie in coverTooltip.js und Jahresliste)
+  if (coverUrls && coverUrls.primary) {
+    // Versuche zuerst primary (mit Jahr, falls vorhanden)
+    coverImage.src = coverUrls.primary;
+    coverImage.onerror = () => {
+      // Fallback: Versuche ohne Jahr (falls vorhanden)
+      if (coverUrls.fallback) {
+        coverImage.src = coverUrls.fallback;
+        coverImage.onerror = () => {
+          // Beide Varianten fehlgeschlagen - entferne Cover
+          if (coverContainer.parentNode) {
+            coverContainer.remove();
+          }
+        };
+      } else {
+        // Kein Fallback verfügbar - entferne Cover
+        if (coverContainer.parentNode) {
+          coverContainer.remove();
+        }
+      }
+    };
+    coverImage.onload = () => {
+      // Bild geladen erfolgreich
+      if (coverContainer.parentNode && requestId === currentCoverRequestId) {
+        console.log('[scatterInfoBox] Cover image loaded successfully');
+      } else {
         coverContainer.remove();
       }
-    }
-  };
-  
-  coverContainer.appendChild(coverImage);
+    };
+    
+    // WICHTIG: Füge Bild zum Container hinzu NACH dem Setzen von src (wie in Jahresliste)
+    coverContainer.appendChild(coverImage);
+  } else {
+    // Keine Cover-URLs gefunden
+    coverContainer.remove();
+    return;
+  }
   
   // Prüfe nochmal, ob Request noch aktuell ist, bevor Container angehängt wird
   if (requestId !== currentCoverRequestId || !infoBox || !infoBox.parentNode) {
     console.log('[scatterInfoBox] Request outdated before append, skipping');
     return;
   }
-  
-  // Setze src NACH dem Anhängen an Container
-  coverImage.src = coverUrls.primary;
   
   infoBox.appendChild(coverContainer);
 }
