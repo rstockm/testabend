@@ -376,6 +376,21 @@ function setupTooltipObserver() {
 /**
  * Richtet einen Observer für ein einzelnes Tooltip ein, der auf Inhaltsänderungen reagiert
  */
+// Import für updateScatterInfoBox (nur wenn nötig)
+let updateScatterInfoBoxFn = null;
+async function getUpdateScatterInfoBox() {
+  if (!updateScatterInfoBoxFn) {
+    try {
+      const module = await import('./scatterInfoBox.js');
+      updateScatterInfoBoxFn = module.updateScatterInfoBox;
+    } catch (e) {
+      // scatterInfoBox.js existiert möglicherweise nicht (z.B. auf Mobile)
+      updateScatterInfoBoxFn = () => {}; // No-op
+    }
+  }
+  return updateScatterInfoBoxFn;
+}
+
 function setupTooltipContentObserver(tooltipElement) {
   // Wenn bereits ein Observer für dieses Tooltip existiert, nicht erneut einrichten
   if (tooltipObservers.has(tooltipElement)) {
