@@ -85,11 +85,22 @@ function extractDataFromTooltip(tooltip) {
  * @param {Array} albumData - Optionale Album-Daten für Swipe-Funktionalität
  */
 export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
+  console.log('[MobileTouchHandler] setupMobileTouchHandlers called', { 
+    isMobile: isMobile(), 
+    hasChartView: !!chartView, 
+    hasChartEl: !!chartEl,
+    albumDataLength: albumData?.length 
+  });
+  
   // Setze Album-Daten für Swipe-Funktionalität
   if (albumData) {
     setAlbumDataForSwipe(albumData);
+    console.log('[MobileTouchHandler] Album data set for swipe:', albumData.length, 'albums');
   }
-  if (!isMobile()) return; // Nur auf Mobile
+  if (!isMobile()) {
+    console.log('[MobileTouchHandler] Not mobile, returning');
+    return; // Nur auf Mobile
+  }
   
   try {
     showDebugMessage('Setting up mobile touch handlers', '#4a9dd4');
@@ -187,43 +198,54 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
           // Ansatz 1: Nutze Vega-Lite's Event-API (wie scatterKeyboardNav)
           if (chartView && typeof chartView.addEventListener === 'function') {
             showDebugMessage('Using Vega-Lite addEventListener', '#4a9dd4');
+            console.log('[MobileTouchHandler] Registering Vega-Lite event listeners');
             
             // Click-Events (funktionieren auch auf Touch)
             chartView.addEventListener('click', (event, item) => {
+              console.log('[MobileTouchHandler] Vega click event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
               showDebugMessage(`Vega click: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
               // Nur anzeigen, wenn wirklich ein Datum vorhanden ist (Punkt getroffen)
               if (item && item.datum && item.datum.Band && item.datum.Album) {
                 event.preventDefault();
                 event.stopPropagation();
+                console.log('[MobileTouchHandler] Showing card for:', item.datum.Band, '-', item.datum.Album);
                 showDebugMessage(`Showing card: ${item.datum.Band} - ${item.datum.Album}`, '#90EE90');
                 try {
                   showMobileAlbumCard(item.datum);
                   showDebugMessage('showMobileAlbumCard called successfully', '#90EE90');
                 } catch (error) {
+                  console.error('[MobileTouchHandler] Error calling showMobileAlbumCard:', error);
                   showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
                 }
               } else {
+                console.log('[MobileTouchHandler] Vega click but no valid datum:', { item: !!item, datum: !!(item?.datum) });
                 showDebugMessage('Vega click but no valid datum (not on a point)', '#ffaa00');
               }
             });
             
             // Auch touchstart direkt abfangen (falls click nicht funktioniert)
             chartView.addEventListener('touchstart', (event, item) => {
+              console.log('[MobileTouchHandler] Vega touchstart event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
               showDebugMessage(`Vega touchstart: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
               // Nur anzeigen, wenn wirklich ein Datum vorhanden ist (Punkt getroffen)
               if (item && item.datum && item.datum.Band && item.datum.Album) {
                 event.preventDefault();
                 event.stopPropagation();
+                console.log('[MobileTouchHandler] Showing card from touchstart for:', item.datum.Band, '-', item.datum.Album);
                 showDebugMessage(`Showing card from touchstart: ${item.datum.Band}`, '#90EE90');
                 try {
                   showMobileAlbumCard(item.datum);
                 } catch (error) {
+                  console.error('[MobileTouchHandler] Error calling showMobileAlbumCard:', error);
                   showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
                 }
               } else {
+                console.log('[MobileTouchHandler] Vega touchstart but no valid datum:', { item: !!item, datum: !!(item?.datum) });
                 showDebugMessage('Vega touchstart but no valid datum (not on a point)', '#ffaa00');
               }
             });
+            
+            console.log('[MobileTouchHandler] Event listeners registered successfully');
             
             // Auch mousemove abfangen (falls Touch als Mouse-Event durchkommt)
             chartView.addEventListener('mousemove', (event, item) => {
