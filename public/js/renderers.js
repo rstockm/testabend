@@ -84,7 +84,7 @@ export async function renderScatterAll(data, chartEl, zoomY = null) {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     description: "Alle Wertungen aller Jahre",
     config: getDarkThemeConfig(),
-    width: CONFIG.CHART.SCATTER_WIDTH,
+    width: "container",
     height: CONFIG.CHART.SCATTER_HEIGHT,
     padding: CONFIG.CHART.SCATTER_PADDING,
     datasets: {

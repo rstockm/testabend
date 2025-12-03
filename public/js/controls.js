@@ -583,11 +583,7 @@ export function buildScatterZoomControls(data, onZoomChange) {
   
   const container = document.createElement('div');
   container.className = 'scatter-zoom-controls';
-  container.style.cssText = 'display: flex; flex-direction: column; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; align-items: center; min-width: 50px; justify-content: center; height: 100%;';
-  
-  const yLabel = document.createElement('label');
-  yLabel.textContent = 'Note';
-  yLabel.style.cssText = 'color: var(--text-primary); font-weight: 500; font-size: 11px; white-space: nowrap; transform: rotate(-90deg); margin-bottom: 0;';
+  container.style.cssText = 'display: flex; flex-direction: column; gap: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 8px; align-items: center; min-width: 50px; justify-content: center; height: 100%; flex-shrink: 0;';
   
   const sliderWrapper = document.createElement('div');
   sliderWrapper.style.cssText = 'display: flex; align-items: center; justify-content: center; height: 400px; width: 30px; position: relative;';
@@ -601,10 +597,6 @@ export function buildScatterZoomControls(data, onZoomChange) {
   yMinSlider.className = 'vertical-slider';
   yMinSlider.style.cssText = 'position: absolute; transform: rotate(-90deg); width: 400px; height: 6px; margin: 0; left: -197px; top: 197px;';
   
-  const yValueDisplay = document.createElement('span');
-  yValueDisplay.textContent = `${fullMinNote} - ${fullMaxNote}`;
-  yValueDisplay.style.cssText = 'color: var(--text-primary); font-size: 10px; text-align: center; margin-top: 8px;';
-  
   const getYValues = () => {
     const sliderValue = Number(yMinSlider.value) / 100;
     return { min: sliderValue, max: fullMaxNote };
@@ -612,16 +604,13 @@ export function buildScatterZoomControls(data, onZoomChange) {
   
   const updateY = () => {
     const { min, max } = getYValues();
-    yValueDisplay.textContent = `${min} - ${max}`;
     onZoomChange({ y: { min, max } });
   };
   
   yMinSlider.addEventListener('input', updateY);
   
   sliderWrapper.appendChild(yMinSlider);
-  container.appendChild(yLabel);
   container.appendChild(sliderWrapper);
-  container.appendChild(yValueDisplay);
   
   return container;
 }

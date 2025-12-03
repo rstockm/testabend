@@ -24,7 +24,8 @@ export function createScatterInfoBox(containerId = 'scatter-container') {
   infoBox = document.createElement('div');
   infoBox.className = 'scatter-info-box';
   infoBox.style.cssText = `
-    width: 350px;
+    width: 250px;
+    flex-shrink: 0;
     min-height: 200px;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
