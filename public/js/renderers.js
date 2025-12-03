@@ -1409,6 +1409,18 @@ export async function renderYearsView(data, containerEl) {
 
     // DOM-Reihenfolge anpassen, damit prev/curr/next im Viewport stimmen
     viewport.replaceChildren(prevContainer, currContainer, nextContainer);
+    
+    // WICHTIG: Observer nach Rotation neu initialisieren, da Container-Referenzen sich geändert haben
+    // Nur für Container, die bereits geladen sind (year !== null)
+    if (containerStates.prev.year !== null) {
+      setupContainerLazyLoading('prev');
+    }
+    if (containerStates.curr.year !== null) {
+      setupContainerLazyLoading('curr');
+    }
+    if (containerStates.next.year !== null) {
+      setupContainerLazyLoading('next');
+    }
   }
   
   // Setup Swipe-Gesten auf Viewport-Ebene
