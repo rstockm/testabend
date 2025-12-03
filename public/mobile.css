@@ -993,9 +993,7 @@
   
   .years-album-band:hover,
   .years-album-band:active {
-    color: var(--text-primary);
-    text-decoration: underline;
-    opacity: 0.9;
+    color: #c4d9ed; /* Dezentes Blau-Grau, ähnlich text-secondary (#d4d4d4) mit minimalem Blaustich */
   }
   
   .years-album-details {
