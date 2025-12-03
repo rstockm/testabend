@@ -1227,9 +1227,31 @@ export async function renderYearsView(data, containerEl) {
     // Stelle sicher, dass Chunk nach Platz sortiert ist
     const sortedChunk = [...chunk].sort((a, b) => a.Platz - b.Platz);
     
+    // DIAGNOSE: Prüfe welche Alben tatsächlich gerendert werden
+    console.log('[YearsView] DIAGNOSE - Rendering albums:', {
+      containerKey,
+      year,
+      chunkLength: sortedChunk.length,
+      renderedAlbums: sortedChunk.slice(0, 3).map(a => ({ Jahr: a.Jahr, Band: a.Band, Album: a.Album, Platz: a.Platz }))
+    });
+    
     for (const album of sortedChunk) {
       const item = await createAlbumItem(album);
       list.appendChild(item);
+    }
+    
+    // DIAGNOSE: Prüfe gerenderte Items im DOM
+    const renderedItems = list.querySelectorAll('.years-album-item');
+    if (renderedItems.length > 0) {
+      const firstItem = renderedItems[0];
+      const firstItemData = firstItem.dataset;
+      console.log('[YearsView] DIAGNOSE - First rendered item:', {
+        containerKey,
+        year,
+        firstItemPlatz: firstItemData.platz,
+        totalItems: renderedItems.length,
+        listParent: list.parentElement?.className
+      });
     }
     
     // Setup Lazy Loading für diesen Container
