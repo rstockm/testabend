@@ -84,29 +84,7 @@ function extractDataFromTooltip(tooltip) {
  * @param {HTMLElement} chartEl - Chart Container Element
  * @param {Array} albumData - Optionale Album-Daten für Swipe-Funktionalität
  */
-// Erstelle Indikator SOFORT beim Modul-Laden (nicht erst bei Setup)
-(function() {
-  const indicator = document.createElement('div');
-  indicator.id = 'mobile-touch-indicator';
-  indicator.style.cssText = `
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    background: rgba(255, 107, 53, 0.95) !important;
-    color: white !important;
-    padding: 12px 16px !important;
-    border-radius: 8px !important;
-    font-size: 14px !important;
-    font-family: monospace !important;
-    z-index: 999999 !important;
-    pointer-events: none !important;
-    display: block !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
-  `;
-  indicator.textContent = 'Module Loaded';
-  document.body.appendChild(indicator);
-  console.log('[MobileTouchHandler] Module loaded, indicator created');
-})();
+// Indikator wird direkt im HTML erstellt, hier nur Referenz holen
 
 export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, visiblePoints = null) {
   // Update Indikator sofort
