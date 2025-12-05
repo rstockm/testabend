@@ -282,14 +282,31 @@ input[type="range"]::-moz-range-track {
 
 /* Desktop: Chart-Container ohne zusätzliches Padding */
 @media (min-width: 768px) {
+  .band-content-area {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
   .band-content-area .chart {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   .band-content-area .vega-embed {
     padding: 0 !important;
     margin: 0 !important;
+  }
+  
+  .band-content-area .vega-embed > * {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Vega-Lite SVG/Canvas ohne Padding */
+  .band-content-area canvas,
+  .band-content-area svg {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 
