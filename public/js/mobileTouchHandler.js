@@ -84,12 +84,13 @@ function extractDataFromTooltip(tooltip) {
  * @param {HTMLElement} chartEl - Chart Container Element
  * @param {Array} albumData - Optionale Album-Daten für Swipe-Funktionalität
  */
-export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
+export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, visiblePoints = null) {
   console.log('[MobileTouchHandler] setupMobileTouchHandlers called', { 
     isMobile: isMobile(), 
     hasChartView: !!chartView, 
     hasChartEl: !!chartEl,
-    albumDataLength: albumData?.length 
+    albumDataLength: albumData?.length,
+    visiblePointsLength: visiblePoints?.length
   });
   
   // Setze Album-Daten für Swipe-Funktionalität
@@ -101,6 +102,10 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
     console.log('[MobileTouchHandler] Not mobile, returning');
     return; // Nur auf Mobile
   }
+  
+  const tapPoints = Array.isArray(visiblePoints) && visiblePoints.length > 0
+    ? visiblePoints
+    : [];
   
   try {
     showDebugMessage('Setting up mobile touch handlers', '#4a9dd4');
@@ -325,6 +330,13 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
           console.log(`[MobileTouchHandler] SVG found after ${attempts} attempts!`);
           showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
           
+          const nearestTapHandler = setupNearestPointTap(svg, chartView, tapPoints, albumData);
+          if (nearestTapHandler) {
+            showDebugMessage('Nearest-tap handler aktiviert', '#90EE90');
+          } else {
+            showDebugMessage('Nearest-tap handler nicht aktiv (zu wenige Punkte?)', '#ffaa00');
+          }
+          
           // Ansatz 1: Nutze Vega-Lite's Event-API (wie scatterKeyboardNav)
           if (chartView && typeof chartView.addEventListener === 'function') {
             console.log('[MobileTouchHandler] chartView.addEventListener is available, registering listeners');
@@ -335,22 +347,14 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
             chartView.addEventListener('click', (event, item) => {
               console.log('[MobileTouchHandler] Vega click event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
               showDebugMessage(`Vega click: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
-              // Nur anzeigen, wenn wirklich ein Datum vorhanden ist (Punkt getroffen)
-              if (item && item.datum && item.datum.Band && item.datum.Album) {
+              const handled = nearestTapHandler ? nearestTapHandler(event, item?.datum) : false;
+              if (handled) {
                 event.preventDefault();
                 event.stopPropagation();
-                console.log('[MobileTouchHandler] Showing card for:', item.datum.Band, '-', item.datum.Album);
-                showDebugMessage(`Showing card: ${item.datum.Band} - ${item.datum.Album}`, '#90EE90');
-                try {
-                  showMobileAlbumCard(item.datum);
-                  showDebugMessage('showMobileAlbumCard called successfully', '#90EE90');
-                } catch (error) {
-                  console.error('[MobileTouchHandler] Error calling showMobileAlbumCard:', error);
-                  showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
-                }
+                showDebugMessage('Click durch nearestTapHandler verarbeitet', '#90EE90');
               } else {
-                console.log('[MobileTouchHandler] Vega click but no valid datum:', { item: !!item, datum: !!(item?.datum) });
-                showDebugMessage('Vega click but no valid datum (not on a point)', '#ffaa00');
+                console.log('[MobileTouchHandler] Vega click but no valid datum and no fallback hit');
+                showDebugMessage('Vega click ohne Treffer', '#ffaa00');
               }
             });
             
@@ -358,21 +362,14 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
             chartView.addEventListener('touchstart', (event, item) => {
               console.log('[MobileTouchHandler] Vega touchstart event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
               showDebugMessage(`Vega touchstart: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
-              // Nur anzeigen, wenn wirklich ein Datum vorhanden ist (Punkt getroffen)
-              if (item && item.datum && item.datum.Band && item.datum.Album) {
+              const handled = nearestTapHandler ? nearestTapHandler(event, item?.datum) : false;
+              if (handled) {
                 event.preventDefault();
                 event.stopPropagation();
-                console.log('[MobileTouchHandler] Showing card from touchstart for:', item.datum.Band, '-', item.datum.Album);
-                showDebugMessage(`Showing card from touchstart: ${item.datum.Band}`, '#90EE90');
-                try {
-                  showMobileAlbumCard(item.datum);
-                } catch (error) {
-                  console.error('[MobileTouchHandler] Error calling showMobileAlbumCard:', error);
-                  showDebugMessage(`ERROR calling showMobileAlbumCard: ${error.message}`, '#ff0000');
-                }
+                showDebugMessage('touchstart durch nearestTapHandler verarbeitet', '#90EE90');
               } else {
-                console.log('[MobileTouchHandler] Vega touchstart but no valid datum:', { item: !!item, datum: !!(item?.datum) });
-                showDebugMessage('Vega touchstart but no valid datum (not on a point)', '#ffaa00');
+                console.log('[MobileTouchHandler] Vega touchstart but no valid datum and no fallback hit');
+                showDebugMessage('touchstart ohne Treffer', '#ffaa00');
               }
             });
             
@@ -477,4 +474,135 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null) {
   } catch (error) {
     console.error('Mobile touch handler fatal error:', error);
   }
+}
+
+/**
+ * Aktiviert die nearest-point Logik auf dem gesamten Chart
+ */
+function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
+  if (!svg || !chartView || !Array.isArray(candidatePoints) || candidatePoints.length === 0) {
+    return null;
+  }
+  
+  const points = candidatePoints
+    .map(point => {
+      const jahr = Number(point.Jahr);
+      const note = Number(point.Note);
+      if (Number.isNaN(jahr) || Number.isNaN(note)) return null;
+      return { datum: point, jahr, note };
+    })
+    .filter(Boolean);
+  
+  if (points.length === 0) {
+    return null;
+  }
+  
+  let lastTouchInfo = null;
+  
+  const findNearestDatum = (x, y) => {
+    let nearest = null;
+    let minDist = Infinity;
+    let xScale;
+    let yScale;
+    try {
+      xScale = chartView.scale('x');
+      yScale = chartView.scale('y');
+    } catch (error) {
+      console.warn('[MobileTouchHandler] scale lookup failed:', error);
+      return null;
+    }
+    
+    if (typeof xScale !== 'function' || typeof yScale !== 'function') {
+      return null;
+    }
+    
+    for (const point of points) {
+      const sx = xScale(point.jahr);
+      const sy = yScale(point.note);
+      if (sx == null || sy == null || Number.isNaN(sx) || Number.isNaN(sy)) continue;
+      const dx = sx - x;
+      const dy = sy - y;
+      const dist = dx * dx + dy * dy;
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = point.datum;
+      }
+    }
+    
+    return nearest;
+  };
+  
+  const showDatumCard = (datum) => {
+    if (!datum || !datum.Band || !datum.Album) {
+      return false;
+    }
+    try {
+      showMobileAlbumCard(datum, albumData);
+      return true;
+    } catch (error) {
+      console.error('[MobileTouchHandler] showMobileAlbumCard failed:', error);
+      return false;
+    }
+  };
+  
+  const handleTap = (event, directDatum = null) => {
+    if (directDatum && directDatum.Band && directDatum.Album) {
+      return showDatumCard(directDatum);
+    }
+    
+    const pointer = getPointerFromEvent(event);
+    if (!pointer) return false;
+    
+    const rect = svg.getBoundingClientRect();
+    const relX = pointer.clientX - rect.left;
+    const relY = pointer.clientY - rect.top;
+    
+    const nearest = findNearestDatum(relX, relY);
+    if (nearest) {
+      return showDatumCard(nearest);
+    }
+    return false;
+  };
+  
+  const onTouchEnd = (event) => {
+    const handled = handleTap(event);
+    if (handled) {
+      event.preventDefault();
+      event.stopPropagation();
+      const touch = event.changedTouches?.[0];
+      lastTouchInfo = touch ? { time: Date.now(), x: touch.clientX, y: touch.clientY } : null;
+    }
+  };
+  
+  const onClick = (event) => {
+    if (lastTouchInfo) {
+      const deltaTime = Date.now() - lastTouchInfo.time;
+      const deltaX = Math.abs(event.clientX - lastTouchInfo.x);
+      const deltaY = Math.abs(event.clientY - lastTouchInfo.y);
+      if (deltaTime < 400 && deltaX < 6 && deltaY < 6) {
+        // Ghost click nach Touch - ignorieren
+        return;
+      }
+    }
+    handleTap(event);
+  };
+  
+  svg.addEventListener('touchend', onTouchEnd, { passive: false });
+  svg.addEventListener('click', onClick);
+  
+  return handleTap;
+}
+
+function getPointerFromEvent(event) {
+  if (!event) return null;
+  if (event.changedTouches && event.changedTouches.length > 0) {
+    return event.changedTouches[0];
+  }
+  if (event.touches && event.touches.length > 0) {
+    return event.touches[0];
+  }
+  if (typeof event.clientX === 'number' && typeof event.clientY === 'number') {
+    return event;
+  }
+  return null;
 }

@@ -332,12 +332,12 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     // Mobile: Touch-Handler für Album-Karte
     setTimeout(() => {
       if (result && result.view) {
-        setupMobileTouchHandlers(result.view, chartEl, data); // Übergebe Daten für Swipe
+        setupMobileTouchHandlers(result.view, chartEl, data, allPoints); // Swipe-Daten + sichtbare Punkte
       }
     }, 300);
   } else {
     // Desktop: Standard Tooltip-Handler
-    setupCoverTooltipHandler();
+  setupCoverTooltipHandler();
   }
   
   return result;
