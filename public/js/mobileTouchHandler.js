@@ -84,7 +84,41 @@ function extractDataFromTooltip(tooltip) {
  * @param {HTMLElement} chartEl - Chart Container Element
  * @param {Array} albumData - Optionale Album-Daten für Swipe-Funktionalität
  */
+// Erstelle Indikator SOFORT beim Modul-Laden (nicht erst bei Setup)
+(function() {
+  const indicator = document.createElement('div');
+  indicator.id = 'mobile-touch-indicator';
+  indicator.style.cssText = `
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    background: rgba(255, 107, 53, 0.95) !important;
+    color: white !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-family: monospace !important;
+    z-index: 999999 !important;
+    pointer-events: none !important;
+    display: block !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+  `;
+  indicator.textContent = 'Module Loaded';
+  document.body.appendChild(indicator);
+  console.log('[MobileTouchHandler] Module loaded, indicator created');
+})();
+
 export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, visiblePoints = null) {
+  // Update Indikator sofort
+  const indicator = document.getElementById('mobile-touch-indicator');
+  if (indicator) {
+    indicator.textContent = 'Setup Called';
+    indicator.style.display = 'block';
+    console.log('[MobileTouchHandler] Indicator updated: Setup Called');
+  } else {
+    console.error('[MobileTouchHandler] Indicator not found!');
+  }
+  
   console.log('[MobileTouchHandler] setupMobileTouchHandlers called', { 
     isMobile: isMobile(), 
     hasChartView: !!chartView, 
@@ -102,8 +136,11 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
   }
   if (!isMobile()) {
     console.log('[MobileTouchHandler] Not mobile, returning');
+    if (indicator) indicator.textContent = 'Not Mobile';
     return; // Nur auf Mobile
   }
+  
+  if (indicator) indicator.textContent = 'Mobile: Setting up...';
   
   const tapPoints = Array.isArray(visiblePoints) && visiblePoints.length > 0
     ? visiblePoints
@@ -663,8 +700,13 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
     console.log('[MobileTouchHandler] Indicator:', message);
   };
   
-  // Erstelle Indikator sofort
-  touchIndicator = createTouchIndicator();
+  // Verwende bereits existierenden Indikator oder erstelle neuen
+  touchIndicator = document.getElementById('mobile-touch-indicator') || createTouchIndicator();
+  if (touchIndicator) {
+    touchIndicator.textContent = 'Touch Handler Ready';
+    touchIndicator.style.display = 'block';
+    console.log('[MobileTouchHandler] Touch indicator ready');
+  }
   
   // iOS-kompatible Touch-Handler - verwende Capture-Phase für frühe Abfangung
   const onTouchStart = (event) => {
