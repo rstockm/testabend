@@ -303,9 +303,10 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     }
   }
   
-  // Titel-Layer hinzufügen
+  // Titel-Layer hinzufügen (als separate Layer für links/rechts/center)
   if (showTitles) {
-    layers.push(createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette));
+    const titleLayers = createTitleLayers(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette);
+    layers.push(...titleLayers);
   }
   
   // Breite bestimmen: Auf Mobile explizit berechnen, da "container" in Flexbox oft fehlschlägt
@@ -740,73 +741,143 @@ function createRegressionLayers(bestPoints, selectedBands, rangeYears, domainMin
 }
 
 /**
- * Titel-Layer erstellen
+ * Titel-Layer erstellen (als separate Layer für links/rechts/center)
  */
-function createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
-  // Bestimme Position im Jahr-Bereich für Ausrichtung
+function createTitleLayers(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
   const yearCount = rangeYears.length;
   
-  const processedPoints = allPoints.map(point => {
+  // Teile Punkte nach Position auf
+  const leftPoints = [];
+  const rightPoints = [];
+  const centerPoints = [];
+  
+  allPoints.forEach(point => {
     const year = point.Jahr;
     const yearIndex = rangeYears.indexOf(year);
-    const position = yearCount > 1 ? yearIndex / (yearCount - 1) : 0.5; // 0 = links, 1 = rechts
-    
-    // Bestimme Ausrichtung und dx-Offset basierend auf Position
-    let align = "center";
-    let dx = 0; // Horizontaler Offset in Pixeln
+    const position = yearCount > 1 ? yearIndex / (yearCount - 1) : 0.5;
     
     if (position < 0.15) {
-      align = "left"; // Links am Rand: linksbündig
-      dx = 8; // Nach rechts verschieben, damit Text nicht über den Punkt hinausgeht
+      leftPoints.push(point);
     } else if (position > 0.85) {
-      align = "right"; // Rechts am Rand: rechtsbündig
-      dx = -8; // Nach links verschieben
+      rightPoints.push(point);
     } else {
-      align = "center"; // In der Mitte: zentriert
-      dx = 0;
+      centerPoints.push(point);
     }
-    
-    return {
-      ...point,
-      Album: point.Album, // Keine Kürzung mehr - Vega-Lite limit übernimmt das
-      align: align, // Ausrichtung als Datenfeld
-      dx: dx // Horizontaler Offset
-    };
   });
   
-  return {
-    data: { values: processedPoints },
-    mark: { 
-      type: "text", 
-      dy: CONFIG.UI.TITLE_OFFSET, 
-      fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
-      fontWeight: "bold",
-      limit: isMobile() ? 100 : 150 // Maximale Textbreite in Pixeln (erhöht)
-    },
-    zindex: 1,
-    encoding: {
-      x: { 
-        field: "Jahr", 
-        type: "ordinal", 
-        sort: "ascending", 
-        scale: { domain: rangeYears } 
+  const layers = [];
+  
+  // Linksbündige Titel (links am Rand)
+  if (leftPoints.length > 0) {
+    layers.push({
+      data: { values: leftPoints },
+      mark: { 
+        type: "text", 
+        dy: CONFIG.UI.TITLE_OFFSET, 
+        dx: 8, // Nach rechts verschieben
+        fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
+        fontWeight: "bold",
+        align: "left",
+        limit: isMobile() ? 100 : 150
       },
-      y: { 
-        field: "Note", 
-        type: "quantitative", 
-        scale: { domainMin: domainMinY, domainMax: domainMaxY } 
-      },
-      text: { field: "Album", type: "nominal" },
-      align: { field: "align", type: "nominal" }, // Dynamische Ausrichtung
-      dx: { field: "dx", type: "quantitative" }, // Horizontaler Offset
-      color: { 
-        field: "Band", 
-        type: "nominal", 
-        legend: null, 
-        scale: { range: palette, domain: selectedBands } 
+      zindex: 1,
+      encoding: {
+        x: { 
+          field: "Jahr", 
+          type: "ordinal", 
+          sort: "ascending", 
+          scale: { domain: rangeYears } 
+        },
+        y: { 
+          field: "Note", 
+          type: "quantitative", 
+          scale: { domainMin: domainMinY, domainMax: domainMaxY } 
+        },
+        text: { field: "Album", type: "nominal" },
+        color: { 
+          field: "Band", 
+          type: "nominal", 
+          legend: null, 
+          scale: { range: palette, domain: selectedBands } 
+        }
       }
-    }
-  };
+    });
+  }
+  
+  // Rechtsbündige Titel (rechts am Rand)
+  if (rightPoints.length > 0) {
+    layers.push({
+      data: { values: rightPoints },
+      mark: { 
+        type: "text", 
+        dy: CONFIG.UI.TITLE_OFFSET, 
+        dx: -8, // Nach links verschieben
+        fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
+        fontWeight: "bold",
+        align: "right",
+        limit: isMobile() ? 100 : 150
+      },
+      zindex: 1,
+      encoding: {
+        x: { 
+          field: "Jahr", 
+          type: "ordinal", 
+          sort: "ascending", 
+          scale: { domain: rangeYears } 
+        },
+        y: { 
+          field: "Note", 
+          type: "quantitative", 
+          scale: { domainMin: domainMinY, domainMax: domainMaxY } 
+        },
+        text: { field: "Album", type: "nominal" },
+        color: { 
+          field: "Band", 
+          type: "nominal", 
+          legend: null, 
+          scale: { range: palette, domain: selectedBands } 
+        }
+      }
+    });
+  }
+  
+  // Zentrierte Titel (in der Mitte)
+  if (centerPoints.length > 0) {
+    layers.push({
+      data: { values: centerPoints },
+      mark: { 
+        type: "text", 
+        dy: CONFIG.UI.TITLE_OFFSET, 
+        fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
+        fontWeight: "bold",
+        align: "center",
+        limit: isMobile() ? 100 : 150
+      },
+      zindex: 1,
+      encoding: {
+        x: { 
+          field: "Jahr", 
+          type: "ordinal", 
+          sort: "ascending", 
+          scale: { domain: rangeYears } 
+        },
+        y: { 
+          field: "Note", 
+          type: "quantitative", 
+          scale: { domainMin: domainMinY, domainMax: domainMaxY } 
+        },
+        text: { field: "Album", type: "nominal" },
+        color: { 
+          field: "Band", 
+          type: "nominal", 
+          legend: null, 
+          scale: { range: palette, domain: selectedBands } 
+        }
+      }
+    });
+  }
+  
+  return layers;
 }
 
 /**
