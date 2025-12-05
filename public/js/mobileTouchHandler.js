@@ -84,25 +84,11 @@ function extractDataFromTooltip(tooltip) {
  * @param {HTMLElement} chartEl - Chart Container Element
  * @param {Array} albumData - Optionale Album-Daten für Swipe-Funktionalität
  */
-// Indikator wird direkt im HTML erstellt, hier nur Referenz holen
-
 export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, visiblePoints = null) {
-  // Update Indikator sofort
-  const indicator = document.getElementById('mobile-touch-indicator');
-  if (indicator) {
-    indicator.textContent = 'Setup Called';
-    indicator.style.display = 'block';
-    console.log('[MobileTouchHandler] Indicator updated: Setup Called');
-  } else {
-    console.error('[MobileTouchHandler] Indicator not found!');
-  }
-  
   console.log('[MobileTouchHandler] setupMobileTouchHandlers called', { 
     isMobile: isMobile(), 
     hasChartView: !!chartView, 
     hasChartEl: !!chartEl,
-    chartElId: chartEl?.id,
-    chartElTag: chartEl?.tagName,
     albumDataLength: albumData?.length,
     visiblePointsLength: visiblePoints?.length
   });
@@ -114,20 +100,12 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
   }
   if (!isMobile()) {
     console.log('[MobileTouchHandler] Not mobile, returning');
-    if (indicator) indicator.textContent = 'Not Mobile';
     return; // Nur auf Mobile
   }
-  
-  if (indicator) indicator.textContent = 'Mobile: Setting up...';
   
   const tapPoints = Array.isArray(visiblePoints) && visiblePoints.length > 0
     ? visiblePoints
     : [];
-  
-  console.log('[MobileTouchHandler] tapPoints count:', tapPoints.length);
-  
-  // Entfernt: Globaler Test-Handler blockiert möglicherweise die Events
-  // Die Events werden jetzt direkt auf dem Chart-Container abgefangen
   
   try {
     showDebugMessage('Setting up mobile touch handlers', '#4a9dd4');
@@ -352,28 +330,15 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
           console.log(`[MobileTouchHandler] SVG found after ${attempts} attempts!`);
           showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
           
-          // Mobile: Nutze Container-Listener für nearest-point Logik
+          // Mobile: Nutze direkte SVG-Listener für nearest-point Logik
           // Diese werden IMMER ausgelöst, auch wenn kein Punkt direkt getroffen wurde
-          // Verwende chartEl statt svg für bessere iOS-Kompatibilität
-          console.log('[MobileTouchHandler] Setting up nearest-point tap handler...', {
-            hasChartEl: !!chartEl,
-            hasSvg: !!svg,
-            hasChartView: !!chartView,
-            tapPointsCount: tapPoints.length
-          });
-          
-          const indicator = document.getElementById('mobile-touch-indicator');
-          if (indicator) indicator.textContent = 'Setting up handlers...';
-          
-          const nearestTapHandler = setupNearestPointTap(chartEl, svg, chartView, tapPoints, albumData);
+          const nearestTapHandler = setupNearestPointTap(svg, chartView, tapPoints, albumData);
           if (nearestTapHandler) {
-            showDebugMessage('Nearest-tap handler aktiviert', '#90EE90');
-            console.log('[MobileTouchHandler] ✅ Nearest-tap handler successfully registered');
-            if (indicator) indicator.textContent = 'Touch Handler Ready';
+            showDebugMessage('Nearest-tap handler aktiviert (direkte SVG-Listener)', '#90EE90');
+            console.log('[MobileTouchHandler] Direct SVG listeners registered for nearest-point tap');
           } else {
             showDebugMessage('Nearest-tap handler nicht aktiv (zu wenige Punkte?)', '#ffaa00');
-            console.warn('[MobileTouchHandler] ❌ Could not setup nearest-point tap handler');
-            if (indicator) indicator.textContent = 'ERROR: No handler';
+            console.warn('[MobileTouchHandler] Could not setup nearest-point tap handler');
           }
           
           // Verhindere Tooltip-Anzeige auf Mobile
@@ -462,14 +427,8 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
 /**
  * Aktiviert die nearest-point Logik auf dem gesamten Chart
  */
-function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumData) {
-  if (!chartEl || !svg || !chartView || !Array.isArray(candidatePoints) || candidatePoints.length === 0) {
-    console.warn('[MobileTouchHandler] setupNearestPointTap: Missing required parameters', {
-      hasChartEl: !!chartEl,
-      hasSvg: !!svg,
-      hasChartView: !!chartView,
-      pointsCount: candidatePoints?.length
-    });
+function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
+  if (!svg || !chartView || !Array.isArray(candidatePoints) || candidatePoints.length === 0) {
     return null;
   }
   
@@ -483,15 +442,10 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
     .filter(Boolean);
   
   if (points.length === 0) {
-    console.warn('[MobileTouchHandler] No valid points after filtering');
     return null;
   }
   
-  console.log('[MobileTouchHandler] Setting up nearest-point tap with', points.length, 'points');
-  
   let lastTouchInfo = null;
-  let touchStartPos = null;
-  let touchStartTime = 0;
   
   const findNearestDatum = (x, y) => {
     if (points.length === 0) {
@@ -542,28 +496,17 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
         band: nearest.Band,
         album: nearest.Album,
         distance: actualDist.toFixed(1),
-        validPoints: validPointsFound,
-        tapX: x,
-        tapY: y
+        validPoints: validPointsFound
       });
     } else if (validPointsFound === 0) {
-      console.warn('[MobileTouchHandler] No valid points with screen coordinates found', {
-        pointsCount: points.length,
-        xScaleType: typeof xScale,
-        yScaleType: typeof yScale
-      });
+      console.warn('[MobileTouchHandler] No valid points with screen coordinates found');
     }
     
     // GARANTIERE dass immer ein Punkt zurückgegeben wird, wenn Punkte vorhanden sind
     // Falls nearest null ist, nimm einfach den ersten verfügbaren Punkt
     if (!nearest && points.length > 0) {
-      console.log('[MobileTouchHandler] ⚠️ No nearest found via distance, using first point as fallback');
+      console.log('[MobileTouchHandler] No nearest found, using first point as fallback');
       nearest = points[0].datum;
-      console.log('[MobileTouchHandler] Fallback point:', nearest.Band, nearest.Album);
-    }
-    
-    if (!nearest) {
-      console.error('[MobileTouchHandler] ❌ CRITICAL: No point returned despite having', points.length, 'points');
     }
     
     return nearest;
@@ -594,7 +537,6 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
       return false;
     }
     
-    // Verwende SVG-Bounding-Rect für Koordinatenberechnung
     const rect = svg.getBoundingClientRect();
     const relX = pointer.clientX - rect.left;
     const relY = pointer.clientY - rect.top;
@@ -603,192 +545,59 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
     
     const nearest = findNearestDatum(relX, relY);
     if (nearest) {
-      console.log('[MobileTouchHandler] ✅ Nearest point found:', nearest.Band, nearest.Album);
-      showTouchIndicator(`✅ ${nearest.Band}`);
+      console.log('[MobileTouchHandler] Nearest point found:', nearest.Band, nearest.Album);
       return showDatumCard(nearest);
     }
-    console.error('[MobileTouchHandler] ❌ No nearest point found despite having points', {
-      relX,
-      relY,
-      pointsCount: points.length,
-      svgRect: svg.getBoundingClientRect()
-    });
-    showTouchIndicator('❌ No point found');
+    // Falls kein Punkt gefunden wurde, sollte das eigentlich nicht passieren
+    // da findNearestDatum jetzt immer einen Punkt zurückgibt wenn Punkte vorhanden sind
+    console.error('[MobileTouchHandler] No nearest point found despite having points');
     return false;
   };
   
-  // Verwende Indikator aus HTML (wird dort erstellt)
-  let touchIndicatorTimeout = null;
-  
-  const showTouchIndicator = (message) => {
-    const indicator = document.getElementById('mobile-touch-indicator');
-    if (indicator) {
-      indicator.textContent = message;
-      indicator.style.display = 'block';
-      clearTimeout(touchIndicatorTimeout);
-      touchIndicatorTimeout = setTimeout(() => {
-        const ind = document.getElementById('mobile-touch-indicator');
-        if (ind) {
-          ind.textContent = 'Ready';
-        }
-      }, 2000);
-    }
-    console.log('[MobileTouchHandler] Indicator:', message);
-  };
-  
-  // Initialisiere Indikator
-  const indicator = document.getElementById('mobile-touch-indicator');
-  if (indicator) {
-    indicator.textContent = 'Touch Handler Ready';
-    indicator.style.display = 'block';
-    console.log('[MobileTouchHandler] Touch indicator initialized');
-  } else {
-    console.warn('[MobileTouchHandler] Touch indicator not found in HTML');
-  }
-  
-  // iOS-kompatible Touch-Handler - verwende Capture-Phase für frühe Abfangung
-  const onTouchStart = (event) => {
-    // Prüfe ob Event innerhalb des Charts ist
-    const rect = chartEl.getBoundingClientRect();
-    const touch = event.touches?.[0];
-    if (!touch) return;
-    
-    const touchX = touch.clientX;
-    const touchY = touch.clientY;
-    
-    if (touchX < rect.left || touchX > rect.right || touchY < rect.top || touchY > rect.bottom) {
-      return; // Touch außerhalb des Charts
-    }
-    
-    touchStartPos = {
-      x: touchX,
-      y: touchY
-    };
-    touchStartTime = Date.now();
-    
-    showTouchIndicator(`Touch Start: ${touchX.toFixed(0)}, ${touchY.toFixed(0)}`);
-    console.log('[MobileTouchHandler] touchstart CAPTURED on container', touchStartPos);
-  };
-  
   const onTouchEnd = (event) => {
-    if (!touchStartPos) {
-      console.log('[MobileTouchHandler] touchend but no touchStartPos');
-      return;
-    }
-    
-    const touch = event.changedTouches?.[0];
-    if (!touch) {
-      console.log('[MobileTouchHandler] touchend but no changedTouches');
-      touchStartPos = null;
-      return;
-    }
-    
-    const touchEndPos = {
-      x: touch.clientX,
-      y: touch.clientY
-    };
-    
-    // Prüfe ob es ein Tap war (kein Swipe)
-    const deltaX = Math.abs(touchEndPos.x - touchStartPos.x);
-    const deltaY = Math.abs(touchEndPos.y - touchStartPos.y);
-    const deltaTime = Date.now() - touchStartTime;
-    
-    showTouchIndicator(`Touch End: Δ${deltaX.toFixed(0)},${deltaY.toFixed(0)} ${deltaTime}ms`);
-    
-    // Maximal 20px Bewegung und 300ms für Tap
-    if (deltaX > 20 || deltaY > 20 || deltaTime > 300) {
-      console.log('[MobileTouchHandler] Ignoring swipe', { deltaX, deltaY, deltaTime });
-      touchStartPos = null;
-      return;
-    }
-    
-    console.log('[MobileTouchHandler] touchend CAPTURED on container (tap detected)', { 
+    console.log('[MobileTouchHandler] touchend event on SVG', { 
       touches: event.changedTouches?.length,
-      pointsCount: points.length,
-      deltaX,
-      deltaY,
-      deltaTime,
-      pos: touchEndPos,
-      chartRect: chartEl.getBoundingClientRect(),
-      svgRect: svg.getBoundingClientRect()
+      pointsCount: points.length 
     });
-    
-    // Erstelle ein synthetisches Event mit den Touch-Koordinaten
-    const syntheticEvent = {
-      clientX: touchEndPos.x,
-      clientY: touchEndPos.y,
-      changedTouches: event.changedTouches,
-      touches: event.touches,
-      preventDefault: () => event.preventDefault(),
-      stopPropagation: () => event.stopPropagation()
-    };
-    
-    console.log('[MobileTouchHandler] Calling handleTap with synthetic event...');
-    const handled = handleTap(syntheticEvent);
-    console.log('[MobileTouchHandler] handleTap result:', handled);
-    
-    if (handled) {
-      event.preventDefault();
-      event.stopPropagation();
-      lastTouchInfo = { time: Date.now(), x: touchEndPos.x, y: touchEndPos.y };
-      showTouchIndicator('✅ Album gefunden!');
-      showDebugMessage('Touch erfolgreich verarbeitet', '#90EE90');
-    } else {
-      showTouchIndicator('❌ Kein Album gefunden');
-      showDebugMessage('Touch ohne Treffer', '#ffaa00');
-      console.error('[MobileTouchHandler] handleTap returned false - no album card shown');
-    }
-    
-    touchStartPos = null;
-  };
-  
-  const onClick = (event) => {
-    // Ignoriere Ghost-Clicks nach Touch
-    if (lastTouchInfo) {
-      const deltaTime = Date.now() - lastTouchInfo.time;
-      const deltaX = Math.abs(event.clientX - lastTouchInfo.x);
-      const deltaY = Math.abs(event.clientY - lastTouchInfo.y);
-      if (deltaTime < 400 && deltaX < 6 && deltaY < 6) {
-        console.log('[MobileTouchHandler] Ignoring ghost click after touch');
-        return;
-      }
-    }
-    
-    console.log('[MobileTouchHandler] click event CAPTURED on container', { pointsCount: points.length });
     const handled = handleTap(event);
     console.log('[MobileTouchHandler] handleTap result:', handled);
     if (handled) {
       event.preventDefault();
       event.stopPropagation();
-      showTouchIndicator('✅ Click Album');
+      const touch = event.changedTouches?.[0];
+      lastTouchInfo = touch ? { time: Date.now(), x: touch.clientX, y: touch.clientY } : null;
+      showDebugMessage('Touch erfolgreich verarbeitet', '#90EE90');
+    } else {
+      showDebugMessage('Touch ohne Treffer', '#ffaa00');
+    }
+  };
+  
+  const onClick = (event) => {
+    if (lastTouchInfo) {
+      const deltaTime = Date.now() - lastTouchInfo.time;
+      const deltaX = Math.abs(event.clientX - lastTouchInfo.x);
+      const deltaY = Math.abs(event.clientY - lastTouchInfo.y);
+      if (deltaTime < 400 && deltaX < 6 && deltaY < 6) {
+        // Ghost click nach Touch - ignorieren
+        console.log('[MobileTouchHandler] Ignoring ghost click after touch');
+        return;
+      }
+    }
+    console.log('[MobileTouchHandler] click event on SVG', { pointsCount: points.length });
+    const handled = handleTap(event);
+    console.log('[MobileTouchHandler] handleTap result:', handled);
+    if (handled) {
       showDebugMessage('Click erfolgreich verarbeitet', '#90EE90');
     }
   };
   
-  // Registriere Events in CAPTURE-Phase (true als 3. Parameter) für frühe Abfangung
-  // Auf Container UND SVG für maximale Abdeckung
-  chartEl.addEventListener('touchstart', onTouchStart, { passive: true, capture: true });
-  chartEl.addEventListener('touchend', onTouchEnd, { passive: false, capture: true });
-  chartEl.addEventListener('click', onClick, { passive: false, capture: true });
+  svg.addEventListener('touchend', onTouchEnd, { passive: false });
+  svg.addEventListener('click', onClick, { passive: false });
   
-  // Auch auf SVG registrieren als Backup
-  svg.addEventListener('touchstart', onTouchStart, { passive: true, capture: true });
-  svg.addEventListener('touchend', onTouchEnd, { passive: false, capture: true });
-  svg.addEventListener('click', onClick, { passive: false, capture: true });
-  
-  console.log('[MobileTouchHandler] Container listeners registered', { 
+  console.log('[MobileTouchHandler] SVG listeners registered', { 
     pointsCount: points.length,
-    chartElTag: chartEl.tagName,
-    chartElId: chartEl.id
+    svgTag: svg.tagName 
   });
-  
-  // Update Indikator nach erfolgreicher Registrierung
-  const indicator = document.getElementById('mobile-touch-indicator');
-  if (indicator) {
-    indicator.textContent = 'Touch Handler Ready';
-    indicator.style.display = 'block';
-    console.log('[MobileTouchHandler] Indicator updated to "Touch Handler Ready"');
-  }
   
   return handleTap;
 }
