@@ -647,61 +647,33 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
     return false;
   };
   
-  // Visueller Indikator für Touch-Events (temporär zum Debuggen)
-  let touchIndicator = null;
+  // Verwende Indikator aus HTML (wird dort erstellt)
   let touchIndicatorTimeout = null;
   
-  const createTouchIndicator = () => {
-    // Entferne alten Indikator falls vorhanden
-    const old = document.getElementById('mobile-touch-indicator');
-    if (old) old.remove();
-    
-    const indicator = document.createElement('div');
-    indicator.id = 'mobile-touch-indicator';
-    indicator.style.cssText = `
-      position: fixed !important;
-      top: 20px !important;
-      right: 20px !important;
-      background: rgba(255, 107, 53, 0.95) !important;
-      color: white !important;
-      padding: 12px 16px !important;
-      border-radius: 8px !important;
-      font-size: 14px !important;
-      font-family: monospace !important;
-      z-index: 999999 !important;
-      pointer-events: none !important;
-      display: block !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
-    `;
-    indicator.textContent = 'Touch Handler Ready';
-    document.body.appendChild(indicator);
-    console.log('[MobileTouchHandler] Touch indicator created');
-    return indicator;
-  };
-  
   const showTouchIndicator = (message) => {
-    if (!touchIndicator) {
-      touchIndicator = createTouchIndicator();
-    }
-    if (touchIndicator) {
-      touchIndicator.textContent = message;
-      touchIndicator.style.display = 'block';
+    const indicator = document.getElementById('mobile-touch-indicator');
+    if (indicator) {
+      indicator.textContent = message;
+      indicator.style.display = 'block';
       clearTimeout(touchIndicatorTimeout);
       touchIndicatorTimeout = setTimeout(() => {
-        if (touchIndicator) {
-          touchIndicator.textContent = 'Touch Handler Ready';
+        const ind = document.getElementById('mobile-touch-indicator');
+        if (ind) {
+          ind.textContent = 'Ready';
         }
       }, 2000);
     }
     console.log('[MobileTouchHandler] Indicator:', message);
   };
   
-  // Verwende bereits existierenden Indikator oder erstelle neuen
-  touchIndicator = document.getElementById('mobile-touch-indicator') || createTouchIndicator();
-  if (touchIndicator) {
-    touchIndicator.textContent = 'Touch Handler Ready';
-    touchIndicator.style.display = 'block';
-    console.log('[MobileTouchHandler] Touch indicator ready');
+  // Initialisiere Indikator
+  const indicator = document.getElementById('mobile-touch-indicator');
+  if (indicator) {
+    indicator.textContent = 'Touch Handler Ready';
+    indicator.style.display = 'block';
+    console.log('[MobileTouchHandler] Touch indicator initialized');
+  } else {
+    console.warn('[MobileTouchHandler] Touch indicator not found in HTML');
   }
   
   // iOS-kompatible Touch-Handler - verwende Capture-Phase für frühe Abfangung
