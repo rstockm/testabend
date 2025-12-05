@@ -743,13 +743,24 @@ function createRegressionLayers(bestPoints, selectedBands, rangeYears, domainMin
  * Titel-Layer erstellen
  */
 function createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
+  // Titel kürzen für sehr lange Namen (max. 30 Zeichen auf Mobile, 40 auf Desktop)
+  const maxLength = isMobile() ? 30 : 40;
+  const processedPoints = allPoints.map(point => ({
+    ...point,
+    Album: point.Album && point.Album.length > maxLength 
+      ? point.Album.substring(0, maxLength - 3) + '...' 
+      : point.Album
+  }));
+  
   return {
-    data: { values: allPoints },
+    data: { values: processedPoints },
     mark: { 
       type: "text", 
       dy: CONFIG.UI.TITLE_OFFSET, 
       fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
-      fontWeight: "bold" 
+      fontWeight: "bold",
+      limit: isMobile() ? 80 : 120, // Maximale Textbreite in Pixeln
+      align: "center" // Titel zentrieren
     },
     zindex: 1,
     encoding: {
