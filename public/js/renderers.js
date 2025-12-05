@@ -317,18 +317,12 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     chartWidth = Math.max(300, window.innerWidth - 24); 
   }
   
-  // Padding für Chart: Mehr Platz links/rechts für lange Titel
-  const padding = isMobile() 
-    ? { left: 20, right: 20, top: 10, bottom: 50 } // Mobile: Mehr Platz für Titel
-    : { left: 60, right: 60, top: 10, bottom: 50 }; // Desktop: Mehr Platz für Titel
-  
   const spec = {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     description: "Zeitreihe für Band/Bands",
     config: getDarkThemeConfig(),
     width: chartWidth,
     height: CONFIG.CHART.BANDS_HEIGHT,
-    padding: padding,
     layer: layers
   };
   
@@ -777,8 +771,7 @@ function createTitleLayers(allPoints, rangeYears, domainMinY, domainMaxY, select
         dx: 8, // Nach rechts verschieben
         fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
         fontWeight: "bold",
-        align: "left",
-        limit: isMobile() ? 100 : 150
+        align: "left"
       },
       zindex: 1,
       encoding: {
@@ -814,8 +807,7 @@ function createTitleLayers(allPoints, rangeYears, domainMinY, domainMaxY, select
         dx: -8, // Nach links verschieben
         fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
         fontWeight: "bold",
-        align: "right",
-        limit: isMobile() ? 100 : 150
+        align: "right"
       },
       zindex: 1,
       encoding: {
@@ -850,8 +842,7 @@ function createTitleLayers(allPoints, rangeYears, domainMinY, domainMaxY, select
         dy: CONFIG.UI.TITLE_OFFSET, 
         fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
         fontWeight: "bold",
-        align: "center",
-        limit: isMobile() ? 100 : 150
+        align: "center"
       },
       zindex: 1,
       encoding: {
