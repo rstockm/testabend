@@ -330,9 +330,10 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
           console.log(`[MobileTouchHandler] SVG found after ${attempts} attempts!`);
           showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
           
-          // Mobile: Nutze direkte SVG-Listener für nearest-point Logik
+          // Mobile: Nutze Container-Listener für nearest-point Logik
           // Diese werden IMMER ausgelöst, auch wenn kein Punkt direkt getroffen wurde
-          const nearestTapHandler = setupNearestPointTap(svg, chartView, tapPoints, albumData);
+          // Verwende chartEl statt svg für bessere iOS-Kompatibilität
+          const nearestTapHandler = setupNearestPointTap(chartEl, svg, chartView, tapPoints, albumData);
           if (nearestTapHandler) {
             showDebugMessage('Nearest-tap handler aktiviert (direkte SVG-Listener)', '#90EE90');
             console.log('[MobileTouchHandler] Direct SVG listeners registered for nearest-point tap');
@@ -427,8 +428,14 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
 /**
  * Aktiviert die nearest-point Logik auf dem gesamten Chart
  */
-function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
-  if (!svg || !chartView || !Array.isArray(candidatePoints) || candidatePoints.length === 0) {
+function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumData) {
+  if (!chartEl || !svg || !chartView || !Array.isArray(candidatePoints) || candidatePoints.length === 0) {
+    console.warn('[MobileTouchHandler] setupNearestPointTap: Missing required parameters', {
+      hasChartEl: !!chartEl,
+      hasSvg: !!svg,
+      hasChartView: !!chartView,
+      pointsCount: candidatePoints?.length
+    });
     return null;
   }
   
@@ -442,10 +449,15 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
     .filter(Boolean);
   
   if (points.length === 0) {
+    console.warn('[MobileTouchHandler] No valid points after filtering');
     return null;
   }
   
+  console.log('[MobileTouchHandler] Setting up nearest-point tap with', points.length, 'points');
+  
   let lastTouchInfo = null;
+  let touchStartPos = null;
+  let touchStartTime = 0;
   
   const findNearestDatum = (x, y) => {
     if (points.length === 0) {
@@ -537,6 +549,7 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
       return false;
     }
     
+    // Verwende SVG-Bounding-Rect für Koordinatenberechnung
     const rect = svg.getBoundingClientRect();
     const relX = pointer.clientX - rect.left;
     const relY = pointer.clientY - rect.top;
@@ -548,55 +561,108 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
       console.log('[MobileTouchHandler] Nearest point found:', nearest.Band, nearest.Album);
       return showDatumCard(nearest);
     }
-    // Falls kein Punkt gefunden wurde, sollte das eigentlich nicht passieren
-    // da findNearestDatum jetzt immer einen Punkt zurückgibt wenn Punkte vorhanden sind
     console.error('[MobileTouchHandler] No nearest point found despite having points');
     return false;
   };
   
+  // iOS-kompatible Touch-Handler auf dem Container-Element
+  const onTouchStart = (event) => {
+    if (event.touches && event.touches.length > 0) {
+      touchStartPos = {
+        x: event.touches[0].clientX,
+        y: event.touches[0].clientY
+      };
+      touchStartTime = Date.now();
+      console.log('[MobileTouchHandler] touchstart on container', touchStartPos);
+    }
+  };
+  
   const onTouchEnd = (event) => {
-    console.log('[MobileTouchHandler] touchend event on SVG', { 
+    if (!touchStartPos) return;
+    
+    const touch = event.changedTouches?.[0];
+    if (!touch) return;
+    
+    const touchEndPos = {
+      x: touch.clientX,
+      y: touch.clientY
+    };
+    
+    // Prüfe ob es ein Tap war (kein Swipe)
+    const deltaX = Math.abs(touchEndPos.x - touchStartPos.x);
+    const deltaY = Math.abs(touchEndPos.y - touchStartPos.y);
+    const deltaTime = Date.now() - touchStartTime;
+    
+    // Maximal 20px Bewegung und 300ms für Tap
+    if (deltaX > 20 || deltaY > 20 || deltaTime > 300) {
+      touchStartPos = null;
+      return;
+    }
+    
+    console.log('[MobileTouchHandler] touchend on container (tap detected)', { 
       touches: event.changedTouches?.length,
-      pointsCount: points.length 
+      pointsCount: points.length,
+      deltaX,
+      deltaY,
+      deltaTime
     });
-    const handled = handleTap(event);
+    
+    // Erstelle ein synthetisches Event mit den Touch-Koordinaten
+    const syntheticEvent = {
+      clientX: touchEndPos.x,
+      clientY: touchEndPos.y,
+      changedTouches: event.changedTouches,
+      touches: event.touches,
+      preventDefault: () => event.preventDefault(),
+      stopPropagation: () => event.stopPropagation()
+    };
+    
+    const handled = handleTap(syntheticEvent);
     console.log('[MobileTouchHandler] handleTap result:', handled);
+    
     if (handled) {
       event.preventDefault();
       event.stopPropagation();
-      const touch = event.changedTouches?.[0];
-      lastTouchInfo = touch ? { time: Date.now(), x: touch.clientX, y: touch.clientY } : null;
+      lastTouchInfo = { time: Date.now(), x: touchEndPos.x, y: touchEndPos.y };
       showDebugMessage('Touch erfolgreich verarbeitet', '#90EE90');
     } else {
       showDebugMessage('Touch ohne Treffer', '#ffaa00');
     }
+    
+    touchStartPos = null;
   };
   
   const onClick = (event) => {
+    // Ignoriere Ghost-Clicks nach Touch
     if (lastTouchInfo) {
       const deltaTime = Date.now() - lastTouchInfo.time;
       const deltaX = Math.abs(event.clientX - lastTouchInfo.x);
       const deltaY = Math.abs(event.clientY - lastTouchInfo.y);
       if (deltaTime < 400 && deltaX < 6 && deltaY < 6) {
-        // Ghost click nach Touch - ignorieren
         console.log('[MobileTouchHandler] Ignoring ghost click after touch');
         return;
       }
     }
-    console.log('[MobileTouchHandler] click event on SVG', { pointsCount: points.length });
+    
+    console.log('[MobileTouchHandler] click event on container', { pointsCount: points.length });
     const handled = handleTap(event);
     console.log('[MobileTouchHandler] handleTap result:', handled);
     if (handled) {
+      event.preventDefault();
+      event.stopPropagation();
       showDebugMessage('Click erfolgreich verarbeitet', '#90EE90');
     }
   };
   
-  svg.addEventListener('touchend', onTouchEnd, { passive: false });
-  svg.addEventListener('click', onClick, { passive: false });
+  // Registriere Events auf dem Container-Element (funktioniert besser auf iOS)
+  chartEl.addEventListener('touchstart', onTouchStart, { passive: true });
+  chartEl.addEventListener('touchend', onTouchEnd, { passive: false });
+  chartEl.addEventListener('click', onClick, { passive: false });
   
-  console.log('[MobileTouchHandler] SVG listeners registered', { 
+  console.log('[MobileTouchHandler] Container listeners registered', { 
     pointsCount: points.length,
-    svgTag: svg.tagName 
+    chartElTag: chartEl.tagName,
+    chartElId: chartEl.id
   });
   
   return handleTap;
