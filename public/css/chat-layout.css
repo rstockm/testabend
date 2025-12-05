@@ -224,6 +224,11 @@
   
   .chat-input-wrapper {
     padding: 10px 12px;
+    align-items: center; /* Zentriert den Text vertikal */
+  }
+  
+  .chat-input {
+    padding: 6px 0; /* Angepasstes Padding für Mobile */
   }
   
   .chat-reset-button,
