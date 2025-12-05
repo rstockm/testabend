@@ -330,65 +330,24 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
           console.log(`[MobileTouchHandler] SVG found after ${attempts} attempts!`);
           showDebugMessage(`SVG found after ${attempts} attempts!`, '#90EE90');
           
+          // Mobile: Nutze direkte SVG-Listener für nearest-point Logik
+          // Diese werden IMMER ausgelöst, auch wenn kein Punkt direkt getroffen wurde
           const nearestTapHandler = setupNearestPointTap(svg, chartView, tapPoints, albumData);
           if (nearestTapHandler) {
-            showDebugMessage('Nearest-tap handler aktiviert', '#90EE90');
+            showDebugMessage('Nearest-tap handler aktiviert (direkte SVG-Listener)', '#90EE90');
+            console.log('[MobileTouchHandler] Direct SVG listeners registered for nearest-point tap');
           } else {
             showDebugMessage('Nearest-tap handler nicht aktiv (zu wenige Punkte?)', '#ffaa00');
+            console.warn('[MobileTouchHandler] Could not setup nearest-point tap handler');
           }
           
-          // Ansatz 1: Nutze Vega-Lite's Event-API (wie scatterKeyboardNav)
+          // Verhindere Tooltip-Anzeige auf Mobile
           if (chartView && typeof chartView.addEventListener === 'function') {
-            console.log('[MobileTouchHandler] chartView.addEventListener is available, registering listeners');
-            showDebugMessage('Using Vega-Lite addEventListener', '#4a9dd4');
-            console.log('[MobileTouchHandler] Registering Vega-Lite event listeners');
-            
-            // Click-Events (funktionieren auch auf Touch)
-            chartView.addEventListener('click', (event, item) => {
-              console.log('[MobileTouchHandler] Vega click event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
-              showDebugMessage(`Vega click: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
-              const handled = nearestTapHandler ? nearestTapHandler(event, item?.datum) : false;
-              if (handled) {
-                event.preventDefault();
-                event.stopPropagation();
-                showDebugMessage('Click durch nearestTapHandler verarbeitet', '#90EE90');
-              } else {
-                console.log('[MobileTouchHandler] Vega click but no valid datum and no fallback hit');
-                showDebugMessage('Vega click ohne Treffer', '#ffaa00');
-              }
-            });
-            
-            // Auch touchstart direkt abfangen (falls click nicht funktioniert)
-            chartView.addEventListener('touchstart', (event, item) => {
-              console.log('[MobileTouchHandler] Vega touchstart event:', { item: !!item, datum: !!(item?.datum), band: item?.datum?.Band });
-              showDebugMessage(`Vega touchstart: item=${!!item}, datum=${!!(item?.datum)}`, '#ff6b35');
-              const handled = nearestTapHandler ? nearestTapHandler(event, item?.datum) : false;
-              if (handled) {
-                event.preventDefault();
-                event.stopPropagation();
-                showDebugMessage('touchstart durch nearestTapHandler verarbeitet', '#90EE90');
-              } else {
-                console.log('[MobileTouchHandler] Vega touchstart but no valid datum and no fallback hit');
-                showDebugMessage('touchstart ohne Treffer', '#ffaa00');
-              }
-            });
-            
-            console.log('[MobileTouchHandler] Event listeners registered successfully');
-            
-            // Auch mousemove abfangen (falls Touch als Mouse-Event durchkommt)
             chartView.addEventListener('mousemove', (event, item) => {
-              if (item && item.datum) {
-                showDebugMessage(`Vega mousemove: ${item.datum.Band}`, '#888');
-                // Verhindere Tooltip-Anzeige
-                const tooltips = document.querySelectorAll('.vg-tooltip, .vega-tooltip');
-                tooltips.forEach(t => t.remove());
-              }
+              // Verhindere Tooltip-Anzeige
+              const tooltips = document.querySelectorAll('.vg-tooltip, .vega-tooltip');
+              tooltips.forEach(t => t.remove());
             });
-          } else {
-            console.error('[MobileTouchHandler] ERROR: chartView.addEventListener not available');
-            console.error('[MobileTouchHandler] chartView:', chartView);
-            console.error('[MobileTouchHandler] chartView.addEventListener:', typeof chartView?.addEventListener);
-            showDebugMessage('ERROR: chartView.addEventListener not available', '#ff0000');
           }
           
           // Ansatz 2: Beobachte Tooltip-Erstellung und extrahiere Daten (funktioniert auch ohne SVG)
@@ -446,22 +405,11 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
             childList: true,
             subtree: true
           });
-          console.log('[MobileTouchHandler] Tooltip observer started');
-          showDebugMessage('Tooltip observer started', '#4a9dd4');
+          console.log('[MobileTouchHandler] Tooltip observer started (fallback only)');
+          showDebugMessage('Tooltip observer started (fallback)', '#4a9dd4');
           
-          // Ansatz 3: Direkte SVG-Events nur für Debugging
-          // Die Vega-Lite Event API (Ansatz 1) und Tooltip-Observer (Ansatz 2) sollten ausreichen
-          svg.addEventListener('touchstart', (e) => {
-            showDebugMessage(`Touch start: ${e.touches.length} touches`, '#4a9dd4');
-          }, { passive: true });
-          
-          svg.addEventListener('click', (e) => {
-            showDebugMessage(`SVG click at (${e.clientX}, ${e.clientY})`, '#888');
-            // Die Vega-Lite Event API sollte das bereits abfangen
-            // Falls nicht, wird der Tooltip-Observer greifen
-          });
-          
-          showDebugMessage('SVG event listeners added (debugging only)', '#90EE90');
+          // Die direkten SVG-Listener aus setupNearestPointTap sind bereits aktiv
+          // Keine zusätzlichen Debug-Listener nötig, da diese mit den nearest-point Listenern kollidieren könnten
         };
         
         // Starte Setup-Versuch
@@ -547,30 +495,46 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
   
   const handleTap = (event, directDatum = null) => {
     if (directDatum && directDatum.Band && directDatum.Album) {
+      console.log('[MobileTouchHandler] Using direct datum:', directDatum.Band, directDatum.Album);
       return showDatumCard(directDatum);
     }
     
     const pointer = getPointerFromEvent(event);
-    if (!pointer) return false;
+    if (!pointer) {
+      console.log('[MobileTouchHandler] No pointer found in event');
+      return false;
+    }
     
     const rect = svg.getBoundingClientRect();
     const relX = pointer.clientX - rect.left;
     const relY = pointer.clientY - rect.top;
     
+    console.log('[MobileTouchHandler] Tap at relative coords:', { relX, relY, pointsCount: points.length });
+    
     const nearest = findNearestDatum(relX, relY);
     if (nearest) {
+      console.log('[MobileTouchHandler] Nearest point found:', nearest.Band, nearest.Album);
       return showDatumCard(nearest);
     }
+    console.log('[MobileTouchHandler] No nearest point found');
     return false;
   };
   
   const onTouchEnd = (event) => {
+    console.log('[MobileTouchHandler] touchend event on SVG', { 
+      touches: event.changedTouches?.length,
+      pointsCount: points.length 
+    });
     const handled = handleTap(event);
+    console.log('[MobileTouchHandler] handleTap result:', handled);
     if (handled) {
       event.preventDefault();
       event.stopPropagation();
       const touch = event.changedTouches?.[0];
       lastTouchInfo = touch ? { time: Date.now(), x: touch.clientX, y: touch.clientY } : null;
+      showDebugMessage('Touch erfolgreich verarbeitet', '#90EE90');
+    } else {
+      showDebugMessage('Touch ohne Treffer', '#ffaa00');
     }
   };
   
@@ -581,14 +545,25 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
       const deltaY = Math.abs(event.clientY - lastTouchInfo.y);
       if (deltaTime < 400 && deltaX < 6 && deltaY < 6) {
         // Ghost click nach Touch - ignorieren
+        console.log('[MobileTouchHandler] Ignoring ghost click after touch');
         return;
       }
     }
-    handleTap(event);
+    console.log('[MobileTouchHandler] click event on SVG', { pointsCount: points.length });
+    const handled = handleTap(event);
+    console.log('[MobileTouchHandler] handleTap result:', handled);
+    if (handled) {
+      showDebugMessage('Click erfolgreich verarbeitet', '#90EE90');
+    }
   };
   
   svg.addEventListener('touchend', onTouchEnd, { passive: false });
-  svg.addEventListener('click', onClick);
+  svg.addEventListener('click', onClick, { passive: false });
+  
+  console.log('[MobileTouchHandler] SVG listeners registered', { 
+    pointsCount: points.length,
+    svgTag: svg.tagName 
+  });
   
   return handleTap;
 }
