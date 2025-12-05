@@ -423,12 +423,13 @@
 
   /* Mobile Tab Navigation */
   .mobile-nav-tabs {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-left: auto;
-    margin-right: 8px;
-    position: relative;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin-left: auto !important;
+    margin-right: 8px !important;
+    position: relative !important;
   }
 
   /* Animierter Hintergrund-Indikator */
