@@ -317,12 +317,18 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
     chartWidth = Math.max(300, window.innerWidth - 24); 
   }
   
+  // Padding für Desktop: Reduziere schwarze Lücke zwischen Schwellenlinien und Skala
+  const padding = isMobile() 
+    ? undefined // Mobile: Standard-Padding
+    : { left: 50, right: 50, top: 10, bottom: 50 }; // Desktop: Explizites Padding
+  
   const spec = {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     description: "Zeitreihe für Band/Bands",
     config: getDarkThemeConfig(),
     width: chartWidth,
     height: CONFIG.CHART.BANDS_HEIGHT,
+    padding: padding,
     layer: layers
   };
   
