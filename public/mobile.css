@@ -434,6 +434,7 @@
 
   /* Animierter Hintergrund-Indikator */
   .mobile-tab-indicator {
+    display: block !important; /* Überschreibt display: none aus styles.css */
     position: absolute;
     height: calc(100% - 4px);
     background-color: rgba(247, 201, 72, 0.15);
