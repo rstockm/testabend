@@ -782,6 +782,14 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
     chartElId: chartEl.id
   });
   
+  // Update Indikator nach erfolgreicher Registrierung
+  const indicator = document.getElementById('mobile-touch-indicator');
+  if (indicator) {
+    indicator.textContent = 'Touch Handler Ready';
+    indicator.style.display = 'block';
+    console.log('[MobileTouchHandler] Indicator updated to "Touch Handler Ready"');
+  }
+  
   return handleTap;
 }
 
