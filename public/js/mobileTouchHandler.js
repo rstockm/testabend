@@ -89,6 +89,8 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
     isMobile: isMobile(), 
     hasChartView: !!chartView, 
     hasChartEl: !!chartEl,
+    chartElId: chartEl?.id,
+    chartElTag: chartEl?.tagName,
     albumDataLength: albumData?.length,
     visiblePointsLength: visiblePoints?.length
   });
@@ -106,6 +108,8 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
   const tapPoints = Array.isArray(visiblePoints) && visiblePoints.length > 0
     ? visiblePoints
     : [];
+  
+  console.log('[MobileTouchHandler] tapPoints count:', tapPoints.length);
   
   try {
     showDebugMessage('Setting up mobile touch handlers', '#4a9dd4');
@@ -333,13 +337,28 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
           // Mobile: Nutze Container-Listener für nearest-point Logik
           // Diese werden IMMER ausgelöst, auch wenn kein Punkt direkt getroffen wurde
           // Verwende chartEl statt svg für bessere iOS-Kompatibilität
+          console.log('[MobileTouchHandler] Setting up nearest-point tap handler...', {
+            hasChartEl: !!chartEl,
+            hasSvg: !!svg,
+            hasChartView: !!chartView,
+            tapPointsCount: tapPoints.length
+          });
+          
           const nearestTapHandler = setupNearestPointTap(chartEl, svg, chartView, tapPoints, albumData);
           if (nearestTapHandler) {
-            showDebugMessage('Nearest-tap handler aktiviert (direkte SVG-Listener)', '#90EE90');
-            console.log('[MobileTouchHandler] Direct SVG listeners registered for nearest-point tap');
+            showDebugMessage('Nearest-tap handler aktiviert', '#90EE90');
+            console.log('[MobileTouchHandler] ✅ Nearest-tap handler successfully registered');
+            
+            // Test: Füge einen einfachen Click-Handler hinzu, um zu prüfen ob Events ankommen
+            const testHandler = (e) => {
+              console.log('[MobileTouchHandler] TEST: Event received!', e.type);
+              alert(`Event received: ${e.type}`); // Alert als letzter Ausweg
+            };
+            chartEl.addEventListener('touchstart', testHandler, { capture: true });
+            console.log('[MobileTouchHandler] Test handler registered on chartEl');
           } else {
             showDebugMessage('Nearest-tap handler nicht aktiv (zu wenige Punkte?)', '#ffaa00');
-            console.warn('[MobileTouchHandler] Could not setup nearest-point tap handler');
+            console.warn('[MobileTouchHandler] ❌ Could not setup nearest-point tap handler');
           }
           
           // Verhindere Tooltip-Anzeige auf Mobile
@@ -566,40 +585,56 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
   };
   
   // Visueller Indikator für Touch-Events (temporär zum Debuggen)
+  let touchIndicator = null;
+  let touchIndicatorTimeout = null;
+  
   const createTouchIndicator = () => {
+    // Entferne alten Indikator falls vorhanden
+    const old = document.getElementById('mobile-touch-indicator');
+    if (old) old.remove();
+    
     const indicator = document.createElement('div');
     indicator.id = 'mobile-touch-indicator';
     indicator.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 107, 53, 0.9);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-family: monospace;
-      z-index: 99999;
-      pointer-events: none;
-      display: none;
+      position: fixed !important;
+      top: 20px !important;
+      right: 20px !important;
+      background: rgba(255, 107, 53, 0.95) !important;
+      color: white !important;
+      padding: 12px 16px !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      font-family: monospace !important;
+      z-index: 999999 !important;
+      pointer-events: none !important;
+      display: block !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
     `;
+    indicator.textContent = 'Touch Handler Ready';
     document.body.appendChild(indicator);
+    console.log('[MobileTouchHandler] Touch indicator created');
     return indicator;
   };
   
-  const touchIndicator = createTouchIndicator();
-  let touchIndicatorTimeout = null;
-  
   const showTouchIndicator = (message) => {
+    if (!touchIndicator) {
+      touchIndicator = createTouchIndicator();
+    }
     if (touchIndicator) {
       touchIndicator.textContent = message;
       touchIndicator.style.display = 'block';
       clearTimeout(touchIndicatorTimeout);
       touchIndicatorTimeout = setTimeout(() => {
-        if (touchIndicator) touchIndicator.style.display = 'none';
-      }, 1000);
+        if (touchIndicator) {
+          touchIndicator.textContent = 'Touch Handler Ready';
+        }
+      }, 2000);
     }
+    console.log('[MobileTouchHandler] Indicator:', message);
   };
+  
+  // Erstelle Indikator sofort
+  touchIndicator = createTouchIndicator();
   
   // iOS-kompatible Touch-Handler - verwende Capture-Phase für frühe Abfangung
   const onTouchStart = (event) => {
