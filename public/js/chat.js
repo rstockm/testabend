@@ -908,7 +908,7 @@ export class Chat {
    * Custom Confirm-Dialog im Dark Theme anzeigen
    */
   showResetConfirmDialog() {
-    // Erstelle Overlay
+    // Erstelle Overlay - immer Dark Theme
     const overlay = document.createElement('div');
     overlay.className = 'chat-confirm-overlay';
     overlay.style.cssText = `
@@ -925,12 +925,12 @@ export class Chat {
       padding: 20px;
     `;
     
-    // Erstelle Dialog
+    // Erstelle Dialog - immer Dark Theme (hardcoded)
     const dialog = document.createElement('div');
     dialog.className = 'chat-confirm-dialog';
     dialog.style.cssText = `
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
+      background: #1e1e1e;
+      border: 1px solid #404040;
       border-radius: 12px;
       padding: 24px;
       max-width: 400px;
@@ -938,11 +938,11 @@ export class Chat {
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     `;
     
-    // Text
+    // Text - immer Dark Theme
     const text = document.createElement('p');
     text.textContent = 'Möchtest du den Chat wirklich zurücksetzen? Der gesamte Verlauf wird gelöscht.';
     text.style.cssText = `
-      color: var(--text-primary);
+      color: #f5f5f5;
       font-size: 16px;
       line-height: 1.5;
       margin: 0 0 24px 0;
@@ -956,15 +956,15 @@ export class Chat {
       justify-content: flex-end;
     `;
     
-    // Abbrechen-Button
+    // Abbrechen-Button - immer Dark Theme
     const cancelButton = document.createElement('button');
     cancelButton.textContent = 'Abbrechen';
     cancelButton.style.cssText = `
       padding: 10px 20px;
-      border: 1px solid var(--border-color);
+      border: 1px solid #404040;
       border-radius: 6px;
       background: transparent;
-      color: var(--text-secondary);
+      color: #d4d4d4;
       font-size: 15px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -973,22 +973,22 @@ export class Chat {
       overlay.remove();
     });
     cancelButton.addEventListener('mouseenter', () => {
-      cancelButton.style.background = 'var(--bg-tertiary)';
-      cancelButton.style.color = 'var(--text-primary)';
+      cancelButton.style.background = '#2a2a2a';
+      cancelButton.style.color = '#f5f5f5';
     });
     cancelButton.addEventListener('mouseleave', () => {
       cancelButton.style.background = 'transparent';
-      cancelButton.style.color = 'var(--text-secondary)';
+      cancelButton.style.color = '#d4d4d4';
     });
     
-    // OK-Button
+    // OK-Button - immer Dark Theme
     const okButton = document.createElement('button');
     okButton.textContent = 'OK';
     okButton.style.cssText = `
       padding: 10px 20px;
       border: none;
       border-radius: 6px;
-      background: var(--accent-blue);
+      background: #3b82f6;
       color: white;
       font-size: 15px;
       font-weight: 600;
@@ -1000,10 +1000,10 @@ export class Chat {
       this.clear();
     });
     okButton.addEventListener('mouseenter', () => {
-      okButton.style.background = 'var(--accent-blue-hover)';
+      okButton.style.background = '#60a5fa';
     });
     okButton.addEventListener('mouseleave', () => {
-      okButton.style.background = 'var(--accent-blue)';
+      okButton.style.background = '#3b82f6';
     });
     
     // ESC-Taste zum Schließen
