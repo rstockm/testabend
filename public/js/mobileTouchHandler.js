@@ -448,6 +448,11 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
   let lastTouchInfo = null;
   
   const findNearestDatum = (x, y) => {
+    if (points.length === 0) {
+      console.warn('[MobileTouchHandler] No points available for nearest search');
+      return null;
+    }
+    
     let nearest = null;
     let minDist = Infinity;
     let xScale;
@@ -457,17 +462,25 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
       yScale = chartView.scale('y');
     } catch (error) {
       console.warn('[MobileTouchHandler] scale lookup failed:', error);
-      return null;
+      // Fallback: Nimm einfach den ersten Punkt wenn Skalen nicht verfügbar
+      return points.length > 0 ? points[0].datum : null;
     }
     
     if (typeof xScale !== 'function' || typeof yScale !== 'function') {
-      return null;
+      console.warn('[MobileTouchHandler] Scales not available, using first point as fallback');
+      return points.length > 0 ? points[0].datum : null;
     }
     
+    // Finde IMMER den nächstgelegenen Punkt, egal wie weit entfernt
+    let validPointsFound = 0;
     for (const point of points) {
       const sx = xScale(point.jahr);
       const sy = yScale(point.note);
-      if (sx == null || sy == null || Number.isNaN(sx) || Number.isNaN(sy)) continue;
+      if (sx == null || sy == null || Number.isNaN(sx) || Number.isNaN(sy)) {
+        console.log('[MobileTouchHandler] Skipping point with invalid coords:', point.datum);
+        continue;
+      }
+      validPointsFound++;
       const dx = sx - x;
       const dy = sy - y;
       const dist = dx * dx + dy * dy;
@@ -475,6 +488,25 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
         minDist = dist;
         nearest = point.datum;
       }
+    }
+    
+    if (nearest) {
+      const actualDist = Math.sqrt(minDist);
+      console.log('[MobileTouchHandler] Nearest point found:', {
+        band: nearest.Band,
+        album: nearest.Album,
+        distance: actualDist.toFixed(1),
+        validPoints: validPointsFound
+      });
+    } else if (validPointsFound === 0) {
+      console.warn('[MobileTouchHandler] No valid points with screen coordinates found');
+    }
+    
+    // GARANTIERE dass immer ein Punkt zurückgegeben wird, wenn Punkte vorhanden sind
+    // Falls nearest null ist, nimm einfach den ersten verfügbaren Punkt
+    if (!nearest && points.length > 0) {
+      console.log('[MobileTouchHandler] No nearest found, using first point as fallback');
+      nearest = points[0].datum;
     }
     
     return nearest;
@@ -516,7 +548,9 @@ function setupNearestPointTap(svg, chartView, candidatePoints, albumData) {
       console.log('[MobileTouchHandler] Nearest point found:', nearest.Band, nearest.Album);
       return showDatumCard(nearest);
     }
-    console.log('[MobileTouchHandler] No nearest point found');
+    // Falls kein Punkt gefunden wurde, sollte das eigentlich nicht passieren
+    // da findNearestDatum jetzt immer einen Punkt zurückgibt wenn Punkte vorhanden sind
+    console.error('[MobileTouchHandler] No nearest point found despite having points');
     return false;
   };
   
