@@ -905,6 +905,137 @@ export class Chat {
   }
   
   /**
+   * Custom Confirm-Dialog im Dark Theme anzeigen
+   */
+  showResetConfirmDialog() {
+    // Erstelle Overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'chat-confirm-overlay';
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    `;
+    
+    // Erstelle Dialog
+    const dialog = document.createElement('div');
+    dialog.className = 'chat-confirm-dialog';
+    dialog.style.cssText = `
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    `;
+    
+    // Text
+    const text = document.createElement('p');
+    text.textContent = 'Möchtest du den Chat wirklich zurücksetzen? Der gesamte Verlauf wird gelöscht.';
+    text.style.cssText = `
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0 0 24px 0;
+    `;
+    
+    // Button-Container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.cssText = `
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    `;
+    
+    // Abbrechen-Button
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Abbrechen';
+    cancelButton.style.cssText = `
+      padding: 10px 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    `;
+    cancelButton.addEventListener('click', () => {
+      overlay.remove();
+    });
+    cancelButton.addEventListener('mouseenter', () => {
+      cancelButton.style.background = 'var(--bg-tertiary)';
+      cancelButton.style.color = 'var(--text-primary)';
+    });
+    cancelButton.addEventListener('mouseleave', () => {
+      cancelButton.style.background = 'transparent';
+      cancelButton.style.color = 'var(--text-secondary)';
+    });
+    
+    // OK-Button
+    const okButton = document.createElement('button');
+    okButton.textContent = 'OK';
+    okButton.style.cssText = `
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background: var(--accent-blue);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    `;
+    okButton.addEventListener('click', () => {
+      overlay.remove();
+      this.clear();
+    });
+    okButton.addEventListener('mouseenter', () => {
+      okButton.style.background = 'var(--accent-blue-hover)';
+    });
+    okButton.addEventListener('mouseleave', () => {
+      okButton.style.background = 'var(--accent-blue)';
+    });
+    
+    // ESC-Taste zum Schließen
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        overlay.remove();
+        document.removeEventListener('keydown', handleEscape);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    
+    // Klick außerhalb schließt Dialog
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.remove();
+        document.removeEventListener('keydown', handleEscape);
+      }
+    });
+    
+    // Zusammenbauen
+    buttonContainer.appendChild(cancelButton);
+    buttonContainer.appendChild(okButton);
+    dialog.appendChild(text);
+    dialog.appendChild(buttonContainer);
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+    
+    // Focus auf Cancel-Button
+    cancelButton.focus();
+  }
+
+  /**
    * Chat zurücksetzen
    */
   clear() {
