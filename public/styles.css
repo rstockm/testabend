@@ -120,6 +120,11 @@ header h1 {
   display: none;
 }
 
+/* Mobile Tab Indicator: Standardmäßig versteckt */
+.mobile-tab-indicator {
+  display: none;
+}
+
 main {
   padding: 8px 8px 16px 0;
   max-width: none;
