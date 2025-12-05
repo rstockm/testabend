@@ -362,21 +362,18 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
             tapPointsCount: tapPoints.length
           });
           
+          const indicator = document.getElementById('mobile-touch-indicator');
+          if (indicator) indicator.textContent = 'Setting up handlers...';
+          
           const nearestTapHandler = setupNearestPointTap(chartEl, svg, chartView, tapPoints, albumData);
           if (nearestTapHandler) {
             showDebugMessage('Nearest-tap handler aktiviert', '#90EE90');
             console.log('[MobileTouchHandler] ✅ Nearest-tap handler successfully registered');
-            
-            // Test: Füge einen einfachen Click-Handler hinzu, um zu prüfen ob Events ankommen
-            const testHandler = (e) => {
-              console.log('[MobileTouchHandler] TEST: Event received!', e.type);
-              alert(`Event received: ${e.type}`); // Alert als letzter Ausweg
-            };
-            chartEl.addEventListener('touchstart', testHandler, { capture: true });
-            console.log('[MobileTouchHandler] Test handler registered on chartEl');
+            if (indicator) indicator.textContent = 'Touch Handler Ready';
           } else {
             showDebugMessage('Nearest-tap handler nicht aktiv (zu wenige Punkte?)', '#ffaa00');
             console.warn('[MobileTouchHandler] ❌ Could not setup nearest-point tap handler');
+            if (indicator) indicator.textContent = 'ERROR: No handler';
           }
           
           // Verhindere Tooltip-Anzeige auf Mobile
