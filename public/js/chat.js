@@ -200,9 +200,7 @@ export class Chat {
     resetButton.setAttribute('aria-label', 'Chat zurücksetzen');
     resetButton.setAttribute('title', 'Chat zurücksetzen');
     resetButton.addEventListener('click', () => {
-      if (confirm('Möchtest du den Chat wirklich zurücksetzen? Der gesamte Verlauf wird gelöscht.')) {
-        this.clear();
-      }
+      this.showResetConfirmDialog();
     });
     
     inputWrapper.appendChild(textarea);
