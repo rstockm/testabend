@@ -426,7 +426,7 @@
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 8px !important;
     margin-left: auto !important;
     margin-right: 8px !important;
     position: relative !important;
@@ -451,14 +451,14 @@
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 6px 10px !important;
+    padding: 8px 12px !important;
     min-width: 48px !important;
     border-radius: 8px !important;
     text-decoration: none !important;
     color: var(--text-secondary) !important;
     transition: color 0.2s ease !important;
     position: relative !important;
-    gap: 2px !important;
+    gap: 4px !important;
     border-bottom: none !important;
     z-index: 1 !important;
   }
@@ -487,15 +487,19 @@
   }
 
   .mobile-tab.active {
-    color: #f7c948;
-    text-decoration: none;
+    color: #f7c948 !important;
+    text-decoration: none !important;
     background-color: transparent !important;
-    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
   .mobile-tab.active .mobile-tab-icon {
-    stroke: #f7c948;
-    transition: stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    stroke: #f7c948 !important;
+    transition: stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  .mobile-tab.active .mobile-tab-label {
+    color: #f7c948 !important;
   }
 
   /* Mobile Navigation Overlay: Versteckt (nicht mehr benötigt) */
