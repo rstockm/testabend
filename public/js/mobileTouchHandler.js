@@ -594,17 +594,28 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
         band: nearest.Band,
         album: nearest.Album,
         distance: actualDist.toFixed(1),
-        validPoints: validPointsFound
+        validPoints: validPointsFound,
+        tapX: x,
+        tapY: y
       });
     } else if (validPointsFound === 0) {
-      console.warn('[MobileTouchHandler] No valid points with screen coordinates found');
+      console.warn('[MobileTouchHandler] No valid points with screen coordinates found', {
+        pointsCount: points.length,
+        xScaleType: typeof xScale,
+        yScaleType: typeof yScale
+      });
     }
     
     // GARANTIERE dass immer ein Punkt zurückgegeben wird, wenn Punkte vorhanden sind
     // Falls nearest null ist, nimm einfach den ersten verfügbaren Punkt
     if (!nearest && points.length > 0) {
-      console.log('[MobileTouchHandler] No nearest found, using first point as fallback');
+      console.log('[MobileTouchHandler] ⚠️ No nearest found via distance, using first point as fallback');
       nearest = points[0].datum;
+      console.log('[MobileTouchHandler] Fallback point:', nearest.Band, nearest.Album);
+    }
+    
+    if (!nearest) {
+      console.error('[MobileTouchHandler] ❌ CRITICAL: No point returned despite having', points.length, 'points');
     }
     
     return nearest;
@@ -644,10 +655,17 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
     
     const nearest = findNearestDatum(relX, relY);
     if (nearest) {
-      console.log('[MobileTouchHandler] Nearest point found:', nearest.Band, nearest.Album);
+      console.log('[MobileTouchHandler] ✅ Nearest point found:', nearest.Band, nearest.Album);
+      showTouchIndicator(`✅ ${nearest.Band}`);
       return showDatumCard(nearest);
     }
-    console.error('[MobileTouchHandler] No nearest point found despite having points');
+    console.error('[MobileTouchHandler] ❌ No nearest point found despite having points', {
+      relX,
+      relY,
+      pointsCount: points.length,
+      svgRect: svg.getBoundingClientRect()
+    });
+    showTouchIndicator('❌ No point found');
     return false;
   };
   
@@ -770,7 +788,9 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
       deltaX,
       deltaY,
       deltaTime,
-      pos: touchEndPos
+      pos: touchEndPos,
+      chartRect: chartEl.getBoundingClientRect(),
+      svgRect: svg.getBoundingClientRect()
     });
     
     // Erstelle ein synthetisches Event mit den Touch-Koordinaten
@@ -783,6 +803,7 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
       stopPropagation: () => event.stopPropagation()
     };
     
+    console.log('[MobileTouchHandler] Calling handleTap with synthetic event...');
     const handled = handleTap(syntheticEvent);
     console.log('[MobileTouchHandler] handleTap result:', handled);
     
@@ -793,8 +814,9 @@ function setupNearestPointTap(chartEl, svg, chartView, candidatePoints, albumDat
       showTouchIndicator('✅ Album gefunden!');
       showDebugMessage('Touch erfolgreich verarbeitet', '#90EE90');
     } else {
-      showTouchIndicator('❌ Kein Album');
+      showTouchIndicator('❌ Kein Album gefunden');
       showDebugMessage('Touch ohne Treffer', '#ffaa00');
+      console.error('[MobileTouchHandler] handleTap returned false - no album card shown');
     }
     
     touchStartPos = null;
