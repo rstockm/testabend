@@ -743,35 +743,34 @@ function createRegressionLayers(bestPoints, selectedBands, rangeYears, domainMin
  * Titel-Layer erstellen
  */
 function createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selectedBands, palette) {
-  // Titel kürzen für sehr lange Namen (max. 30 Zeichen auf Mobile, 40 auf Desktop)
-  const maxLength = isMobile() ? 30 : 40;
-  
   // Bestimme Position im Jahr-Bereich für Ausrichtung
   const yearCount = rangeYears.length;
-  const firstYear = rangeYears[0];
-  const lastYear = rangeYears[rangeYears.length - 1];
   
   const processedPoints = allPoints.map(point => {
     const year = point.Jahr;
     const yearIndex = rangeYears.indexOf(year);
     const position = yearCount > 1 ? yearIndex / (yearCount - 1) : 0.5; // 0 = links, 1 = rechts
     
-    // Bestimme Ausrichtung basierend auf Position
+    // Bestimme Ausrichtung und dx-Offset basierend auf Position
     let align = "center";
+    let dx = 0; // Horizontaler Offset in Pixeln
+    
     if (position < 0.15) {
       align = "left"; // Links am Rand: linksbündig
+      dx = 8; // Nach rechts verschieben, damit Text nicht über den Punkt hinausgeht
     } else if (position > 0.85) {
       align = "right"; // Rechts am Rand: rechtsbündig
+      dx = -8; // Nach links verschieben
     } else {
       align = "center"; // In der Mitte: zentriert
+      dx = 0;
     }
     
     return {
       ...point,
-      Album: point.Album && point.Album.length > maxLength 
-        ? point.Album.substring(0, maxLength - 3) + '...' 
-        : point.Album,
-      align: align // Ausrichtung als Datenfeld
+      Album: point.Album, // Keine Kürzung mehr - Vega-Lite limit übernimmt das
+      align: align, // Ausrichtung als Datenfeld
+      dx: dx // Horizontaler Offset
     };
   });
   
@@ -782,7 +781,7 @@ function createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selecte
       dy: CONFIG.UI.TITLE_OFFSET, 
       fontSize: CONFIG.UI.TITLE_FONT_SIZE, 
       fontWeight: "bold",
-      limit: isMobile() ? 80 : 120 // Maximale Textbreite in Pixeln
+      limit: isMobile() ? 100 : 150 // Maximale Textbreite in Pixeln (erhöht)
     },
     zindex: 1,
     encoding: {
@@ -799,6 +798,7 @@ function createTitleLayer(allPoints, rangeYears, domainMinY, domainMaxY, selecte
       },
       text: { field: "Album", type: "nominal" },
       align: { field: "align", type: "nominal" }, // Dynamische Ausrichtung
+      dx: { field: "dx", type: "quantitative" }, // Horizontaler Offset
       color: { 
         field: "Band", 
         type: "nominal", 
