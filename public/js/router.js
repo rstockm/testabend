@@ -220,7 +220,7 @@ export class Router {
     }
     
     if (!isMobileView) {
-      layout.appendChild(panel);
+    layout.appendChild(panel);
     }
     
     layout.appendChild(right);
@@ -437,13 +437,13 @@ export class Router {
    * Jahre-Route (nur Mobile)
    */
   async handleJahre() {
-    // Nur auf Mobile anzeigen
+    // Desktop: Scatter-Diagramm anzeigen
     if (!isMobile()) {
-      // Auf Desktop zu Band umleiten
-      updateHash('band', {});
+      await this.handleScatter();
       return;
     }
     
+    // Mobile: Jahresliste anzeigen
     this.controlsEl.innerHTML = '';
     this.chartEl.innerHTML = '';
     this.resetBandLayout();
