@@ -330,14 +330,27 @@ export async function renderBandsSeries(data, selectedBands, chartEl, showTitles
   // Mobile vs Desktop: Unterschiedliche Handler
   if (isMobile()) {
     // Mobile: Touch-Handler für Album-Karte
+    console.log('[renderBandsSeries] Mobile detected, will setup touch handlers');
     setTimeout(() => {
+      console.log('[renderBandsSeries] Timeout fired, checking result.view...', {
+        hasResult: !!result,
+        hasView: !!(result?.view),
+        chartElId: chartEl?.id,
+        dataLength: data?.length,
+        allPointsLength: allPoints?.length
+      });
       if (result && result.view) {
+        console.log('[renderBandsSeries] Calling setupMobileTouchHandlers...');
         setupMobileTouchHandlers(result.view, chartEl, data, allPoints); // Swipe-Daten + sichtbare Punkte
+      } else {
+        console.error('[renderBandsSeries] Cannot setup touch handlers: missing result or view');
+        const indicator = document.getElementById('mobile-touch-indicator');
+        if (indicator) indicator.textContent = 'ERROR: No view';
       }
     }, 300);
   } else {
     // Desktop: Standard Tooltip-Handler
-  setupCoverTooltipHandler();
+    setupCoverTooltipHandler();
   }
   
   return result;
