@@ -277,6 +277,20 @@ input[type="range"]::-moz-range-track {
   margin: 12px 0 28px 0;
   width: 100%;
   overflow: visible;
+  padding: 0;
+}
+
+/* Desktop: Chart-Container ohne zusätzliches Padding */
+@media (min-width: 768px) {
+  .band-content-area .chart {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .band-content-area .vega-embed {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 }
 
 .muted {
@@ -535,6 +549,8 @@ input[type="range"]::-moz-range-track {
 /* Vega-Lite Chart Anpassungen für Dark Theme */
 .vega-embed {
   background-color: var(--bg-primary) !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .vega-embed summary {
