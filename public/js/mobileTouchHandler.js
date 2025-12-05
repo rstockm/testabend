@@ -111,6 +111,36 @@ export function setupMobileTouchHandlers(chartView, chartEl, albumData = null, v
   
   console.log('[MobileTouchHandler] tapPoints count:', tapPoints.length);
   
+  // GLOBALER TEST: Event-Listener auf body für alle Touch-Events
+  // Dieser sollte IMMER ausgelöst werden, um zu prüfen ob Events überhaupt ankommen
+  const globalTestHandler = (e) => {
+    console.log('[MobileTouchHandler] GLOBAL TEST: Event received on body!', e.type, {
+      target: e.target?.tagName,
+      currentTarget: e.currentTarget?.tagName,
+      touches: e.touches?.length,
+      changedTouches: e.changedTouches?.length
+    });
+    
+    // Prüfe ob Event vom Chart kommt
+    if (chartEl && (chartEl.contains(e.target) || e.target === chartEl)) {
+      console.log('[MobileTouchHandler] GLOBAL TEST: Event is from chart!');
+      const indicator = document.getElementById('mobile-touch-indicator');
+      if (indicator) {
+        indicator.textContent = `GLOBAL: ${e.type} from chart`;
+        indicator.style.display = 'block';
+        indicator.style.background = 'rgba(0, 255, 0, 0.9)';
+        setTimeout(() => {
+          if (indicator) indicator.style.background = 'rgba(255, 107, 53, 0.95)';
+        }, 500);
+      }
+    }
+  };
+  
+  document.body.addEventListener('touchstart', globalTestHandler, { passive: true, capture: true });
+  document.body.addEventListener('touchend', globalTestHandler, { passive: true, capture: true });
+  document.body.addEventListener('click', globalTestHandler, { passive: true, capture: true });
+  console.log('[MobileTouchHandler] Global test handlers registered on body');
+  
   try {
     showDebugMessage('Setting up mobile touch handlers', '#4a9dd4');
     
