@@ -189,6 +189,19 @@ export class RAGService {
     
     console.log('RAG: Gefundene relevante Alben:', relevantAlbums.length);
     
+    // Debug: Prüfe ob Platz-Daten vorhanden sind
+    if (relevantAlbums.length > 0) {
+      const firstAlbum = relevantAlbums[0];
+      console.log('RAG: Debug - Erstes Album:', {
+        Band: firstAlbum.Band,
+        Album: firstAlbum.Album,
+        Jahr: firstAlbum.Jahr,
+        Platz: firstAlbum.Platz,
+        PlatzTyp: typeof firstAlbum.Platz,
+        Note: firstAlbum.Note
+      });
+    }
+    
     if (relevantAlbums.length === 0) {
       console.warn('RAG: Keine relevanten Alben gefunden');
       return userQuery; // Keine relevanten Alben gefunden
@@ -317,6 +330,15 @@ export class RAGService {
     console.log('RAG: Kontext hinzugefügt, Gesamtlänge:', enriched.length);
     console.log('RAG: Anzahl Alben:', relevantAlbums.length);
     console.log('RAG: Erste 3 Alben:', relevantAlbums.slice(0, 3).map(a => `${a.Band} - ${a.Album}: ${a.Note}`));
+    
+    // Debug: Prüfe ob Platz im Kontext enthalten ist
+    const hasPlatzColumn = context.includes('| Platz |');
+    const hasPlatzValues = context.match(/\|\s*\d+\s*\|\s*===/); // Platz-Wert gefolgt von Note
+    console.log('RAG: Debug - Platz-Spalte im Kontext:', hasPlatzColumn);
+    console.log('RAG: Debug - Platz-Werte im Kontext:', hasPlatzValues ? 'JA' : 'NEIN');
+    if (hasPlatzValues) {
+      console.log('RAG: Debug - Gefundene Platz-Werte:', context.match(/\|\s*(\d+)\s*\|\s*===/g));
+    }
     
     return enriched;
   }
