@@ -204,16 +204,17 @@ export class RAGService {
     const sortedAlbums = [...relevantAlbums].sort((a, b) => (a.Jahr || 0) - (b.Jahr || 0));
     
     // Tabellenformat erstellen
-    context += '| Band | Album | Jahr | Note |\n';
-    context += '|------|-------|------|------|\n';
+    context += '| Band | Album | Jahr | Platz | Note |\n';
+    context += '|------|-------|------|-------|------|\n';
     
     sortedAlbums.forEach((album) => {
       const band = album.Band || 'N/A';
       const albumName = album.Album || 'N/A';
       const year = album.Jahr || 'N/A';
       const note = album.Note;
+      const platz = typeof album.Platz === 'number' ? album.Platz : 'N/A';
       // Verwende === für noch stärkere Hervorhebung der Zahlen
-      context += `| ${band} | "${albumName}" | ${year} | ===${note}=== |\n`;
+      context += `| ${band} | "${albumName}" | ${year} | ${platz} | ===${note}=== |\n`;
     });
     
     context += '\n';
@@ -222,8 +223,9 @@ export class RAGService {
     context += '🚨🚨🚨 EXAKTE NOTEN - MUSS VERWENDET WERDEN 🚨🚨🚨\n';
     sortedAlbums.forEach((album) => {
       const note = album.Note;
-      context += `  🚨 "${album.Album}" von ${album.Band} (${album.Jahr || 'N/A'}): ===${note}=== 🚨\n`;
-      context += `     WICHTIG: Wenn du über "${album.Album}" sprichst, ist die Note ${note}, NICHT eine andere Zahl!\n`;
+      const platz = typeof album.Platz === 'number' ? album.Platz : 'N/A';
+      context += `  🚨 "${album.Album}" von ${album.Band} (${album.Jahr || 'N/A'}): Platz ${platz}, ===${note}=== 🚨\n`;
+      context += `     WICHTIG: Wenn du über "${album.Album}" sprichst, sind Platz ${platz} und die Note ${note} verbindlich!\n`;
     });
     
     context += '\n';
@@ -240,7 +242,7 @@ export class RAGService {
       context += `❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote1}\n`;
       context += `❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote2}\n`;
       context += `❌ FALSCH: "${firstAlbum.Album}" erreichte eine ${wrongNote3}\n`;
-      context += `✅ RICHTIG: "${firstAlbum.Album}" erreichte eine ${exampleNote} (GENAU diese Zahl aus der Tabelle!)\n\n`;
+      context += `✅ RICHTIG: "${firstAlbum.Album}" erreichte Platz ${typeof firstAlbum.Platz === 'number' ? firstAlbum.Platz : 'N/A'} mit Note ${exampleNote} (GENAU diese Werte aus der Tabelle!)\n\n`;
       
       // Wenn mehrere Alben vorhanden, zeige auch ein Beispiel mit dem letzten Album
       if (sortedAlbums.length > 1) {
@@ -249,7 +251,7 @@ export class RAGService {
         const wrongLastNote = lastAlbum.Note + 0.3;
         context += `📋 WEITERES BEISPIEL:\n`;
         context += `❌ FALSCH: "${lastAlbum.Album}" erreichte eine ${wrongLastNote}\n`;
-        context += `✅ RICHTIG: "${lastAlbum.Album}" erreichte eine ${lastNote} (GENAU diese Zahl aus der Tabelle!)\n\n`;
+        context += `✅ RICHTIG: "${lastAlbum.Album}" erreichte Platz ${typeof lastAlbum.Platz === 'number' ? lastAlbum.Platz : 'N/A'} mit Note ${lastNote} (GENAU diese Werte aus der Tabelle!)\n\n`;
       }
     }
     
@@ -296,8 +298,9 @@ export class RAGService {
     if (sortedAlbums.length > 0) {
       const exampleAlbum = sortedAlbums[0];
       const correctNote = exampleAlbum.Note;
-      context += `Wenn "${exampleAlbum.Album}" von ${exampleAlbum.Band} in der Tabelle steht mit Note ${correctNote},\n`;
-      context += `dann ist die Note ${correctNote}, NICHT ${exampleAlbum.Note + 0.3}, NICHT ${exampleAlbum.Note - 0.2}, NICHT irgendeine andere Zahl!\n\n`;
+      const correctPlatz = typeof exampleAlbum.Platz === 'number' ? exampleAlbum.Platz : 'N/A';
+      context += `Wenn "${exampleAlbum.Album}" von ${exampleAlbum.Band} in der Tabelle steht mit Platz ${correctPlatz} und Note ${correctNote},\n`;
+      context += `dann sind Platz ${correctPlatz} und Note ${correctNote} verbindlich – KEINE anderen Plätze, KEINE anderen Noten!\n\n`;
       
       // Wenn nur ein Album vorhanden, betone das besonders
       if (sortedAlbums.length === 1) {
