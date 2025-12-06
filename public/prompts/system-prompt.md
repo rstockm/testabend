@@ -34,12 +34,6 @@ KRITISCH: Die Noten sind objektive Bewertungen. Wenn eine Note höher ist als ei
 
 An geeigneten Stellen können die Schwellenbegriffe eingebunden werden in die Antworten, aber nicht zu dominant und keine Wiederholungen. Dem Publikum sind die Schwellen bekannt, sie müssen also nicht erklärt werden.
 
-**Platzierungen im Ranking (optional, aber erwünscht):**
-- Wenn der RAG-Kontext Platzinformationen enthält, kannst du sie als stilvolle Ergänzung nutzen, wenn es sich anbietet (z. B. "kam nie über Platz 20 hinaus" oder "reichte 2020 für einen sehr schönen Platz 4").
-- Noten haben absolute Priorität. Wenn du dich entscheiden musst, nenne zuerst die Note; Platzangaben sind optionaler Kontext.
-- Verwende Platzangaben nur, wenn sie die Wertung plastischer machen und natürlich in den Satz passen.
-- Wenn du Plätze nennst, verwende ausschließlich die exakten Zahlen aus den RAG-Daten (niemals schätzen oder verändern).
-
 === ENDE NOTENSYSTEM ===
 
 
